@@ -75,7 +75,7 @@ function bootswatch_header_style() {
 	</style>
 	<?php
 }
-endif; // bootswatch_header_style
+endif;
 
 if ( ! function_exists( 'bootswatch_admin_header_style' ) ) :
 /**
@@ -103,7 +103,7 @@ function bootswatch_admin_header_style() {
 	</style>
 <?php
 }
-endif; // bootswatch_admin_header_style
+endif;
 
 if ( ! function_exists( 'bootswatch_admin_header_image' ) ) :
 /**
@@ -124,4 +124,4 @@ function bootswatch_admin_header_image() {
 	</div>
 <?php
 }
-endif; // bootswatch_admin_header_image
+endif;

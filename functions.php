@@ -77,7 +77,7 @@ function bootswatch_setup() {
 		'default-image' => '',
 	) ) );
 }
-endif; // bootswatch_setup
+endif;
 add_action( 'after_setup_theme', 'bootswatch_setup' );
 
 /**
