@@ -4,7 +4,7 @@
  *
  * Eventually, some of the functionality here could be replaced by core features.
  *
- * @package bootswatch
+ * @package Bootswatch
  */
 
 if ( ! function_exists( 'bootswatch_posted_on' ) ) :

@@ -6,7 +6,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package bootswatch
+ * @package Bootswatch
  */
 
 ?>
@@ -17,7 +17,7 @@
 		<div class="site-info">
 			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'bootswatch' ) ); ?>"><?php printf( esc_html__( 'Proudly powered by %s', 'bootswatch' ), 'WordPress' ); ?></a>
 			<span class="sep"> | </span>
-			<?php printf( esc_html__( 'Theme: %1$s by %2$s.', 'bootswatch' ), 'bootswatch', '<a href="http://underscores.me/" rel="designer">Underscores.me</a>' ); ?>
+			<?php printf( esc_html__( 'Theme: %1$s by %2$s.', 'bootswatch' ), 'bootswatch', '<a href="http://www.kadimi.com/" rel="designer">Nabil Kadimi</a>' ); ?>
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->
 </div><!-- #page -->

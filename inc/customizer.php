@@ -1,8 +1,8 @@
 <?php
 /**
- * bootswatch Theme Customizer.
+ * Bootswatch Theme Customizer.
  *
- * @package bootswatch
+ * @package Bootswatch
  */
 
 /**

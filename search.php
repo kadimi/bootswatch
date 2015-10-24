@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#search-result
  *
- * @package bootswatch
+ * @package Bootswatch
  */
 
 get_header(); ?>

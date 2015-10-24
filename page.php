@@ -9,7 +9,7 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package bootswatch
+ * @package Bootswatch
  */
 
 get_header(); ?>
