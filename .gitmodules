@@ -1,0 +1,6 @@
+[submodule "vendor/TGM-Plugin-Activation"]
+	path = vendor/TGM-Plugin-Activation
+	url = https://github.com/TGMPA/TGM-Plugin-Activation.git
+[submodule "vendor/bootswatch"]
+	path = vendor/bootswatch
+	url = https://github.com/thomaspark/bootswatch.git
