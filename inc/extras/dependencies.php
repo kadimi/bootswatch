@@ -11,7 +11,7 @@ require_once get_template_directory() . '/vendor/TGM-Plugin-Activation/class-tgm
  * We require this plugin:
  * - Titan Framework
  */
-function bootswatch_setup_dependencies () {
+function bootswatch_setup_dependencies() {
 	tgmpa( array(
 		array(
 			'name' => 'Titan Framework',
