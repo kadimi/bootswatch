@@ -42,3 +42,12 @@ function bootswatch_create_options() {
 	) );
 }
 add_action( 'tf_create_options', 'bootswatch_create_options' );
+
+/**
+ * Gets an option.
+ * @param  string $option_id The option id.
+ * @return miwed             The option value.
+ */
+function bootswatch_option( $option_id ) {
+	return TitanFramework::getInstance( 'bootswatch' )->getOption( $option_id );
+}
