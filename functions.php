@@ -99,13 +99,12 @@ add_action( 'after_setup_theme', 'bootswatch_content_width', 0 );
  */
 function bootswatch_widgets_init() {
 	register_sidebar( array(
-		'name'          => esc_html__( 'Sidebar', 'bootswatch' ),
-		'id'            => 'sidebar-1',
-		'description'   => '',
-		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</aside>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
+		'name' => __( 'Sidebar', 'bootswatch' ),
+		'id' => 'sidebar',
+		'before_widget' => '<aside id="%1$s" class="widget well clearfix %2$s">',
+		'after_widget' => '</aside>',
+		'before_title' => '<h3 class="widgettitle">',
+		'after_title' => '</h3>',
 	) );
 }
 add_action( 'widgets_init', 'bootswatch_widgets_init' );
@@ -115,7 +114,11 @@ add_action( 'widgets_init', 'bootswatch_widgets_init' );
  */
 function bootswatch_scripts() {
 
-	wp_enqueue_style( 'bootswatch', get_template_directory_uri() . '/vendor/bootswatch/' . bootswatch_option( 'theme' ) . '/bootstrap.min.css' );
+    wp_enqueue_style( 'bootswatch-bootswatch', get_template_directory_uri() . '/vendor/bootswatch/' . bootswatch_option( 'theme' ) . '.min.css' );
+    wp_enqueue_style( 'bootswatch', get_template_directory_uri() . '/style.css' );
+
+    wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/vendor/bootstrap/js/bootstrap.min.js', array( 'jquery' ) );
+    wp_enqueue_script( 'bootswatch', get_template_directory_uri() . '/js/script.js', array( 'jquery' ) );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -158,3 +161,22 @@ require get_template_directory() . '/inc/extras/dependencies.php';
  */
 require get_template_directory() . '/inc/extras/titan.php';
 
+/**
+ * Menus
+ */
+require get_template_directory() . '/inc/extras/menus.php';
+
+/**
+ * Sidebars
+ */
+require get_template_directory() . '/inc/extras/sidebars.php';
+
+/**
+ * Search form.
+ */
+require get_template_directory() . '/inc/extras/search_form.php';
+
+/**
+ * Quick and dirty fixes
+ */
+require get_template_directory() . '/inc/extras/quick_and_dirty.php';
