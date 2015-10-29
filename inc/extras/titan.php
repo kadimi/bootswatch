@@ -22,6 +22,7 @@ function bootswatch_create_options() {
 		'type' => 'select',
 		'default' => 'cerulean',
 		'options' => array(
+			'' => 'Just Bootstrap',
 			'cerulean' => 'Cerulean',
 			'cosmo' => 'Cosmo',
 			'cyborg' => 'Cyborg',

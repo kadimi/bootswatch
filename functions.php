@@ -114,12 +114,35 @@ add_action( 'widgets_init', 'bootswatch_widgets_init' );
  */
 function bootswatch_scripts() {
 
-    wp_enqueue_style( 'bootswatch-bootswatch', get_template_directory_uri() . '/vendor/bootswatch/' . bootswatch_option( 'theme' ) . '.min.css' );
-    wp_enqueue_style( 'bootswatch', get_template_directory_uri() . '/style.css' );
+	/**
+	 * Bootswatch theme setting value.
+	 * @var string
+	 */
+	$bootswatch_theme = bootswatch_option( 'theme' );
 
-    wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/vendor/bootstrap/js/bootstrap.min.js', array( 'jquery' ) );
-    wp_enqueue_script( 'bootswatch', get_template_directory_uri() . '/js/script.js', array( 'jquery' ) );
+	/**
+	 * Selected Bootswatch theme, if none is selected, use Bootstrap.
+	 */
+	if ( $bootswatch_theme ) {
+		wp_enqueue_style( 'bootswatch' . $bootswatch_theme, get_template_directory_uri() . '/vendor/bootswatch/' . $bootswatch_theme . '.min.css' );
+	} else {
+		wp_enqueue_style( 'bootswatch-bootstrap', get_template_directory_uri() . '/vendor/bootstrap/css/bootstrap.min.css' );
+	}
 
+	/**
+	 * Style.css
+	 */
+	wp_enqueue_style( 'bootswatch', get_template_directory_uri() . '/style.css' );
+
+	/**
+	 * Scripts.
+	 */
+	wp_enqueue_script( 'bootswatch-bootstrap', get_template_directory_uri() . '/vendor/bootstrap/js/bootstrap.min.js', array( 'jquery' ) );
+	wp_enqueue_script( 'bootswatch', get_template_directory_uri() . '/js/script.js', array( 'jquery' ) );
+
+	/**
+	 * Comment reply script.
+	 */
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}

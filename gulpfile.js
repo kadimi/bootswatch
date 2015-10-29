@@ -25,8 +25,20 @@ gulp.task('tgmpa', function() {
 
 // Download Bootstrap JavaScript file.
 gulp.task('bootstrap', function() {
+	var tasks = [];
 	var bsBase = githubBase + 'twbs/bootstrap/master/dist/';
-	return remoteSrc('/js/bootstrap.min.js', {base: bsBase}).pipe(gulp.dest('vendor/bootstrap/'));
+	var bsFonts = ['glyphicons-halflings-regular.eot', 'glyphicons-halflings-regular.svg', 'glyphicons-halflings-regular.ttf', 'glyphicons-halflings-regular.woff', 'glyphicons-halflings-regular.woff2'];
+
+	var css = remoteSrc('/css/bootstrap.min.css', {base: bsBase}).pipe(gulp.dest('vendor/bootstrap/'));
+	var js = remoteSrc('/js/bootstrap.min.js', {base: bsBase}).pipe(gulp.dest('vendor/bootstrap/'));
+
+	// Fonts
+	for (i = 0; i < bsFonts.length; i++) {
+		tasks[i] = remoteSrc('/fonts/' + bsFonts[i], {base: bsBase + '/'})
+			.pipe(gulp.dest('vendor/bootstrap/'));
+	}
+
+	return merge(css, js, tasks);
 });
 
 // Download bootswatch themes and fonts.
