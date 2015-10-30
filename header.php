@@ -20,7 +20,7 @@
 </head>
 <body <?php body_class(); ?>>
 
-	<header id="masthead">
+	<header class="header">
 
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">

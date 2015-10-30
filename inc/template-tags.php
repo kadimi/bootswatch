@@ -14,7 +14,10 @@ if ( ! function_exists( 'bootswatch_posted_on' ) ) :
 function bootswatch_posted_on() {
 	$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
 	if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
-		$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
+		$time_string = '' 
+			. '<time class="entry-date published" datetime="%1$s">%2$s</time>'
+			// . '<time class="updated" datetime="%3$s">%4$s</time>'
+		;
 	}
 
 	$time_string = sprintf( $time_string,
@@ -49,13 +52,14 @@ function bootswatch_entry_footer() {
 		/* translators: used between list items, there is a space after the comma */
 		$categories_list = get_the_category_list( esc_html__( ', ', 'bootswatch' ) );
 		if ( $categories_list && bootswatch_categorized_blog() ) {
-			printf( '<span class="cat-links">' . esc_html__( 'Posted in %1$s', 'bootswatch' ) . '</span>', $categories_list ); // WPCS: XSS OK.
+			printf( '<p class="cat-links">' . esc_html__( 'Posted in %1$s', 'bootswatch' ) . '</p>', $categories_list ); // WPCS: XSS OK.
 		}
 
 		/* translators: used between list items, there is a space after the comma */
-		$tags_list = get_the_tag_list( '', esc_html__( ', ', 'bootswatch' ) );
+		$tags_list = str_replace('rel="tag"', 'rel="tag" class="btn btn-primary btn-xs"', get_the_tag_list('', ' '));
+
 		if ( $tags_list ) {
-			printf( '<span class="tags-links">' . esc_html__( 'Tagged %1$s', 'bootswatch' ) . '</span>', $tags_list ); // WPCS: XSS OK.
+			printf( '<p class="tags-links">' . esc_html__( 'Tagged %1$s', 'bootswatch' ) . '</p>', $tags_list ); // WPCS: XSS OK.
 		}
 	}
 
@@ -71,8 +75,8 @@ function bootswatch_entry_footer() {
 			esc_html__( 'Edit %s', 'bootswatch' ),
 			the_title( '<span class="screen-reader-text">"', '"</span>', false )
 		),
-		'<span class="edit-link">',
-		'</span>'
+		'<p>',
+		'</p>'
 	);
 }
 endif;

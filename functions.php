@@ -175,31 +175,8 @@ require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/jetpack.php';
 
 /**
- * Dependencies manager.
+ * Load all extras from ./inc/extras/
  */
-require get_template_directory() . '/inc/extras/dependencies.php';
-
-/**
- * Titan.
- */
-require get_template_directory() . '/inc/extras/titan.php';
-
-/**
- * Menus
- */
-require get_template_directory() . '/inc/extras/menus.php';
-
-/**
- * Sidebars
- */
-require get_template_directory() . '/inc/extras/sidebars.php';
-
-/**
- * Search form.
- */
-require get_template_directory() . '/inc/extras/search_form.php';
-
-/**
- * Quick and dirty fixes
- */
-require get_template_directory() . '/inc/extras/quick_and_dirty.php';
+foreach ( glob( get_template_directory() . '/inc/extras/*.php') as $extra ) {
+    require $extra;
+}

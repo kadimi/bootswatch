@@ -1,4 +1,4 @@
-<footer id="footer" class="footer">
+<footer>
 	<div class="container navbar navbar-default">
 		<div class="row">
 			<div class="col-md-4">1</div>

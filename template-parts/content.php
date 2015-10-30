@@ -10,17 +10,19 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
-		<?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
+	<header class="entry-header <?php echo ( ! is_sticky() || ! is_home() ) ? 'page-header' : ''; ?> panel-heading">
+		<h2 class="entry-title">
+			<a href="<?php echo esc_url( get_permalink() ); ?>">
+				<?php the_title(); ?>
+			</a>
+		</h2>
 
 		<?php if ( 'post' === get_post_type() ) : ?>
-		<div class="entry-meta">
-			<?php bootswatch_posted_on(); ?>
-		</div><!-- .entry-meta -->
+			<p class="entry-meta"><?php bootswatch_posted_on(); ?></p>
 		<?php endif; ?>
-	</header><!-- .entry-header -->
+	</header>
 
-	<div class="entry-content">
+	<div class="entry-content panel-body">
 		<?php
 			the_content( sprintf(
 				/* translators: %s: Name of current post. */
@@ -29,15 +31,10 @@
 			) );
 		?>
 
-		<?php
-			wp_link_pages( array(
-				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'bootswatch' ),
-				'after'  => '</div>',
-			) );
-		?>
+		<?php bootswatch_link_pages(); ?>
 	</div><!-- .entry-content -->
 
-	<footer class="entry-footer">
+	<footer class="entry-footer panel-footer">
 		<?php bootswatch_entry_footer(); ?>
 	</footer><!-- .entry-footer -->
 </article><!-- #post-## -->
