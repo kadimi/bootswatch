@@ -3,10 +3,8 @@
 function bootstwatch_post_classes($classes) {
 	if ( is_sticky() AND is_home() ) {
 		$classes[] = 'well';
+		$classes[] = 'well-lg';
 	}
-	$classes[] = 'panel';
-	$classes[] = 'panel-default';
-	
 	return $classes;
 }
 add_filter( 'post_class', 'bootstwatch_post_classes' );

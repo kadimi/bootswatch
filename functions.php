@@ -118,7 +118,7 @@ function bootswatch_scripts() {
 	 * Bootswatch theme setting value.
 	 * @var string
 	 */
-	$bootswatch_theme = bootswatch_option( 'theme' );
+	$bootswatch_theme = bootswatch_get_option( 'theme' );
 
 	/**
 	 * Selected Bootswatch theme, if none is selected, use Bootstrap.

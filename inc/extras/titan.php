@@ -41,6 +41,17 @@ function bootswatch_create_options() {
 			'yeti' => 'Yeti',
 		),
 	) );
+
+	$section->createOption( array(
+		'name' => __( 'Fixed Navbar', 'bootswatch' ),
+		'id' => 'fixed_navbar',
+		'type' => 'select',
+		'default' => 'yes',
+		'options' => array(
+			'yes' => __( 'Yes' ),
+			'no' => __( 'No' ),
+		),
+	) );
 }
 add_action( 'tf_create_options', 'bootswatch_create_options' );
 
@@ -49,6 +60,10 @@ add_action( 'tf_create_options', 'bootswatch_create_options' );
  * @param  string $option_id The option id.
  * @return miwed             The option value.
  */
-function bootswatch_option( $option_id ) {
+function bootswatch_get_option( $option_id ) {
 	return TitanFramework::getInstance( 'bootswatch' )->getOption( $option_id );
+}
+
+function bootswatch_use( $option_id ) {
+	return 'yes' === bootswatch_get_option( $option_id );
 }

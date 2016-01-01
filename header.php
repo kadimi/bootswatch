@@ -20,9 +20,9 @@
 </head>
 <body <?php body_class(); ?>>
 
-	<header class="header">
+    <header class="header">
 
-        <nav class="navbar navbar-default navbar-fixed-top">
+        <nav class=" navbar navbar-default <?php if ( bootswatch_use( 'fixed_navbar' ) ) echo 'navbar-fixed-top'; ?> ">
             <div class="container">
                 <div class="navbar-header">
                     <button type="buttox" class="navbar-toggle" data-toggle="collapse" data-target=".collapse">
@@ -47,4 +47,4 @@
                 </div>
             </div>
         </nav>
-	</header>
+    </header>

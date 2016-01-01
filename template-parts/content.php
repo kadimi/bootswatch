@@ -10,7 +10,7 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header <?php echo ( ! is_sticky() || ! is_home() ) ? 'page-header' : ''; ?> panel-heading">
+	<header class="entry-header <?php echo ( ! is_sticky() || ! is_home() ) ? 'page-header' : ''; ?>">
 		<h2 class="entry-title">
 			<a href="<?php echo esc_url( get_permalink() ); ?>">
 				<?php the_title(); ?>
@@ -22,7 +22,7 @@
 		<?php endif; ?>
 	</header>
 
-	<div class="entry-content panel-body">
+	<div class="entry-content">
 		<?php
 			the_content( sprintf(
 				/* translators: %s: Name of current post. */
@@ -34,7 +34,7 @@
 		<?php bootswatch_link_pages(); ?>
 	</div><!-- .entry-content -->
 
-	<footer class="entry-footer panel-footer">
+	<footer class="entry-footer">
 		<?php bootswatch_entry_footer(); ?>
 	</footer><!-- .entry-footer -->
 </article><!-- #post-## -->
