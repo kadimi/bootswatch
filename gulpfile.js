@@ -2,15 +2,20 @@
  * Gulp File
  */
 
-var gulp = require('gulp');
 var del = require('del');
+var gulp = require('gulp');
 var merge = require('merge-stream');
 var remoteSrc = require('gulp-remote-src');
 var rename = require('gulp-rename');
-var githubBase = 'https://raw.githubusercontent.com/';
+var unzip = require('gulp-unzip');
+
+var github = 'https://github.com/';
+var githubUC = 'https://raw.githubusercontent.com/';
 
 // Run all tasks.
-gulp.task('default', ['clean', 'tgmpa', 'bootstrap', 'bootswatch']);
+gulp.task('default', ['clean'], function() {
+	gulp.start( 'bootstrap', 'bootswatch', 'less.php', 'tgmpa');
+});
 
 // Delete vendor folder 
 gulp.task('clean', function(cb) {
@@ -19,48 +24,109 @@ gulp.task('clean', function(cb) {
 
 // Downloads TGMPA class.
 gulp.task('tgmpa', function() {
-	var tgmpaBase = githubBase + 'TGMPA/TGM-Plugin-Activation/master';
-	return remoteSrc('/class-tgm-plugin-activation.php', {base: tgmpaBase}).pipe(gulp.dest('vendor/TGM-Plugin-Activation/'));
+	var tgmpaBase = githubUC + 'TGMPA/TGM-Plugin-Activation/master/';
+	return remoteSrc('class-tgm-plugin-activation.php', {base: tgmpaBase})
+		.pipe(gulp.dest('vendor/TGM-Plugin-Activation'))
+	;
 });
 
 // Download Bootstrap JavaScript file.
 gulp.task('bootstrap', function() {
 	var tasks = [];
-	var bsBase = githubBase + 'twbs/bootstrap/master/dist/';
-	var bsFonts = ['glyphicons-halflings-regular.eot', 'glyphicons-halflings-regular.svg', 'glyphicons-halflings-regular.ttf', 'glyphicons-halflings-regular.woff', 'glyphicons-halflings-regular.woff2'];
+	var bsBase = githubUC + 'twbs/bootstrap/master/dist/';
+	var bsFonts = ['glyphicons-halflings-regular.eot'
+		, 'glyphicons-halflings-regular.svg'
+		, 'glyphicons-halflings-regular.ttf'
+		, 'glyphicons-halflings-regular.woff'
+		, 'glyphicons-halflings-regular.woff2'
+	];
 
-	var css = remoteSrc('/css/bootstrap.min.css', {base: bsBase}).pipe(gulp.dest('vendor/bootstrap/'));
-	var js = remoteSrc('/js/bootstrap.min.js', {base: bsBase}).pipe(gulp.dest('vendor/bootstrap/'));
+	var css = remoteSrc('/css/bootstrap.min.css', {base: bsBase})
+		.pipe(gulp.dest('vendor/bootstrap'))
+	;
+	var js = remoteSrc('/js/bootstrap.min.js', {base: bsBase})
+		.pipe(gulp.dest('vendor/bootstrap'))
+	;
 
 	// Fonts
 	for (i = 0; i < bsFonts.length; i++) {
 		tasks[i] = remoteSrc('/fonts/' + bsFonts[i], {base: bsBase + '/'})
-			.pipe(gulp.dest('vendor/bootstrap/'));
+			.pipe(gulp.dest('vendor/bootstrap'))
+		;
 	}
 
 	return merge(css, js, tasks);
 });
 
-// Download bootswatch themes and fonts.
+// Download bootswatch themes, variables and fonts.
 gulp.task('bootswatch', function() {
 	var tasks = [];
-	var bwThemes = ['cerulean', 'cosmo', 'cyborg', 'darkly', 'flatly', 'journal', 'lumen', 'paper', 'readable', 'sandstone', 'simplex', 'slate', 'spacelab', 'superhero', 'united', 'yeti'];
-	var bwFonts = ['glyphicons-halflings-regular.eot', 'glyphicons-halflings-regular.svg', 'glyphicons-halflings-regular.ttf', 'glyphicons-halflings-regular.woff', 'glyphicons-halflings-regular.woff2'];
-	var bwBase = githubBase + 'thomaspark/bootswatch/gh-pages/';
+	var bwThemes = ['cerulean'
+		, 'cosmo'
+		, 'cyborg'
+		, 'darkly'
+		, 'flatly'
+		, 'journal'
+		, 'lumen'
+		, 'paper'
+		, 'readable'
+		, 'sandstone'
+		, 'simplex'
+		, 'slate'
+		, 'spacelab'
+		, 'superhero'
+		, 'united'
+		, 'yeti'
+	];
+	var bwFonts = ['glyphicons-halflings-regular.eot'
+		, 'glyphicons-halflings-regular.svg'
+		, 'glyphicons-halflings-regular.ttf'
+		, 'glyphicons-halflings-regular.woff'
+		, 'glyphicons-halflings-regular.woff2'
+	];
+	var bwBase = githubUC + 'thomaspark/bootswatch/gh-pages/';
 	var i;
 
 	// Themes
 	for (i = 0; i < bwThemes.length; i++) {
 		tasks[i] = remoteSrc('bootstrap.min.css', {base: bwBase + bwThemes[i] + '/'})
 			.pipe(rename(bwThemes[i] + '.min.css'))
-			.pipe(gulp.dest('vendor/bootswatch/'));
+			.pipe(gulp.dest('vendor/bootswatch/themes/' + bwThemes[i]))
+		;
+	}
+
+	// Variables
+	for (i = 0; i < bwThemes.length; i++) {
+		tasks[i] = remoteSrc('variables.less', {base: bwBase + bwThemes[i] + '/'})
+			.pipe(rename(bwThemes[i] + '.vars.less'))
+			.pipe(gulp.dest('vendor/bootswatch/themes/' + bwThemes[i]))
+		;
 	}
 
 	// Fonts
 	for (i = 0; i < bwFonts.length; i++) {
 		tasks[i] = remoteSrc('fonts/' + bwFonts[i], {base: bwBase + '/'})
-			.pipe(gulp.dest('vendor/bootswatch/'));
+			.pipe(gulp.dest('vendor/bootswatch'))
+		;
 	}
 
 	return merge(tasks);
 });
+
+// Download oyejorge/less.php from github
+gulp.task('less.php-download', function() {
+	return remoteSrc('master.zip', {base: github + 'oyejorge/less.php/archive/'})
+		.pipe(unzip())
+		.pipe(gulp.dest('vendor'))
+	;
+});
+gulp.task('less.php-rename', ['less.php-download'], function() {
+	return gulp
+		.src("vendor/less.php-master/**/*", {dot: true})
+		.pipe(gulp.dest("vendor/less.php"))
+	;
+});
+gulp.task('less.php-clean', ['less.php-rename'], function() {
+	return del('vendor/less.php-master');
+});
+gulp.task('less.php', ['less.php-clean']);
