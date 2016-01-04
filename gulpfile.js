@@ -33,7 +33,7 @@ gulp.task('tgmpa', function() {
 // Download Bootstrap JavaScript file.
 gulp.task('bootstrap', function() {
 	var tasks = [];
-	var bsBase = githubUC + 'twbs/bootstrap/master/dist/';
+	var bsBase = githubUC + 'twbs/bootstrap/master/';
 	var bsFonts = ['glyphicons-halflings-regular.eot'
 		, 'glyphicons-halflings-regular.svg'
 		, 'glyphicons-halflings-regular.ttf'
@@ -41,10 +41,13 @@ gulp.task('bootstrap', function() {
 		, 'glyphicons-halflings-regular.woff2'
 	];
 
-	var css = remoteSrc('/css/bootstrap.min.css', {base: bsBase})
+	var css = remoteSrc('css/bootstrap.min.css', {base: bsBase + 'dist/'})
 		.pipe(gulp.dest('vendor/bootstrap'))
 	;
-	var js = remoteSrc('/js/bootstrap.min.js', {base: bsBase})
+	var js = remoteSrc('js/bootstrap.min.js', {base: bsBase + 'dist/'})
+		.pipe(gulp.dest('vendor/bootstrap'))
+	;
+	var variables = remoteSrc('less/variables.less', {base: bsBase})
 		.pipe(gulp.dest('vendor/bootstrap'))
 	;
 
@@ -55,7 +58,7 @@ gulp.task('bootstrap', function() {
 		;
 	}
 
-	return merge(css, js, tasks);
+	return merge(css, js, variables, tasks);
 });
 
 // Download bootswatch themes, variables and fonts.
@@ -90,7 +93,7 @@ gulp.task('bootswatch', function() {
 	// Themes
 	for (i = 0; i < bwThemes.length; i++) {
 		tasks[i] = remoteSrc('bootstrap.min.css', {base: bwBase + bwThemes[i] + '/'})
-			.pipe(rename(bwThemes[i] + '.min.css'))
+			.pipe(rename('theme.min.css'))
 			.pipe(gulp.dest('vendor/bootswatch/themes/' + bwThemes[i]))
 		;
 	}
@@ -98,7 +101,7 @@ gulp.task('bootswatch', function() {
 	// Variables
 	for (i = 0; i < bwThemes.length; i++) {
 		tasks[i] = remoteSrc('variables.less', {base: bwBase + bwThemes[i] + '/'})
-			.pipe(rename(bwThemes[i] + '.vars.less'))
+			.pipe(rename('vars.less'))
 			.pipe(gulp.dest('vendor/bootswatch/themes/' + bwThemes[i]))
 		;
 	}

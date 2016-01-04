@@ -124,7 +124,7 @@ function bootswatch_scripts() {
 	 * Selected Bootswatch theme, if none is selected, use Bootstrap.
 	 */
 	if ( $bootswatch_theme ) {
-		wp_enqueue_style( 'bootswatch' . $bootswatch_theme, get_template_directory_uri() . '/vendor/bootswatch/themes/' . $bootswatch_theme . '/' . $bootswatch_theme . '.min.css' );
+		wp_enqueue_style( 'bootswatch' . $bootswatch_theme, get_template_directory_uri() . '/vendor/bootswatch/themes/' . $bootswatch_theme . '/theme.min.css' );
 	} else {
 		wp_enqueue_style( 'bootswatch-bootstrap', get_template_directory_uri() . '/vendor/bootstrap/css/bootstrap.min.css' );
 	}
