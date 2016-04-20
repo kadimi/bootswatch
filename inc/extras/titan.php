@@ -57,6 +57,7 @@ add_action( 'tf_create_options', 'bootswatch_create_options' );
 
 /**
  * Gets an option.
+ *
  * @param  string $option_id The option id.
  * @return miwed             The option value.
  */
@@ -64,6 +65,12 @@ function bootswatch_get_option( $option_id ) {
 	return TitanFramework::getInstance( 'bootswatch' )->getOption( $option_id );
 }
 
+/**
+ * Checks if an option is being used.
+ *
+ * @param  [string] $option_id The Option id.
+ * @return [boolean]           Weither or not that option is being used
+ */
 function bootswatch_use( $option_id ) {
 	return 'yes' === bootswatch_get_option( $option_id );
 }
