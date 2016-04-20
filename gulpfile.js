@@ -4,6 +4,7 @@
 
 var del = require('del');
 var gulp = require('gulp');
+var jshint = require('gulp-jshint');
 var merge = require('merge-stream');
 var remoteSrc = require('gulp-remote-src');
 var rename = require('gulp-rename');
@@ -34,12 +35,7 @@ gulp.task('tgmpa', function() {
 gulp.task('bootstrap', function() {
 	var tasks = [];
 	var bsBase = githubUC + 'twbs/bootstrap/master/';
-	var bsFonts = ['glyphicons-halflings-regular.eot'
-		, 'glyphicons-halflings-regular.svg'
-		, 'glyphicons-halflings-regular.ttf'
-		, 'glyphicons-halflings-regular.woff'
-		, 'glyphicons-halflings-regular.woff2'
-	];
+	var bsFonts = ['glyphicons-halflings-regular.eot', 'glyphicons-halflings-regular.svg', 'glyphicons-halflings-regular.ttf', 'glyphicons-halflings-regular.woff', 'glyphicons-halflings-regular.woff2'];
 
 	var css = remoteSrc('css/bootstrap.min.css', {base: bsBase + 'dist/'})
 		.pipe(gulp.dest('vendor/bootstrap'))
@@ -64,29 +60,8 @@ gulp.task('bootstrap', function() {
 // Download bootswatch themes, variables and fonts.
 gulp.task('bootswatch', function() {
 	var tasks = [];
-	var bwThemes = ['cerulean'
-		, 'cosmo'
-		, 'cyborg'
-		, 'darkly'
-		, 'flatly'
-		, 'journal'
-		, 'lumen'
-		, 'paper'
-		, 'readable'
-		, 'sandstone'
-		, 'simplex'
-		, 'slate'
-		, 'spacelab'
-		, 'superhero'
-		, 'united'
-		, 'yeti'
-	];
-	var bwFonts = ['glyphicons-halflings-regular.eot'
-		, 'glyphicons-halflings-regular.svg'
-		, 'glyphicons-halflings-regular.ttf'
-		, 'glyphicons-halflings-regular.woff'
-		, 'glyphicons-halflings-regular.woff2'
-	];
+	var bwThemes = ['cerulean', 'cosmo', 'cyborg', 'darkly', 'flatly', 'journal', 'lumen', 'paper', 'readable', 'sandstone', 'simplex', 'slate', 'spacelab', 'superhero', 'united', 'yeti'];
+	var bwFonts = ['glyphicons-halflings-regular.eot', 'glyphicons-halflings-regular.svg', 'glyphicons-halflings-regular.ttf', 'glyphicons-halflings-regular.woff', 'glyphicons-halflings-regular.woff2'];
 	var bwBase = githubUC + 'thomaspark/bootswatch/gh-pages/';
 	var i;
 
@@ -133,3 +108,11 @@ gulp.task('less.php-clean', ['less.php-rename'], function() {
 	return del('vendor/less.php-master');
 });
 gulp.task('less.php', ['less.php-clean']);
+
+// Lint
+gulp.task('lint', function() {
+	return gulp.src(['*.js', '!vendor/*.js'])
+		.pipe(jshint())
+		.pipe(jshint.reporter('default'))
+	;
+});
