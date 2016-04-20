@@ -1,6 +1,4 @@
-/**
- * Gulp File
- */
+/* globals require */
 
 var del = require('del');
 var gulp = require('gulp');
@@ -48,7 +46,7 @@ gulp.task('bootstrap', function() {
 	;
 
 	// Fonts
-	for (i = 0; i < bsFonts.length; i++) {
+	for (var i = 0; i < bsFonts.length; i++) {
 		tasks[i] = remoteSrc('/fonts/' + bsFonts[i], {base: bsBase + '/'})
 			.pipe(gulp.dest('vendor/bootstrap'))
 		;
@@ -113,6 +111,6 @@ gulp.task('less.php', ['less.php-clean']);
 gulp.task('lint', function() {
 	return gulp.src(['*.js', '!vendor/*.js'])
 		.pipe(jshint())
-		.pipe(jshint.reporter('default'))
+		.pipe(jshint.reporter('non_error'))
 	;
 });
