@@ -13,7 +13,7 @@ var githubUC = 'https://raw.githubusercontent.com/';
 
 // Run all tasks.
 gulp.task('default', ['clean'], function() {
-	gulp.start( 'bootstrap', 'bootswatch', 'less.php', 'tgmpa');
+	gulp.start('bootstrap.get', 'bootswatch.get', 'less.php', 'tgmpa.get', '.jshintrc.get');
 });
 
 // Delete vendor folder 
@@ -22,7 +22,7 @@ gulp.task('clean', function(cb) {
 });
 
 // Downloads TGMPA class.
-gulp.task('tgmpa', function() {
+gulp.task('tgmpa.get', function() {
 	var tgmpaBase = githubUC + 'TGMPA/TGM-Plugin-Activation/master/';
 	return remoteSrc('class-tgm-plugin-activation.php', {base: tgmpaBase})
 		.pipe(gulp.dest('vendor/TGM-Plugin-Activation'))
@@ -30,7 +30,7 @@ gulp.task('tgmpa', function() {
 });
 
 // Download Bootstrap JavaScript file.
-gulp.task('bootstrap', function() {
+gulp.task('bootstrap.get', function() {
 	var tasks = [];
 	var bsBase = githubUC + 'twbs/bootstrap/master/';
 	var bsFonts = ['glyphicons-halflings-regular.eot', 'glyphicons-halflings-regular.svg', 'glyphicons-halflings-regular.ttf', 'glyphicons-halflings-regular.woff', 'glyphicons-halflings-regular.woff2'];
@@ -56,7 +56,7 @@ gulp.task('bootstrap', function() {
 });
 
 // Download bootswatch themes, variables and fonts.
-gulp.task('bootswatch', function() {
+gulp.task('bootswatch.get', function() {
 	var tasks = [];
 	var bwThemes = ['cerulean', 'cosmo', 'cyborg', 'darkly', 'flatly', 'journal', 'lumen', 'paper', 'readable', 'sandstone', 'simplex', 'slate', 'spacelab', 'superhero', 'united', 'yeti'];
 	var bwFonts = ['glyphicons-halflings-regular.eot', 'glyphicons-halflings-regular.svg', 'glyphicons-halflings-regular.ttf', 'glyphicons-halflings-regular.woff', 'glyphicons-halflings-regular.woff2'];
@@ -90,27 +90,35 @@ gulp.task('bootswatch', function() {
 });
 
 // Download oyejorge/less.php from github
-gulp.task('less.php-download', function() {
+gulp.task('less.php.get', function() {
 	return remoteSrc('master.zip', {base: github + 'oyejorge/less.php/archive/'})
 		.pipe(unzip())
 		.pipe(gulp.dest('vendor'))
 	;
 });
-gulp.task('less.php-rename', ['less.php-download'], function() {
+gulp.task('less.php.rename', ['less.php.get'], function() {
 	return gulp
-		.src("vendor/less.php-master/**/*", {dot: true})
-		.pipe(gulp.dest("vendor/less.php"))
+		.src('vendor/less.php-master/**/*', {dot: true})
+		.pipe(gulp.dest('vendor/less.php'))
 	;
 });
-gulp.task('less.php-clean', ['less.php-rename'], function() {
+gulp.task('less.php.clean', ['less.php.rename'], function() {
 	return del('vendor/less.php-master');
 });
-gulp.task('less.php', ['less.php-clean']);
+gulp.task('less.php', ['less.php.clean']);
 
-// Lint
-gulp.task('lint', function() {
+// JavaScript
+gulp.task('.jshintrc.clean', function() {
+	return del('.jshintrc');
+});
+gulp.task('.jshintrc.get', ['.jshintrc.clean'], function() {
+	return remoteSrc('.jshintrc', {base: 'https://develop.svn.wordpress.org/trunk/'})
+		.pipe(gulp.dest('.'))
+	;
+});
+gulp.task('jshint', ['.jshintrc.get'], function() {
 	return gulp.src(['*.js', '!vendor/*.js'])
 		.pipe(jshint())
-		.pipe(jshint.reporter('non_error'))
+		.pipe(jshint.reporter('default'))
 	;
 });
