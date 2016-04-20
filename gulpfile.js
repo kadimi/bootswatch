@@ -112,9 +112,6 @@ gulp.task( 'less.php', ['less.php.clean']);
 gulp.task( 'jscs', function() {
 	return gulp.src(['*.js', '!vendor/*.js'])
 		.pipe( jscs() )
-		.pipe( jscs({ fix: true }) )
-		.pipe( jscs.reporter() )
-		.pipe( jscs.reporter( 'fail' ) )
 		.pipe( jscs.reporter() )
 	;
 });
