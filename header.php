@@ -20,31 +20,31 @@
 </head>
 <body <?php body_class(); ?>>
 
-    <header class="header">
+	<header class="header">
 
-        <nav class=" navbar navbar-default <?php if ( bootswatch_use( 'fixed_navbar' ) ) echo 'navbar-fixed-top'; ?> ">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="buttox" class="navbar-toggle" data-toggle="collapse" data-target=".collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="<?php echo esc_url( home_url() ); ?>"><?php bloginfo( 'name' ); ?></a>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <?php
-                    wp_nav_menu( array(
-                        'theme_location' => 'primary',
-                        'container' => false,
-                        'menu_class' => 'nav navbar-nav',
-                        'walker' => new Bootswatch_Nav_Walker,
-                        'fallback_cb' => false,
-                        'depth' => 2,
-                    ) );
-                    ?>
-                    <?php bootswatch_search_form( 'navbar-form navbar-right'); ?>
-                </div>
-            </div>
-        </nav>
-    </header>
+		<nav class=" navbar navbar-default <?php if ( bootswatch_use( 'fixed_navbar' ) ) { echo 'navbar-fixed-top'; } ?> ">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="buttox" class="navbar-toggle" data-toggle="collapse" data-target=".collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="<?php echo esc_url( home_url() ); ?>"><?php bloginfo( 'name' ); ?></a>
+				</div>
+				<div class="collapse navbar-collapse">
+					<?php
+					wp_nav_menu( array(
+						'theme_location' => 'primary',
+						'container' => false,
+						'menu_class' => 'nav navbar-nav',
+						'walker' => new Bootswatch_Nav_Walker,
+						'fallback_cb' => false,
+						'depth' => 2,
+					) );
+					?>
+					<?php bootswatch_search_form( 'navbar-form navbar-right' ); ?>
+				</div>
+			</div>
+		</nav>
+	</header>

@@ -19,15 +19,14 @@ get_header(); ?>
 		<div id="primary" class="col-md-8">
 			<div id="content" role="main">
 				<?php
-					if ( have_posts() ) {
-						while ( have_posts() ) {
-							the_post();
-							get_template_part( 'template-parts/content' );
-						}
+				if ( have_posts() ) {
+					while ( have_posts() ) {
+						the_post();
+						get_template_part( 'template-parts/content' );
 					}
-					else {
-						get_template_part( 'template-parts/content', 'none' );
-					}
+				} else {
+					get_template_part( 'template-parts/content', 'none' );
+				}
 				?>
 			</div>
 		</div>

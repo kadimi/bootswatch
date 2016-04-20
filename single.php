@@ -14,18 +14,18 @@ get_header(); ?>
 		<div id="primary" class="col-md-8">
 			<div id="content" role="main">
 				<?php
-					if ( have_posts() ) {
-						while ( have_posts() ) {
-							the_post();
-							get_template_part( 'template-parts/content', 'single' );
-							the_post_navigation();
-							if ( comments_open() || get_comments_number() ) {
-								comments_template();
-							}
+				if ( have_posts() ) {
+					while ( have_posts() ) {
+						the_post();
+						get_template_part( 'template-parts/content', 'single' );
+						the_post_navigation();
+						if ( comments_open() || get_comments_number() ) {
+							comments_template();
 						}
-					} else {
-						get_template_part( 'template-parts/content', 'none' );
 					}
+				} else {
+					get_template_part( 'template-parts/content', 'none' );
+				}
 				?>
 			</div>
 		</div>
