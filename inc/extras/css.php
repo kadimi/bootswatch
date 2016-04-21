@@ -28,7 +28,7 @@ function bootswatch_css() {
 	if ( bootswatch_use( 'fixed_navbar' ) ) {
 
 		$variables_path = bootswatch_get_option( 'theme' )
-			? get_template_directory() . '/vendor/bootswatch/themes/' . bootswatch_get_option( 'theme' ) . '/vars.less'
+			? get_template_directory() . '/vendor/bootswatch/' . bootswatch_get_option( 'theme' ) . '/vars.less'
 			: get_template_directory() . '/vendor/bootstrap/less/variables.less'
 		;
 

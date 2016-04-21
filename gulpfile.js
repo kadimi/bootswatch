@@ -68,7 +68,7 @@ gulp.task( 'bootswatch.get', function() {
 	for ( i = 0; i < bwThemes.length; i++ ) {
 		tasks[i] = remoteSrc( 'bootstrap.min.css', { base: bwBase + bwThemes[i] + '/' })
 			.pipe( rename( 'theme.min.css' ) )
-			.pipe( gulp.dest( 'vendor/bootswatch/themes/' + bwThemes[i] ) )
+			.pipe( gulp.dest( 'vendor/bootswatch/' + bwThemes[i] ) )
 		;
 	}
 
@@ -76,14 +76,14 @@ gulp.task( 'bootswatch.get', function() {
 	for ( i = 0; i < bwThemes.length; i++ ) {
 		tasks[i] = remoteSrc( 'variables.less', { base: bwBase + bwThemes[i] + '/' })
 			.pipe( rename( 'vars.less' ) )
-			.pipe( gulp.dest( 'vendor/bootswatch/themes/' + bwThemes[i] ) )
+			.pipe( gulp.dest( 'vendor/bootswatch/' + bwThemes[i] ) )
 		;
 	}
 
 	// Fonts
 	for ( i = 0; i < bwFonts.length; i++ ) {
 		tasks[i] = remoteSrc( 'fonts/' + bwFonts[i], { base: bwBase + '/' })
-			.pipe( gulp.dest( 'vendor/bootswatch' ) )
+			.pipe( gulp.dest( 'vendor/bootswatch/' ) )
 		;
 	}
 
@@ -106,7 +106,7 @@ gulp.task( 'less.php.rename', ['less.php.get'], function() {
 gulp.task( 'less.php.clean', ['less.php.rename'], function() {
 	return del( 'vendor/less.php-master' );
 });
-gulp.task( 'less.php', ['less.php.clean']);
+gulp.task( 'less.php', ['less.php.clean'] );
 
 // JavaScript
 gulp.task( 'jscs', function() {
