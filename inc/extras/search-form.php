@@ -33,7 +33,7 @@ function bootswatch_get_search_form( $form ) {
 			<input class="form-control" name="s" value="<?php echo get_search_query(); ?>">
 			<span class="input-group-btn">
 				<button type="submit" class="btn btn-default">
-					<span class="glyphicon glyphicon-search"></span>\
+					<span class="glyphicon glyphicon-search"></span>
 					<span class="screen-reader-text"><?php esc_html_e( 'Search', 'bootswatch' ); ?></span>
 				</button>
 			</span>
