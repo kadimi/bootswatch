@@ -20,9 +20,44 @@ get_header(); ?>
 			<div id="content" role="main">
 				<?php
 				if ( have_posts() ) {
+
+					if ( is_archive() ) {
+						?>
+						<header class="page-header">
+							<?php
+								the_archive_title( '<h1 class="page-title">', '</h1>' );
+								the_archive_description( '<div class="taxonomy-description">', '</div>' );
+							?>
+						</header>
+						<?php
+					}
+
 					while ( have_posts() ) {
 						the_post();
-						get_template_part( 'template-parts/content' );
+
+						if ( is_single() ) {
+							get_template_part( 'template-parts/content', 'single' );
+						} else if ( is_page() ) {
+							get_template_part( 'template-parts/content', 'page' );
+						} else if ( is_archive() ) {
+							get_template_part( 'template-parts/content', get_post_format() );
+						} else {
+							get_template_part( 'template-parts/content' );
+						}
+
+						if ( is_single() ) {
+							the_post_navigation();
+						}
+
+						if ( is_single() || is_page() ) {
+							if ( comments_open() || get_comments_number() ) {
+								comments_template();
+							}
+						}
+
+						if ( is_archive() ) {
+							the_posts_navigation();
+						}
 					}
 				} else {
 					get_template_part( 'template-parts/content', 'none' );
