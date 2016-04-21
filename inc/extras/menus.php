@@ -112,7 +112,7 @@ function bootswatch_nav_menu_item_title( $title, $item, $args, $depth ) {
 
 	return $title;
 }
-// add_filter( 'nav_menu_item_title', 'bootswatch_nav_menu_item_title', 10, 4 );
+/* add_filter( 'nav_menu_item_title', 'bootswatch_nav_menu_item_title', 10, 4 ); */
 
 /**
  * Bootswatch menu walker class
