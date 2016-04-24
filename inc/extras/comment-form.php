@@ -60,7 +60,7 @@ function bootswatch_comment_form_fields( $fields ) {
 		// Build <input>.
 		$input = $input_tpl;
 		foreach ( array( 'name', 'id', 'type', 'value', 'required', 'aria-required', 'size', 'maxlength', 'describedby', 'class' ) as $p ) {
-			if ( ! empty($parameter[ $p ]) ) {
+			if ( ! empty( $parameter[ $p ] ) ) {
 				$input = str_replace( '{{param}}', sprintf( ' %s="%s"{{param}}', $p, $parameter[ $p ] ), $input );
 			}
 		}
@@ -69,7 +69,7 @@ function bootswatch_comment_form_fields( $fields ) {
 		// Build <label>.
 		$label = $label_tpl;
 		$label = str_replace( '{{label}}', $parameter['label'], $label );
-		$label = str_replace( '{{required}}', !empty($parameter['required']) ? ' <span class="required">*</span>' : '', $label );
+		$label = str_replace( '{{required}}', ! empty( $parameter['required'] ) ? ' <span class="required">*</span>' : '', $label );
 
 		// Build field <div>.
 		$div = $div_tpl;
