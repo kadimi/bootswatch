@@ -79,8 +79,8 @@ function bootswatch_get_option( $option_id ) {
 /**
  * Checks if an option is being used.
  *
- * @param  [string] $option_id The Option id.
- * @return [boolean]           Weither or not that option is being used
+ * @param  string $option_id The Option id.
+ * @return boolean           Weither or not that option is being used
  */
 function bootswatch_use( $option_id ) {
 	return 'yes' === bootswatch_get_option( $option_id );
