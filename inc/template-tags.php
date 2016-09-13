@@ -40,10 +40,10 @@ function bootswatch_posted_on() {
 endif;
 
 if ( ! function_exists( 'bootswatch_entry_footer' ) ) :
-/**
- * Prints HTML with meta information for the categories, tags and comments.
- */
-function bootswatch_entry_footer() {
+	/**
+	 * Prints HTML with meta information for the categories, tags and comments.
+	 */
+	function bootswatch_entry_footer() {
 		// Hide category and tag text for pages.
 		if ( 'post' === get_post_type() ) {
 			/* translators: used between list items, there is a space after the comma */
@@ -58,24 +58,23 @@ function bootswatch_entry_footer() {
 			if ( $tags_list ) {
 				printf( '<p class="tags-links">' . esc_html__( 'Tagged %1$s', 'bootswatch' ) . '</p>', $tags_list ); // WPCS: XSS OK.
 			}
-			}
+		}
 
-		if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
+		if ( bootswatch_can_we_use_comments_popup_link() ) {
 			echo '<span class="comments-link">';
 			comments_popup_link( esc_html__( 'Leave a comment', 'bootswatch' ), esc_html__( '1 Comment', 'bootswatch' ), esc_html__( '% Comments', 'bootswatch' ) );
 			echo '</span>';
-			}
+		}
 
-		edit_post_link(
-		sprintf(
-			/* translators: %s: Name of current post */
-			esc_html__( 'Edit %s', 'bootswatch' ),
-			the_title( '<span class="screen-reader-text">"', '"</span>', false )
-		),
-		'<p>',
-		'</p>'
+		edit_post_link( sprintf(
+				/* translators: %s: Name of current post */
+				esc_html__( 'Edit %s', 'bootswatch' ),
+				the_title( '<span class="screen-reader-text">"', '"</span>', false )
+			)
+			, '<p>'
+			, '</p>'
 		);
-}
+	}
 endif;
 
 /**
@@ -120,3 +119,12 @@ function bootswatch_category_transient_flusher() {
 }
 add_action( 'edit_category', 'bootswatch_category_transient_flusher' );
 add_action( 'save_post',     'bootswatch_category_transient_flusher' );
+
+/**
+ * Helps us know if we can use the tag `comments_popup_link()`.
+ *
+ * It's because the tag `comments_popup_link()` must be within The Loop or a comment loop.
+ */
+function bootswatch_can_we_use_comments_popup_link() {
+	return ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() );
+}
