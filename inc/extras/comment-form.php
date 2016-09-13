@@ -15,7 +15,7 @@ function bootswatch_comment_form_fields( $fields ) {
 
 	$commenter = wp_get_current_commenter();
 	$req = get_option( 'require_name_email' );
-	$html5 = current_theme_supports( 'html5', 'comment-form' ) ? true : false;
+	$html5 = current_theme_supports( 'html5', 'comment-form' );
 
 	$div_tpl = '<div class="form-group comment-form-{{field}}">{{label}} {{input}}</div>';
 	$label_tpl = '<label for="{{field}}" class="col-sm-2 control-label">{{label}}{{required}}</label>';
