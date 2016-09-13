@@ -11,15 +11,11 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-	<?php
-		if ( ! is_front_page() ) {
-		?>
-			<header class="entry-header">
-				<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
-			</header><!-- .entry-header -->
-		<?php
-		}
-	?>
+	<?php do_action( 'bootswatch_before_page_title' ); ?>
+	<header class="entry-header">
+		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+	</header><!-- .entry-header -->
+	<?php do_action( 'bootswatch_after_page_title' ); ?>
 
 	<div class="entry-content">
 		<?php the_content(); ?>
