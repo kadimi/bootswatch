@@ -93,7 +93,13 @@ function bootstrap_link_pages( $args = array() ) {
 		}
 	}
 
-	print $output . $after; // WPCS: xss ok.
+	$output .= $after;
+
+	if ( $echo ) {
+		print $output; // WPCS: xss ok.
+	} else {
+		return $output;
+	}
 }
 
 /**
