@@ -47,4 +47,6 @@
 				</div>
 			</div>
 		</nav>
+
+		<?php do_action( 'bootswatch_after_nav' ); ?>
 	</header>

@@ -16,7 +16,7 @@ get_header(); ?>
 
 <div class="container">
 	<div class="row">
-		<div id="primary" class="col-md-8">
+		<div id="primary" class="<?php echo implode( ' ', bootswatch_primary_classes() ); ?>">
 			<div id="content" role="main">
 				<?php
 				if ( have_posts() ) {

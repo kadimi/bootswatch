@@ -52,6 +52,17 @@ function bootswatch_create_options() {
 			'no' => __( 'No' ),
 		),
 	) );
+
+	$metabox = $titan->createMetaBox( array(
+		'name' => __( 'Bootswatch additions', 'bootswatch' ),
+	) );
+
+	$metabox->createOption( array(
+		'name' => __( 'After navigation bar', 'bootswatch' ),
+		'id' => 'after_nav',
+		'desc' => __( 'Content to insert after the header navigation bar', 'bootswatch' ),
+		'type' => 'editor',
+	) );
 }
 add_action( 'tf_create_options', 'bootswatch_create_options' );
 
@@ -59,7 +70,7 @@ add_action( 'tf_create_options', 'bootswatch_create_options' );
  * Gets an option.
  *
  * @param  string $option_id The option id.
- * @return miwed             The option value.
+ * @return mixed             The option value.
  */
 function bootswatch_get_option( $option_id ) {
 	return TitanFramework::getInstance( 'bootswatch' )->getOption( $option_id );
