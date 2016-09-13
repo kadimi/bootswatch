@@ -15,6 +15,8 @@ function bootswatch_comment_form_fields( $fields ) {
 
 	$commenter = wp_get_current_commenter();
 	$req = get_option( 'require_name_email' );
+	$required = $req ? 'required' : '';
+	$aria_required = $req ? 'true' : '';
 	$html5 = current_theme_supports( 'html5', 'comment-form' );
 
 	$div_tpl = '<div class="form-group comment-form-{{field}}">{{label}} {{input}}</div>';
@@ -28,8 +30,8 @@ function bootswatch_comment_form_fields( $fields ) {
 			'label'         => __( 'Name' ),
 			'type'          => 'text',
 			'value'         => esc_attr( $commenter['comment_author'] ),
-			'required'      => $req ? 'required' : '',
-			'aria-required' => $req ? 'true' : '',
+			'required'      => $required,
+			'aria-required' => $aria_required,
 			'size'          => 30,
 			'maxlength'     => 245,
 		),
@@ -37,8 +39,8 @@ function bootswatch_comment_form_fields( $fields ) {
 			'label'         => __( 'Email' ),
 			'type'          => $html5 ? 'email' : 'text',
 			'value'         => esc_attr( $commenter['comment_author_email'] ),
-			'required'      => $req ? 'required' : '',
-			'aria-required' => $req ? 'true' : '',
+			'required'      => $required,
+			'aria-required' => $aria_required,
 			'size'          => 30,
 			'maxlength'     => 100,
 			'describedby'   => 'email-notes',
