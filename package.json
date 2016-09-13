@@ -19,7 +19,7 @@
   "devDependencies": {
     "del": "^2.2.0",
     "gulp": "^3.9.1",
-    "gulp-jscs": "^3.0.2",
+    "gulp-jscs": "^4.0.0",
     "gulp-remote-src": "^0.4.1",
     "gulp-rename": "^1.2.2",
     "gulp-unzip": "^0.1.4",
