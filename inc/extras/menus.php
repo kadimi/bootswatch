@@ -129,7 +129,7 @@ class Bootswatch_Nav_Walker extends Walker_Nav_Menu {
 	 * @param  Array  $args   See link.
 	 * @return void
 	 */
-	function start_lvl( &$output, $depth = 0, $args = array() ) {
+	public function start_lvl( &$output, $depth = 0, $args = array() ) {
 		if ( 'primary' === $args->theme_location ) {
 			$indent = str_repeat( "\t", $depth );
 			$output .= "\n$indent<ul class=\"dropdown-menu\">\n";
