@@ -11,11 +11,14 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header <?php echo ( ! is_sticky() || ! is_home() ) ? 'page-header' : ''; ?>">
+
+		<?php do_action( 'bootswatch_before_.entry-title' ); ?>
 		<h2 class="entry-title">
 			<a href="<?php echo esc_url( get_permalink() ); ?>">
 				<?php the_title(); ?>
 			</a>
 		</h2>
+		<?php do_action( 'bootswatch_after_.entry-title' ); ?>
 
 		<?php if ( 'post' === get_post_type() ) : ?>
 
