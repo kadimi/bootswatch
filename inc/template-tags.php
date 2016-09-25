@@ -61,9 +61,9 @@ if ( ! function_exists( 'bootswatch_entry_footer' ) ) :
 		}
 
 		if ( bootswatch_can_we_use_comments_popup_link() ) {
-			echo '<span class="comments-link">';
+			echo '<p class="comments-link">';
 			comments_popup_link( esc_html__( 'Leave a comment', 'bootswatch' ), esc_html__( '1 Comment', 'bootswatch' ), esc_html__( '% Comments', 'bootswatch' ) );
-			echo '</span>';
+			echo '</p>';
 		}
 
 		edit_post_link( sprintf(
