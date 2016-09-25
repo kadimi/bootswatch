@@ -13,11 +13,11 @@
 	<header class="entry-header">
 		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 
-		<?php do_action( 'bootswatch_before.entry-meta' ); ?>
+		<?php do_action( 'bootswatch_before_.entry-meta' ); ?>
 		<div class="entry-meta">
 			<?php bootswatch_posted_on(); ?>
 		</div><!-- .entry-meta -->
-		<?php do_action( 'bootswatch_before.entry-meta' ); ?>
+		<?php do_action( 'bootswatch_before_.entry-meta' ); ?>
 	</header><!-- .entry-header -->
 
 	<div class="entry-content">
