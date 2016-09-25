@@ -14,9 +14,11 @@
 		<?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
 
 		<?php if ( 'post' === get_post_type() ) : ?>
+		<?php do_action( 'bootswatch_before.entry-meta' ); ?>
 		<div class="entry-meta">
 			<?php bootswatch_posted_on(); ?>
 		</div><!-- .entry-meta -->
+		<?php do_action( 'bootswatch_after.entry-meta' ); ?>
 		<?php endif; ?>
 	</header><!-- .entry-header -->
 

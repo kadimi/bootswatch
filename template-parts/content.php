@@ -18,7 +18,11 @@
 		</h2>
 
 		<?php if ( 'post' === get_post_type() ) : ?>
+
+			<?php do_action( 'bootswatch_before.entry-meta' ); ?>
 			<p class="entry-meta"><?php bootswatch_posted_on(); ?></p>
+			<?php do_action( 'bootswatch_after.entry-meta' ); ?>
+
 		<?php endif; ?>
 	</header>
 
