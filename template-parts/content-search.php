@@ -26,10 +26,10 @@
 		<?php the_excerpt(); ?>
 	</div><!-- .entry-summary -->
 
-	<?php do_action( 'bootswatch_before_.entry-header' ); ?>
+	<?php do_action( 'bootswatch_before_.entry-footer' ); ?>
 	<footer class="entry-footer">
 		<?php bootswatch_entry_footer(); ?>
 	</footer><!-- .entry-footer -->
-	<?php do_action( 'bootswatch_after_.entry-header' ); ?>
+	<?php do_action( 'bootswatch_after_.entry-footer' ); ?>
 </article><!-- #post-## -->
 
