@@ -11,11 +11,11 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-	<?php do_action( 'bootswatch_before_page_title' ); ?>
+	<?php do_action( 'bootswatch_before_.entry-header' ); ?>
 	<header class="entry-header">
 		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 	</header><!-- .entry-header -->
-	<?php do_action( 'bootswatch_after_page_title' ); ?>
+	<?php do_action( 'bootswatch_after_.entry-header' ); ?>
 
 	<div class="entry-content">
 		<?php the_content(); ?>

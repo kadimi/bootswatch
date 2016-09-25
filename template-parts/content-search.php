@@ -18,7 +18,7 @@
 		<div class="entry-meta">
 			<?php bootswatch_posted_on(); ?>
 		</div><!-- .entry-meta -->
-		<?php do_action( 'bootswatch_after.entry-meta' ); ?>
+		<?php do_action( 'bootswatch_after_.entry-meta' ); ?>
 		<?php endif; ?>
 	</header><!-- .entry-header -->
 
