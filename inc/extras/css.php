@@ -13,11 +13,6 @@ function bootswatch_css() {
 	$css = '';
 
 	/**
-	 * Remove padding on search form.
-	 */
-	$css .= '.navbar-collapse{ padding-right: 0; }';
-
-	/**
 	 * Fix overlapping with WordPress admin bar.
 	 */
 	$css .= 'body.admin-bar .navbar-fixed-top{ top: 32px; }';
