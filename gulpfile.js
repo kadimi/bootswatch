@@ -39,6 +39,9 @@ gulp.task( 'bootstrap.get', function() {
 	var css = remoteSrc( 'css/bootstrap.min.css', { base: bsBase + 'dist/' })
 		.pipe( gulp.dest( 'vendor/bootstrap' ) )
 	;
+	var less = remoteSrc( 'less/bootstrap.less', { base: bsBase })
+		.pipe( gulp.dest( 'vendor/bootstrap' ) )
+	;
 	var js = remoteSrc( 'js/bootstrap.min.js', { base: bsBase + 'dist/' })
 		.pipe( gulp.dest( 'vendor/bootstrap' ) )
 	;
@@ -53,7 +56,7 @@ gulp.task( 'bootstrap.get', function() {
 		;
 	}
 
-	return merge( css, js, variables, tasks );
+	return merge( css, js, less, variables, tasks );
 });
 
 // Download bootswatch themes, variables and fonts.
