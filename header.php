@@ -22,7 +22,7 @@
 
 	<header class="header">
 
-		<nav class=" navbar navbar-default <?php if ( bootswatch_use( 'fixed_navbar' ) ) { echo 'navbar-fixed-top'; } ?> ">
+		<nav class=" navbar navbar-default <?php echo bootswatch_use( 'fixed_navbar' ) ? 'navbar-fixed-top' : 'navbar-static-top'; ?> ">
 			<div class="container">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".collapse">
