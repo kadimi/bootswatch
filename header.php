@@ -25,7 +25,7 @@
 		<nav class=" navbar navbar-default <?php if ( bootswatch_use( 'fixed_navbar' ) ) { echo 'navbar-fixed-top'; } ?> ">
 			<div class="container">
 				<div class="navbar-header">
-					<button type="buttox" class="navbar-toggle" data-toggle="collapse" data-target=".collapse">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".collapse">
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
