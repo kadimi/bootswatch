@@ -37,13 +37,17 @@
 					wp_nav_menu( array(
 						'theme_location' => 'primary',
 						'container' => false,
-						'menu_class' => 'nav navbar-nav',
+						'menu_class' => 'nav navbar-nav' . ( ! bootswatch_use( 'search_form_in_header' ) ? ' navbar-right' : '' ),
 						'walker' => new Bootswatch_Nav_Walker,
 						'fallback_cb' => false,
 						'depth' => 2,
 					) );
 					?>
-					<?php bootswatch_search_form( 'navbar-form navbar-right' ); ?>
+					<?php
+					if ( bootswatch_use( 'search_form_in_header' ) ) {
+						bootswatch_search_form( 'navbar-form pull-right' );
+					}
+					?>
 				</div>
 			</div>
 		</nav>

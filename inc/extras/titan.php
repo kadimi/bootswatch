@@ -53,6 +53,17 @@ function bootswatch_create_options() {
 		),
 	) );
 
+	$section->createOption( array(
+		'name' => __( 'Search Form in Header', 'bootswatch' ),
+		'id' => 'search_form_in_header',
+		'type' => 'select',
+		'default' => 'yes',
+		'options' => array(
+			'yes' => __( 'Yes' ),
+			'no' => __( 'No' ),
+		),
+	) );
+
 	$metabox = $titan->createMetaBox( array(
 		'name' => __( 'Bootswatch additions', 'bootswatch' ),
 	) );
