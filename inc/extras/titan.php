@@ -64,6 +64,13 @@ function bootswatch_create_options() {
 		),
 	) );
 
+	$section->createOption( array(
+		'name' => __( 'Less Variables', 'bootswatch' ),
+		'id' => 'less_variables',
+		'type' => 'textarea',
+		'desc' => __( 'Coming soon...', 'bootswatch' ),
+	) );
+
 	$metabox = $titan->createMetaBox( array(
 		'name' => __( 'Bootswatch additions', 'bootswatch' ),
 	) );

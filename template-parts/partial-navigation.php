@@ -6,5 +6,5 @@
  */
 
 if ( is_home() || is_archive() || is_search() ) {
-	the_posts_navigation();
+	bootswatch_posts_navigation();
 }

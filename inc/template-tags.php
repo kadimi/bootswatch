@@ -39,6 +39,22 @@ function bootswatch_posted_on() {
 }
 endif;
 
+if ( ! function_exists( 'bootswatch_posts_navigation' ) ) {
+	/**
+	 * Displays pagination.
+	 */
+	function bootswatch_posts_navigation() {
+		$links = paginate_links( [ 'type' => 'array' ] );
+		if ( $links ) {
+			foreach ( $links as $index => $link ) {
+				$links[ $index ] = '<li>' . $link . '</li>';
+			}
+			echo '<nav><ul class="pagination">' . implode( $links, "\n" ) . '</ul></nav>'; // XSS OK.
+		}
+	}
+}
+
+
 if ( ! function_exists( 'bootswatch_entry_footer' ) ) :
 	/**
 	 * Prints HTML with meta information for the categories, tags and comments.
