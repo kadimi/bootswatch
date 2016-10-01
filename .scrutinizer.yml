@@ -1,3 +1,7 @@
+build:
+    environment:
+        php:
+            version: 5.6
 tools:
     php_mess_detector:
         config:
