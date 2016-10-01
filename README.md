@@ -4,6 +4,22 @@
 
 # Bootswatch for WordPress
 
+A WordPress theme based on Bootswatch, with the ability to override its themes.
+
+## Installation
+
+```bash
+# Clone the repository
+cd ~/[...]/wp-content/themes
+git clone git@github.com:kadimi/bootswatch.git
+cd bootswatch
+
+# Setup dependencies with Composer
+rm -fr composer.lock vendor
+composer install
+
+```
+
 ## Code Sniffing
 
 The command you need is:
