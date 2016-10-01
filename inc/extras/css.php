@@ -23,7 +23,7 @@ function bootswatch_css() {
 	if ( bootswatch_use( 'fixed_navbar' ) ) {
 
 		$variables_path = bootswatch_get_option( 'theme' )
-			? get_template_directory() . '/vendor/bootswatch/' . bootswatch_get_option( 'theme' ) . '/vars.less'
+			? get_template_directory() . '/vendor/thomaspark/bootswatch/' . bootswatch_get_option( 'theme' ) . '/variables.less'
 			: get_template_directory() . '/vendor/bootstrap/less/variables.less'
 		;
 
@@ -31,6 +31,7 @@ function bootswatch_css() {
 		$less_parser->parseFile( $variables_path, home_url() );
 		$less_parser->parse( 'body { padding-top: (@navbar-height + @navbar-margin-bottom); }' );
 		$css .= $less_parser->getCss();
+
 	}
 	echo "<style>$css</style>"; // WPCS: xss ok.
 }
