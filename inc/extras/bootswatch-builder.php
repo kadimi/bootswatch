@@ -22,32 +22,10 @@ use Symfony\Component\Finder\Finder;
  */
 function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 
-	/**
-	 * Filesystem.
-	 *
-	 * @var Filesystem
-	 */
 	$filesystem = new Filesystem();
-
-	/**
-	 * Finder.
-	 *
-	 * @var Finder
-	 */
 	$finder = new Finder();
 
-	/**
-	 * Cache directory path.
-	 *
-	 * @var String
-	 */
 	$cache_dir = get_template_directory() . '/cache';
-
-	/**
-	 * Cache file path.
-	 *
-	 * @var String
-	 */
 	$cached_file_path = sprintf( '%1$s/%2$s%3$s.min.css'
 		, $cache_dir
 		, $theme
@@ -71,39 +49,10 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 	    $filesystem->remove( $file->getRealPath() );
 	}
 
-	/**
-	 * The folder of bootstrap.
-	 *
-	 * @var String
-	 */
 	$bootstrap_dir = get_template_directory() . '/vendor/thomaspark/bootswatch/bower_components/bootstrap';
-
-	/**
-	 * The bootstrap main less file contents.
-	 *
-	 * @var String
-	 */
 	$bootstrap_less = file_get_contents( $bootstrap_dir . '/less/bootstrap.less' );
-
-	/**
-	 * Bootswatch theme variables.less
-	 *
-	 * @var String
-	 */
 	$bootswatch_theme_variables_less = file_get_contents( get_template_directory() . '/vendor/thomaspark/bootswatch/' . $theme . '/variables.less' );
-
-	/**
-	 * The path of the temporary bootswatch file.
-	 *
-	 * @var String
-	 */
 	$bootswatch_theme_less_file_path = $bootstrap_dir . '/less/bootswatch-' . $theme . '.less';
-
-	/**
-	 * The path of the temporary variables file
-	 *
-	 * @var String
-	 */
 	$variables_less_file_path = $bootstrap_dir . '/less/variables-' . $theme . '.less';
 
 	/**
