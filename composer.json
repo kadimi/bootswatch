@@ -6,5 +6,5 @@
         "oyejorge/less.php": "v1.7.0.10",
         "symfony/filesystem": "^3.1",
         "symfony/finder": "^3.1"
-    },
+    }
 }
