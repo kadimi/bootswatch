@@ -24,7 +24,7 @@ function bootswatch_css() {
 
 		$variables_path = bootswatch_get_option( 'theme' )
 			? get_template_directory() . '/vendor/thomaspark/bootswatch/' . bootswatch_get_option( 'theme' ) . '/variables.less'
-			: get_template_directory() . '/vendor/bootstrap/less/variables.less'
+			: get_template_directory() . '/vendor/thomaspark/bootswatch/bower_components/bootstrap/less/variables.less'
 		;
 
 		$less_parser = new Less_Parser();

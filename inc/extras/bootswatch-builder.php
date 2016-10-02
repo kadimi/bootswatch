@@ -6,6 +6,7 @@
  */
 
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Finder\Finder;
 
 /**
  * Build a bootswatch theme.
@@ -14,7 +15,7 @@ use Symfony\Component\Filesystem\Filesystem;
  * If the cache already exists, the function skips the build process,
  * unless `$rebuild` is set to true.
  *
- * @param  String  $theme      Theme name, e.g. Cerulean.
+ * @param  String  $theme      Theme name, e.g. `cerulean`.
  * @param  Array   $overrides  Associative array of variable names and values.
  * @param  Boolean $rebuild    Should the function rebuild the cache.
  * @return String              Generated CSS code.
@@ -26,7 +27,14 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 	 *
 	 * @var Filesystem
 	 */
-	$fs = new Filesystem();
+	$filesystem = new Filesystem();
+
+	/**
+	 * Finder.
+	 *
+	 * @var Finder
+	 */
+	$finder = new Finder();
 
 	/**
 	 * Cache directory path.
@@ -51,8 +59,16 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 	 */
 	if ( ! $rebuild ) {
 		if ( file_exists( $cached_file_path ) ) {
-			return file_get_contents( $cached_file_path );
+			return $cached_file_path;
 		}
+	}
+
+	/**
+	 * Clear old cache.
+	 */
+	$finder->files()->in( $cache_dir )->date( 'before now - 6 hours' );
+	foreach ( $finder as $file ) {
+	    $filesystem->remove( $file->getRealPath() );
 	}
 
 	/**
@@ -102,7 +118,7 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 	/**
 	 * Create temporary bootswatch variable less file.
 	 */
-	$fs->dumpFile( $variables_less_file_path, $bootswatch_theme_variables_less );
+	$filesystem->dumpFile( $variables_less_file_path, $bootswatch_theme_variables_less );
 
 	/**
 	 * The bootswatch less code.
@@ -116,7 +132,7 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 	/**
 	 * Create temporary bootswatch less file.
 	 */
-	$fs->dumpFile( $bootswatch_theme_less_file_path, $bootswatch_less );
+	$filesystem->dumpFile( $bootswatch_theme_less_file_path, $bootswatch_less );
 
 	/**
 	 * Parse bootswatch theme LESS code.
@@ -128,23 +144,23 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 	/**
 	 * Delete temporary files.
 	 */
-	$fs->remove( $bootswatch_theme_less_file_path );
-	$fs->remove( $variables_less_file_path );
+	$filesystem->remove( $bootswatch_theme_less_file_path );
+	$filesystem->remove( $variables_less_file_path );
 
 	/**
 	 * Maybe create cache directory.
 	 */
 	if ( ! file_exists( $cache_dir ) ) {
-		$fs->mkdir( $cache_dir, 0777 );
+		$filesystem->mkdir( $cache_dir, 0777 );
 	}
 
 	/**
 	 * Save generated CSS code to cache.
 	 */
-	$fs->dumpFile( $cached_file_path, $css );
+	$filesystem->dumpFile( $cached_file_path, $css );
 
 	/**
-	 * Return generated CSS code.
+	 * Return generated CSS code file path.
 	 */
-	return $css;
+	return $cached_file_path;
 }

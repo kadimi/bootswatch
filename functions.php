@@ -125,9 +125,14 @@ function bootswatch_scripts() {
 	 * Selected Bootswatch theme, if none is selected, use Bootstrap.
 	 */
 	if ( $bootswatch_theme ) {
-		wp_enqueue_style( 'bootswatch' . $bootswatch_theme, get_template_directory_uri() . '/vendor/thomaspark/bootswatch/' . $bootswatch_theme . '/bootstrap.min.css' );
+		$variables_overrides = [];
+		$variables_overrides = apply_filters( 'bootswatch_variables_overrides', $variables_overrides, $bootswatch_theme );
+		$css_file_path = bootswatch_build( $bootswatch_theme, $variables_overrides );
+		$css_file_url = site_url( substr( $css_file_path, strlen( ABSPATH ) ) );
+		wp_enqueue_style( 'bootswatch' . $bootswatch_theme, $css_file_url );
 	} else {
 		wp_enqueue_style( 'bootswatch-bootstrap', get_template_directory_uri() . '/vendor/thomaspark/bootswatch/bower_components/bootstrap/dist/css/bootstrap.min.css' );
+		wp_enqueue_style( 'bootswatch-bootstrap-theme', get_template_directory_uri() . '/vendor/thomaspark/bootswatch/bower_components/bootstrap/dist/css/bootstrap-theme.min.css' );
 	}
 
 	/**
