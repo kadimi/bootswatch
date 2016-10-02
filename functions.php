@@ -125,7 +125,9 @@ function bootswatch_scripts() {
 	 * Selected Bootswatch theme, if none is selected, use Bootstrap.
 	 */
 	if ( $bootswatch_theme ) {
-		$variables_overrides = [];
+		$variables_overrides = [
+			'@icon-font-path' => '../vendor/thomaspark/bootswatch/fonts/',
+		];
 		$variables_overrides = apply_filters( 'bootswatch_variables_overrides', $variables_overrides, $bootswatch_theme );
 		$css_file_path = bootswatch_build( $bootswatch_theme, $variables_overrides );
 		$css_file_url = site_url( substr( $css_file_path, strlen( ABSPATH ) ) );

@@ -27,6 +27,9 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 		, $theme
 		, $overrides ? '-' . md5( serialize( $overrides ) ) : ''
 	);
+	if ( ! file_exists( $cache_dir ) ) {
+		$filesystem->mkdir( $cache_dir, 0777 );
+	}
 
 	/**
 	 * Return cached CSS if a rebuild is not requested and cache exists.
@@ -53,10 +56,16 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 
 	/**
 	 * Apply overrides to bootswatch theme variables.less file.
+	 *
+	 * Value will be surrounded in quotes if:
+	 * - it contains a forward slash
 	 */
 	foreach ( $overrides as $variable => $value ) {
 		$regex = sprintf( '/(%1$s)\s*:\s*(.+?);/s', $variable );
-		$replacement = sprintf( '$1:%s;', $value );
+		$replacement = strstr( $value, '/' )
+			? sprintf( '$1:"%s";', $value )
+			: sprintf( '$1:%s;', $value )
+		;
 		$bootswatch_theme_variables_less = preg_replace( $regex, $replacement, $bootswatch_theme_variables_less );
 	}
 
@@ -69,20 +78,13 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 	$filesystem->dumpFile( $bootswatch_theme_less_file_path, $bootswatch_less );
 
 	/**
-	 * Parse bootswatch theme LESS code.
+	 * Parse and save bootswatch theme LESS code.
 	 */
 	$less_parser = new Less_Parser( [ 'compress' => true ] );
 	$less_parser->parseFile( $bootswatch_theme_less_file_path );
 	$css = $less_parser->getCss();
 	$filesystem->remove( $bootswatch_theme_less_file_path );
 	$filesystem->remove( $variables_less_file_path );
-
-	/**
-	 * Save generated CSS code to cache.
-	 */
-	if ( ! file_exists( $cache_dir ) ) {
-		$filesystem->mkdir( $cache_dir, 0777 );
-	}
 	$filesystem->dumpFile( $cached_file_path, $css );
 
 	return $cached_file_path;
