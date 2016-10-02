@@ -18,7 +18,7 @@ use Symfony\Component\Finder\Finder;
  * @param  String  $theme      Theme name, e.g. `cerulean`.
  * @param  Array   $overrides  Associative array of variable names and values.
  * @param  Boolean $rebuild    Should the function rebuild the cache.
- * @return String              Generated CSS code.
+ * @return String              Generated CSS file path.
  */
 function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 
@@ -69,18 +69,7 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 	 */
 	$filesystem->dumpFile( $variables_less_file_path, $bootswatch_theme_variables_less );
 
-	/**
-	 * The bootswatch less code.
-	 *
-	 * It's bootstrap's less file contents with @variables pointing to bootswatch theme variables.less.
-	 *
-	 * @var String
-	 */
 	$bootswatch_less = str_replace( 'variables.less', 'variables-' . $theme . '.less', $bootstrap_less );
-
-	/**
-	 * Create temporary bootswatch less file.
-	 */
 	$filesystem->dumpFile( $bootswatch_theme_less_file_path, $bootswatch_less );
 
 	/**
@@ -89,27 +78,16 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 	$less_parser = new Less_Parser( [ 'compress' => true ] );
 	$less_parser->parseFile( $bootswatch_theme_less_file_path );
 	$css = $less_parser->getCss();
-
-	/**
-	 * Delete temporary files.
-	 */
 	$filesystem->remove( $bootswatch_theme_less_file_path );
 	$filesystem->remove( $variables_less_file_path );
 
 	/**
-	 * Maybe create cache directory.
+	 * Save generated CSS code to cache.
 	 */
 	if ( ! file_exists( $cache_dir ) ) {
 		$filesystem->mkdir( $cache_dir, 0777 );
 	}
-
-	/**
-	 * Save generated CSS code to cache.
-	 */
 	$filesystem->dumpFile( $cached_file_path, $css );
 
-	/**
-	 * Return generated CSS code file path.
-	 */
 	return $cached_file_path;
 }
