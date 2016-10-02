@@ -9,11 +9,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 
 /**
- * Build a bootswatch theme.
- *
- * The function builds CSS code for a theme and stores it in cache.
- * If the cache already exists, the function skips the build process,
- * unless `$rebuild` is set to true.
+ * Build a bootswatch theme (results are cached).
  *
  * @param  String  $theme      Theme name, e.g. `cerulean`.
  * @param  Array   $overrides  Associative array of variable names and values.
