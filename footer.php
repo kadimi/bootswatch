@@ -21,7 +21,9 @@
 				</nav>
 			</div>
 			<div class="col-md-4">
-				<p class="muted pull-right small">© <?php echo date( 'Y' ) ?> <?php echo get_bloginfo( 'title' ); ?>.</p>
+				<p class="muted pull-right small">
+					© <?php echo date( 'Y' ); // WPCS: XSS OK. ?> <?php echo esc_html( get_bloginfo( 'title' ) ); ?>.
+				</p>
 			</div>
 		</div>
 	</div>
