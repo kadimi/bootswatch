@@ -11,12 +11,18 @@
 
 ?>
 
-<footer>
-	<div class="container navbar navbar-default">
-		<div class="row">
-			<div class="col-md-4">1</div>
-			<div class="col-md-4">2</div>
-			<div class="col-md-4">3</div>
+<footer class="container">
+	<div class="row">
+		<hr>
+		<div class="col-lg-12">
+			<div class="col-md-8">
+				<nav>
+					<a href="#">Terms of Service</a> | <a href="#">Privacy</a>
+				</nav>
+			</div>
+			<div class="col-md-4">
+				<p class="muted pull-right small">© <?php echo date( 'Y' ) ?> <?php echo get_bloginfo( 'title' ); ?>.</p>
+			</div>
 		</div>
 	</div>
 </footer>
