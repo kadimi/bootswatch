@@ -138,9 +138,11 @@ function bootswatch_scripts() {
 	}
 
 	/**
-	 * Style.css
+	 * Style.css and company
 	 */
 	wp_enqueue_style( 'bootswatch', get_template_directory_uri() . '/style.css' );
+	wp_enqueue_style( 'wordpress-core', get_template_directory_uri() . '/css/wordpress-core.css' );
+	wp_enqueue_style( 'wordpress-core-overrides', get_template_directory_uri() . '/css/wordpress-core-overrides.css' );
 
 	/**
 	 * Scripts.

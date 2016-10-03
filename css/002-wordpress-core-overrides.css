@@ -1,0 +1,13 @@
+img {
+	max-width: 100%;
+}
+
+.wp-caption {
+	background: none;
+	border: none;
+	max-width: 100%;
+}
+
+.wp-caption img {
+	max-width: 100%;
+}
