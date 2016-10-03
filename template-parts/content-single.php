@@ -20,10 +20,14 @@
 		<?php do_action( 'bootswatch_before_.entry-meta' ); ?>
 	</header><!-- .entry-header -->
 
+	<?php do_action( 'bootswatch_before_.entry-content' ); ?>
 	<div class="entry-content">
 		<?php the_content(); ?>
 		<?php bootswatch_link_pages(); ?>
 	</div><!-- .entry-content -->
+	<?php do_action( 'bootswatch_after_.entry-content' ); ?>
+
+	<hr>
 
 	<?php do_action( 'bootswatch_before_.entry-footer' ); ?>
 	<footer class="entry-footer">

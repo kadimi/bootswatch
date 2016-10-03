@@ -23,12 +23,13 @@
 		<?php if ( 'post' === get_post_type() ) : ?>
 
 			<?php do_action( 'bootswatch_before_.entry-meta' ); ?>
-			<p class="entry-meta"><?php bootswatch_posted_on(); ?></p>
+				<div class="entry-meta"><?php bootswatch_posted_on(); ?></div>
 			<?php do_action( 'bootswatch_after_.entry-meta' ); ?>
 
 		<?php endif; ?>
 	</header>
 
+	<?php do_action( 'bootswatch_before_.entry-content' ); ?>
 	<div class="entry-content">
 		<?php
 			the_content( sprintf(
@@ -40,6 +41,9 @@
 
 		<?php bootswatch_link_pages(); ?>
 	</div><!-- .entry-content -->
+	<?php do_action( 'bootswatch_after_.entry-content' ); ?>
+
+	<hr>
 
 	<?php do_action( 'bootswatch_before_.entry-footer' ); ?>
 	<footer class="entry-footer">

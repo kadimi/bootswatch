@@ -17,6 +17,7 @@
 	</header><!-- .entry-header -->
 	<?php do_action( 'bootswatch_after_.entry-header' ); ?>
 
+	<?php do_action( 'bootswatch_before_.entry-content' ); ?>
 	<div class="entry-content">
 		<?php the_content(); ?>
 		<?php
@@ -26,6 +27,7 @@
 			) );
 		?>
 	</div><!-- .entry-content -->
+	<?php do_action( 'bootswatch_after_.entry-content' ); ?>
 
 	<?php do_action( 'bootswatch_before_.entry-footer' ); ?>
 	<footer class="entry-footer">

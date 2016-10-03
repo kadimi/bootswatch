@@ -65,19 +65,19 @@ if ( ! function_exists( 'bootswatch_entry_footer' ) ) :
 			/* translators: used between list items, there is a space after the comma */
 			$categories_list = get_the_category_list( esc_html__( ', ', 'bootswatch' ) );
 			if ( $categories_list && bootswatch_categorized_blog() ) {
-				printf( '<p class="cat-links">' . esc_html__( 'Posted in %1$s', 'bootswatch' ) . '</p>', $categories_list ); // WPCS: XSS OK.
+				printf( '<p class="cat-links small">' . esc_html__( 'Posted in %1$s', 'bootswatch' ) . '</p>', $categories_list ); // WPCS: XSS OK.
 			}
 
 			/* translators: used between list items, there is a space after the comma */
 			$tags_list = str_replace( 'rel="tag"', 'rel="tag" class="btn btn-primary btn-xs"', get_the_tag_list( '', ' ' ) );
 
 			if ( $tags_list ) {
-				printf( '<p class="tags-links">' . esc_html__( 'Tagged %1$s', 'bootswatch' ) . '</p>', $tags_list ); // WPCS: XSS OK.
+				printf( '<p class="tags-links small">' . esc_html__( 'Tagged %1$s', 'bootswatch' ) . '</p>', $tags_list ); // WPCS: XSS OK.
 			}
 		}
 
 		if ( bootswatch_can_we_use_comments_popup_link() ) {
-			echo '<p class="comments-link">';
+			echo '<p class="comments-link lead">';
 			comments_popup_link( esc_html__( 'Leave a comment', 'bootswatch' ), esc_html__( '1 Comment', 'bootswatch' ), esc_html__( '% Comments', 'bootswatch' ) );
 			echo '</p>';
 		}
