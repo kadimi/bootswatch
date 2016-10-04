@@ -47,14 +47,15 @@ if ( post_password_required() ) {
 		</nav><!-- #comment-nav-above -->
 		<?php endif; // Check for comment navigation. ?>
 
-		<ol class="comment-list">
+		<div class="comment-list">
 			<?php
-				wp_list_comments( array(
-					'style'      => 'ol',
+				wp_list_comments( [
+					'style' => 'div',
+					'walker' => new Walker_Comment_Bootswatch(),
 					'short_ping' => true,
-				) );
+				] );
 			?>
-		</ol><!-- .comment-list -->
+		</div><!-- .comment-list -->
 
 		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // Are there comments to navigate through? ?>
 		<nav id="comment-nav-below" class="navigation comment-navigation" role="navigation">
