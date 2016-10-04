@@ -29,7 +29,7 @@ class Walker_Comment_Bootswatch extends Walker_Comment {
 			],
 			[
 				'class="comment-body well"',
-				'comment-reply-link btn btn-info btn-xs',
+				'comment-reply-link btn btn-default btn-xs',
 			],
 			ob_get_clean()
 		);
