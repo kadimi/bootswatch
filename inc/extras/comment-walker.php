@@ -25,11 +25,11 @@ class Walker_Comment_Bootswatch extends Walker_Comment {
 		echo str_replace( // WPCS XSS OK.
 			[
 				'class="comment-body"',
-				'class="comment-reply-link',
+				'comment-reply-link',
 			],
 			[
 				'class="comment-body well"',
-				'class="comment-reply-link btn btn-info btn-xs',
+				'comment-reply-link btn btn-info btn-xs',
 			],
 			ob_get_clean()
 		);
