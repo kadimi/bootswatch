@@ -61,12 +61,8 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 	 * - it contains a forward slash
 	 */
 	foreach ( $overrides as $variable => $value ) {
-		$regex       = sprintf( '/(%1$s)\s*:\s*(.+?);/s', $variable );
-		$replacement = strstr( $value, '/' )
-			? sprintf( '$1:"%s";', $value )
-			: sprintf( '$1:%s;', $value )
-		;
-
+		$regex                      = sprintf( '/(%1$s)\s*:\s*(.+?);/s', $variable );
+		$replacement                = strstr( $value, '/' ) ? sprintf( '$1:"%s";', $value ) : sprintf( '$1:%s;', $value );
 		$bootswatch_theme_vars_less = preg_replace( $regex, $replacement, $bootswatch_theme_vars_less );
 	}
 

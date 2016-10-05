@@ -51,7 +51,7 @@ class Walker_Comment_Bootswatch extends Walker_Comment {
 		// Fix line exceeding link.
 		$output = preg_replace( "/\s*<\/time>\n\s+<\/a>/s", '</time></a>', $output );
 
-		echo $output;
+		echo $output; // WPCS XSS OK.
 	}
 
 	/**

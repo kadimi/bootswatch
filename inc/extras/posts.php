@@ -102,7 +102,7 @@ function bootstrap_link_pages( $args = array() ) {
 				, $j
 				, $link_after
 				, $current_after
-			);			
+			);
 		}
 	}
 
