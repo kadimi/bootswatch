@@ -21,7 +21,7 @@ foreach ( $hooks as $hook ) {
  * [bootswatch_hook_callback description]
  */
 function bootswatch_hook_callback() {
-	$hook = preg_replace( '/^bootswatch_/', '', current_filter() );
+	$hook    = preg_replace( '/^bootswatch_/', '', current_filter() );
 	$content = TitanFramework::getInstance( 'bootswatch' )->getOption( $hook );
 	printf( '<div class="%s">%s</div>', 'bootswatch_' . $hook, apply_filters( 'the_content', $content ) ); // WPCS: XSS OK.
 }
