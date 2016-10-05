@@ -88,7 +88,7 @@ add_filter( 'comment_form_default_fields', 'bootswatch_comment_form_fields' );
  * @return Array           Defaults modified
  */
 function bootswatch_comment_form( $defaults ) {
-	$defaults['class_form'] = 'form-horizontal well';
+	$defaults['class_form']    = 'form-horizontal well';
 	$defaults['comment_field'] = '
 		<div class="form-group comment-form-comment">
 			<label for="comment" class="col-sm-2 control-label">' . _x( 'Comment', 'noun' ) . ' <span class="required">*</span></label> 
