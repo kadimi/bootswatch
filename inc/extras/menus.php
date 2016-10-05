@@ -70,22 +70,6 @@ function bootswatch_nav_menu_link_attributes( $atts, $item, $args, $depth ) {
 add_filter( 'nav_menu_link_attributes', 'bootswatch_nav_menu_link_attributes', 10, 4 );
 
 /**
- * Does nothing... Yet.
- *
- * @link https://developer.wordpress.org/reference/hooks/walker_nav_menu_start_el/
- *
- * @param  string $item_output See link.
- * @param  Object $item        See link.
- * @param  Int    $depth       See link.
- * @param  Array  $args        See link.
- * @return String              See link.
- */
-function bootswatch_nav_menu_start_el( $item_output, $item, $depth, $args ) {
-	return $item_output;
-}
-add_filter( 'walker_nav_menu_start_el', 'bootswatch_nav_menu_start_el', 10, 4 );
-
-/**
  * Bootswatch menu walker class
  *
  * @link https://developer.wordpress.org/reference/classes/walker_nav_menu/
