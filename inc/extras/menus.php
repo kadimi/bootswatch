@@ -86,29 +86,6 @@ function bootswatch_nav_menu_start_el( $item_output, $item, $depth, $args ) {
 add_filter( 'walker_nav_menu_start_el', 'bootswatch_nav_menu_start_el', 10, 4 );
 
 /**
- * Adds caret to first level primary menu elements with children.
- *
- * @link https://developer.wordpress.org/reference/hooks/nav_menu_item_title/
- *
- * @param  String $title See link.
- * @param  Object $item  See link.
- * @param  Array  $args  See link.
- * @param  Int    $depth See link.
- * @return String        See link.
- */
-function bootswatch_nav_menu_item_title( $title, $item, $args, $depth ) {
-	// Add caret to first level primary menu elements with children.
-	if ( 'primary' === $args->theme_location && 0 == $depth ) {
-		if ( in_array( 'menu-item-has-children', $item->classes ) ) {
-			$title .= ' <b class="caret"></b>';
-		}
-	}
-
-	return $title;
-}
-/* add_filter( 'nav_menu_item_title', 'bootswatch_nav_menu_item_title', 10, 4 ); */
-
-/**
  * Bootswatch menu walker class
  *
  * @link https://developer.wordpress.org/reference/classes/walker_nav_menu/
