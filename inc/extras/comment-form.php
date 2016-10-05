@@ -13,12 +13,12 @@
  */
 function bootswatch_comment_form_fields( $fields ) {
 
-	$commenter = wp_get_current_commenter();
-	$req = get_option( 'require_name_email' );
-	$required = $req ? 'required' : '';
+	$commenter     = wp_get_current_commenter();
+	$req           = get_option( 'require_name_email' );
+	$required      = $req ? 'required' : '';
 	$aria_required = $req ? 'true' : '';
 
-	$div_tpl = '<div class="form-group comment-form-{{field}}">{{label}} {{input}}</div>';
+	$div_tpl   = '<div class="form-group comment-form-{{field}}">{{label}} {{input}}</div>';
 	$label_tpl = '<label for="{{field}}" class="col-sm-2 control-label">{{label}}{{required}}</label>';
 	$input_tpl = '<div class="col-sm-10"><input{{param}}></div>';
 

@@ -59,11 +59,8 @@ function bootswatch_nav_menu_link_attributes( $atts, $item, $args, $depth ) {
 			$atts['data-toggle'] = 'dropdown';
 
 			// Add "dropdown-toggle" class to first level primary menu elements with children.
-			$classes = isset( $atts['classes'] )
-				? explode( ' ', $atts['classes'] )
-				: array()
-			;
-			$classes[] = 'dropdown-toggle';
+			$classes         = isset( $atts['classes'] ) ? explode( ' ', $atts['classes'] ) : [];
+			$classes[]       = 'dropdown-toggle';
 			$atts['classes'] = implode( ' ', $classes );
 		}
 	}
@@ -128,7 +125,7 @@ class Bootswatch_Nav_Walker extends Walker_Nav_Menu {
 	 */
 	public function start_lvl( &$output, $depth = 0, $args = array() ) {
 		if ( 'primary' === $args->theme_location ) {
-			$indent = str_repeat( "\t", $depth );
+			$indent  = str_repeat( "\t", $depth );
 			$output .= sprintf( '%2$s<ul class="dropdown-menu">%3$s', "\n", $indent, "\n" );
 		}
 	}
