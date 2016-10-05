@@ -34,10 +34,8 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 	/**
 	 * Return cached CSS if a rebuild is not requested and cache exists.
 	 */
-	if ( ! $rebuild ) {
-		if ( file_exists( $cached_file_path ) ) {
-			return $cached_file_path;
-		}
+	if ( ! $rebuild && file_exists( $cached_file_path ) ) {
+		return $cached_file_path;
 	}
 
 	/**

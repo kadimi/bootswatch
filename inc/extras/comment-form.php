@@ -97,8 +97,8 @@ function bootswatch_comment_form( $defaults ) {
 			</div>
 		</div>'
 	;
-	$defaults['submit_field'] = '<div class="form-group"><div class="col-sm-offset-2 col-sm-10">%1$s %2$s</div></div>';
-	$defaults['class_submit'] = 'btn btn-primary btn-lg';
+	$defaults['submit_field']  = '<div class="form-group"><div class="col-sm-offset-2 col-sm-10">%1$s %2$s</div></div>';
+	$defaults['class_submit']  = 'btn btn-primary btn-lg';
 	return $defaults;
 };
 add_filter( 'comment_form_defaults', 'bootswatch_comment_form' );
