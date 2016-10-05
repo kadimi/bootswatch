@@ -19,9 +19,9 @@ use Symfony\Component\Finder\Finder;
 function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 
 	$filesystem = new Filesystem();
-	$finder = new Finder();
+	$finder     = new Finder();
 
-	$cache_dir = get_template_directory() . '/cache';
+	$cache_dir        = get_template_directory() . '/cache';
 	$cached_file_path = sprintf( '%1$s/%2$s%3$s.min.css'
 		, $cache_dir
 		, $theme
@@ -48,11 +48,11 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 	    $filesystem->remove( $file->getRealPath() );
 	}
 
-	$bootstrap_dir = get_template_directory() . '/vendor/thomaspark/bootswatch/bower_components/bootstrap';
-	$bootstrap_less = file_get_contents( $bootstrap_dir . '/less/bootstrap.less' );
+	$bootstrap_dir              = get_template_directory() . '/vendor/thomaspark/bootswatch/bower_components/bootstrap';
+	$bootstrap_less             = file_get_contents( $bootstrap_dir . '/less/bootstrap.less' );
 	$bootswatch_theme_vars_less = file_get_contents( get_template_directory() . '/vendor/thomaspark/bootswatch/' . $theme . '/variables.less' );
-	$bootswatch_less_file_path = $bootstrap_dir . '/less/bootswatch-' . $theme . '.less';
-	$variables_less_file_path = $bootstrap_dir . '/less/variables-' . $theme . '.less';
+	$bootswatch_less_file_path  = $bootstrap_dir . '/less/bootswatch-' . $theme . '.less';
+	$variables_less_file_path   = $bootstrap_dir . '/less/variables-' . $theme . '.less';
 
 	/**
 	 * Apply overrides to bootswatch theme variables.less file.
@@ -66,6 +66,7 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 			? sprintf( '$1:"%s";', $value )
 			: sprintf( '$1:%s;', $value )
 		;
+
 		$bootswatch_theme_vars_less = preg_replace( $regex, $replacement, $bootswatch_theme_vars_less );
 	}
 
