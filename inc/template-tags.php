@@ -64,7 +64,7 @@ if ( ! function_exists( 'bootswatch_entry_footer' ) ) :
 		if ( 'post' === get_post_type() ) {
 			/* translators: used between list items, there is a space after the comma */
 			$categories_list = get_the_category_list( esc_html__( ', ', 'bootswatch' ) );
-			if ( $categories_list && bootswatch_is_categorized_blog() ) {
+			if ( $categories_list && bootswatch_categorized_blog() ) {
 				printf( '<p class="cat-links small">' . esc_html__( 'Posted in %1$s', 'bootswatch' ) . '</p>', $categories_list ); // WPCS: XSS OK.
 			}
 
@@ -76,7 +76,7 @@ if ( ! function_exists( 'bootswatch_entry_footer' ) ) :
 			}
 		}
 
-		if ( bootswatch_may_use_comments_popup_link() ) {
+		if ( bootswatch_can_we_use_comments_popup_link() ) {
 			echo '<p class="comments-link lead">';
 			comments_popup_link( esc_html__( 'Leave a comment', 'bootswatch' ), esc_html__( '1 Comment', 'bootswatch' ), esc_html__( '% Comments', 'bootswatch' ) );
 			echo '</p>';
@@ -98,7 +98,7 @@ endif;
  *
  * @return bool
  */
-function bootswatch_is_categorized_blog() {
+function bootswatch_categorized_blog() {
 	if ( false === ( $all_the_cool_cats = get_transient( 'bootswatch_categories' ) ) ) {
 		// Create an array of all the categories that are attached to posts.
 		$all_the_cool_cats = get_categories( array(
@@ -118,7 +118,7 @@ function bootswatch_is_categorized_blog() {
 }
 
 /**
- * Flush out the transients used in bootswatch_is_categorized_blog.
+ * Flush out the transients used in bootswatch_categorized_blog.
  */
 function bootswatch_category_transient_flusher() {
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
@@ -135,6 +135,6 @@ add_action( 'save_post',     'bootswatch_category_transient_flusher' );
  *
  * It's because the tag `comments_popup_link()` must be within The Loop or a comment loop.
  */
-function bootswatch_may_use_comments_popup_link() {
+function bootswatch_can_we_use_comments_popup_link() {
 	return ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() );
 }
