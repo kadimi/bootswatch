@@ -25,7 +25,7 @@ function bootswatch_search_form( $classes = '' ) {
  * @param  String $form Form HTML.
  * @return String       Modified form HTML.
  */
-function bootswatch_get_search_form( $form ) {
+function bootswatch_get_search_form() {
 	ob_start();
 	?>
 	<form role="search" method="get" class="search-form" action="<?php echo esc_url( home_url() ); ?>">
