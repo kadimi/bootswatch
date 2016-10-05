@@ -52,16 +52,13 @@ add_filter( 'nav_menu_css_class' , 'bootswatch_nav_menu_css_class' , 10 , 4 );
  */
 function bootswatch_nav_menu_link_attributes( $atts, $item, $args, $depth ) {
 
-	// Add data-toggle="dropdown" to first level primary menu elements with children.
 	if ( 'primary' === $args->theme_location && 0 == $depth ) {
 		if ( in_array( 'menu-item-has-children', $item->classes ) ) {
-			$atts['data-toggle'] = 'dropdown';
-		}
-	}
 
-	// Add "dropdown-toggle" class to first level primary menu elements with children.
-	if ( 'primary' === $args->theme_location && 0 == $depth ) {
-		if ( in_array( 'menu-item-has-children', $item->classes ) ) {
+			// Add data-toggle="dropdown" to first level primary menu elements with children.
+			$atts['data-toggle'] = 'dropdown';
+
+			// Add "dropdown-toggle" class to first level primary menu elements with children.
 			$classes = isset( $atts['classes'] )
 				? explode( ' ', $atts['classes'] )
 				: array()
