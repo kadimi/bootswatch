@@ -33,7 +33,7 @@ function bootswatch_css() {
 		$css .= $less_parser->getCss();
 
 	}
-	echo "<style>$css</style>"; // WPCS: xss ok.
+	printf( '<style>%s</style>', $css ); // WPCS: xss ok.
 }
 
 add_action( 'wp_head', 'bootswatch_css' );

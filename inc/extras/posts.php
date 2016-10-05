@@ -63,16 +63,16 @@ function bootstrap_link_pages( $args = array() ) {
 	$args = wp_parse_args( $args, $defaults );
 	$args = apply_filters( 'wp_link_pages_args', $args );
 
-	$before = $args['before'];
-	$after = $args['after'];
-	$before_link = $args['before_link'];
-	$after_link = $args['after_link'];
+	$before         = $args['before'];
+	$after          = $args['after'];
+	$before_link    = $args['before_link'];
+	$after_link     = $args['after_link'];
 	$current_before = $args['current_before'];
-	$current_after = $args['current_after'];
-	$link_before = $args['link_before'];
-	$link_after = $args['link_after'];
-	$pagelink = $args['pagelink'];
-	$echo = $args['echo'];
+	$current_after  = $args['current_after'];
+	$link_before    = $args['link_before'];
+	$link_after     = $args['link_after'];
+	$pagelink       = $args['pagelink'];
+	$echo           = $args['echo'];
 
 	global $page, $numpages, $multipage, $more, $pagenow;
 
