@@ -22,8 +22,6 @@ function bootswatch_comment_form_fields( $fields ) {
 	$label_tpl = '<label for="{{field}}" class="col-sm-2 control-label">{{label}}{{required}}</label>';
 	$input_tpl = '<div class="col-sm-10"><input{{param}}></div>';
 
-	$fields = array();
-
 	$fields_parameters = array(
 		'author' => array(
 			'label'         => __( 'Name' ),
