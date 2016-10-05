@@ -53,7 +53,6 @@ checks:
             interface_name: '^[A-Z][a-zA-Z0-9_]*Interface$'
             type_name: '^[A-Z][a-zA-Z0-9_]*$'
             exception_name: '^[A-Z][a-zA-Z0-9_]*Exception$'
-            isser_method_name: '^(?:is|has|should|may|supports)'
         function_in_camel_caps: false
         fix_line_ending: true
         encourage_single_quotes: true
