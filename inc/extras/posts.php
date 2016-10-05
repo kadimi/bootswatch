@@ -14,7 +14,7 @@
  * @return Array          Classes with possible additions.
  */
 function bootstwatch_post_classes( $classes ) {
-	if ( is_sticky() and is_home() ) {
+	if ( is_sticky() && is_home() ) {
 		$classes[] = 'well';
 		$classes[] = 'well-lg';
 	}
@@ -87,9 +87,22 @@ function bootstrap_link_pages( $args = array() ) {
 		$output .= ' ';
 
 		if ( $i != $page || ( ! $more && 1 == $page ) ) {
-			$output .= "{$before_link}" . _wp_link_page( $i ) . "{$link_before}{$j}{$link_after}</a>{$after_link}";
+			$output .= sprintf( '%1$s%2$s%3$s%4$s%5$s</a>%6$s'
+				, $before_link
+				, _wp_link_page( $i )
+				, $link_before
+				, {$j}
+				, {$link_after}
+				, {$after_link}
+			);
 		} else {
-			$output .= "{$current_before}{$link_before}<a>{$j}</a>{$link_after}{$current_after}";
+			$output .= sprintf( '%1$s%2$s<a>%3$s</a>%4$s%5$s'
+				, $current_before
+				, $link_before
+				, $j
+				, $link_after
+				, $current_after
+			);			
 		}
 	}
 
