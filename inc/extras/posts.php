@@ -83,7 +83,7 @@ function bootstrap_link_pages( $args = array() ) {
 	$output = $before;
 
 	for ( $i = 1; $i < ( $numpages + 1 ); $i++ ) {
-		$jjj     = str_replace( '%', $i, $pagelink );
+		$j       = str_replace( '%', $i, $pagelink );
 		$output .= ' ';
 
 		if ( $i != $page || ( ! $more && 1 == $page ) ) {
@@ -91,7 +91,7 @@ function bootstrap_link_pages( $args = array() ) {
 				, $before_link
 				, _wp_link_page( $i )
 				, $link_before
-				, $jjj
+				, $j
 				, $link_after
 				, $after_link
 			);
@@ -99,7 +99,7 @@ function bootstrap_link_pages( $args = array() ) {
 			$output .= sprintf( '%1$s%2$s<a>%3$s</a>%4$s%5$s'
 				, $current_before
 				, $link_before
-				, $jjj
+				, $j
 				, $link_after
 				, $current_after
 			);
