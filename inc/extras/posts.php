@@ -91,9 +91,9 @@ function bootstrap_link_pages( $args = array() ) {
 				, $before_link
 				, _wp_link_page( $i )
 				, $link_before
-				, {$j}
-				, {$link_after}
-				, {$after_link}
+				, $j
+				, $link_after
+				, $after_link
 			);
 		} else {
 			$output .= sprintf( '%1$s%2$s<a>%3$s</a>%4$s%5$s'
