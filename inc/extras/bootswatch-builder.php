@@ -50,8 +50,8 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 
 	$bootstrap_dir = get_template_directory() . '/vendor/thomaspark/bootswatch/bower_components/bootstrap';
 	$bootstrap_less = file_get_contents( $bootstrap_dir . '/less/bootstrap.less' );
-	$bootswatch_theme_variables_less = file_get_contents( get_template_directory() . '/vendor/thomaspark/bootswatch/' . $theme . '/variables.less' );
-	$bootswatch_theme_less_file_path = $bootstrap_dir . '/less/bootswatch-' . $theme . '.less';
+	$bootswatch_theme_vars_less = file_get_contents( get_template_directory() . '/vendor/thomaspark/bootswatch/' . $theme . '/variables.less' );
+	$bootswatch_less_file_path = $bootstrap_dir . '/less/bootswatch-' . $theme . '.less';
 	$variables_less_file_path = $bootstrap_dir . '/less/variables-' . $theme . '.less';
 
 	/**
@@ -66,24 +66,24 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 			? sprintf( '$1:"%s";', $value )
 			: sprintf( '$1:%s;', $value )
 		;
-		$bootswatch_theme_variables_less = preg_replace( $regex, $replacement, $bootswatch_theme_variables_less );
+		$bootswatch_theme_vars_less = preg_replace( $regex, $replacement, $bootswatch_theme_vars_less );
 	}
 
 	/**
 	 * Create temporary bootswatch variable less file.
 	 */
-	$filesystem->dumpFile( $variables_less_file_path, $bootswatch_theme_variables_less );
+	$filesystem->dumpFile( $variables_less_file_path, $bootswatch_theme_vars_less );
 
 	$bootswatch_less = str_replace( 'variables.less', 'variables-' . $theme . '.less', $bootstrap_less );
-	$filesystem->dumpFile( $bootswatch_theme_less_file_path, $bootswatch_less );
+	$filesystem->dumpFile( $bootswatch_less_file_path, $bootswatch_less );
 
 	/**
 	 * Parse and save bootswatch theme LESS code.
 	 */
 	$less_parser = new Less_Parser( [ 'compress' => true ] );
-	$less_parser->parseFile( $bootswatch_theme_less_file_path );
+	$less_parser->parseFile( $bootswatch_less_file_path );
 	$css = $less_parser->getCss();
-	$filesystem->remove( $bootswatch_theme_less_file_path );
+	$filesystem->remove( $bootswatch_less_file_path );
 	$filesystem->remove( $variables_less_file_path );
 	$filesystem->dumpFile( $cached_file_path, $css );
 

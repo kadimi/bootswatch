@@ -129,8 +129,8 @@ function bootswatch_scripts() {
 			'@icon-font-path' => '../vendor/thomaspark/bootswatch/fonts/',
 		];
 		$variables_overrides = apply_filters( 'bootswatch_variables_overrides', $variables_overrides, $bootswatch_theme );
-		$css_file_path = bootswatch_build( $bootswatch_theme, $variables_overrides );
-		$css_file_url = site_url( substr( $css_file_path, strlen( ABSPATH ) ) );
+		$css_file_path       = bootswatch_build( $bootswatch_theme, $variables_overrides );
+		$css_file_url        = site_url( substr( $css_file_path, strlen( ABSPATH ) ) );
 		wp_enqueue_style( 'bootswatch' . $bootswatch_theme, $css_file_url );
 	} else {
 		wp_enqueue_style( 'bootswatch-bootstrap', get_template_directory_uri() . '/vendor/thomaspark/bootswatch/bower_components/bootstrap/dist/css/bootstrap.min.css' );
