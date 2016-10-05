@@ -22,8 +22,7 @@ function bootswatch_search_form( $classes = '' ) {
 /**
  * Generates Bootstrap powered WordPress compatible search form.
  *
- * @param  String $form Form HTML.
- * @return String       Modified form HTML.
+ * @return String       Form HTML.
  */
 function bootswatch_get_search_form() {
 	ob_start();
