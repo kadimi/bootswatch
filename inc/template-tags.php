@@ -94,6 +94,22 @@ if ( ! function_exists( 'bootswatch_entry_footer' ) ) :
 endif;
 
 /**
+ * Prints previous and next posts links.
+ */
+function bootswatch_post_navigation() {
+	$replacements = [
+		'<div class="nav-links">'    => '<ul class="nav-links pager">',
+		'<div class="nav-previous">' => '<li class="nav-previous previous">',
+		'<div class="nav-next">'     => '<li class="nav-next next">',
+		'</a></div>'                 => '</a></li>',
+		'rel="prev">'                => 'rel="prev">« ',
+		'</a></li></div>'            => ' »</a></li></ul>',
+	];
+	$replacements = apply_filters( 'bootswatch_post_navigation_replacements', $replacements );
+	echo str_replace( array_keys( $replacements ), array_values( $replacements ), get_the_post_navigation() ); // WPCS XSS OK.
+}
+
+/**
  * Returns true if a blog has more than 1 category.
  *
  * @return bool

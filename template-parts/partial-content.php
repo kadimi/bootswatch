@@ -21,7 +21,7 @@ while ( have_posts() ) {
 	}
 
 	if ( is_single() ) {
-		the_post_navigation();
+		bootswatch_post_navigation();
 	}
 
 	if ( is_single() || is_page() ) {
