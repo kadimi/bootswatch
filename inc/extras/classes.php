@@ -6,7 +6,7 @@
  */
 
 /**
- * Return classes to be used for the primary container.
+ * Returns classes to be used for the primary container.
  *
  * @return Array The classes.
  */
@@ -19,3 +19,11 @@ function bootswatch_primary_classes() {
 	$classes = apply_filters( 'bootswatch_primary_classes', $classes );
 	return $classes;
 }
+
+add_filter( 'body_class', function( $classes ) {
+	if ( is_active_sidebar( 'sidebar' ) ) {
+		$classes[] = 'has-sidebar';
+		$classes[] = 'has-sidebar-sidebar';
+	}
+	return array_unique( $classes );
+} );
