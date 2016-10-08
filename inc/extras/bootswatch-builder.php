@@ -94,7 +94,7 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 	/**
 	 * Parse and save bootswatch theme LESS code.
 	 */
-	$css = ( new Less_Parser( [ 'compress' => true ] ) )->parseFile( $paths['tmp-final.less'] )->getCss();
+	$css = ( ( new Less_Parser( [ 'compress' => true ] ) )->parseFile( $paths['tmp-final.less'] ) )->getCss();
 	$filesystem->dumpFile( $paths['cache.css'], $css );
 
 	/**
