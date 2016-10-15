@@ -20,6 +20,8 @@ composer install
 
 ```
 
+...Then login to the dashboard and follow the messages in the notices to install and activate required plugins.
+
 ## Code Sniffing
 
 The command you need is:
