@@ -20,6 +20,24 @@ composer install
 
 ```
 
+...Then login to the dashboard and follow the messages in the notices to install and activate required plugins.
+
+## Overriding Bootstrap/Bootswatch `variables.less`
+
+You can override variables used by a sub-theme using the `bootswatch_variables_overrides` filter hook, here is an example:
+
+```php
+/**
+ * Override base font size for Lumen sub-theme.
+ */
+add_filter( 'bootswatch_variables_overrides', function( $variables_overrides, $bootswatch_theme ) {
+	if ( 'lumen' === $bootswatch_theme ) {
+		$variables_overrides[ '@font-size-base' ] = '15px';
+	}
+	return $variables_overrides;
+}, 10, 3 );
+```
+
 ## Code Sniffing
 
 The command you need is:
