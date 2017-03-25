@@ -19,9 +19,10 @@ use Symfony\Component\Finder\Finder;
 function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 
 	$paths = $contents = [];
+	$text_direction = is_rtl() ? 'rtl' : 'ltr';
 
 	$paths['cache.dir'] = get_template_directory() . '/cache';
-	$paths['cache.css'] = sprintf( '%1$s/%2$s%3$s.min.css', $paths['cache.dir'], $theme, $overrides ? '-' . md5( serialize( $overrides ) ) : '' );
+	$paths['cache.css'] = sprintf( '%1$s/%2$s%3$s-%4$s.min.css', $paths['cache.dir'], $theme, $overrides ? '-' . md5( serialize( $overrides ) ) : '', $text_direction );
 
 	$filesystem = new Filesystem();
 	if ( ! file_exists( $paths['cache.dir'] ) ) {
@@ -97,6 +98,9 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 	$less_parser = new Less_Parser( [ 'compress' => true ] );
 	$less_parser->parseFile( $paths['tmp-final.less'] );
 	$css = $less_parser->getCss();
+	if ( is_rtl() ) {
+		$css = CSSJanus::transform( $css );
+	}
 	$filesystem->dumpFile( $paths['cache.css'], $css );
 
 	/**
