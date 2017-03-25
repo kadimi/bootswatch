@@ -187,6 +187,9 @@ require get_template_directory() . '/inc/jetpack.php';
 /**
  * Load all extras from ./inc/extras/
  */
-foreach ( glob( get_template_directory() . '/inc/extras/*.php' ) as $extra ) {
-	require $extra;
+$extras = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( get_template_directory() . '/inc/extras' ), RecursiveIteratorIterator::SELF_FIRST );
+foreach ( $extras as $extra => $unused ) {
+	if ( preg_match( '/\/[\w-]+\.php$/', $extra ) ) {
+		require $extra;
+	}
 }
