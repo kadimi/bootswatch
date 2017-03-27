@@ -5,6 +5,10 @@
  * @package Bootswatch
  */
 
+add_action( 'after_setup_theme', function () {
+	add_theme_support( 'sensei' );
+} );
+
 remove_action( 'sensei_before_main_content', [ Sensei()->frontend, 'sensei_output_content_wrapper' ] );
 remove_action( 'sensei_after_main_content', [ Sensei()->frontend, 'sensei_output_content_wrapper_end' ] );
 
