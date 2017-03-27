@@ -77,10 +77,7 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 	/**
 	 * #3 - Prepary tmp-final.less.
 	 *
-	 * Contents:
-	 * - Bootstrap
-	 * - Modified variables.less path
-	 * - Bootswatch theme
+	 * Contains: Bootstrap, modified variables.less path and Bootswatch theme.
 	 */
 	$contents['tmp-final.less'] = $contents['tmp-bootstrap.less'] . $contents['bootswatch.less'];
 	$filesystem->dumpFile( $paths['tmp-final.less'], $contents['tmp-final.less'] );
@@ -107,8 +104,5 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 		}
 	}, $paths);
 
-	/**
-	 * Return cache file path.
-	 */
 	return $paths['cache.css'];
 }
