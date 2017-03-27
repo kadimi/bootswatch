@@ -5,9 +5,8 @@
  * @package Bootswatch
  */
 
-global $woothemes_sensei;
-remove_action( 'sensei_before_main_content', [ $woothemes_sensei->frontend, 'sensei_output_content_wrapper' ] );
-remove_action( 'sensei_after_main_content', [ $woothemes_sensei->frontend, 'sensei_output_content_wrapper_end' ] );
+remove_action( 'sensei_before_main_content', [ Sensei()->frontend, 'sensei_output_content_wrapper' ] );
+remove_action( 'sensei_after_main_content', [ Sensei()->frontend, 'sensei_output_content_wrapper_end' ] );
 
 add_action( 'sensei_before_main_content', function() {
 	?>
