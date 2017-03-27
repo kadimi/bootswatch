@@ -22,7 +22,7 @@
 
 	<header class="header">
 
-		<nav class=" navbar navbar-default <?php echo bootswatch_use( 'fixed_navbar' ) ? 'navbar-fixed-top' : 'navbar-static-top'; ?> ">
+		<nav class=" navbar navbar-default <?php echo bootswatch_has( 'fixed_navbar' ) ? 'navbar-fixed-top' : 'navbar-static-top'; ?> ">
 			<div class="container">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".collapse">
@@ -37,14 +37,14 @@
 					wp_nav_menu( array(
 						'theme_location' => 'primary',
 						'container' => false,
-						'menu_class' => 'nav navbar-nav' . ( ! bootswatch_use( 'search_form_in_header' ) ? ' navbar-right' : '' ),
+						'menu_class' => 'nav navbar-nav' . ( ! bootswatch_has( 'search_form_in_header' ) ? ' navbar-right' : '' ),
 						'walker' => new Bootswatch_Nav_Walker,
 						'fallback_cb' => false,
 						'depth' => 2,
 					) );
 					?>
 					<?php
-					if ( bootswatch_use( 'search_form_in_header' ) ) {
+					if ( bootswatch_has( 'search_form_in_header' ) ) {
 						bootswatch_search_form( 'navbar-form pull-right' );
 					}
 					?>

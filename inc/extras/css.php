@@ -20,7 +20,7 @@ function bootswatch_css() {
 	/**
 	 * Fix overlapping with Bootstrap's fixed navbar.
 	 */
-	if ( bootswatch_use( 'fixed_navbar' ) ) {
+	if ( bootswatch_has( 'fixed_navbar' ) ) {
 
 		$variables_path = bootswatch_get_option( 'theme' )
 			? get_template_directory() . '/vendor/thomaspark/bootswatch/' . bootswatch_get_option( 'theme' ) . '/variables.less'
