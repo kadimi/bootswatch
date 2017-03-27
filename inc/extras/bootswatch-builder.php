@@ -6,7 +6,6 @@
  */
 
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Finder\Finder;
 
 /**
  * Build a bootswatch theme (results are cached).
@@ -26,9 +25,6 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 	$paths['cache.css'] = sprintf( '%1$s/%2$s%3$s-%4$s.min.css', $paths['cache.dir'], $theme, $overrides ? '-' . md5( serialize( $overrides ) ) : '', $text_direction );
 
 	$filesystem = new Filesystem();
-	if ( ! file_exists( $paths['cache.dir'] ) ) {
-		$filesystem->mkdir( $paths['cache.dir'], 0777 );
-	}
 
 	/**
 	 * Return cached CSS if a rebuild is not requested and cache exists.
@@ -40,11 +36,7 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 	/**
 	 * Clear old cache.
 	 */
-	$finder = new Finder();
-	$finder->files()->in( $paths['cache.dir'] )->date( 'before now - 6 hours' );
-	foreach ( $finder as $file ) {
-	    $filesystem->remove( $file->getRealPath() );
-	}
+    $filesystem->remove( $paths['cache.dir'] );
 
 	$paths['bootswatch.dir'] = get_template_directory() . '/vendor/thomaspark/bootswatch';
 	$paths['bootstrap.dir']  = $paths['bootswatch.dir'] . '/bower_components/bootstrap';
