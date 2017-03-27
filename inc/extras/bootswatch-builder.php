@@ -18,7 +18,8 @@ use Symfony\Component\Finder\Finder;
  */
 function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 
-	$paths = $contents = [];
+	$paths = [];
+	$contents = [];
 	$text_direction = is_rtl() ? 'rtl' : 'ltr';
 
 	$paths['cache.dir'] = get_template_directory() . '/cache';
@@ -95,7 +96,9 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 	/**
 	 * Parse and save bootswatch theme LESS code.
 	 */
-	$less_parser = new Less_Parser( [ 'compress' => true ] );
+	$less_parser = new Less_Parser( [
+		'compress' => true,
+	] );
 	$less_parser->parseFile( $paths['tmp-final.less'] );
 	$css = $less_parser->getCss();
 	if ( is_rtl() ) {

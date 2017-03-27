@@ -12,29 +12,20 @@ if ( ! function_exists( 'bootswatch_posted_on' ) ) :
  * Prints HTML with meta information for the current post-date/time and author.
  */
 function bootswatch_posted_on() {
-		$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
-		if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
-			$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time>' /* . '<time class="updated" datetime="%3$s">%4$s</time>' */;
-			}
+	$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
+	if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
+		$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time>' /* . '<time class="updated" datetime="%3$s">%4$s</time>' */;
+		}
 
-		$time_string = sprintf( $time_string,
-		esc_attr( get_the_date( 'c' ) ),
-		esc_html( get_the_date() ),
-		esc_attr( get_the_modified_date( 'c' ) ),
-		esc_html( get_the_modified_date() )
-			);
+	$time_string = sprintf( $time_string, esc_attr( get_the_date( 'c' ) ), esc_html( get_the_date() ), esc_attr( get_the_modified_date( 'c' ) ), esc_html( get_the_modified_date() ) );
 
-			$posted_on = sprintf(
-			esc_html_x( 'Posted on %s', 'post date', 'bootswatch' ),
-			'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
-			);
+	// Translators: %s ia a date.
+	$posted_on = sprintf( esc_html_x( 'Posted on %s', 'post date', 'bootswatch' ), '<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>' );
 
-			$byline = sprintf(
-			esc_html_x( 'by %s', 'post author', 'bootswatch' ),
-			'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
-			);
+	// Translators: %s ia a name.
+	$byline = sprintf( esc_html_x( 'by %s', 'post author', 'bootswatch' ), '<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>' );
 
-			echo '<span class="posted-on">' . $posted_on . '</span><span class="byline"> ' . $byline . '</span>'; // WPCS: XSS OK.
+	echo '<span class="posted-on">' . $posted_on . '</span><span class="byline"> ' . $byline . '</span>'; // WPCS: XSS OK.
 
 }
 endif;
@@ -44,7 +35,9 @@ if ( ! function_exists( 'bootswatch_posts_navigation' ) ) {
 	 * Displays pagination.
 	 */
 	function bootswatch_posts_navigation() {
-		$links = paginate_links( [ 'type' => 'array' ] );
+		$links = paginate_links( [
+			'type' => 'array',
+		] );
 		if ( $links ) {
 			foreach ( $links as $index => $link ) {
 				$links[ $index ] = '<li>' . $link . '</li>';
@@ -65,13 +58,15 @@ if ( ! function_exists( 'bootswatch_entry_footer' ) ) :
 			/* translators: used between list items, there is a space after the comma */
 			$categories_list = get_the_category_list( esc_html__( ', ', 'bootswatch' ) );
 			if ( $categories_list && bootswatch_categorized_blog() ) {
-				printf( '<p class="cat-links small">' . esc_html__( 'Posted in %1$s', 'bootswatch' ) . '</p>', $categories_list ); // WPCS: XSS OK.
+				// Translators: %s ia a category name.
+				printf( '<p class="cat-links small">' . esc_html__( 'Posted in %s', 'bootswatch' ) . '</p>', $categories_list ); // WPCS: XSS OK.
 			}
 
 			/* translators: used between list items, there is a space after the comma */
 			$tags_list = str_replace( 'rel="tag"', 'rel="tag" class="btn btn-primary btn-xs"', get_the_tag_list( '', ' ' ) );
 
 			if ( $tags_list ) {
+				// Translators: %s ia a tag name.
 				printf( '<p class="tags-links small">' . esc_html__( 'Tagged %1$s', 'bootswatch' ) . '</p>', $tags_list ); // WPCS: XSS OK.
 			}
 		}
@@ -115,7 +110,8 @@ function bootswatch_post_navigation() {
  * @return bool
  */
 function bootswatch_categorized_blog() {
-	if ( false === ( $all_the_cool_cats = get_transient( 'bootswatch_categories' ) ) ) {
+	$all_the_cool_cats = get_transient( 'bootswatch_categories' );
+	if ( ! $all_the_cool_cats ) {
 		// Create an array of all the categories that are attached to posts.
 		$all_the_cool_cats = get_categories( array(
 			'fields'     => 'ids',

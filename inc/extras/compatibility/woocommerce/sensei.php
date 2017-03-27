@@ -1,10 +1,15 @@
 <?php
+/**
+ * Bootswatch WooCommerce/Sensei compatibility.
+ *
+ * @package Bootswatch
+ */
 
 global $woothemes_sensei;
 remove_action( 'sensei_before_main_content', [ $woothemes_sensei->frontend, 'sensei_output_content_wrapper' ] );
 remove_action( 'sensei_after_main_content', [ $woothemes_sensei->frontend, 'sensei_output_content_wrapper_end' ] );
 
-add_action('sensei_before_main_content', function() {
+add_action( 'sensei_before_main_content', function() {
 	?>
 	<div class="container">
 		<div class="row">
@@ -13,7 +18,7 @@ add_action('sensei_before_main_content', function() {
 	<?php
 } );
 
-add_action('sensei_after_main_content', function () {
+add_action( 'sensei_after_main_content', function () {
 	?>
 				</div>
 			</div>

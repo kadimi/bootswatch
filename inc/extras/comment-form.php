@@ -54,7 +54,11 @@ function bootswatch_comment_form_fields( $fields ) {
 	foreach ( $fields_parameters as $field => $parameter ) {
 
 		// Add some defaults to field.
-		$parameter += array( 'id' => $field, 'name' => $field, 'class' => 'form-control' );
+		$parameter += [
+			'id' => $field,
+			'name' => $field,
+			'class' => 'form-control',
+		];
 
 		// Build <input>.
 		$input = $input_tpl;

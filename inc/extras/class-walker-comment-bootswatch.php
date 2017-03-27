@@ -63,7 +63,9 @@ class Walker_Comment_Bootswatch extends Walker_Comment {
 	 */
 	protected function ping( $comment, $depth, $args ) {
 		ob_start();
-		parent::ping( $comment, $depth, array_merge( $args, [ 'style' => 'div' ] ) );
+		parent::ping( $comment, $depth, array_merge( $args, [
+			'style' => 'div',
+		] ) );
 		echo str_replace( // WPCS XSS OK.
 			[
 				'class="comment-body"',
