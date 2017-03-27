@@ -36,7 +36,7 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 	/**
 	 * Clear old cache.
 	 */
-    $filesystem->remove( $paths['cache.dir'] );
+	$filesystem->remove( $paths['cache.dir'] );
 
 	$paths['bootswatch.dir'] = get_template_directory() . '/vendor/thomaspark/bootswatch';
 	$paths['bootstrap.dir']  = $paths['bootswatch.dir'] . '/bower_components/bootstrap';

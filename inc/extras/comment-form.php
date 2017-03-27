@@ -63,8 +63,8 @@ function bootswatch_comment_form_fields( $fields ) {
 		// Build <input>.
 		$input = $input_tpl;
 		foreach ( array( 'name', 'id', 'type', 'value', 'required', 'aria-required', 'size', 'maxlength', 'describedby', 'class' ) as $p ) {
-			if ( ! empty( $parameter[ $p ] ) ) {
-				$input = str_replace( '{{param}}', sprintf( ' %s="%s"{{param}}', $p, $parameter[ $p ] ), $input );
+			if ( ! empty( $parameter[$p] ) ) {
+				$input = str_replace( '{{param}}', sprintf( ' %s="%s"{{param}}', $p, $parameter[$p] ), $input );
 			}
 		}
 		$input = str_replace( '{{param}}', '', $input );
@@ -79,7 +79,7 @@ function bootswatch_comment_form_fields( $fields ) {
 		$div = str_replace( array( '{{input}}', '{{label}}', '{{field}}' ), array( $input, $label, $field ), $div );
 
 		// Add field to $fields array.
-		$fields[ $field ] = $div;
+		$fields[$field] = $div;
 	}
 	return $fields;
 }
