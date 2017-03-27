@@ -18,8 +18,8 @@ use Symfony\Component\Finder\Finder;
  */
 function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 
-	$paths = [];
-	$contents = [];
+	$paths          = [];
+	$contents       = [];
 	$text_direction = is_rtl() ? 'rtl' : 'ltr';
 
 	$paths['cache.dir'] = get_template_directory() . '/cache';
