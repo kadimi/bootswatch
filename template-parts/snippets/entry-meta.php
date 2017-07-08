@@ -2,8 +2,6 @@
 /**
  * Snippet.
  *
- * @todo Improve this comment.
- *
  * @package Bootswatch
  */
 
