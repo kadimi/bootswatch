@@ -11,9 +11,9 @@
 require get_template_directory() . '/vendor/autoload.php';
 
 /**
- * Requires plugins with TGMPA:
+ * Requires plugins with TGMPA.
  *
- * Example
+ * Example:
  *
  * tgmpa( array(
  * 	array(
