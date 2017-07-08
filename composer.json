@@ -5,6 +5,8 @@
         "thomaspark/bootswatch": "^3.3",
         "oyejorge/less.php": "v1.7.0.10",
         "symfony/filesystem": "^3.1",
-        "cssjanus/cssjanus": "^1.2"
+        "cssjanus/cssjanus": "^1.2",
+        "kint-php/kint": "^2.1",
+        "gambitph/titan-framework": "^1.9"
     }
 }
