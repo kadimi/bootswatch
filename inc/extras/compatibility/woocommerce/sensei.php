@@ -5,6 +5,8 @@
  * @package Bootswatch
  */
 
+if ( function_exists( 'Sensei' ) ) :
+
 add_action( 'after_setup_theme', function () {
 	add_theme_support( 'sensei' );
 } );
@@ -31,3 +33,4 @@ add_action( 'sensei_after_main_content', function () {
 	<?php
 	get_sidebar();
 } );
+endif;
