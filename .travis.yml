@@ -4,6 +4,10 @@
 # For use with the Underscores WordPress theme.
 # @link https://github.com/Automattic/_s
 
+# Use Trusty.
+# # @link https://docs.travis-ci.com/user/trusty-ci-environment/#Using-Trusty
+dist: trusty
+
 # Ditch sudo and use containers.
 # @link http://docs.travis-ci.com/user/migrating-from-legacy/#Why-migrate-to-container-based-infrastructure%3F
 # @link http://docs.travis-ci.com/user/workers/container-based-infrastructure/#Routing-your-build-to-container-based-infrastructure
