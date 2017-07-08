@@ -12,8 +12,6 @@ while ( have_posts() ) {
 		get_template_part( 'template-parts/content', 'single' );
 	} else if ( is_page() ) {
 		get_template_part( 'template-parts/content', 'page' );
-	} else if ( is_archive() ) {
-		get_template_part( 'template-parts/content', get_post_format() );
 	} else if ( is_search() ) {
 		get_template_part( 'template-parts/content', 'search' );
 	} else {

@@ -31,6 +31,7 @@
 
 	<?php do_action( 'bootswatch_before_.entry-content' ); ?>
 	<div class="entry-content">
+		<p><?php the_post_thumbnail( apply_filters( 'bootswatch_thumbnail_size', 'thumbnail' ) ); ?></p>
 		<?php
 			the_content( sprintf(
 				/* translators: %s: Name of current post. */

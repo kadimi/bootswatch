@@ -26,8 +26,11 @@
 	</header><!-- .entry-header -->
 
 	<div class="entry-summary">
+		<p><?php the_post_thumbnail( apply_filters( 'bootswatch_thumbnail_size_post', 'thumbnail' ) ); ?></p>
 		<?php the_excerpt(); ?>
 	</div><!-- .entry-summary -->
+
+	<hr>
 
 	<?php do_action( 'bootswatch_before_.entry-footer' ); ?>
 	<footer class="entry-footer">

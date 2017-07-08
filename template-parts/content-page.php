@@ -19,6 +19,7 @@
 
 	<?php do_action( 'bootswatch_before_.entry-content' ); ?>
 	<div class="entry-content">
+		<p><?php the_post_thumbnail( apply_filters( 'bootswatch_thumbnail_size_post', 'large' ) ); ?></p>
 		<?php the_content(); ?>
 		<?php
 			wp_link_pages( array(
