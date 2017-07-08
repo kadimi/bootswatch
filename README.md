@@ -31,7 +31,9 @@ You can override variables used by a sub-theme using the `bootswatch_variables_o
  * Override base font size for Lumen sub-theme.
  */
 function my_variables_overrides( $overrides, $themes ) {
-	$overrides[ '@font-size-base' ] = '15px';
+	if ( 'lumen' === $theme ) {
+		$overrides[ '@font-size-base' ] = '15px';
+	}
 	return $overrides;
 }
 add_filter( 'bootswatch_variables_overrides', 'my_variables_overrides', 10, 2 );
