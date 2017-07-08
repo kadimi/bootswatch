@@ -5,6 +5,11 @@
  * @package Bootswatch
  */
 
+/**
+ * Opens content wrapper.
+ *
+ * @return void
+ */
 function bootswatch_content_wrapper() {
 	?>
 	<div class="container">
@@ -14,6 +19,11 @@ function bootswatch_content_wrapper() {
 	<?php
 }
 
+/**
+ * Closes content wrapper.
+ *
+ * @return void
+ */
 function bootswatch_content_wrapper_end() {
 	?>
 				</div>

@@ -12,20 +12,20 @@ if ( ! function_exists( 'bootswatch_posted_on' ) ) :
  * Prints HTML with meta information for the current post-date/time and author.
  */
 function bootswatch_posted_on() {
-	$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
-	if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
-		$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time>' /* . '<time class="updated" datetime="%3$s">%4$s</time>' */;
-		}
+		$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
+		if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
+			$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time>' /* . '<time class="updated" datetime="%3$s">%4$s</time>' */;
+			}
 
-	$time_string = sprintf( $time_string, esc_attr( get_the_date( 'c' ) ), esc_html( get_the_date() ), esc_attr( get_the_modified_date( 'c' ) ), esc_html( get_the_modified_date() ) );
+		$time_string = sprintf( $time_string, esc_attr( get_the_date( 'c' ) ), esc_html( get_the_date() ), esc_attr( get_the_modified_date( 'c' ) ), esc_html( get_the_modified_date() ) );
 
-	// Translators: %s ia a date.
-	$posted_on = sprintf( esc_html_x( 'Posted on %s', 'post date', 'bootswatch' ), '<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>' );
+		// Translators: %s ia a date.
+		$posted_on = sprintf( esc_html_x( 'Posted on %s', 'post date', 'bootswatch' ), '<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>' );
 
-	// Translators: %s ia a name.
-	$byline = sprintf( esc_html_x( 'by %s', 'post author', 'bootswatch' ), '<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>' );
+		// Translators: %s ia a name.
+		$byline = sprintf( esc_html_x( 'by %s', 'post author', 'bootswatch' ), '<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>' );
 
-	echo '<span class="posted-on">' . $posted_on . '</span><span class="byline"> ' . $byline . '</span>'; // WPCS: XSS OK.
+		echo '<span class="posted-on">' . $posted_on . '</span><span class="byline"> ' . $byline . '</span>'; // WPCS: XSS OK.
 
 }
 endif;
@@ -93,15 +93,20 @@ endif;
  */
 function bootswatch_post_navigation() {
 	$replacements = [
-		'<div class="nav-links">'    => '<ul class="nav-links pager">',
-		'<div class="nav-previous">' => '<li class="nav-previous previous">',
-		'<div class="nav-next">'     => '<li class="nav-next next">',
-		'</a></div>'                 => '</a></li>',
-		'rel="prev">'                => 'rel="prev">« ',
-		'</a></li></div>'            => ' »</a></li></ul>',
+		'/<div class="nav-links">/'    => '<ul class="nav-links pager">',
+		'/<div class="nav-previous">/' => '<li class="nav-previous previous">',
+		'/<div class="nav-next">/'     => '<li class="nav-next next">',
+		'/<\/a><\/div>/'                 => '</a></li>',
+		'/rel="prev">(.*?)</'          => 'rel="prev">« $1<',
+		'/rel="next">(.*?)</'          => 'rel="prev">$1 »<',
+		'/<\/li><\/div>/'                => '</li></ul>',
 	];
-	$replacements = apply_filters( 'bootswatch_post_navigation_replacements', $replacements );
-	echo str_replace( array_keys( $replacements ), array_values( $replacements ), get_the_post_navigation() ); // WPCS XSS OK.
+
+	$nav = get_the_post_navigation();
+	foreach ( $replacements as $pattern => $replacement ) {
+		$nav = preg_replace( $pattern , $replacement, $nav );
+	}
+	echo $nav; // WPCS: XSS OK.
 }
 
 /**
