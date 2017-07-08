@@ -45,7 +45,7 @@ The command you need is:
 phpcs -p -s -v -n . --standard=./codesniffer.ruleset.xml --extensions=php
 ```
 
-This command requires PHP_CodeSniffer and WordPress-Coding-Standards, an easy way to install them:
+This command requires PHP_CodeSniffer and WordPress-Coding-Standards, you can install them as follows:
 
 ```bash
 # Install PHP_CodeSniffer.
