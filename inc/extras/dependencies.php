@@ -14,9 +14,9 @@ require get_template_directory() . '/vendor/autoload.php';
  * Requires plugins with TGMPA:
  */
 function bootswatch_setup_dependencies() {
-    /**
-     * Example
-     *
+	/**
+	 * Example
+	 *
 	tgmpa( array(
 		array(
 			'name' => 'Titan Framework',
@@ -24,6 +24,6 @@ function bootswatch_setup_dependencies() {
 			'required' => true,
 		),
 	), array() );
-     */
+	 */
 }
 add_action( 'tgmpa_register', 'bootswatch_setup_dependencies' );
