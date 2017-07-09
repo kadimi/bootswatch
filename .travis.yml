@@ -10,10 +10,11 @@ matrix:
         - php: 'hhvm'
 before_script:
     - export COMPOSER_BIN_DIR=/home/travis/build/kadimi/bootswatch/vendor/bin
+    - export COMPOSER_VENDOR_DIR=/home/travis/build/kadimi/bootswatch/vendor
     - if [[ "$SNIFF" == "1" ]]; then composer config -g -l; fi
     - if [[ "$SNIFF" == "1" ]]; then composer global require squizlabs/php_codesniffer:^2.8.1; fi
     - if [[ "$SNIFF" == "1" ]]; then composer global require wp-coding-standards/wpcs; fi
-    - if [[ "$SNIFF" == "1" ]]; then $COMPOSER_BIN_DIR/phpcs --config-set installed_paths $COMPOSER_BIN_DIR/../wp-coding-standards/wpcs/; fi
+    - if [[ "$SNIFF" == "1" ]]; then $COMPOSER_BIN_DIR/phpcs --config-set installed_paths $COMPOSER_VENDOR_DIR/wp-coding-standards/wpcs/; fi
     - if [[ "$SNIFF" == "1" ]]; then phpenv rehash; fi
     - if [[ "$SNIFF" == "1" ]]; then $COMPOSER_BIN_DIR/phpcs -i; fi
     - if [[ "$SNIFF" == "1" ]]; then npm install -g jscs; fi
