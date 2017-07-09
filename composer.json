@@ -1,5 +1,6 @@
 {
     "description": "Bootswatch for WordPress",
+    "license": "MIT",
     "require": {
         "php": ">=5.6",
         "tgmpa/tgm-plugin-activation": "^2.6",
@@ -7,8 +8,9 @@
         "oyejorge/less.php": "^v1.7",
         "symfony/filesystem": "^3.1",
         "cssjanus/cssjanus": "^1.2",
-        "kint-php/kint": "^2.1",
         "gambitph/titan-framework": "^1.9"
     },
-    "license": "MIT"
+    "require-dev": {
+        "kint-php/kint": "^2.1"
+    }
 }
