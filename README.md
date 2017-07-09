@@ -49,7 +49,7 @@ This command requires PHP_CodeSniffer and WordPress-Coding-Standards, you can in
 
 ```bash
 # Install PHP_CodeSniffer.
-composer global require squizlabs/php_codesniffer
+composer global require squizlabs/php_codesniffer:^2.8.1
 
 # Install WordPress-Coding-Standards.
 composer global require wp-coding-standards/wpcs
