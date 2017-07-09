@@ -13,7 +13,7 @@ before_script:
     - if [[ "$SNIFF" == "1" ]]; then composer config -g -l; fi
     - if [[ "$SNIFF" == "1" ]]; then composer global require squizlabs/php_codesniffer:^2.8.1; fi
     - if [[ "$SNIFF" == "1" ]]; then composer global require wp-coding-standards/wpcs; fi
-    - if [[ "$SNIFF" == "1" ]]; then $COMPOSER_BIN_DIR/phpcs --config-set installed_paths /home/travis/build/kadimi/bootswatch/vendor/bin-coding-standards/wpcs/; fi
+    - if [[ "$SNIFF" == "1" ]]; then $COMPOSER_BIN_DIR/phpcs --config-set installed_paths /home/travis/build/kadimi/bootswatch/vendor/wp-coding-standards/wpcs/; fi
     - if [[ "$SNIFF" == "1" ]]; then phpenv rehash; fi
     - if [[ "$SNIFF" == "1" ]]; then $COMPOSER_BIN_DIR/phpcs -i; fi
     - if [[ "$SNIFF" == "1" ]]; then npm install -g jscs; fi
