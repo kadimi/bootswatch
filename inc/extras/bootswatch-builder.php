@@ -69,13 +69,13 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 	$filesystem->dumpFile( $paths['tmp-theme-variables.less'], $contents['tmp-theme-variables.less'] );
 
 	/**
-	 * #2 - Prepary tmp-bootstrap.less.
+	 * #2 - Prepare tmp-bootstrap.less.
 	 */
 	$contents['tmp-bootstrap.less'] = str_replace( 'variables.less', 'tmp-' . $theme . '-variables.less', $contents['tmp-bootstrap.less'] );
 	$filesystem->dumpFile( $paths['tmp-bootstrap.less'], $contents['tmp-bootstrap.less'] );
 
 	/**
-	 * #3 - Prepary tmp-final.less.
+	 * #3 - Prepare tmp-final.less.
 	 *
 	 * Contains: Bootstrap, modified variables.less path and Bootswatch theme.
 	 */
