@@ -15,6 +15,7 @@ before_script:
     - if [[ "$SNIFF" == "1" ]]; then composer global require wp-coding-standards/wpcs; fi
     - if [[ "$SNIFF" == "1" ]]; then $COMPOSER_BIN_DIR/phpcs --config-set installed_paths /home/travis/build/kadimi/bootswatch/vendor/bin-coding-standards/wpcs/; fi
     - if [[ "$SNIFF" == "1" ]]; then phpenv rehash; fi
+    - if [[ "$SNIFF" == "1" ]]; then $COMPOSER_BIN_DIR/phpcs -i; fi
     - if [[ "$SNIFF" == "1" ]]; then npm install -g jscs; fi
     - if [[ "$SNIFF" == "1" ]]; then npm install -g jshint; fi
     - if [[ "$SNIFF" == "1" ]]; then wget https://develop.svn.wordpress.org/trunk/.jshintrc; fi
