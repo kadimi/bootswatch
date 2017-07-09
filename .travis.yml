@@ -11,7 +11,7 @@ matrix:
 before_script:
     - if [[ "$SNIFF" == "1" ]]; then composer global require squizlabs/php_codesniffer:^2.8.1; fi
     - if [[ "$SNIFF" == "1" ]]; then composer global require wp-coding-standards/wpcs; fi
-    - if [[ "$SNIFF" == "1" ]]; then phpcs --config-set installed_paths ~/.config/composer/vendor/wp-coding-standards/wpcs/; fi
+    - if [[ "$SNIFF" == "1" ]]; then ~/.config/composer/vendor/bin//phpcs --config-set installed_paths ~/.config/composer/vendor/wp-coding-standards/wpcs/; fi
     - if [[ "$SNIFF" == "1" ]]; then phpenv rehash; fi
     - if [[ "$SNIFF" == "1" ]]; then npm install -g jscs; fi
     - if [[ "$SNIFF" == "1" ]]; then npm install -g jshint; fi
