@@ -9,6 +9,7 @@ matrix:
         - php: '7.0'
         - php: 'hhvm'
 before_script:
+    - if [[ "$SNIFF" == "1" ]]; then composer config -g -l; fi
     - if [[ "$SNIFF" == "1" ]]; then composer global require squizlabs/php_codesniffer:^2.8.1; fi
     - if [[ "$SNIFF" == "1" ]]; then composer global require wp-coding-standards/wpcs; fi
     - if [[ "$SNIFF" == "1" ]]; then ls $COMPOSER_HOME/vendor/bin/phpcs; fi
