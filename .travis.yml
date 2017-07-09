@@ -11,9 +11,9 @@ matrix:
 before_script:
     - if [[ "$SNIFF" == "1" ]]; then composer global require squizlabs/php_codesniffer:^2.8.1; fi
     - if [[ "$SNIFF" == "1" ]]; then composer global require wp-coding-standards/wpcs; fi
-    - if [[ "$SNIFF" == "1" ]]; then ls ~/.config/composer/vendor/bin/phpcs
-    - if [[ "$SNIFF" == "1" ]]; then ls ~/.config/composer/vendor/wp-coding-standards/wpcs/; fi
-    - if [[ "$SNIFF" == "1" ]]; then ~/.config/composer/vendor/bin/phpcs --config-set installed_paths ~/.config/composer/vendor/wp-coding-standards/wpcs/; fi
+    - if [[ "$SNIFF" == "1" ]]; then ls /home/travis/.config/composer/vendor/bin/phpcs; fi
+    - if [[ "$SNIFF" == "1" ]]; then ls /home/travis/.config/composer/vendor/wp-coding-standards/wpcs/; fi
+    - if [[ "$SNIFF" == "1" ]]; then /home/travis/.config/composer/vendor/bin/phpcs --config-set installed_paths /home/travis/.config/composer/vendor/wp-coding-standards/wpcs/; fi
     - if [[ "$SNIFF" == "1" ]]; then phpenv rehash; fi
     - if [[ "$SNIFF" == "1" ]]; then npm install -g jscs; fi
     - if [[ "$SNIFF" == "1" ]]; then npm install -g jshint; fi
@@ -28,4 +28,4 @@ script:
     # Run the theme through JavaScript Code Style checker.
     - if [[ "$SNIFF" == "1" ]]; then jscs .; fi
     # Run the theme through PHP_CodeSniffer.
-    - if [[ "$SNIFF" == "1" ]]; then ~/.config/composer/vendor/bin/phpcs -p -s -v -n . --standard=./codesniffer.ruleset.xml --extensions=php; fi
+    - if [[ "$SNIFF" == "1" ]]; then /home/travis/.config/composer/vendor/bin/phpcs -p -s -v -n . --standard=./codesniffer.ruleset.xml --extensions=php; fi
