@@ -20,6 +20,14 @@ composer install
 
 ```
 
+## Build
+
+The build script, among many other things, deletes unused files and generates the installable theme file **bootswatch.zip**, you can run it manually with:
+
+```bash
+composer run-script post-install-cm
+```
+
 ## Overriding Bootstrap/Bootswatch `variables.less`
 
 You can override variables used by a sub-theme using the `bootswatch_variables_overrides` filter hook, here is an example:
