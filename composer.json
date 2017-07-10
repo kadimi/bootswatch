@@ -12,5 +12,9 @@
     },
     "require-dev": {
         "kint-php/kint": "^2.1"
+    },
+    "scripts": {
+        "post-install-cmd": "php -f scripts/class-bootswatchpostinstall.php",
+        "post-update-cmd": "php -f scripts/class-bootswatchpostinstall.php"
     }
 }

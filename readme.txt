@@ -4,16 +4,16 @@ Contributors: Nabil Kadimi
 Tags: translation-ready, custom-background, theme-options, custom-menu, post-formats, threaded-comments
 
 Requires at least: 4.0
-Tested up to: 4.2.2
+Tested up to: 4.8
 Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A theme called Bootswatch.
+Bootswatch.
 
 == Description ==
 
-A theme called Bootswatch.
+Do you link Bootswatch? Now you'll like it even more.
 
 == Installation ==
 	
@@ -29,9 +29,11 @@ Bootswatch includes support for Infinite Scroll in Jetpack.
 
 == Changelog ==
 
-= 1.0 - Dec 1 2016 =
+= 1.0.0 - Jul 10 2017 =
 * Initial release
 
 == Credits ==
 
-* Based on Underscores http://underscores.me/, (C) 2012-2015 Automattic, Inc., [GPLv2 or later](https://www.gnu.org/licenses/gpl-2.0.html)
+* Titan Framework
+* Twitter Bootstrap
+* Underscores
