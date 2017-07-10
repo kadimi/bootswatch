@@ -1,6 +1,8 @@
 bootswatch.zip
 composer.lock
 cache/*
+hostname
+ip
 node_modules/*
 style.css
 vendor/*

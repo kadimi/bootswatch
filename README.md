@@ -22,10 +22,10 @@ composer install
 
 ## Build
 
-The build script, among many other things, deletes unused files and generates the installable theme file **bootswatch.zip**, you can run it manually with:
+The build script, among many other things, deletes unused files and generates the installable themeqa file **bootswatch.zip**, you can run it manually with:
 
 ```bash
-composer run-script post-install-cm
+php -f build/build.php
 ```
 
 ## Overriding Bootstrap/Bootswatch `variables.less`
