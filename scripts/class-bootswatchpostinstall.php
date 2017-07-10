@@ -152,8 +152,8 @@ class BootswatchPostInstall {
 		 */
 		$zip      = new ZipArchive();
 		if ( $zip->open( $filename, ZipArchive::CREATE ) !== true ) {
-		    $this->log( 'cannot open <$filename>' );
-		    exit;
+			$this->log( 'cannot open <$filename>' );
+			exit;
 		}
 		foreach ( $files as $file ) {
 			if ( is_dir( $file ) ) {
