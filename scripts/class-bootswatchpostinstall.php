@@ -76,6 +76,7 @@ class BootswatchPostInstall {
 		$this->timer = microtime( true );
 		$this->ignored_patterns = $data['ignored_patterns'];
 		$this->vendor_ignored_patterns = $data['vendor_ignored_patterns'];
+		$this->create_style();
 		$this->clean_vendor();
 		$this->clear_cache();
 		$this->package();
@@ -88,6 +89,29 @@ class BootswatchPostInstall {
 		$this->log();
 		$this->log( sprintf( 'Optimization completed in %.2fs' , microtime( true ) - $this->timer ) );
 		$this->log();
+	}
+
+	/**
+	 * Create or recreates style.css.
+	 */
+	private function create_style() {
+
+		if ( file_exists( 'style.css' ) ) {
+			call_user_func( 'unlink', 'style.css' );
+		}
+
+		$parts = [
+			'css/style.css',
+			'css/wordpress-core.css',
+			'css/wordpress-core-overrides.css',
+			'css/wordpress-core-missing.css',
+		];
+
+		$css = '';
+		foreach ( $parts as $part ) {
+			$css .= file_get_contents( $part ) . "\n";
+		}
+		call_user_func( 'file_put_contents', 'style.css', $css );
 	}
 
 	/**
@@ -327,8 +351,9 @@ class BootswatchPostInstall {
 		'bootswatch-4' => '^thomaspark/bootswatch/(2|api|assets)',
 		'cssjanus'     => '^cssjanus/cssjanus/test',
 		'filesystem'   => '^symfony/filesystem/Tests',
-		'titan-1'      => '^gambitph/titan-framework/js/(ace-min-noconflict|dev)',
-		'titan-2'      => '^gambitph/titan-framework/(languages|tests)',
-		'tgpma'        => '^tgmpa/tgm-plugin-activation/languages',
+		'titan-0'      => '^gambitph/titan-framework/js/(ace-min-noconflict|dev)',
+		'titan-1'      => '^gambitph/titan-framework/(languages|tests)',
+		'tgpma-0'      => '^tgmpa/tgm-plugin-activation/languages',
+		'tgpma-1'      => '^tgmpa/tgm-plugin-activation/.*/tgm-example-plugin.zip',
 	],
 ] ) );

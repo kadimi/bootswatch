@@ -2,4 +2,5 @@ bootswatch.zip
 composer.lock
 cache/*
 node_modules/*
+style.css
 vendor/*
