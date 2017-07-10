@@ -70,7 +70,7 @@ class BootswatchPostInstall {
 	 * - Cleaning vendors with `clean_vendor`
 	 * - Clearing cache with `clear_cache`
 	 *
-	 * @param Array $vendor_ignored_patterns List of file pattern.
+	 * @param Array $data Data.
 	 */
 	public function __construct( $data ) {
 		$this->timer = microtime( true );
@@ -128,12 +128,15 @@ class BootswatchPostInstall {
 		chdir( '..' );
 	}
 
+	/**
+	 * Build zip file.
+	 */
 	private function package() {
 
 		$filename = 'bootswatch.zip';
 
 		if ( file_exists( $filename ) ) {
-			unlink( $filename );
+			call_user_func( 'unlink', $filename );
 		}
 
 		/**
@@ -141,14 +144,14 @@ class BootswatchPostInstall {
 		 */
 		$files = $this->update_files();
 		foreach ( $this->ignored_patterns as $pattern ) {
-			$files   = array_diff( $files, $this->pattern_elements( $pattern, $files) );
+			$files = array_diff( $files, $this->pattern_elements( $pattern, $files ) );
 		}
 
 		/**
 		 * Create package.
 		 */
 		$zip      = new ZipArchive();
-		if ( $zip->open( $filename, ZipArchive::CREATE ) !== TRUE ) {
+		if ( $zip->open( $filename, ZipArchive::CREATE ) !== true ) {
 		    $this->log( 'cannot open <$filename>' );
 		    exit;
 		}
@@ -219,7 +222,8 @@ class BootswatchPostInstall {
 	 * Count elements matching pattern.
 	 *
 	 * @param  String $pattern  The pattern.
-	 * @return Integer           The count.
+	 * @param  Array  $files    The files list to match pattern against.
+	 * @return Integer          The count.
 	 */
 	protected function pattern_total_elements( $pattern, $files ) {
 		return count( $this->pattern_elements( $pattern, $files ) );
@@ -228,7 +232,8 @@ class BootswatchPostInstall {
 	/**
 	 * Get size of elements matching pattern.
 	 *
-	 * @param  String $pattern The pattern.
+	 * @param  String $pattern  The pattern.
+	 * @param  Array  $files    The files list to match pattern against.
 	 * @return Integer          The size.
 	 */
 	protected function pattern_total_size( $pattern, $files ) {
@@ -282,6 +287,7 @@ class BootswatchPostInstall {
 	 * Get list of elements matching pattern.
 	 *
 	 * @param  Sting $pattern The pattern.
+	 * @param  Array $files   The files list to match pattern against.
 	 * @return Array          A list of files paths.
 	 */
 	protected function pattern_elements( $pattern, $files ) {
