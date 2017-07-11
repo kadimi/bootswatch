@@ -1,6 +1,6 @@
 <?php
 /**
- * Bootswatch Theme Customizer.
+ * Bootswatch Theme Customizer
  *
  * @package Bootswatch
  */
@@ -10,17 +10,23 @@
  *
  * @param WP_Customize_Manager $wp_customize Theme Customizer object.
  */
-function bootswatch_customize_register( $wp_customize ) {
+add_action( 'customize_register',  function ( $wp_customize ) {
 	$wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
-	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
 	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
-}
-add_action( 'customize_register', 'bootswatch_customize_register' );
+
+	if ( isset( $wp_customize->selective_refresh ) ) {
+		$wp_customize->selective_refresh->add_partial( 'blogname', [
+			'selector'        => '.site-title',
+			'render_callback' => function () {
+				bloginfo( 'name' );
+			},
+		] );
+	}
+} );
 
 /**
  * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
  */
-function bootswatch_customize_preview_js() {
-	wp_enqueue_script( 'bootswatch_customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), '20130508', true );
-}
-add_action( 'customize_preview_init', 'bootswatch_customize_preview_js' );
+add_action( 'customize_preview_init', function () {
+	wp_enqueue_script( 'bootswatch-customizer', get_template_directory_uri() . '/js/customizer.js', [ 'customize-preview' ], '1.0.0', true );
+} );
