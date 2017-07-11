@@ -24,7 +24,7 @@ $site_icon_url = get_site_icon_url();
 <link rel="profile" href="http://gmpg.org/xfn/11">
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 <?php if ( $site_icon_url ) { ?>
-	<link rel="shortcut icon" href="<?php echo $site_icon_url; ?>" />
+	<link rel="shortcut icon" href="<?php echo $site_icon_url; // XSS OK. ?>" />
 <?php } ?>
 <?php wp_head(); ?>
 </head>
