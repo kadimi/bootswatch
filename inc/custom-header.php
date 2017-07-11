@@ -21,7 +21,7 @@
 add_action( 'init', function() {
 	if ( bootswatch_has( 'header_image' ) ) {
 		add_action( 'body_class', function( $classes ) {
-			return array_merge( $classes, ['has_header_image'] );
+			return array_merge( $classes, [ 'has_header_image' ] );
 		} );
 	}
 } );
@@ -54,18 +54,18 @@ if ( ! function_exists( 'bootswatch_header_style' ) ) :
  * @see bootswatch_custom_header_setup().
  */
 function bootswatch_header_style() {
-	$header_text_color = get_header_textcolor();
+		$header_text_color = get_header_textcolor();
 
-	// If no custom options for text are set, let's bail
-	// get_header_textcolor() options: HEADER_TEXTCOLOR is default, hide text (returns 'blank') or any hex value.
-	if ( HEADER_TEXTCOLOR === $header_text_color ) {
-		return;
-	}
+		// If no custom options for text are set, let's bail
+		// get_header_textcolor() options: HEADER_TEXTCOLOR is default, hide text (returns 'blank') or any hex value.
+		if ( HEADER_TEXTCOLOR === $header_text_color ) {
+			return;
+			}
 
-	// If we get this far, we have custom styles. Let's do this.
-	?>
-	<style type="text/css">
-	<?php
+		// If we get this far, we have custom styles. Let's do this.
+		?>
+		<style type="text/css">
+		<?php
 		// Has the text been hidden?
 		if ( ! display_header_text() ) :
 	?>
@@ -95,8 +95,8 @@ if ( ! function_exists( 'bootswatch_admin_header_style' ) ) :
  * @see bootswatch_custom_header_setup().
  */
 function bootswatch_admin_header_style() {
-?>
-	<style type="text/css">
+		?>
+		<style type="text/css">
 		.appearance_page_custom-header #headimg {
 			border: none;
 		}
@@ -111,8 +111,8 @@ function bootswatch_admin_header_style() {
 		}
 		#headimg img {
 		}
-	</style>
-<?php
+		</style>
+		<?php
 }
 endif;
 
@@ -123,8 +123,8 @@ if ( ! function_exists( 'bootswatch_admin_header_image' ) ) :
  * @see bootswatch_custom_header_setup().
  */
 function bootswatch_admin_header_image() {
-?>
-	<div id="headimg">
+		?>
+		<div id="headimg">
 		<h1 class="displaying-header-text">
 			<a id="name" style="<?php echo esc_attr( 'color: #' . get_header_textcolor() ); ?>" onclick="return false;" href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php bloginfo( 'name' ); ?></a>
 		</h1>
@@ -132,7 +132,7 @@ function bootswatch_admin_header_image() {
 		<?php if ( get_header_image() ) : ?>
 		<img src="<?php header_image(); ?>" alt="">
 		<?php endif; ?>
-	</div>
-<?php
+		</div>
+		<?php
 }
 endif;

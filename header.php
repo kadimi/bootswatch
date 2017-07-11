@@ -64,7 +64,7 @@
 		<div class="container-fluid header_image">
 			<div class="row">
 				<div class="col-md-12 ">
-					<img alt="<?php bloginfo( 'description' ); ?>" src="<?php echo get_header_image(); ?>" />
+					<img alt="<?php bloginfo( 'description' ); ?>" src="<?php echo get_header_image(); // XSS OK. ?>" />
 				</div>
 			</div> 
 		</div>
