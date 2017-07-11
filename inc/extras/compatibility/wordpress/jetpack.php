@@ -33,5 +33,4 @@ if ( class_exists( 'Jetpack' ) ) {
 		$using_infinite_scroll = in_array( 'infinite-scroll', get_option( 'jetpack_active_modules', [] ) );
 		return $using_infinite_scroll ? false : $show;
 	} );
-
 }
