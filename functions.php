@@ -178,11 +178,6 @@ require get_template_directory() . '/inc/extras.php';
 require get_template_directory() . '/inc/customizer.php';
 
 /**
- * Load Jetpack compatibility file.
- */
-require get_template_directory() . '/inc/jetpack.php';
-
-/**
  * Load all extras from ./inc/extras/
  */
 $extras = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( get_template_directory() . '/inc/extras' ), RecursiveIteratorIterator::SELF_FIRST );

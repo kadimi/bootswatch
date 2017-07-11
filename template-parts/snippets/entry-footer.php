@@ -5,6 +5,9 @@
  * @package Bootswatch
  */
 
+if ( ! current_user_can( 'edit_post', $post->ID ) ) {
+	return;
+}
 ?>
 
 <?php do_action( 'bootswatch_before_.entry-footer' ); ?>

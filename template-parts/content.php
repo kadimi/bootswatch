@@ -12,6 +12,5 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<?php get_template_part( 'template-parts/snippets/entry', 'header' ); ?>
 	<?php get_template_part( 'template-parts/snippets/entry', 'content' ); ?>
-	<hr>
 	<?php get_template_part( 'template-parts/snippets/entry', 'footer' ); ?>
 </article><!-- #post-## -->
