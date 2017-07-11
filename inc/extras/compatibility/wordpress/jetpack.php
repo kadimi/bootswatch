@@ -14,7 +14,7 @@ if ( class_exists( 'Jetpack' ) ) {
 	 */
 	add_action( 'after_setup_theme', function() {
 
-		add_theme_support( 'infinite-scroll', array(
+		add_theme_support( 'infinite-scroll', [
 			'container' => 'primary',
 			'footer'    => false,
 			'render'    => function () {
@@ -23,7 +23,7 @@ if ( class_exists( 'Jetpack' ) ) {
 					get_template_part( 'template-parts/content', get_post_format() );
 				}
 			},
-		) );
+		] );
 	} );
 
 	/**
