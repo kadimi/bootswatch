@@ -16,6 +16,17 @@
  */
 
 /**
+ * Add body class `has_header_image` if header image exists.
+ */
+add_action( 'init', function() {
+	if ( bootswatch_has( 'header_image' ) ) {
+		add_action( 'body_class', function( $classes ) {
+			return array_merge( $classes, ['has_header_image'] );
+		} );
+	}
+} );
+
+/**
  * Set up the WordPress core custom header feature.
  *
  * @uses bootswatch_header_style()

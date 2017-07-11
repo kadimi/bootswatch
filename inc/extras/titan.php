@@ -101,5 +101,15 @@ function bootswatch_get_option( $option_id ) {
  * @return boolean           Weither or not that option is being used
  */
 function bootswatch_has( $option_id ) {
-	return 'yes' === bootswatch_get_option( $option_id );
+	switch ( $option_id ) {
+	case 'header_image':
+		return ( bool ) get_header_image();
+		break;
+	case 'site_icon':
+		return ( bool ) get_site_icon_url();
+		break;
+	default:
+		return 'yes' === bootswatch_get_option( $option_id );
+		break;
+	}
 }

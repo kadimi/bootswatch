@@ -9,13 +9,6 @@
  * @package Bootswatch
  */
 
-/**
- * Get URL of site icon provided in the customizer.
- *
- * No fallback is used as we there is already `favicon.ico`.
- */
-$site_icon_url = get_site_icon_url();
-
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -23,8 +16,8 @@ $site_icon_url = get_site_icon_url();
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="profile" href="http://gmpg.org/xfn/11">
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
-<?php if ( $site_icon_url ) { ?>
-	<link rel="shortcut icon" href="<?php echo $site_icon_url; // XSS OK. ?>" />
+<?php if ( bootswatch_has( 'site_icon' ) ) { ?>
+	<link rel="shortcut icon" href="<?php echo get_site_icon_url(); // XSS OK. ?>" />
 <?php } ?>
 <?php wp_head(); ?>
 </head>
@@ -40,7 +33,9 @@ $site_icon_url = get_site_icon_url();
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand site-title" href="<?php echo esc_url( home_url() ); ?>"><?php bloginfo( 'name' ); ?></a>
+					<span class="site-title">
+						<a class="navbar-brand" href="<?php echo esc_url( home_url() ); ?>"><?php bloginfo( 'name' ); ?></a>
+					</span>
 				</div>
 				<div class="collapse navbar-collapse">
 					<?php
@@ -64,3 +59,13 @@ $site_icon_url = get_site_icon_url();
 
 		<?php do_action( 'bootswatch_after_nav' ); ?>
 	</header>
+
+	<?php if ( is_home() && bootswatch_has( 'header_image' ) ) { ?>
+		<div class="container-fluid header_image">
+			<div class="row">
+				<div class="col-md-12 ">
+					<img alt="<?php bloginfo( 'description' ); ?>" src="<?php echo get_header_image(); ?>" />
+				</div>
+			</div> 
+		</div>
+	<?php } ?>
