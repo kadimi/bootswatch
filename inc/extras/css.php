@@ -46,8 +46,17 @@ add_action( 'wp_head', function() {
 	 */
 	if ( has_custom_header() ) {
 		$less .= '
+
 			.custom-header {
+
 				overflow: hidden;
+				padding-left: 0;
+				padding-right: 0;
+
+				position: relative;
+				top: -@navbar-margin-bottom;
+
+				width: 100%;
 				height: calc(~"100vh -" @navbar-height);
 				body.adminbar & {
 					height: calc(~"100vh - 32px" - @navbar-height );
@@ -55,17 +64,11 @@ add_action( 'wp_head', function() {
 						height: calc(~"100vh - 46px" - @navbar-height );
 					}
 				}
-				width: 100%;
-				padding-left: 0;
-				padding-right: 0;
-				position: relative;
-				top: -@navbar-margin-bottom;
+
 				img {
 					object-fit: cover;
-					height: 95vh;
+					height: 100vh;
 					width: 100%;
-				}
-				@media screen and (min-width: 48em) {
 				}
 			}
 		';
