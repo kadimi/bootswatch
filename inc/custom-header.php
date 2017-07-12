@@ -35,13 +35,10 @@ add_action( 'body_class', function( $body_classes ) {
 function bootswatch_custom_header_setup() {
 	add_theme_support( 'custom-header', apply_filters( 'bootswatch_custom_header_args', array(
 		'default-image'      => get_parent_theme_file_uri( '/img/header.jpg' ),
-		'default-text-color' => '000000',
+		'header-text'        => false,
 		'flex-height'        => true,
 		'flex-width'         => true,
 		'video'              => true,
-		'wp-head-callback'   => 'bootswatch_header_style',
-		// 'admin-head-callback'    => 'bootswatch_admin_header_style',
-		// 'admin-preview-callback' => 'bootswatch_admin_header_image',
 	) ) );
 	register_default_headers( array(
 		'default-image' => array(

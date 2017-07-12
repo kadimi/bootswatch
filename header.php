@@ -60,7 +60,7 @@
 		<?php do_action( 'bootswatch_after_nav' ); ?>
 	</header>
 
-	<?php if ( is_front_page() && has_custom_header() ) { ?>
+	<?php if ( ( is_front_page() && has_custom_header() ) || is_customize_preview() ) { ?>
 		<div class="container-fluid custom-header">
 			<div class="row">
 				<div class="col-md-12 ">
@@ -68,4 +68,21 @@
 				</div>
 			</div> 
 		</div>
-	<?php } ?>
+	<?php }
+
+	/**
+	 * Hide media placeholder if no media choosen in the customizer.
+	 */
+	if ( is_customize_preview() ) { ?>
+		<script>
+			jQuery( document ).ready( function( $ ) {
+				setInterval( function() {
+					if ( $( '.wp-custom-header' ).children().not( 'span' ).length ) {
+						$( '.custom-header' ).slideDown( 200 );
+					} else {
+						$( '.custom-header' ).slideUp( 200 );
+					}
+				}, 1000 );
+			} )
+		</script>
+	<?php }
