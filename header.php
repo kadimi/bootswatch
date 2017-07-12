@@ -16,7 +16,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="profile" href="http://gmpg.org/xfn/11">
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
-<?php if ( bootswatch_has( 'site_icon' ) ) { ?>
+<?php if ( has_site_icon() ) { ?>
 	<link rel="shortcut icon" href="<?php echo get_site_icon_url(); // XSS OK. ?>" />
 <?php } ?>
 <?php wp_head(); ?>
@@ -60,11 +60,11 @@
 		<?php do_action( 'bootswatch_after_nav' ); ?>
 	</header>
 
-	<?php if ( is_home() && bootswatch_has( 'header_image' ) ) { ?>
-		<div class="container-fluid header_image">
+	<?php if ( is_front_page() && has_custom_header() ) { ?>
+		<div class="container-fluid custom-header">
 			<div class="row">
 				<div class="col-md-12 ">
-					<img alt="<?php bloginfo( 'description' ); ?>" src="<?php echo get_header_image(); // XSS OK. ?>" />
+					<?php the_custom_header_markup(); ?>
 				</div>
 			</div> 
 		</div>

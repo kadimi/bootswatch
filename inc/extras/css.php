@@ -6,9 +6,9 @@
  */
 
 /**
- * Adds inline CSS in header.
+ * Add inline CSS in header.
  */
-function bootswatch_css() {
+add_action( 'wp_head', function() {
 
 	$less = '';
 
@@ -44,20 +44,32 @@ function bootswatch_css() {
 	/**
 	 * Position header image.
 	 */
-	if ( bootswatch_has( 'header_image' ) ) {
+	if ( has_custom_header() ) {
 		$less .= '
-			.header_image {
+			.custom-header {
+				overflow: hidden;
+				height: calc(~"100vh -" @navbar-height);
+				body.adminbar & {
+					height: calc(~"100vh - 32px" - @navbar-height );
+					@media screen and (max-width:782px) {
+						height: calc(~"100vh - 46px" - @navbar-height );
+					}
+				}
+				width: 100%;
 				padding-left: 0;
 				padding-right: 0;
 				position: relative;
 				top: -@navbar-margin-bottom;
 				img {
-					min-width:100%;
+					object-fit: cover;
+					height: 95vh;
+					width: 100%;
+				}
+				@media screen and (min-width: 48em) {
 				}
 			}
 		';
 	}
-
 	/**
 	 * Parse LESS code.
 	 */
@@ -68,6 +80,4 @@ function bootswatch_css() {
 	 * Print to page.
 	 */
 	printf( '<style>%s</style>', $css ); // WPCS: xss ok.
-}
-
-add_action( 'wp_head', 'bootswatch_css' );
+} );

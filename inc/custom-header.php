@@ -21,7 +21,7 @@
 add_action( 'init', function() {
 	if ( bootswatch_has( 'header_image' ) ) {
 		add_action( 'body_class', function( $classes ) {
-			return array_merge( $classes, [ 'has_header_image' ] );
+			return array_merge( $classes, [ 'has-header-image' ] );
 		} );
 	}
 } );
@@ -35,14 +35,14 @@ add_action( 'init', function() {
  */
 function bootswatch_custom_header_setup() {
 	add_theme_support( 'custom-header', apply_filters( 'bootswatch_custom_header_args', array(
-		'default-image'          => '',
-		'default-text-color'     => '000000',
-		'width'                  => 1000,
-		'height'                 => 250,
-		'flex-height'            => true,
-		'wp-head-callback'       => 'bootswatch_header_style',
-		'admin-head-callback'    => 'bootswatch_admin_header_style',
-		'admin-preview-callback' => 'bootswatch_admin_header_image',
+		'default-image'      => get_parent_theme_file_uri( '/img/header.jpg' ),
+		'default-text-color' => '000000',
+		'flex-height'        => true,
+		'flex-width'         => true,
+		'video'              => true,
+		'wp-head-callback'   => 'bootswatch_header_style',
+		// 'admin-head-callback'    => 'bootswatch_admin_header_style',
+		// 'admin-preview-callback' => 'bootswatch_admin_header_image',
 	) ) );
 }
 add_action( 'after_setup_theme', 'bootswatch_custom_header_setup' );
