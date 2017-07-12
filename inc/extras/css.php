@@ -65,28 +65,35 @@ add_action( 'wp_head', function() {
 			position: relative;
 			top: -@navbar-margin-bottom;
 
-			height: calc(~"100vh -" @navbar-height);
 			width: 100%;
 			iframe,
-			img {
+			img,
+			video {
 				object-fit: cover;
-				height: 100vh;
 				width: 100%;
+			}
+			&,
+			iframe,
+			img,
+			video {
+				height: calc(~"100vh -" @navbar-height);
 			}
 		}
 
 		// Custom header when #wpadminbar is visible.
 		body.admin-bar .custom-header {
-			height: calc(~"100vh - 32px" - @navbar-height);
+			&,
 			iframe,
-			img {
-				height: calc(~"100vh - 32px" );
+			img,
+			video {
+				height: calc(~"100vh - 32px" - @navbar-height);
 			}
 			@media screen and (max-width:782px) {
-				height: calc(~"100vh - 46px" - @navbar-height);
+				&,
 				iframe,
-				img {
-					height: calc(~"100vh - 46px");
+				img,
+				video {
+						height: calc(~"100vh - 46px" - @navbar-height);
 				}
 			}
 		}

@@ -43,6 +43,18 @@ function bootswatch_custom_header_setup() {
 		// 'admin-head-callback'    => 'bootswatch_admin_header_style',
 		// 'admin-preview-callback' => 'bootswatch_admin_header_image',
 	) ) );
+	register_default_headers( array(
+		'default-image' => array(
+			'url'           => '%s/img/header.jpg',
+			'thumbnail_url' => '%s/img/header.jpg',
+			'description'   => __( 'Default Header Image', 'bootswatch_has' ),
+		),
+		'default-image-2' => array(
+			'url'           => '%s/img/header.jpg',
+			'thumbnail_url' => '%s/img/header.jpg',
+			'description'   => __( 'Default Header Image', 'bootswatch_has' ),
+		),
+	) );
 }
 add_action( 'after_setup_theme', 'bootswatch_custom_header_setup' );
 
