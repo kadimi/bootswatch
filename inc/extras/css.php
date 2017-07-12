@@ -6,6 +6,16 @@
  */
 
 /**
+ * Add body class `fixed-navbar` if navbar is fixed.
+ */
+add_action( 'body_class', function( $body_classes ) {
+	if ( bootswatch_has( 'fixed_navbar' ) ) {
+		return array_merge( $body_classes, [ 'fixed-navbar' ] );
+	}
+	return $body_classes;
+} );
+
+/**
  * Add inline CSS in header.
  */
 add_action( 'wp_head', function() {
@@ -23,56 +33,65 @@ add_action( 'wp_head', function() {
 	$less_parser->parseFile( $variables_path, home_url() );
 
 	/**
-	 * Fix overlapping with WordPress admin bar.
+	 * The styles.
 	 */
 	$less .= '
+
+		// Use fixed position for admin bar if navbar position is fixed.
+		body.fixed-navbar #wpadminbar {
+			position: fixed;
+		}
+
+		// Fix overlapping with Bootstrap fixed navbar.
+		body.fixed-navbar {
+			padding-top: (@navbar-height + @navbar-margin-bottom);
+		}
+
+		// Fix overlapping with WordPress admin bar.
 		body.admin-bar .navbar-fixed-top{
 			top: 32px;
 			@media screen and (max-width:782px) {
 				top: 46px;
 			}
 		}
-	';
 
-	/**
-	 * Fix overlapping with Bootstrap's fixed navbar.
-	 */
-	if ( bootswatch_has( 'fixed_navbar' ) ) {
-		$less .= 'body { padding-top: (@navbar-height + @navbar-margin-bottom); }';
-	}
+		// Custom header defaults.
+		.custom-header {
 
-	/**
-	 * Position header image.
-	 */
-	if ( has_custom_header() ) {
-		$less .= '
+			overflow: hidden;
+			padding-left: 0;
+			padding-right: 0;
 
-			.custom-header {
+			position: relative;
+			top: -@navbar-margin-bottom;
 
-				overflow: hidden;
-				padding-left: 0;
-				padding-right: 0;
-
-				position: relative;
-				top: -@navbar-margin-bottom;
-
+			height: calc(~"100vh -" @navbar-height);
+			width: 100%;
+			iframe,
+			img {
+				object-fit: cover;
+				height: 100vh;
 				width: 100%;
-				height: calc(~"100vh -" @navbar-height);
-				body.adminbar & {
-					height: calc(~"100vh - 32px" - @navbar-height );
-					@media screen and (max-width:782px) {
-						height: calc(~"100vh - 46px" - @navbar-height );
-					}
-				}
+			}
+		}
 
+		// Custom header when #wpadminbar is visible.
+		body.admin-bar .custom-header {
+			height: calc(~"100vh - 32px" - @navbar-height);
+			iframe,
+			img {
+				height: calc(~"100vh - 32px" );
+			}
+			@media screen and (max-width:782px) {
+				height: calc(~"100vh - 46px" - @navbar-height);
+				iframe,
 				img {
-					object-fit: cover;
-					height: 100vh;
-					width: 100%;
+					height: calc(~"100vh - 46px");
 				}
 			}
-		';
-	}
+		}
+	';
+
 	/**
 	 * Parse LESS code.
 	 */

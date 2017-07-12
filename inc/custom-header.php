@@ -18,12 +18,11 @@
 /**
  * Add body class `has_header_image` if header image exists.
  */
-add_action( 'init', function() {
+add_action( 'body_class', function( $body_classes ) {
 	if ( bootswatch_has( 'header_image' ) ) {
-		add_action( 'body_class', function( $classes ) {
-			return array_merge( $classes, [ 'has-header-image' ] );
-		} );
+		return array_merge( $body_classes, [ 'has-header-image' ] );
 	}
+	return $body_classes;
 } );
 
 /**
