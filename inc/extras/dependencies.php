@@ -10,6 +10,7 @@
  */
 require get_template_directory() . '/vendor/autoload.php';
 require get_template_directory() . '/managed/tgmpa/class-tgm-plugin-activation.php';
+
 /**
  * Requires plugins with TGMPA.
  */
