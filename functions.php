@@ -124,7 +124,7 @@ function bootswatch_scripts() {
 	if ( $bootswatch_theme ) {
 		if ( class_exists( 'Less_Parser' ) ) {
 			$variables_overrides = [
-				'@icon-font-path' => '../vendor/thomaspark/bootswatch/fonts/',
+				'@icon-font-path' => '../vendor/thomaspark/bootswatch/bower_components/bootstrap/dist/fonts/',
 			];
 			$variables_overrides = apply_filters( 'bootswatch_variables_overrides', $variables_overrides, $bootswatch_theme );
 			$css_file_path       = bootswatch_build( $bootswatch_theme, $variables_overrides );

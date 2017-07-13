@@ -304,6 +304,14 @@ class BootswatchBuild {
 			 * Remove './';
 			 */
 			$path = preg_replace( '#^\./#', '', $path );
+
+			/**
+			 * Add `/` to directories.
+			 */
+			if ( is_dir( $path ) ) {
+				$path .= '/';
+			}
+
 			$elements[] = $path;
 		}
 		sort( $elements );
