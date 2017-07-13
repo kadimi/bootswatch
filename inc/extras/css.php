@@ -19,10 +19,18 @@ add_action( 'body_class', function( $body_classes ) {
  * Add inline CSS in header.
  */
 add_action( 'wp_head', function() {
-	echo '<style>' . bootwatch_generate_inline_css( bootswatch_get_option( 'theme' ) ) . '</style>'; // WPCS: xss ok.
+	echo '<style>' . bootswatch_generate_inline_css( bootswatch_get_option( 'theme' ) ) . '</style>'; // WPCS: xss ok.
 } );
 
-function bootwatch_generate_inline_css( $theme ) {
+/**
+ * Generates inline CSS that corrects display, see comments with LESS code.
+ *
+ * If `$theme` is empty, the function will use bootstrap.
+ *
+ * @param  String $theme The bootswatch theme.
+ * @return String        The CSS code.
+ */
+function bootswatch_generate_inline_css( $theme ) {
 	if ( ! class_exists( 'Less_Parser' ) ) {
 		return bootwatch_bootstrap_inline_css();
 	}
@@ -114,6 +122,13 @@ function bootwatch_generate_inline_css( $theme ) {
 	return $css;
 }
 
+/**
+ * Return Bootstrap inline CSS code.
+ *
+ * This CSS code can be obtained by running `var_dump(bootswatch_generate_inline_css()`.
+ *
+ * @return String CSS code.
+ */
 function bootwatch_bootstrap_inline_css() {
 	$css = '
 		body.fixed-navbar #wpadminbar {
@@ -166,4 +181,4 @@ function bootwatch_bootstrap_inline_css() {
 		}
 	';
 	return $css;
-} 
+}

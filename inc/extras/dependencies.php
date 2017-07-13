@@ -11,11 +11,6 @@
 require get_template_directory() . '/vendor/autoload.php';
 
 /**
- * Require TGMPA
- */
-// require get_template_directory() . '/managed/tgmpa/class-tgm-plugin-activation.php';
-
-/**
  * Requires plugins with TGMPA.
  */
 function bootswatch_setup_dependencies() {
