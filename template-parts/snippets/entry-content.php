@@ -20,7 +20,7 @@ if ( ! is_singular() && ! post_password_required() ) {
 if ( $use_short ) {
 	$featured_image_size = apply_filters( 'bootswatch_thumbnail_size_short', 'thumbnail' );
 } else {
-	$featured_image_size = apply_filters( 'bootswatch_thumbnail_size', 'large' );
+	$featured_image_size = apply_filters( 'bootswatch_thumbnail_size', 'full' );
 }
 
 ?>
