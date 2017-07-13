@@ -101,8 +101,8 @@ function bootswatch_post_navigation() {
 		'/<div class="nav-previous">/' => '<li class="nav-previous previous">',
 		'/<div class="nav-next">/'     => '<li class="nav-next next">',
 		'/<\/a><\/div>/'                 => '</a></li>',
-		'/rel="prev">(.*?)</'          => 'rel="prev">« $1<',
-		'/rel="next">(.*?)</'          => 'rel="prev">$1 »<',
+		'/rel="prev">(.*?)</'          => 'rel="prev">&laquo; $1<',
+		'/rel="next">(.*?)</'          => 'rel="prev">$1 &raquo;<',
 		'/<\/li><\/div>/'                => '</li></ul>',
 	];
 

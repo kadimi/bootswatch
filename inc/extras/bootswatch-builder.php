@@ -5,8 +5,6 @@
  * @package Bootswatch
  */
 
-use Symfony\Component\Filesystem\Filesystem;
-
 /**
  * Build a bootswatch theme (results are cached).
  *
@@ -28,8 +26,6 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 	$paths['cache.dir'] = get_template_directory() . '/cache';
 	$paths['cache.css'] = sprintf( '%1$s/%2$s%3$s-%4$s.min.css', $paths['cache.dir'], $theme, $overrides ? '-' . md5( serialize( $overrides ) ) : '', $text_direction );
 
-	$filesystem = new Filesystem();
-
 	/**
 	 * Return cached CSS if a rebuild is not requested and cache exists.
 	 */
@@ -37,10 +33,19 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 		return $paths['cache.css'];
 	}
 
+
+	/**
+	 * Create file system instance.
+	 */
+	require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
+	require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php';
+	$fs = new WP_Filesystem_Direct( 'bootswatch' );
+
 	/**
 	 * Clear old cache.
 	 */
-	$filesystem->remove( $paths['cache.dir'] );
+	$fs->delete( $paths['cache.dir'] );
+	$fs->mkdir( $paths['cache.dir'] );
 
 	$paths['bootswatch.dir'] = get_template_directory() . '/vendor/thomaspark/bootswatch';
 	$paths['bootstrap.dir']  = $paths['bootswatch.dir'] . '/bower_components/bootstrap';
@@ -51,9 +56,9 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 	] );
 
 	$contents = array_merge( $contents, [
-		'tmp-bootstrap.less'       => file_get_contents( $paths['bootstrap.dir'] . '/less/bootstrap.less' ),
-		'bootswatch.less'          => file_get_contents( $paths['bootswatch.dir'] . '/' . $theme . '/bootswatch.less' ),
-		'tmp-theme-variables.less' => file_get_contents( $paths['bootswatch.dir'] . '/' . $theme . '/variables.less' ),
+		'tmp-bootstrap.less'       => $fs->get_contents( $paths['bootstrap.dir'] . '/less/bootstrap.less' ),
+		'bootswatch.less'          => $fs->get_contents( $paths['bootswatch.dir'] . '/' . $theme . '/bootswatch.less' ),
+		'tmp-theme-variables.less' => $fs->get_contents( $paths['bootswatch.dir'] . '/' . $theme . '/variables.less' ),
 		'tmp-final.less'           => '',
 	] );
 
@@ -70,13 +75,13 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 		$replacement                          = strstr( $value, '/' ) ? sprintf( '$1:"%s";', $value ) : sprintf( '$1:%s;', $value );
 		$contents['tmp-theme-variables.less'] = preg_replace( $regex, $replacement, $contents['tmp-theme-variables.less'] );
 	}
-	$filesystem->dumpFile( $paths['tmp-theme-variables.less'], $contents['tmp-theme-variables.less'] );
+	$fs->put_contents( $paths['tmp-theme-variables.less'], $contents['tmp-theme-variables.less'] );
 
 	/**
 	 * #2 - Prepare tmp-bootstrap.less.
 	 */
 	$contents['tmp-bootstrap.less'] = str_replace( 'variables.less', 'tmp-' . $theme . '-variables.less', $contents['tmp-bootstrap.less'] );
-	$filesystem->dumpFile( $paths['tmp-bootstrap.less'], $contents['tmp-bootstrap.less'] );
+	$fs->put_contents( $paths['tmp-bootstrap.less'], $contents['tmp-bootstrap.less'] );
 
 	/**
 	 * #3 - Prepare tmp-final.less.
@@ -84,7 +89,7 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 	 * Contains: Bootstrap, modified variables.less path and Bootswatch theme.
 	 */
 	$contents['tmp-final.less'] = $contents['tmp-bootstrap.less'] . $contents['bootswatch.less'];
-	$filesystem->dumpFile( $paths['tmp-final.less'], $contents['tmp-final.less'] );
+	$fs->put_contents( $paths['tmp-final.less'], $contents['tmp-final.less'] );
 
 	/**
 	 * Parse and save bootswatch theme LESS code.
@@ -97,14 +102,14 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 	if ( is_rtl() ) {
 		$css = CSSJanus::transform( $css );
 	}
-	$filesystem->dumpFile( $paths['cache.css'], $css );
+	$fs->put_contents( $paths['cache.css'], $css );
 
 	/**
 	 * Delete temporary files.
 	 */
-	array_map( function( $path ) use ( $filesystem ) {
+	array_map( function( $path ) use ( $fs ) {
 		if ( 'tmp-' === substr( basename( $path ), 0, 4 ) ) {
-			$filesystem->remove( $path );
+			$fs->delete( $path );
 		}
 	}, $paths);
 
