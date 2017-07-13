@@ -97,7 +97,7 @@ class BootswatchBuild {
 	private function create_style() {
 
 		if ( file_exists( 'style.css' ) ) {
-			call_user_func( 'unlink', 'style.css' );
+			unlink( 'style.css' );
 		}
 
 		$parts = [
@@ -113,7 +113,7 @@ class BootswatchBuild {
 		foreach ( $parts as $part ) {
 			$css .= file_get_contents( $part ) . "\n";
 		}
-		call_user_func( 'file_put_contents', 'style.css', $css );
+		file_put_contents( 'style.css', $css );
 	}
 
 	/**
@@ -163,7 +163,7 @@ class BootswatchBuild {
 		$filename = 'bootswatch.zip';
 
 		if ( file_exists( $filename ) ) {
-			call_user_func( 'unlink', $filename );
+			unlink( $filename );
 		}
 
 		/**
@@ -220,10 +220,10 @@ class BootswatchBuild {
 			foreach ( glob( $element . '/{,.}[!.,!..]*', GLOB_MARK | GLOB_BRACE ) as $e ) {
 				$this->delete_element( $e );
 			}
-			return $this->pretend ? true : call_user_func( 'rmdir', $element );
+			return $this->pretend ? true : rmdir( $element );
 		} else {
 			$this->bytes_deleted += filesize( $element );
-			return $this->pretend ? true : call_user_func( 'unlink', $element );
+			return $this->pretend ? true : unlink( $element );
 		}
 		return true;
 	}
