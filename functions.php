@@ -82,7 +82,10 @@ add_action( 'after_setup_theme', 'bootswatch_setup' );
  * @global int $content_width
  */
 function bootswatch_content_width() {
-	$GLOBALS['content_width'] = apply_filters( 'bootswatch_content_width', 640 );
+	$GLOBALS['content_width'] = ! is_active_sidebar( 'sidebar' )
+		? 1140
+		: 750
+	;
 }
 add_action( 'after_setup_theme', 'bootswatch_content_width', 0 );
 
