@@ -92,6 +92,7 @@ endif;
  * Prints previous and next posts links.
  */
 function bootswatch_post_navigation() {
+
 	$replacements = [
 		'/<div class="nav-links">/'    => '<ul class="nav-links pager">',
 		'/<div class="nav-previous">/' => '<li class="nav-previous previous">',
