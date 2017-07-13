@@ -16,7 +16,7 @@
 		<div class="col-md-12"><hr></div>
 		<div class="col-md-4 col-md-offset-8">
 			<p class="muted pull-right small">
-				© <?php echo date( 'Y' ); // WPCS: XSS OK. ?> <?php echo esc_html( get_bloginfo( 'title' ) ); ?>.
+				&copy; <?php echo date( 'Y' ); // WPCS: XSS OK. ?> <?php echo esc_html( get_bloginfo( 'title' ) ); ?>.
 			</p>
 		</div>
 	</div>

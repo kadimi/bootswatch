@@ -24,7 +24,7 @@ function bootswatch_comment_form_fields( $fields ) {
 
 	$fields_parameters = array(
 		'author' => array(
-			'label'         => __( 'Name' ),
+			'label'         => __( 'Name', 'bootswatch' ),
 			'type'          => 'text',
 			'value'         => esc_attr( $commenter['comment_author'] ),
 			'required'      => $required,
@@ -33,7 +33,7 @@ function bootswatch_comment_form_fields( $fields ) {
 			'maxlength'     => 245,
 		),
 		'email' => array(
-			'label'         => __( 'Email' ),
+			'label'         => __( 'Email', 'bootswatch' ),
 			'type'          => 'email',
 			'value'         => esc_attr( $commenter['comment_author_email'] ),
 			'required'      => $required,
@@ -43,7 +43,7 @@ function bootswatch_comment_form_fields( $fields ) {
 			'describedby'   => 'email-notes',
 		),
 		'url' => array(
-			'label'     => __( 'Website' ),
+			'label'     => __( 'Website', 'bootswatch' ),
 			'type'      => 'url',
 			'value'     => esc_attr( $commenter['comment_author_url'] ),
 			'size'      => 30,
@@ -95,7 +95,7 @@ function bootswatch_comment_form( $defaults ) {
 	$defaults['class_form']    = 'form-horizontal well';
 	$defaults['comment_field'] = '
 		<div class="form-group comment-form-comment">
-			<label for="comment" class="col-sm-2 control-label">' . _x( 'Comment', 'noun' ) . ' <span class="required">*</span></label> 
+			<label for="comment" class="col-sm-2 control-label">' . _x( 'Comment', 'noun', 'bootswatch' ) . ' <span class="required">*</span></label>
 			<div class="col-sm-10">
 				<textarea class="form-control" id="comment" name="comment" cols="45" rows="8" required="required" aria-required="true"></textarea>
 			</div>

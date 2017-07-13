@@ -47,8 +47,8 @@ function bootswatch_create_options() {
 		'type' => 'select',
 		'default' => 'yes',
 		'options' => array(
-			'yes' => __( 'Yes' ),
-			'no' => __( 'No' ),
+			'yes' => __( 'Yes', 'bootswatch' ),
+			'no' => __( 'No', 'bootswatch' ),
 		),
 	) );
 
@@ -58,8 +58,8 @@ function bootswatch_create_options() {
 		'type' => 'select',
 		'default' => 'yes',
 		'options' => array(
-			'yes' => __( 'Yes' ),
-			'no' => __( 'No' ),
+			'yes' => __( 'Yes', 'bootswatch' ),
+			'no' => __( 'No', 'bootswatch' ),
 		),
 	) );
 
