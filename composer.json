@@ -3,7 +3,6 @@
     "license": "MIT",
     "require": {
         "php": ">=5.6",
-        "tgmpa/tgm-plugin-activation": "^2.6",
         "thomaspark/bootswatch": "^3.3",
         "oyejorge/less.php": "^v1.7",
         "symfony/filesystem": "^3.1",
