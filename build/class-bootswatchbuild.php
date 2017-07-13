@@ -105,6 +105,7 @@ class BootswatchBuild {
 			'css/wordpress-core.css',
 			'css/wordpress-core-overrides.css',
 			'css/wordpress-core-missing.css',
+			'css/twentyseventeen-galleries.css',
 		];
 
 		$css = '';
