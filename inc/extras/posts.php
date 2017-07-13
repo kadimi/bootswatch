@@ -41,14 +41,23 @@ add_filter( 'edit_post_link', 'bootstwatch_edit_post_link' );
  */
 function bootswatch_link_pages() {
 
+	/**
+	 * Helps prevent hooking function twice.
+	 */
 	static $once;
 
+	/**
+	 * Put current link in empty `a` tag.
+	 */
 	if ( ! $once ) {
 		add_filter( 'wp_link_pages_link', function( $link ) {
 			return is_numeric( $link ) ? '<a class="active">' . $link . '</a>' : $link;
 		} );
 	}
 
+	/**
+	 * Generate links.
+	 */
 	$links = wp_link_pages( [
 		'after' => '</li></ul>',
 		'before' => '<ul class="pagination"><li>',
@@ -56,9 +65,18 @@ function bootswatch_link_pages() {
 		'separator' => '</li><li>',
 	] );
 
+	/**
+	 * Move active class from `a` to `li`.
+	 */
 	$links = str_replace( '<li><a class="active">', '<li class="active"><a>', $links );
 
+	/**
+	 * Output.
+	 */
 	echo $links; // XSS OK.
 
+	/**
+	 * Prevent hooking function twice.
+	 */
 	$once = true;
 }
