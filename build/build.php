@@ -17,7 +17,6 @@ require 'build/class-bootswatchbuild.php';
 		'file-0' => '^codesniffer\.ruleset\.xml$',
 		'file-1' => '^README\.md$',
 		'file-2' => '^composer.(json|lock)$',
-		'tgmpa'  => '^managed/tgmpa/.*/tgm-example-plugin\.zip',
 		'wp.dev' => '^(ip|hostname)$',
 	],
 	'vendor_ignored_patterns' => [
