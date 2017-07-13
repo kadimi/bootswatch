@@ -44,7 +44,7 @@ function bootswatch_custom_header_setup() {
 		'default-image' => array(
 			'url'           => '%s/img/header.jpg',
 			'thumbnail_url' => '%s/img/header.jpg',
-			'description'   => __( 'Default Header Image', 'bootswatch_has' ),
+			'description'   => __( 'Default Header Image', 'bootswatch' ),
 		),
 	) );
 }
