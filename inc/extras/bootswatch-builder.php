@@ -17,6 +17,10 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 
+	if ( ! class_exists( 'Less_Parser' ) ) {
+		return;
+	}
+
 	$paths          = [];
 	$contents       = [];
 	$text_direction = is_rtl() ? 'rtl' : 'ltr';

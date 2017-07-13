@@ -4,13 +4,8 @@
     "require": {
         "php": ">=5.6",
         "thomaspark/bootswatch": "^3.3",
-        "oyejorge/less.php": "^v1.7",
         "symfony/filesystem": "^3.1",
-        "cssjanus/cssjanus": "^1.2",
-        "gambitph/titan-framework": "^1.9"
-    },
-    "require-dev": {
-        "kint-php/kint": "^2.1"
+        "cssjanus/cssjanus": "^1.2"
     },
     "scripts": {
         "post-install-cmd": "php -f build/build.php",

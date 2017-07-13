@@ -19,13 +19,20 @@ add_action( 'body_class', function( $body_classes ) {
  * Add inline CSS in header.
  */
 add_action( 'wp_head', function() {
+	echo '<style>' . bootwatch_generate_inline_css( bootswatch_get_option( 'theme' ) ) . '</style>'; // WPCS: xss ok.
+} );
+
+function bootwatch_generate_inline_css( $theme ) {
+	if ( ! class_exists( 'Less_Parser' ) ) {
+		return bootwatch_bootstrap_inline_css();
+	}
 
 	$less = '';
 
 	/**
 	 * Prepare LESS parser.
 	 */
-	$variables_path = bootswatch_get_option( 'theme' )
+	$variables_path = $theme
 		? get_template_directory() . '/vendor/thomaspark/bootswatch/' . bootswatch_get_option( 'theme' ) . '/variables.less'
 		: get_template_directory() . '/vendor/thomaspark/bootswatch/bower_components/bootstrap/less/variables.less'
 	;
@@ -104,9 +111,59 @@ add_action( 'wp_head', function() {
 	 */
 	$less_parser->parse( $less );
 	$css .= $less_parser->getCss();
+	return $css;
+}
 
-	/**
-	 * Print to page.
-	 */
-	printf( '<style>%s</style>', $css ); // WPCS: xss ok.
-} );
+function bootwatch_bootstrap_inline_css() {
+	$css = '
+		body.fixed-navbar #wpadminbar {
+			position: fixed;
+		}
+		body.fixed-navbar {
+			padding-top: 70px;
+		}
+		body.admin-bar .navbar-fixed-top {
+			top: 32px;
+		}
+		@media screen and (max-width: 782px) {
+			body.admin-bar .navbar-fixed-top {
+				top: 46px;
+			}
+		}
+		.custom-header {
+			overflow: hidden;
+			padding-left: 0;
+			padding-right: 0;
+			position: relative;
+			top: -20px;
+			width: 100%;
+		}
+		.custom-header iframe,
+		.custom-header img,
+		.custom-header video {
+			object-fit: cover;
+			width: 100%;
+		}
+		.custom-header,
+		.custom-header iframe,
+		.custom-header img,
+		.custom-header video {
+			height: calc(100vh - 50px);
+		}
+		body.admin-bar .custom-header,
+		body.admin-bar .custom-header iframe,
+		body.admin-bar .custom-header img,
+		body.admin-bar .custom-header video {
+			height: calc(100vh - 32px - 50px);
+		}
+		@media screen and (max-width: 782px) {
+			body.admin-bar .custom-header,
+			body.admin-bar .custom-header iframe,
+			body.admin-bar .custom-header img,
+			body.admin-bar .custom-header video {
+				height: calc(100vh - 46px - 50px);
+			}
+		}
+	';
+	return $css;
+} 

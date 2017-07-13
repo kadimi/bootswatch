@@ -20,7 +20,6 @@ function bootswatch_create_options() {
 		'name' => __( 'Theme', 'bootswatch' ),
 		'id' => 'theme',
 		'type' => 'select',
-		'default' => 'cerulean',
 		'options' => array(
 			'' => 'Just Bootstrap',
 			'cerulean' => 'Cerulean',
@@ -70,17 +69,6 @@ function bootswatch_create_options() {
 		'type' => 'textarea',
 		'desc' => __( 'Coming soon...', 'bootswatch' ),
 	) );
-
-	$metabox = $titan->createMetaBox( array(
-		'name' => __( 'Bootswatch additions', 'bootswatch' ),
-	) );
-
-	$metabox->createOption( array(
-		'name' => __( 'After navigation bar', 'bootswatch' ),
-		'id' => 'after_nav',
-		'desc' => __( 'Content to insert after the header navigation bar', 'bootswatch' ),
-		'type' => 'editor',
-	) );
 }
 add_action( 'tf_create_options', 'bootswatch_create_options' );
 
@@ -91,7 +79,10 @@ add_action( 'tf_create_options', 'bootswatch_create_options' );
  * @return mixed             The option value.
  */
 function bootswatch_get_option( $option_id ) {
-	return TitanFramework::getInstance( 'bootswatch' )->getOption( $option_id );
+	return class_exists( 'TitanFramework' )
+		? TitanFramework::getInstance( 'bootswatch' )->getOption( $option_id )
+		: false
+	;
 }
 
 /**
