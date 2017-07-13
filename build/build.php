@@ -12,7 +12,7 @@ require 'build/class-bootswatchbuild.php';
 ( new BootswatchBuild( [
 	'ignored_patterns' => [
 		'hidden-0' => '^\..*',
-		'hidden-1' => '\.(csslintrc|csscomb\.json|bower\.json|gitignore|travis\.yml)$'
+		'hidden-1' => '\.(csslintrc|csscomb\.json|bower\.json|gitignore|travis\.yml)$',
 		'build'  => '^build',
 		'file-0' => '^codesniffer\.ruleset\.xml$',
 		'file-1' => '^README\.md$',
