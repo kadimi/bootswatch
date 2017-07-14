@@ -79,10 +79,15 @@ add_action( 'tf_create_options', 'bootswatch_create_options' );
  * @return mixed             The option value.
  */
 function bootswatch_get_option( $option_id ) {
-	return class_exists( 'TitanFramework' )
-		? TitanFramework::getInstance( 'bootswatch' )->getOption( $option_id )
-		: false
-	;
+	if ( class_exists( 'TitanFramework' ) ) {
+		return TitanFramework::getInstance( 'bootswatch' )->getOption( $option_id );
+	} else {
+		$mods = get_theme_mod( 'bootswatch', [] );
+		return array_key_exists( $option_id, $mods )
+			? $mods[ $option_id ]
+			: false
+		;
+	}
 }
 
 /**
