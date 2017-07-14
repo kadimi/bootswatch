@@ -21,7 +21,7 @@ require 'build/class-bootswatchbuild.php';
 	],
 	'vendor_ignored_patterns' => [
 		'extensions'   => '\.md$',
-		'bootstrap-0'  => '^thomaspark/bootswatch/bower_components/bootstrap/(fonts|grunt|js|nuget)/',
+		'bootstrap-0'  => '^thomaspark/bootswatch/bower_components/bootstrap/(grunt|js|nuget)/',
 		'bootstrap-1'  => '^thomaspark/bootswatch/bower_components/bootstrap/[^/]+$',
 		'bootstrap-2'  => '^thomaspark/bootswatch/bower_components/bootstrap/dist/css/(bootstrap\.css|bootstrap\.css\.map|bootstrap\.min\.css\.map|bootstrap-theme\.css|bootstrap-theme\.css\.map|bootstrap-theme\.min\.css\.map)$',
 		'bootswatch-0'  => '^thomaspark/bootswatch/[^/]+$',
