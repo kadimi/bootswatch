@@ -45,6 +45,13 @@ function bootswatch_recommend_plugin( $plugin ) {
  */
 add_action( 'admin_notices', function() {
 
+	/**
+	 * No notices on the update screen.
+	 */
+	if ( 'update' === get_current_screen()['id'] ) {
+		return;
+	}
+
 	$recommended_plugins = apply_filters( 'bootswatch_recommended_plugins', [] );
 	$notice_id           = 'bootswatch-notice-dependencies';
 	$dismissed           = ! empty( $_COOKIE[ "$notice_id-dismissed" ] );
@@ -59,27 +66,26 @@ add_action( 'admin_notices', function() {
 			// Plugin is installed but inactive.
 			$verb = __( 'activate', 'bootswatch' );
 			$ucf_verb = ucfirst( $verb );
-			$link = sprintf( '<strong><a href="%s">%s</a></strong>', admin_url( 'plugins.php?plugin_status=inactive' ), $plugin['name'] );
+			$url = admin_url( 'plugins.php?plugin_status=inactive' );
 		} else {
 			// Plugin is not installed.
 			$verb = __( 'install', 'bootswatch' );
 			$ucf_verb = ucfirst( $verb );
-			$slug = explode( '/', $plugin['file'] )[0];
-			$url  = admin_url( sprintf( 'plugin-install.php?tab=plugin-information&plugin=%s&TB_iframe=true&width=640&height=480', $slug ) );
-			$link = sprintf( '<strong><a class="thickbox" href="%s">%s</a></strong>', $url, $plugin['name'] );
+			$url  = admin_url( sprintf( 'plugin-install.php?tab=plugin-information&plugin=%s', explode( '/', $plugin['file'] )[0] ) );
 		}
+		$link = sprintf( '<strong><a href="%s">%s</a></strong>', $url, $plugin['name'] );
 		$output .= '<p>' . str_replace( [ '{{link}}', '{{verb}}', '{{ucf_verb}}' ], [ $link, $verb, $ucf_verb ], $plugin['description'] ) . '</p>';
 	}
 
 	if ( $output ) {
 		?>
-		<div class="notice notice-success is-dismissible bootswatch-notice" id="<?php echo $notice_id; ?>">
+		<div class="notice notice-success is-dismissible bootswatch-notice" id="<?php echo $notice_id; // XSS OK. ?>">
 			<h4><?php __( 'Howdy, Bootswatch here!', 'bootswatch' ) ?></h4>
 			<?php echo $output; // XSS OK. ?>
 		</div>
 		<script>
 			jQuery( document ).ready( function($) {
-				var noticeID = '<?php echo $notice_id; ?>';
+				var noticeID = '<?php echo $notice_id; // XSS OK. ?>';
 				$( document ).on( 'click', `#${noticeID} .notice-dismiss`, function() {
 					boostwatchCreateCookie( `${noticeID}-dismissed`, 1, 7 );
 				} );
