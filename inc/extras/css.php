@@ -115,11 +115,10 @@ function bootswatch_generate_inline_css( $theme ) {
 	';
 
 	/**
-	 * Parse LESS code.
+	 * Parse LESS code and return CSS code.
 	 */
 	$less_parser->parse( $less );
-	$css .= $less_parser->getCss();
-	return $css;
+	return  $less_parser->getCss();
 }
 
 /**
