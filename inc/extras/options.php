@@ -36,12 +36,52 @@ bootswatch_create_select( 'theme', __( 'Theme', 'bootswatch' ), [
 	'superhero' => 'Superhero',
 	'united'    => 'United',
 	'yeti'      => 'Yeti',
-] );
+], 'bootswatch', function() {
+	?>
+	<script>
+		jQuery( document ).ready( function( $ ) {
+			wp.customize( 'bootswatch[theme]', function( value ) {
+				value.bind( function( newval ) {
+
+					$('link[id^=bootswatch]').remove();
+
+					var theme_uri_format = "<?php echo bootswatch_get_theme_uri( '{{theme}}' );?>"
+					var theme_uri        = theme_uri_format.replace('{{theme}}', newval);
+
+					$('body').append( `<link rel='stylesheet' id='bootswatch-preview-css'  href='${theme_uri}' type='text/css' media='all' />` );
+
+				} );
+			} );
+		} );
+	</script>
+	<?
+} );
 
 /**
  * Add fixed navbar option.
  */
-bootswatch_create_select( 'fixed_navbar', __( 'Fixed Navigation Bar', 'bootswatch' ) );
+bootswatch_create_select( 'fixed_navbar', __( 'Fixed Navigation Bar', 'bootswatch' ), 'noyes', 'bootswatch', function() {
+	?>
+	<script>
+		jQuery( document ).ready( function( $ ) {
+			wp.customize( 'bootswatch[fixed_navbar]', function( value ) {
+				value.bind( function( newval ) {
+					$navbar = $( 'header nav');
+					if ( 'yes' === newval ) {
+						$( 'body' ).addClass( 'fixed-navbar' );
+						$navbar.addClass( 'navbar-fixed-top' );
+						$navbar.removeClass( 'navbar-satitc-top' );
+					} else {
+						$( 'body' ).removeClass( 'fixed-navbar' );
+						$navbar.addClass( 'navbar-static-top' );
+						$navbar.removeClass( 'navbar-fixed-top' );
+					}
+				} );
+			} );
+		} );
+	</script>
+	<?
+} );
 
 /**
  * Add header search form option.
@@ -56,9 +96,9 @@ bootswatch_create_select( 'search_form_in_header', __( 'Search Form in Header', 
  * @param  String|Array $choices Choices array, accepts also `noyes` and 'yesno'.
  * @param  String       $section Section ID.
  */
-function bootswatch_create_select( $id, $label, $choices = 'noyes', $section = 'bootswatch' ) {
+function bootswatch_create_select( $id, $label, $choices = 'noyes', $section = 'bootswatch', $preview_cb = false ) {
 
-	add_action( 'customize_register', function( $wp_customize ) use ( $id, $label, $choices, $section ) {
+	add_action( 'customize_register', function( $wp_customize ) use ( $id, $label, $choices, $section, $preview_cb ) {
 		switch ( $choices ) {
 		case 'noyes':
 				$choices = [
@@ -84,7 +124,11 @@ function bootswatch_create_select( $id, $label, $choices = 'noyes', $section = '
 					: ''
 				;
 			},
+			'transport' => $preview_cb ? 'postMessage' : 'refresh',
 		] );
+		if ( $preview_cb ) {
+			add_action( 'wp_footer', $preview_cb );
+		}
 		$wp_customize->add_control(
 			new WP_Customize_Control( $wp_customize, $id, [
 				'settings' => $id,
@@ -127,4 +171,8 @@ function bootswatch_has( $option_id ) {
 		return 'yes' === bootswatch_get_option( $option_id );
 		break;
 	}
+}
+
+function bootswatch_get_theme_uri( $theme ) {
+	return get_template_directory_uri() . '/vendor/thomaspark/bootswatch/' . $theme . '/bootstrap.min.css';
 }

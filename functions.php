@@ -130,7 +130,7 @@ function bootswatch_scripts() {
 			$css_file_path       = bootswatch_build( $bootswatch_theme, $variables_overrides );
 			$css_file_url        = site_url( substr( $css_file_path, strlen( ABSPATH ) ) );
 		} else {
-			$css_file_url = get_template_directory_uri() . '/vendor/thomaspark/bootswatch/' . $bootswatch_theme . '/bootstrap.min.css';
+			$css_file_url = bootswatch_get_theme_uri( $bootswatch_theme );
 		}
 		wp_enqueue_style( 'bootswatch' . $bootswatch_theme, $css_file_url );
 	} else {
