@@ -11,15 +11,6 @@
 require get_template_directory() . '/vendor/autoload.php';
 
 /**
- * Recommend Titan Framework.
- */
-bootswatch_recommend_plugin( [
-	'name' => 'Titan Framework',
-	'file' => 'titan-framework/titan-framework.php',
-	'description' => '{{ucf_verb}} {{link}} to enable Bootswatch customizer options section.',
-] );
-
-/**
  * Recommend Less PHP Compiler,
  */
 bootswatch_recommend_plugin( [
