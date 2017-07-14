@@ -31,6 +31,5 @@ require 'build/class-bootswatchbuild.php';
 		'bootswatch-4' => '^thomaspark/bootswatch/(2|api|assets)',
 		'cssjanus-0'   => '^cssjanus/cssjanus/[^/]+$',
 		'cssjanus-1'   => '^cssjanus/cssjanus/test/$',
-		'filesystem'   => '^symfony/filesystem/Tests/$',
 	],
 ] ) );
