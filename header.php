@@ -64,20 +64,3 @@
 			</div> 
 		</div>
 	<?php }
-
-	/**
-	 * Hide media placeholder if no media choosen in the customizer.
-	 */
-	if ( is_customize_preview() ) { ?>
-		<script>
-			jQuery( document ).ready( function( $ ) {
-				setInterval( function() {
-					if ( $( '.wp-custom-header' ).children().not( 'span' ).length ) {
-						$( '.custom-header' ).slideDown( 200 );
-					} else {
-						$( '.custom-header' ).slideUp( 200 );
-					}
-				}, 1000 );
-			} )
-		</script>
-	<?php }

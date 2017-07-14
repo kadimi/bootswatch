@@ -48,7 +48,7 @@ add_action( 'admin_notices', function() {
 	/**
 	 * No notices on the update screen.
 	 */
-	if ( 'update' === get_current_screen()['id'] ) {
+	if ( 'update' === get_current_screen()->id ) {
 		return;
 	}
 
