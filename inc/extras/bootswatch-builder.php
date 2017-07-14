@@ -33,7 +33,6 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 		return $paths['cache.css'];
 	}
 
-
 	/**
 	 * Create file system instance.
 	 */
