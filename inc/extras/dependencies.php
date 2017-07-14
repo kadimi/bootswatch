@@ -6,7 +6,7 @@
  */
 
 /**
- * Require composer autoloader and TGMPA.
+ * Require composer autoloader.
  */
 require get_template_directory() . '/vendor/autoload.php';
 
