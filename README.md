@@ -21,7 +21,7 @@ rm -fr composer.lock vendor && composer install
 
 ## Build
 
-The build script, among many other things, deletes unused files and generates the installable themeqa file **bootswatch.zip**, you can run it manually with:
+The build script, among many other things, deletes unused files and generates the installable theme file **bootswatch.zip**, the build command is:
 
 ```bash
 php -f build/build.php
