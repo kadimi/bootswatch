@@ -77,7 +77,11 @@ function bootswatch_create_select( $id, $label, $choices = 'noyes', $section = '
 		}
 
 		$id = sprintf( 'bootswatch[%s]', $id );
-		$wp_customize->add_setting( $id );
+		$wp_customize->add_setting( $id, [
+			'sanitize_callback' => function( $value ) {
+				return preg_match( '/^[a-z]$+/', $value );
+			},
+		] );
 		$wp_customize->add_control(
 			new WP_Customize_Control( $wp_customize, $id, [
 				'settings' => $id,
