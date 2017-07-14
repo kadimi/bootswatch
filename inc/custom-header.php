@@ -38,7 +38,7 @@ function bootswatch_custom_header_setup() {
 		'wp-head-callback'   => function() {
 			?><script>
 				var bootswatch_customizer = {
-					"is_front_page" : <?php echo is_front_page() ? 'true' : 'false' ?>
+					"is_front_page" : <?php echo is_front_page() ? 'true' : 'false'; // XSS OK. ?>
 				};
 				jQuery( document ).ready( function( $ ) {
 					/**
@@ -51,7 +51,7 @@ function bootswatch_custom_header_setup() {
 					}
 				} );
 			</script><?php
-		}
+		},
 	) ) );
 	register_default_headers( array(
 		'default-image' => array(
