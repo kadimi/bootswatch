@@ -5,7 +5,7 @@ Tags: translation-ready, custom-background, theme-options, custom-menu, post-for
 
 Requires at least: 4.0
 Tested up to: 4.8
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,6 +28,10 @@ Do you like Bootswatch? Now you'll like it even more.
 Bootswatch includes support for Infinite Scroll in Jetpack.
 
 == Changelog ==
+
+= 1.0.3 - Jul 15 2017 =
+* Improve customizer options handling and live preview.
+* Improve caching mechanism
 
 = 1.0.2 - Jul 14 2017 =
 * Hot fix.

@@ -28,5 +28,5 @@ add_action( 'customize_register',  function ( $wp_customize ) {
  * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
  */
 add_action( 'customize_preview_init', function () {
-	wp_enqueue_script( 'bootswatch-customizer', get_template_directory_uri() . '/js/customizer.js', [ 'customize-preview' ], '1.0.2', true );
+	wp_enqueue_script( 'bootswatch-customizer', get_template_directory_uri() . '/js/customizer.js', [ 'customize-preview' ], '1.0.3', true );
 } );
