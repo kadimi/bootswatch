@@ -40,11 +40,11 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = false ) {
 	 */
 	require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
 	require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php';
-	if( ! defined( 'FS_CHMOD_DIR' ) ) {
-		define( 'FS_CHMOD_DIR', false);
+	if ( ! defined( 'FS_CHMOD_DIR' ) ) {
+		define( 'FS_CHMOD_DIR', false );
 	}
-	if( ! defined( 'FS_CHMOD_FILE' ) ) {
-		define( 'FS_CHMOD_FILE', false);
+	if ( ! defined( 'FS_CHMOD_FILE' ) ) {
+		define( 'FS_CHMOD_FILE', false );
 	}
 	$fs = new WP_Filesystem_Direct( 'bootswatch' );
 
@@ -63,8 +63,8 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = false ) {
 		/**
 		 * Delete 5 files.
 		 */
-		while( $counter_0++ < 10 ) {
-			$fs->delete( $paths['cache.dir'] . '/' . $files[$counter_0]['name'] );
+		while ( $counter_0++ < 10 ) {
+			$fs->delete( $paths['cache.dir'] . '/' . $files[ $counter_0 ]['name'] );
 		}
 	}
 
