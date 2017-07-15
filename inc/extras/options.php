@@ -31,14 +31,14 @@ bootswatch_create_select( 'theme', __( 'Theme', 'bootswatch' ), bootswatch_theme
 						$( '<link/>', {
 							rel   : 'stylesheet',
 							id    : 'bootswatch-bootstrap',
-							href  : '<?php echo bootswatch_bootstrap_part_uri( 'style' ); ?>',
+							href  : '<?php bootswatch_bootstrap_part_uri( 'style' ); ?>',
 							type  : 'text/css',
 							media : 'all'
 						} ).appendTo( $( 'body' ) );
 						$( '<link/>', {
 							rel   : 'stylesheet',
 							id    : 'bootswatch-bootstrap-theme',
-							href  : '<?php echo bootswatch_bootstrap_part_uri( 'theme' ); ?>',
+							href  : '<?php bootswatch_bootstrap_part_uri( 'theme' ); ?>',
 							type  : 'text/css',
 							media : 'all'
 						} ).appendTo( $( 'body' ) );
@@ -187,7 +187,9 @@ function bootswatch_get_theme_uri( $theme ) {
 		return bootswatch_get_bootstrap_part_uri( 'style' );
 	}
 
-	return array_key_exists( $theme, array_merge( bootswatch_themes_list(), [ '{{theme}}' => '' ] ) )
+	return array_key_exists( $theme, array_merge( bootswatch_themes_list(), [
+		'{{theme}}' => '',
+	] ) )
 		? get_template_directory_uri() . '/vendor/thomaspark/bootswatch/' . $theme . '/bootstrap.min.css'
 		: false
 	;
@@ -195,10 +197,11 @@ function bootswatch_get_theme_uri( $theme ) {
 
 /**
  * Print Bootstrap Part URI.
+ *
  * @param  String $part `style`, `theme` or `script`.
  */
-function bootswatch_bootstrap_part_uri( $theme ) {
-	echo ( string ) bootswatch_get_bootstrap_part_uri( $theme );
+function bootswatch_bootstrap_part_uri( $part ) {
+	echo (string) bootswatch_get_bootstrap_part_uri( $part ) // XSS OK;
 }
 
 /**
