@@ -201,7 +201,7 @@ function bootswatch_get_theme_uri( $theme ) {
  * @param  String $part `style`, `theme` or `script`.
  */
 function bootswatch_bootstrap_part_uri( $part ) {
-	echo (string) bootswatch_get_bootstrap_part_uri( $part ) // XSS OK;
+	echo (string) bootswatch_get_bootstrap_part_uri( $part ); // XSS OK.
 }
 
 /**

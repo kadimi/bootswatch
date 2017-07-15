@@ -32,7 +32,7 @@ function bootswatch_get_search_form( $classes = '' ) {
  *
  * @return String       Form HTML.
  */
-function bootswatch_get_search_form() {
+function bootswatch_get_search_form_cb() {
 	ob_start();
 	?>
 	<form role="search" method="get" class="search-form" action="<?php echo esc_url( home_url() ); ?>">
@@ -50,4 +50,4 @@ function bootswatch_get_search_form() {
 	$form = ob_get_clean();
 	return $form;
 }
-add_filter( 'get_search_form', 'bootswatch_get_search_form' );
+add_filter( 'get_search_form', 'bootswatch_get_search_form_cb' );
