@@ -1,10 +1,6 @@
 <?php
 /**
- * The header for our theme.
- *
- * This is the template that displays all of the <footer> section and all content after.
- *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
+ * The footer.
  *
  * @package Bootswatch
  */

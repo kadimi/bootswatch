@@ -1,10 +1,6 @@
 <?php
 /**
- * The header for our theme.
- *
- * This is the template that displays all of the <head> section and everything up until <div id="content">
- *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
+ * The header.
  *
  * @package Bootswatch
  */
@@ -34,11 +30,7 @@
 				</div>
 				<div class="collapse navbar-collapse">
 					<?php get_template_part( 'template-parts/snippets/header', 'menu' ); ?>
-					<?php
-					if ( bootswatch_has( 'search_form_in_header' ) ) {
-						bootswatch_search_form( 'navbar-form pull-right' );
-					}
-					?>
+					<?php get_template_part( 'template-parts/snippets/header', 'search-form' ); ?>
 				</div>
 			</div>
 		</nav>
@@ -46,12 +38,4 @@
 		<?php do_action( 'bootswatch_after_nav' ); ?>
 	</header>
 
-	<?php if ( ( is_front_page() && has_custom_header() ) || is_customize_preview() ) { ?>
-		<div class="container-fluid custom-header">
-			<div class="row">
-				<div class="col-md-12 ">
-					<?php the_custom_header_markup(); ?>
-				</div>
-			</div> 
-		</div>
-	<?php }
+	<?php get_template_part( 'template-parts/snippets/header', 'custom-header' ); ?>
