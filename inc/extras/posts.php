@@ -80,3 +80,16 @@ function bootswatch_link_pages() {
 	 */
 	$once = true;
 }
+
+add_filter( 'the_content', 'bootswatch_content' );
+add_filter( 'comment_text', 'bootswatch_content' );
+
+/**
+ * Adds Bootstrap classes to some important elements.
+ *
+ * @param  String $output The content.
+ * @return String         The filtered content.
+ */
+function bootswatch_content( $output ) {
+	return str_replace( '<table>', '<table class="table table-striped table-bordered">', $output );
+}

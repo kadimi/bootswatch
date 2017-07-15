@@ -33,16 +33,7 @@
 					<a class="navbar-brand site-title" href="<?php echo esc_url( home_url() ); ?>"><?php bloginfo( 'name' ); ?></a>
 				</div>
 				<div class="collapse navbar-collapse">
-					<?php
-					wp_nav_menu( array(
-						'theme_location' => 'primary',
-						'container' => false,
-						'menu_class' => 'nav navbar-nav' . ( ! bootswatch_has( 'search_form_in_header' ) ? ' navbar-right' : '' ),
-						'walker' => new Bootswatch_Nav_Walker,
-						'fallback_cb' => false,
-						'depth' => 2,
-					) );
-					?>
+					<?php get_template_part( 'template-parts/snippets/header', 'menu' ); ?>
 					<?php
 					if ( bootswatch_has( 'search_form_in_header' ) ) {
 						bootswatch_search_form( 'navbar-form pull-right' );
