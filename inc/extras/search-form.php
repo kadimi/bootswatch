@@ -6,7 +6,7 @@
  */
 
 /**
- * Search form
+ * Output search form.
  *
  * @param  Array|String $classes Additional form classes.
  */
@@ -15,8 +15,16 @@ function bootswatch_search_form( $classes = '' ) {
 	if ( is_array( $classes ) ) {
 		$classes = implode( ' ', $classes );
 	}
-	$form = str_replace( 'class="search', 'class="' . $classes . ' search', get_search_form( false ) );
-	echo $form; // XSS OK.
+	return str_replace( 'class="search', 'class="' . $classes . ' search', get_search_form( false ) );
+}
+
+/**
+ * Get search form.
+ *
+ * @param  Array|String $classes Additional form classes.
+ */
+function bootswatch_get_search_form( $classes = '' ) {
+	echo bootswatch_search_form( $classes ); // XSS OK.
 }
 
 /**
