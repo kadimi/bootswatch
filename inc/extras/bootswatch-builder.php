@@ -13,11 +13,13 @@
  * @param  Boolean $rebuild    Should the function rebuild the cache.
  * @return String              Generated CSS file path.
  */
-function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
+function bootswatch_build( $theme, $overrides = [], $rebuild = false ) {
 
 	if ( ! class_exists( 'Less_Parser' ) ) {
 		return;
 	}
+
+	$rebuild = $rebuild || ( defined( 'BOOTSWATCH_DEBUG' ) && BOOTSWATCH_DEBUG );
 
 	$paths          = [];
 	$contents       = [];
@@ -27,7 +29,7 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 	$paths['cache.css'] = sprintf( '%1$s/%2$s%3$s-%4$s.min.css', $paths['cache.dir'], $theme, $overrides ? '-' . md5( serialize( $overrides ) ) : '', $text_direction );
 
 	/**
-	 * Return cached CSS if a rebuild is not requested and cache exists.
+	 * Return cached CSS if a rebuild is not requested, we are not debugging and cache exists.
 	 */
 	if ( ! $rebuild && file_exists( $paths['cache.css'] ) ) {
 		return $paths['cache.css'];
@@ -38,13 +40,33 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = WP_DEBUG ) {
 	 */
 	require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
 	require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php';
+	if( ! defined( 'FS_CHMOD_DIR' ) ) {
+		define( 'FS_CHMOD_DIR', false);
+	}
+	if( ! defined( 'FS_CHMOD_FILE' ) ) {
+		define( 'FS_CHMOD_FILE', false);
+	}
 	$fs = new WP_Filesystem_Direct( 'bootswatch' );
 
 	/**
-	 * Clear old cache.
+	 * Make sur we have the cache folder.
 	 */
-	$fs->delete( $paths['cache.dir'] );
 	$fs->mkdir( $paths['cache.dir'] );
+
+	/**
+	 * Keep cache light (only ~50 files).
+	 */
+	$files = $fs->dirlist( $paths['cache.dir'] );
+	if ( count( $files ) > 50 ) {
+		shuffle( $files );
+		$counter_0 = 0;
+		/**
+		 * Delete 5 files.
+		 */
+		while( $counter_0++ < 10 ) {
+			$fs->delete( $paths['cache.dir'] . '/' . $files[$counter_0]['name'] );
+		}
+	}
 
 	$paths['bootswatch.dir'] = get_template_directory() . '/vendor/thomaspark/bootswatch';
 	$paths['bootstrap.dir']  = $paths['bootswatch.dir'] . '/bower_components/bootstrap';
