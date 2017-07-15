@@ -18,25 +18,7 @@ add_action( 'customize_register', function( $wp_customize ) {
 /**
  * Add theme option.
  */
-bootswatch_create_select( 'theme', __( 'Theme', 'bootswatch' ), [
-	''          => __( 'Just Bootstrap', 'bootswatch' ),
-	'cerulean'  => 'Cerulean',
-	'cosmo'     => 'Cosmo',
-	'cyborg'    => 'Cyborg',
-	'darkly'    => 'Darkly',
-	'flatly'    => 'Flatly',
-	'journal'   => 'Journal',
-	'lumen'     => 'Lumen',
-	'paper'     => 'Paper',
-	'readable'  => 'Readable',
-	'sandstone' => 'Sandstone',
-	'simplex'   => 'Simplex',
-	'slate'     => 'Slate',
-	'spacelab'  => 'Spacelab',
-	'superhero' => 'Superhero',
-	'united'    => 'United',
-	'yeti'      => 'Yeti',
-], 'bootswatch', function() {
+bootswatch_create_select( 'theme', __( 'Theme', 'bootswatch' ), bootswatch_themes_list(), 'bootswatch', function () {
 	?>
 	<script>
 		jQuery( document ).ready( function( $ ) {
@@ -45,22 +27,41 @@ bootswatch_create_select( 'theme', __( 'Theme', 'bootswatch' ), [
 
 					$('link[id^=bootswatch]').remove();
 
-					var theme_uri_format = "<?php echo bootswatch_get_theme_uri( '{{theme}}' );?>"
-					var theme_uri        = theme_uri_format.replace('{{theme}}', newval);
-
-					$('body').append( `<link rel='stylesheet' id='bootswatch-preview-css'  href='${theme_uri}' type='text/css' media='all' />` );
-
+					if ( ! newval ) {
+						$( '<link/>', {
+							rel   : 'stylesheet',
+							id    : 'bootswatch-bootstrap',
+							href  : '<?php echo bootswatch_bootstrap_part_uri( 'style' ); ?>',
+							type  : 'text/css',
+							media : 'all'
+						} ).appendTo( $( 'body' ) );
+						$( '<link/>', {
+							rel   : 'stylesheet',
+							id    : 'bootswatch-bootstrap-theme',
+							href  : '<?php echo bootswatch_bootstrap_part_uri( 'theme' ); ?>',
+							type  : 'text/css',
+							media : 'all'
+						} ).appendTo( $( 'body' ) );
+					} else {
+						$( '<link/>', {
+							rel   : 'stylesheet',
+							id    : `bootswatch-${newval}-css`,
+							href  : '<?php echo bootswatch_get_theme_uri( '{{theme}}' ); // XSS OK. ?>'.replace('{{theme}}', newval),
+							type  : 'text/css',
+							media : 'all'
+						} ).appendTo( $( 'body' ) );
+					}
 				} );
 			} );
 		} );
 	</script>
-	<?
+	<?php
 } );
 
 /**
  * Add fixed navbar option.
  */
-bootswatch_create_select( 'fixed_navbar', __( 'Fixed Navigation Bar', 'bootswatch' ), 'noyes', 'bootswatch', function() {
+bootswatch_create_select( 'fixed_navbar', __( 'Fixed Navigation Bar', 'bootswatch' ), 'noyes', 'bootswatch', function () {
 	?>
 	<script>
 		jQuery( document ).ready( function( $ ) {
@@ -80,21 +81,22 @@ bootswatch_create_select( 'fixed_navbar', __( 'Fixed Navigation Bar', 'bootswatc
 			} );
 		} );
 	</script>
-	<?
+	<?php
 } );
 
 /**
- * Add header search form option.
- */
+	* Add header search form option.
+	*/
 bootswatch_create_select( 'search_form_in_header', __( 'Search Form in Header', 'bootswatch' ) );
 
 /**
  * Registers a new option which is a dropdown.
  *
- * @param  String       $id      ID.
- * @param  String       $label   Label.
- * @param  String|Array $choices Choices array, accepts also `noyes` and 'yesno'.
- * @param  String       $section Section ID.
+ * @param  String          $id      ID.
+ * @param  String          $label   Label.
+ * @param  String|Array    $choices Choices array, accepts also `noyes` and 'yesno'.
+ * @param  String          $section Section ID.
+ * @param  String|Function $preview_cb Function.
  */
 function bootswatch_create_select( $id, $label, $choices = 'noyes', $section = 'bootswatch', $preview_cb = false ) {
 
@@ -173,6 +175,74 @@ function bootswatch_has( $option_id ) {
 	}
 }
 
+/**
+ * Return bootswatch theme CSS file URI.
+ *
+ * @param  String $theme The theme.
+ * @return String|Bolean The theme URI or false.
+ */
 function bootswatch_get_theme_uri( $theme ) {
-	return get_template_directory_uri() . '/vendor/thomaspark/bootswatch/' . $theme . '/bootstrap.min.css';
+
+	if ( ! $theme ) {
+		return bootswatch_get_bootstrap_part_uri( 'style' );
+	}
+
+	return array_key_exists( $theme, array_merge( bootswatch_themes_list(), [ '{{theme}}' => '' ] ) )
+		? get_template_directory_uri() . '/vendor/thomaspark/bootswatch/' . $theme . '/bootstrap.min.css'
+		: false
+	;
+}
+
+/**
+ * Print Bootstrap Part URI.
+ * @param  String $part `style`, `theme` or `script`.
+ */
+function bootswatch_bootstrap_part_uri( $theme ) {
+	echo ( string ) bootswatch_get_bootstrap_part_uri( $theme );
+}
+
+/**
+ * Get bootstrap part URI.
+ *
+ * @param  String $part `style`, `theme` or `script`.
+ * @return String|null  The URI.
+ */
+function bootswatch_get_bootstrap_part_uri( $part ) {
+
+	$d = get_template_directory_uri() . '/vendor/thomaspark/bootswatch/bower_components/bootstrap/dist/';
+	switch ( $part ) {
+	case 'style':
+		return $d . 'css/bootstrap.min.css';
+	case 'theme':
+		return $d . 'css/bootstrap-theme.min.css';
+	case 'script':
+		return $d . 'js/bootstrap.min.js';
+	}
+}
+
+/**
+ * Returns a list of available themes.
+ *
+ * @return Array The list.
+ */
+function bootswatch_themes_list() {
+	return [
+		''          => __( 'Just Bootstrap', 'bootswatch' ),
+		'cerulean'  => 'Cerulean',
+		'cosmo'     => 'Cosmo',
+		'cyborg'    => 'Cyborg',
+		'darkly'    => 'Darkly',
+		'flatly'    => 'Flatly',
+		'journal'   => 'Journal',
+		'lumen'     => 'Lumen',
+		'paper'     => 'Paper',
+		'readable'  => 'Readable',
+		'sandstone' => 'Sandstone',
+		'simplex'   => 'Simplex',
+		'slate'     => 'Slate',
+		'spacelab'  => 'Spacelab',
+		'superhero' => 'Superhero',
+		'united'    => 'United',
+		'yeti'      => 'Yeti',
+	];
 }
