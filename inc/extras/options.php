@@ -18,7 +18,7 @@ add_action( 'customize_register', function( $wp_customize ) {
 /**
  * Add theme option.
  */
-bootswatch_create_select( 'theme', __( 'Theme', 'bootswatch' ), bootswatch_themes_list(), 'bootswatch', function () {
+bootswatch_create_option_select( 'theme', __( 'Theme', 'bootswatch' ), bootswatch_themes_list(), 'bootswatch', function () {
 	?>
 	<script>
 		jQuery( document ).ready( function( $ ) {
@@ -61,7 +61,7 @@ bootswatch_create_select( 'theme', __( 'Theme', 'bootswatch' ), bootswatch_theme
 /**
  * Add fixed navbar option.
  */
-bootswatch_create_select( 'fixed_navbar', __( 'Fixed Navigation Bar', 'bootswatch' ), 'noyes', 'bootswatch', function () {
+bootswatch_create_option_radio( 'fixed_navbar', __( 'Fixed Navigation Bar', 'bootswatch' ), 'noyes', 'bootswatch', function () {
 	?>
 	<script>
 		jQuery( document ).ready( function( $ ) {
@@ -87,20 +87,49 @@ bootswatch_create_select( 'fixed_navbar', __( 'Fixed Navigation Bar', 'bootswatc
 /**
 	* Add header search form option.
 	*/
-bootswatch_create_select( 'search_form_in_header', __( 'Search Form in Header', 'bootswatch' ) );
+bootswatch_create_option_radio( 'search_form_in_header', __( 'Search Form in Header', 'bootswatch' ), 'noyes', 'bootswatch', function () {
+	?>
+	<script>
+		jQuery( document ).ready( function( $ ) {
+			wp.customize( 'bootswatch[search_form_in_header]', function( value ) {
+				value.bind( function( newval ) {
+
+					$container = $( '.navbar .navbar-collapse' );
+					$menu      = $( '.nav', $container );
+					$form_new  = $( '<?php echo str_replace( [ "'", "\n" ], [ "\'", ' ' ], bootswatch_get_search_form( 'navbar-form pull-right' ) ); // XSS OK. ?>' );
+					$form_old  = $( '.navbar-form', $container );
+
+					if ( 'yes' === newval ) {
+						$form_new.appendTo( $container );
+						$menu.removeClass( 'navbar-right' );
+					} else {
+						$form_old.remove();
+						$menu.addClass( 'navbar-right' );
+					}
+				} );
+			} );
+		} );
+	</script>
+	<?php
+} );
 
 /**
- * Registers a new option which is a dropdown.
+ * Registers a new option which is a dropdown or a radio.
  *
+ * @param  String          $type   `select` or `radio`.
  * @param  String          $id      ID.
  * @param  String          $label   Label.
  * @param  String|Array    $choices Choices array, accepts also `noyes` and 'yesno'.
  * @param  String          $section Section ID.
  * @param  String|Function $preview_cb Function.
  */
-function bootswatch_create_select( $id, $label, $choices = 'noyes', $section = 'bootswatch', $preview_cb = false ) {
+function bootswatch_create_option_choice( $type, $id, $label, $choices = 'noyes', $section = 'bootswatch', $preview_cb = false ) {
 
-	add_action( 'customize_register', function( $wp_customize ) use ( $id, $label, $choices, $section, $preview_cb ) {
+	if ( ! in_array( $type, [ 'select', 'radio' ] ) ) {
+		return;
+	}
+
+	add_action( 'customize_register', function( $wp_customize ) use ( $type, $id, $label, $choices, $section, $preview_cb ) {
 		switch ( $choices ) {
 		case 'noyes':
 				$choices = [
@@ -135,12 +164,38 @@ function bootswatch_create_select( $id, $label, $choices = 'noyes', $section = '
 			new WP_Customize_Control( $wp_customize, $id, [
 				'settings' => $id,
 				'label'    => $label,
-				'type'     => 'select',
+				'type'     => $type,
 				'choices'  => $choices,
 				'section'  => $section,
 			] )
 		);
 	} );
+}
+
+/**
+ * Registers a new option which is a dropdown.
+ *
+ * @param  String          $id      ID.
+ * @param  String          $label   Label.
+ * @param  String|Array    $choices Choices array, accepts also `noyes` and 'yesno'.
+ * @param  String          $section Section ID.
+ * @param  String|Function $preview_cb Function.
+ */
+function bootswatch_create_option_select( $id, $label, $choices = 'noyes', $section = 'bootswatch', $preview_cb = false ) {
+	bootswatch_create_option_choice( 'select', $id, $label, $choices, $section, $preview_cb );
+}
+
+/**
+ * Registers a new option which is a radio.
+ *
+ * @param  String          $id      ID.
+ * @param  String          $label   Label.
+ * @param  String|Array    $choices Choices array, accepts also `noyes` and 'yesno'.
+ * @param  String          $section Section ID.
+ * @param  String|Function $preview_cb Function.
+ */
+function bootswatch_create_option_radio( $id, $label, $choices = 'noyes', $section = 'bootswatch', $preview_cb = false ) {
+	bootswatch_create_option_choice( 'radio', $id, $label, $choices, $section, $preview_cb );
 }
 
 /**

@@ -6,11 +6,11 @@
  */
 
 /**
- * Output search form.
+ * Get search form.
  *
  * @param  Array|String $classes Additional form classes.
  */
-function bootswatch_search_form( $classes = '' ) {
+function bootswatch_get_search_form( $classes = '' ) {
 
 	if ( is_array( $classes ) ) {
 		$classes = implode( ' ', $classes );
@@ -19,12 +19,12 @@ function bootswatch_search_form( $classes = '' ) {
 }
 
 /**
- * Get search form.
+ * Output search form.
  *
  * @param  Array|String $classes Additional form classes.
  */
-function bootswatch_get_search_form( $classes = '' ) {
-	echo bootswatch_search_form( $classes ); // XSS OK.
+function bootswatch_search_form( $classes = '' ) {
+	echo bootswatch_get_search_form( $classes ); // XSS OK.
 }
 
 /**
