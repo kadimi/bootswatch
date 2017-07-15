@@ -149,7 +149,7 @@ function bootswatch_scripts() {
 	/**
 	 * Scripts.
 	 */
-	wp_enqueue_script( 'bootswatch-bootstrap', bootswatch_get_bootstrap_part_uri( 'script' ), ['jquery'] );
+	wp_enqueue_script( 'bootswatch-bootstrap', bootswatch_get_bootstrap_part_uri( 'script' ), [ 'jquery' ] );
 
 	/**
 	 * Comment reply script.
