@@ -19,12 +19,12 @@ if ( post_password_required() ) {
 
 	if ( have_comments() ) {
 
-		get_template_part( 'template-parts/snippets/comments', 'title' );
-		get_template_part( 'template-parts/snippets/comments', 'list' );
-		get_template_part( 'template-parts/snippets/comments', 'navigation' );
+		bootswatch_get_template_part( 'template-parts/components/comments', 'title' );
+		bootswatch_get_template_part( 'template-parts/components/comments', 'list' );
+		bootswatch_get_template_part( 'template-parts/components/comments', 'navigation' );
 	}
 
-	get_template_part( 'template-parts/snippets/comments', 'closed' );
+	bootswatch_get_template_part( 'template-parts/components/comments', 'closed' );
 
 	comment_form();
 

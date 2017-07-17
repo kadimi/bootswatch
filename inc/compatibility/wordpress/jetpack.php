@@ -20,7 +20,7 @@ if ( class_exists( 'Jetpack' ) ) {
 			'render'    => function () {
 				while ( have_posts() ) {
 					the_post();
-					get_template_part( 'template-parts/content', get_post_format() );
+					bootswatch_get_template_part( 'template-parts/content', get_post_format() );
 				}
 			},
 		] );

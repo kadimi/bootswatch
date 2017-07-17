@@ -298,6 +298,7 @@ function bootswatch_themes_list() {
 		'sandstone' => 'Sandstone',
 		'simplex'   => 'Simplex',
 		'slate'     => 'Slate',
+		'solar'     => 'Solar',
 		'spacelab'  => 'Spacelab',
 		'superhero' => 'Superhero',
 		'united'    => 'United',

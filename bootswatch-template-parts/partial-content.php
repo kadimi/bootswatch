@@ -8,7 +8,7 @@
 while ( have_posts() ) {
 	the_post();
 
-	get_template_part( 'template-parts/content' );
+	bootswatch_get_template_part( 'template-parts/content' );
 
 	if ( is_singular( [ 'post' ] ) ) {
 		bootswatch_post_navigation();

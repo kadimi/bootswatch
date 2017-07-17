@@ -10,7 +10,6 @@ if ( ! current_user_can( 'edit_post', $post->ID ) ) {
 }
 ?>
 
-<?php do_action( 'bootswatch_before_.entry-footer' ); ?>
 <footer class="entry-footer">
 	<?php
 		edit_post_link(
@@ -24,4 +23,3 @@ if ( ! current_user_can( 'edit_post', $post->ID ) ) {
 		);
 	?>
 </footer><!-- .entry-footer -->
-<?php do_action( 'bootswatch_after_.entry-footer' ); ?>

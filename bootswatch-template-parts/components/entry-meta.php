@@ -5,8 +5,8 @@
  * @package Bootswatch
  */
 
-?>
-
-<?php do_action( 'bootswatch_before_.entry-meta' ); ?>
+if ( 'post' === get_post_type() ) {
+	?>
 	<div class="entry-meta"><?php bootswatch_posted_on(); ?></div>
-<?php do_action( 'bootswatch_after_.entry-meta' ); ?>
+	<?php
+}

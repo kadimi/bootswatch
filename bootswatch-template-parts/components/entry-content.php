@@ -25,7 +25,6 @@ if ( $use_short ) {
 
 ?>
 
-<?php do_action( 'bootswatch_before_.entry-content' ); ?>
 <div class="entry-content">
 	<p><?php the_post_thumbnail( $featured_image_size ); ?></p>
 	<?php
@@ -49,4 +48,3 @@ if ( $use_short ) {
 	?>
 	<?php bootswatch_link_pages(); ?>
 </div><!-- .entry-content -->
-<?php do_action( 'bootswatch_after_.entry-content' ); ?>

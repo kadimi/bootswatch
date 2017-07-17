@@ -5,8 +5,6 @@
  * @package Bootswatch
  */
 
-do_action( 'bootswatch_before_.page-header' );
-
 if ( is_search() ) {
 	?>
 	<header class="page-header">
@@ -28,5 +26,3 @@ if ( is_archive() ) {
 	</header>
 	<?php
 }
-
-do_action( 'bootswatch_after_.page-header' );
