@@ -23,11 +23,11 @@ bootswatch_create_option_select( 'theme', __( 'Theme', 'bootswatch' ), bootswatc
 	<script>
 		jQuery( document ).ready( function( $ ) {
 			wp.customize( 'bootswatch[theme]', function( value ) {
-				value.bind( function( newval ) {
+				value.bind( function( to ) {
 
 					$('link[id^=bootswatch]').remove();
 
-					if ( ! newval ) {
+					if ( ! to ) {
 						$( '<link/>', {
 							rel   : 'stylesheet',
 							id    : 'bootswatch-bootstrap',
@@ -45,8 +45,8 @@ bootswatch_create_option_select( 'theme', __( 'Theme', 'bootswatch' ), bootswatc
 					} else {
 						$( '<link/>', {
 							rel   : 'stylesheet',
-							id    : `bootswatch-${newval}-css`,
-							href  : '<?php echo bootswatch_get_theme_uri( '{{theme}}' ); // XSS OK. ?>'.replace('{{theme}}', newval),
+							id    : `bootswatch-${to}-css`,
+							href  : '<?php echo bootswatch_get_theme_uri( '{{theme}}' ); // XSS OK. ?>'.replace('{{theme}}', to),
 							type  : 'text/css',
 							media : 'all'
 						} ).appendTo( $( 'body' ) );
@@ -66,9 +66,9 @@ bootswatch_create_option_radio( 'fixed_navbar', __( 'Fixed Navigation Bar', 'boo
 	<script>
 		jQuery( document ).ready( function( $ ) {
 			wp.customize( 'bootswatch[fixed_navbar]', function( value ) {
-				value.bind( function( newval ) {
+				value.bind( function( to ) {
 					$navbar = $( 'header nav');
-					if ( 'yes' === newval ) {
+					if ( 'yes' === to ) {
 						$( 'body' ).addClass( 'fixed-navbar' );
 						$navbar.addClass( 'navbar-fixed-top' );
 						$navbar.removeClass( 'navbar-satitc-top' );
@@ -92,14 +92,14 @@ bootswatch_create_option_radio( 'search_form_in_header', __( 'Search Form in Hea
 	<script>
 		jQuery( document ).ready( function( $ ) {
 			wp.customize( 'bootswatch[search_form_in_header]', function( value ) {
-				value.bind( function( newval ) {
+				value.bind( function( to ) {
 
 					$container = $( '.navbar .navbar-collapse' );
 					$menu      = $( '.nav', $container );
 					$form_new  = $( '<?php echo str_replace( [ "'", "\n" ], [ "\'", ' ' ], bootswatch_get_search_form( 'navbar-form pull-right' ) ); // XSS OK. ?>' );
 					$form_old  = $( '.navbar-form', $container );
 
-					if ( 'yes' === newval ) {
+					if ( 'yes' === to ) {
 						$form_new.appendTo( $container );
 						$menu.removeClass( 'navbar-right' );
 					} else {
