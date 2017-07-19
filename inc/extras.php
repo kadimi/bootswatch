@@ -144,6 +144,7 @@ add_action( 'bootswatch_shutdown', function() {
 	foreach ( $render['partial'] as &$partial ) {
 		$partial['total_duration_ms'] = sprintf( '%d', $partial['total_duration_ms'] );
 	}
+	! d( get_theme_mods() );
 	! d( $render );
 } );
 

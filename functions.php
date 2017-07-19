@@ -89,7 +89,6 @@ function bootswatch_scripts() {
 	 * Current Bootswatch theme with fallback to Bootstrap
 	 */
 	$theme = bootswatch_get_option( 'theme', 'bootstrap' );
-	$theme = 'darkly';
 	/**
 	 * Default variable overrides.
 	 */
