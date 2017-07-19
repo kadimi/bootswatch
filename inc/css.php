@@ -19,7 +19,7 @@ add_action( 'body_class', function( $body_classes ) {
  * Add inline CSS in header.
  */
 add_action( 'wp_head', function() {
-	echo '<style>' . bootswatch_generate_inline_css( bootswatch_get_option( 'theme' ) ) . '</style>'; // WPCS: xss ok.
+	echo '<style>' . bootswatch_generate_inline_css( bootswatch_get_option( 'theme', 'bootstrap' ) ) . '</style>'; // WPCS: xss ok.
 } );
 
 /**
@@ -31,26 +31,31 @@ add_action( 'wp_head', function() {
  * @return String        The CSS code.
  */
 function bootswatch_generate_inline_css( $theme ) {
+
 	if ( ! class_exists( 'Less_Parser' ) ) {
 		return bootwatch_bootstrap_inline_css();
 	}
 
-	$less = '';
-
 	/**
 	 * Prepare LESS parser.
 	 */
-	$variables_path = $theme
-		? get_template_directory() . '/vendor/thomaspark/bootswatch/' . bootswatch_get_option( 'theme' ) . '/variables.less'
-		: get_template_directory() . '/vendor/thomaspark/bootswatch/bower_components/bootstrap/less/variables.less'
-	;
-	$less_parser = new Less_Parser();
-	$less_parser->parseFile( $variables_path, home_url() );
+	switch ( $theme ) {
+	case 'bootstrap':
+			$variables_path = bootswatch_get_bootstrap_part_path( 'variables' );
+		break;
+	default:
+			$variables_path = bootswatch_get_theme_part_path( $theme, 'variables' );
+		break;
+	}
 
+	$less_parser = new Less_Parser( [
+		'compress' => true,
+	] );
+	$less_parser->parseFile( $variables_path );
 	/**
 	 * The styles.
 	 */
-	$less .= '
+	$less = '
 
 		// Use fixed position for admin bar if navbar position is fixed.
 		body.fixed-navbar #wpadminbar {
@@ -115,10 +120,9 @@ function bootswatch_generate_inline_css( $theme ) {
 	';
 
 	/**
-	 * Parse LESS code and return CSS code.
+	 * Parse Less and return CSS.
 	 */
-	$less_parser->parse( $less );
-	return  $less_parser->getCss();
+	return $less_parser->parse( $less )->getCss();
 }
 
 /**

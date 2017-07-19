@@ -13,31 +13,183 @@
  * @param  Boolean $rebuild    Should the function rebuild the cache.
  * @return String              Generated CSS file path.
  */
-function bootswatch_build( $theme, $overrides = [], $rebuild = false ) {
+function bootswatch_make_theme_file( $theme, $overrides = [], $rebuild = false ) {
 
+	/**
+	 * Fall back when missing the Less compiler.
+	 */
 	if ( ! class_exists( 'Less_Parser' ) ) {
-		return;
+		switch ( $theme ) {
+		case 'bootstrap':
+			return get_template_directory() . '/vendor/kadimi/bootswatch-light/light/css/bootstrap.min.css';
+			break;
+		case 'bootstrap-theme':
+			return get_template_directory() . '/vendor/kadimi/bootswatch-light/light/css/bootstrap-theme.min.css';
+			break;
+		default:
+			return get_template_directory() . '/vendor/kadimi/bootswatch-light/light/' . $theme . '/bootstrap.min.css';
+			break;
+		}
 	}
-
 	$rebuild = $rebuild || ( defined( 'BOOTSWATCH_DEBUG' ) && BOOTSWATCH_DEBUG );
 
-	$paths          = [];
-	$contents       = [];
-	$text_direction = is_rtl() ? 'rtl' : 'ltr';
-
-	$paths['cache.dir'] = get_template_directory() . '/cache';
-	$paths['cache.css'] = sprintf( '%1$s/%2$s%3$s-%4$s.min.css', $paths['cache.dir'], $theme, $overrides ? '-' . md5( serialize( $overrides ) ) : '', $text_direction );
+	$cache_file_basename = sprintf( '%1$s%2$s-%3$s.min.css'
+		, $theme
+		, $overrides ? '-' . md5( serialize( $overrides ) ) : ''
+		, is_rtl() ? 'rtl' : 'ltr'
+	);
 
 	/**
-	 * Return cached CSS if a rebuild is not requested, we are not debugging and cache exists.
+	 * Return cached CSS if abs(number) rebuild is not requested, we are not debugging and cache exists.
 	 */
-	if ( ! $rebuild && file_exists( $paths['cache.css'] ) ) {
-		return $paths['cache.css'];
+	if ( ! $rebuild && bootswatch_cache_file_exists( $cache_file_basename ) ) {
+		return get_template_directory() . '/cache/' . $cache_file_basename;
+	}
+
+	$css = bootswatch_get_bootswatch_theme_css( $theme, $overrides );
+	/**
+	 * Keep cache light (only ~50 files).
+	 */
+	bootswatch_reduce_cache( 50 );
+
+	/**
+	 * Save file
+	 */
+	bootswatch_cache_file( $cache_file_basename, $css );
+
+	/**
+	 * Done, return path.
+	 */
+	return get_template_directory() . '/cache/' . $cache_file_basename;
+}
+
+/**
+ * Parse a file with Less_Parser.
+ *
+ * @param  String $path Path to file.
+ * @return String       CSS code.
+ */
+function bootswatch_parse_less_file( $path ) {
+	return ( new Less_Parser( [
+		'compress' => true,
+	] ) )->parseFile( $path )->getCss();
+}
+
+/**
+ * Parses Less code.
+ *
+ * @param  String $less Less code.
+ * @return String       CSS code.
+ */
+function bootswatch_parse_less( $less ) {
+	return ( new Less_Parser( [
+		'compress' => true,
+	] ) )->parse( $less )->getCss();
+}
+
+/**
+ * Build a themes file, cache it and return the path.
+ *
+ * @param  String $theme     The theme name, `bootstrap` or a bootswatch theme name, e.g. `lumen`.
+ * @param  Array  $overrides Overrides.
+ * @return String            Path to file.
+ */
+function bootswatch_get_bootswatch_theme_css( $theme, $overrides = [] ) {
+
+	/**
+	 * Prevent muliple using the same file.
+	 */
+	$salt = rand( 10, 99 );
+
+	/**
+	 * Path of original files, bare, theme and variables.
+	 */
+	if ( 'bootstrap' === $theme ) {
+		$variables_path = bootswatch_light_directory() . 'less/variables.less';
+		$bare_path      = bootswatch_light_directory() . 'less/bootstrap.less';
+		$theme_path     = bootswatch_light_directory() . 'less/theme.less';
+	} else {
+		$variables_path = bootswatch_light_directory() . "$theme/variables.less";
+		$bare_path      = bootswatch_light_directory() . 'less/bootstrap.less';
+		$theme_path     = bootswatch_light_directory() . "$theme/bootswatch.less";
 	}
 
 	/**
-	 * Create file system instance.
+	 * Path of temporary files, bare, theme, variables and final.
 	 */
+	$tmp_variables_path = bootswatch_light_directory() . "less/_tmp-variables-$salt.less";
+	$tmp_bare_path      = bootswatch_light_directory() . "less/_tmp-bare-$salt.less";
+	$tmp_theme_path     = bootswatch_light_directory() . "less/_tmp-theme-$salt.less";
+	$tmp_final_path     = bootswatch_light_directory() . "less/_tmp-final-$salt.less";
+
+	/**
+	 * Get a file system isntance.
+	 */
+	$filesystem = bootswatch_get_filesystem();
+
+	/**
+	 * Create modified variables.less as tmp-variables.less
+	 */
+	$variables_contents = $filesystem->get_contents( $variables_path );
+	foreach ( $overrides as $variable => $value ) {
+		$regex       = sprintf( '/(%1$s)\s*:\s*(.+?);/s', $variable );
+		$replacement = strstr( $value, '/' )
+			? sprintf( '$1:"%s";', $value )
+			: sprintf( '$1:%s;', $value );
+		$variables_contents = preg_replace( $regex, $replacement, $variables_contents );
+	}
+	$filesystem->delete( $tmp_variables_path );
+	$filesystem->put_contents( $tmp_variables_path, $variables_contents );
+
+	/**
+	 * Replace variables in bare file.
+	 */
+	$bare_contents = $filesystem->get_contents( $bare_path );
+		$bare_contents = str_replace( 'variables.less', "_tmp-variables-$salt.less", $bare_contents );
+
+	/**
+	 * Replace variables in theme file.
+	 */
+	$theme_contents = $filesystem->get_contents( $theme_path );
+		$theme_contents = str_replace( 'variables.less', "_tmp-variables-$salt.less", $theme_contents );
+
+		/**
+		 * Combine bare and theme files to produce final file.
+		 */
+		$final_contents = $bare_contents . $theme_contents;
+	$filesystem->delete( $tmp_final_path );
+	$filesystem->put_contents( $tmp_final_path, $final_contents );
+
+	/**
+	 * Parse final file.
+	 */
+	$css = bootswatch_parse_less_file( $tmp_final_path );
+
+	/**
+	 * Delete temporary files.
+	 */
+	$filesystem->delete( $tmp_final_path );
+	$filesystem->delete( $tmp_variables_path );
+
+	/**
+	 * Return CSS code.
+	 */
+	return $css;
+}
+
+/**
+ * Get the WP_Filesystem_Direct instance.
+ *
+ * @return WP_Filesystem_Direct	The instance.
+ */
+function bootswatch_get_filesystem() {
+
+	static $filesystem = false;
+
+	if ( $filesystem ) {
+		return $filesystem;
+	}
+
 	require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
 	require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php';
 	if ( ! defined( 'FS_CHMOD_DIR' ) ) {
@@ -46,93 +198,81 @@ function bootswatch_build( $theme, $overrides = [], $rebuild = false ) {
 	if ( ! defined( 'FS_CHMOD_FILE' ) ) {
 		define( 'FS_CHMOD_FILE', false );
 	}
-	$fs = new WP_Filesystem_Direct( 'bootswatch' );
+	$filesystem = new WP_Filesystem_Direct( 'bootswatch' );
+
+	return $filesystem;
+}
+
+/**
+ * Recude cache.
+ *
+ * @param  Int $keep Number of files to keep.
+ * @return Boolean   True.
+ */
+function bootswatch_reduce_cache( $keep ) {
+
+	$filesystem = bootswatch_get_filesystem();
+	$cache_dir  = get_template_directory() . '/cache/';
+	$files      = $filesystem->dirlist( $cache_dir );
 
 	/**
-	 * Make sur we have the cache folder.
+	 * Cache directory not found.
 	 */
-	$fs->mkdir( $paths['cache.dir'] );
+	if ( ! $files ) {
+		return;
+	}
 
-	/**
-	 * Keep cache light (only ~50 files).
-	 */
-	$files = $fs->dirlist( $paths['cache.dir'] );
-	if ( count( $files ) > 50 ) {
+	if ( count( $files ) > $keep ) {
 		shuffle( $files );
 		$counter_0 = 0;
 		/**
-		 * Delete 5 files.
+		 * Delete 10 files per batch.
 		 */
 		while ( $counter_0++ < 10 ) {
-			$fs->delete( $paths['cache.dir'] . '/' . $files[ $counter_0 ]['name'] );
+			$filesystem->delete( $cache_dir . '/' . $files[ $counter_0 ]['name'] );
 		}
 	}
+	return true;
+}
 
-	$paths['bootswatch.dir'] = get_template_directory() . '/vendor/thomaspark/bootswatch';
-	$paths['bootstrap.dir']  = $paths['bootswatch.dir'] . '/bower_components/bootstrap';
-	$paths                   = array_merge( $paths, [
-		'tmp-bootstrap.less'       => $paths['bootstrap.dir'] . '/less/tmp-bootstrap.less',
-		'tmp-theme-variables.less' => $paths['bootstrap.dir'] . '/less/tmp-' . $theme . '-variables.less',
-		'tmp-final.less'           => $paths['bootstrap.dir'] . '/less/tmp-final.less',
-	] );
-
-	$contents = array_merge( $contents, [
-		'tmp-bootstrap.less'       => $fs->get_contents( $paths['bootstrap.dir'] . '/less/bootstrap.less' ),
-		'bootswatch.less'          => $fs->get_contents( $paths['bootswatch.dir'] . '/' . $theme . '/bootswatch.less' ),
-		'tmp-theme-variables.less' => $fs->get_contents( $paths['bootswatch.dir'] . '/' . $theme . '/variables.less' ),
-		'tmp-final.less'           => '',
-	] );
+/**
+ * Saves file to cache.
+ *
+ * @param  String $basename Basename.
+ * @param  String $contents Content.
+ */
+function bootswatch_cache_file( $basename, $contents ) {
+	$filesystem = bootswatch_get_filesystem();
+	$cache_dir  = get_template_directory() . '/cache/';
 
 	/**
-	 * #1 - Prepare variables.less.
-	 *
-	 * Apply overrides to bootswatch theme variables.less file.
-	 *
-	 * Value will be surrounded in quotes if:
-	 * - it contains a forward slash
+	 * Make sure the cache folder exists.
 	 */
-	foreach ( $overrides as $variable => $value ) {
-		$regex                                = sprintf( '/(%1$s)\s*:\s*(.+?);/s', $variable );
-		$replacement                          = strstr( $value, '/' ) ? sprintf( '$1:"%s";', $value ) : sprintf( '$1:%s;', $value );
-		$contents['tmp-theme-variables.less'] = preg_replace( $regex, $replacement, $contents['tmp-theme-variables.less'] );
-	}
-	$fs->put_contents( $paths['tmp-theme-variables.less'], $contents['tmp-theme-variables.less'] );
+	$filesystem->mkdir( $cache_dir );
 
 	/**
-	 * #2 - Prepare tmp-bootstrap.less.
+	 * Save file
 	 */
-	$contents['tmp-bootstrap.less'] = str_replace( 'variables.less', 'tmp-' . $theme . '-variables.less', $contents['tmp-bootstrap.less'] );
-	$fs->put_contents( $paths['tmp-bootstrap.less'], $contents['tmp-bootstrap.less'] );
+	$filesystem->delete( $cache_dir . $basename );
+	$filesystem->put_contents( $cache_dir . $basename, $contents );
+}
 
-	/**
-	 * #3 - Prepare tmp-final.less.
-	 *
-	 * Contains: Bootstrap, modified variables.less path and Bootswatch theme.
-	 */
-	$contents['tmp-final.less'] = $contents['tmp-bootstrap.less'] . $contents['bootswatch.less'];
-	$fs->put_contents( $paths['tmp-final.less'], $contents['tmp-final.less'] );
+/**
+ * Check if cache exists for file.
+ *
+ * @param  String $basename Basename.
+ * @return Boolean          True if the file exists, false otherwise.
+ */
+function bootswatch_cache_file_exists( $basename ) {
+	$cache_dir  = get_template_directory() . '/cache/';
+	return file_exists( $cache_dir . $basename );
+}
 
-	/**
-	 * Parse and save bootswatch theme LESS code.
-	 */
-	$less_parser = new Less_Parser( [
-		'compress' => true,
-	] );
-	$less_parser->parseFile( $paths['tmp-final.less'] );
-	$css = $less_parser->getCss();
-	if ( is_rtl() ) {
-		$css = CSSJanus::transform( $css );
-	}
-	$fs->put_contents( $paths['cache.css'], $css );
-
-	/**
-	 * Delete temporary files.
-	 */
-	array_map( function( $path ) use ( $fs ) {
-		if ( 'tmp-' === substr( basename( $path ), 0, 4 ) ) {
-			$fs->delete( $path );
-		}
-	}, $paths);
-
-	return $paths['cache.css'];
+/**
+ * Get bootswatch-light assets directory.
+ *
+ * @return String The directory path.
+ */
+function bootswatch_light_directory() {
+	return get_template_directory() . '/vendor/kadimi/bootswatch-light/light/';
 }

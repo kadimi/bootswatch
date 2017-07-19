@@ -203,17 +203,14 @@ function bootswatch_create_option_radio( $id, $label, $choices = 'noyes', $secti
  *
  * @param  string $option_id The option id.
  * @return mixed             The option value.
+ * @param  mixed  $default   Default value.
  */
-function bootswatch_get_option( $option_id ) {
-	if ( class_exists( 'TitanFramework' ) ) {
-		return TitanFramework::getInstance( 'bootswatch' )->getOption( $option_id );
-	} else {
-		$mods = get_theme_mod( 'bootswatch', [] );
-		return array_key_exists( $option_id, $mods )
-			? $mods[ $option_id ]
-			: false
-		;
-	}
+function bootswatch_get_option( $option_id, $default = false ) {
+	$mods = get_theme_mod( 'bootswatch', [] );
+	return array_key_exists( $option_id, $mods )
+		? $mods[ $option_id ]
+		: $default
+	;
 }
 
 /**
@@ -238,6 +235,8 @@ function bootswatch_has( $option_id ) {
  */
 function bootswatch_get_theme_uri( $theme ) {
 
+	$bootswatch_light = get_template_directory_uri() . '/vendor/kadimi/bootswatch-light/light/';
+
 	if ( ! $theme ) {
 		return bootswatch_get_bootstrap_part_uri( 'style' );
 	}
@@ -245,9 +244,32 @@ function bootswatch_get_theme_uri( $theme ) {
 	return array_key_exists( $theme, array_merge( bootswatch_themes_list(), [
 		'{{theme}}' => '',
 	] ) )
-		? get_template_directory_uri() . '/vendor/thomaspark/bootswatch/' . $theme . '/bootstrap.min.css'
+		? $bootswatch_light . $theme . '/bootstrap.min.css'
 		: false
 	;
+}
+
+/**
+ * Returns bootswatch theme variable.less file path.
+ *
+ * @param  String $theme The theme.
+ * @param  String $part  Which part.
+ * @return String|Bolean The theme path or false.
+ */
+function bootswatch_get_theme_part_path( $theme, $part ) {
+
+	if ( ! array_key_exists( $theme, bootswatch_themes_list() ) ) {
+		return false;
+	}
+
+	$bootswatch_light = get_template_directory() . '/vendor/kadimi/bootswatch-light/light/';
+
+	switch ( $part ) {
+	case 'bootswatch':
+		return $bootswatch_light . "$theme/" . 'bootswatch.less';
+	case 'variables':
+		return $bootswatch_light . "$theme/" . 'variables.less';
+	}
 }
 
 /**
@@ -266,17 +288,57 @@ function bootswatch_bootstrap_part_uri( $part ) {
  * @return String|null  The URI.
  */
 function bootswatch_get_bootstrap_part_uri( $part ) {
-
-	$d = get_template_directory_uri() . '/vendor/thomaspark/bootswatch/bower_components/bootstrap/dist/';
-	switch ( $part ) {
-	case 'style':
-		return $d . 'css/bootstrap.min.css';
-	case 'theme':
-		return $d . 'css/bootstrap-theme.min.css';
-	case 'script':
-		return $d . 'js/bootstrap.min.js';
-	}
+	return bootswatch_get_bootstrap_part( $part, 'uri' );
 }
+
+/**
+ * Get bootstrap part path.
+ *
+ * @param  String $part `style`, `theme` or `script`.
+ * @return String|null  The path.
+ */
+function bootswatch_get_bootstrap_part_path( $part ) {
+	return bootswatch_get_bootstrap_part( $part, 'path' );
+}
+
+/**
+ * Get bootstrap part path.
+ *
+ * @param  String $part `style`, `theme` or `script`.
+ * @param  String $type `uri` or `part`.
+ * @return String|null  The path.
+ */
+function bootswatch_get_bootstrap_part( $part, $type ) {
+
+	if ( 'uri' === $type ) {
+		$bootswatch_light = get_template_directory_uri() . '/vendor/kadimi/bootswatch-light/light/';
+	} else if ( 'path' === $type ) {
+		$bootswatch_light = get_template_directory() . '/vendor/kadimi/bootswatch-light/light/';
+	} else {
+		return false;
+	}
+
+	switch ( $part ) {
+	case 'less':
+		return $bootswatch_light . 'less/bootstrap.less';
+	case 'variables':
+		return $bootswatch_light . 'less/variables.less';
+	case 'script':
+		return $bootswatch_light . 'js/bootstrap.min.js';
+	case 'bootstrap':
+		return $bootswatch_light . 'css/bootstrap.min.css';
+	case 'bootstrap.less':
+		return $bootswatch_light . 'less/bootstrap.less';
+	case 'theme':
+		return $bootswatch_light . 'css/bootstrap-theme.min.css';
+	case 'theme.less':
+		return $bootswatch_light . 'less/theme.less';
+	}
+
+	return false;
+}
+
+
 
 /**
  * Returns a list of available themes.

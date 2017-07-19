@@ -86,31 +86,24 @@ add_action( 'widgets_init', 'bootswatch_widgets_init' );
 function bootswatch_scripts() {
 
 	/**
-	 * Bootswatch theme setting value.
-	 *
-	 * @var string
+	 * Current Bootswatch theme with fallback to Bootstrap
 	 */
-	$bootswatch_theme = bootswatch_get_option( 'theme' );
+	$theme = bootswatch_get_option( 'theme', 'bootstrap' );
+	$theme = 'darkly';
+	/**
+	 * Default variable overrides.
+	 */
+	$variables_overrides = [
+		'@icon-font-path' => '../vendor/kadimi/bootswatch-light/light/fonts/',
+	];
+	$variables_overrides = apply_filters( 'bootswatch_variables_overrides', $variables_overrides, $theme );
 
 	/**
-	 * Selected Bootswatch theme, if none is selected, use Bootstrap.
+	 * Bootswatch or bootstrap theme.
 	 */
-	if ( $bootswatch_theme ) {
-		if ( class_exists( 'Less_Parser' ) ) {
-			$variables_overrides = [
-				'@icon-font-path' => '../vendor/thomaspark/bootswatch/bower_components/bootstrap/dist/fonts/',
-			];
-			$variables_overrides = apply_filters( 'bootswatch_variables_overrides', $variables_overrides, $bootswatch_theme );
-			$css_file_path       = bootswatch_build( $bootswatch_theme, $variables_overrides );
-			$css_file_url        = site_url( substr( $css_file_path, strlen( ABSPATH ) ) );
-		} else {
-			$css_file_url = bootswatch_get_theme_uri( $bootswatch_theme );
-		}
-		wp_enqueue_style( 'bootswatch' . $bootswatch_theme, $css_file_url );
-	} else {
-		wp_enqueue_style( 'bootswatch-bootstrap', bootswatch_get_bootstrap_part_uri( 'style' ) );
-		wp_enqueue_style( 'bootswatch-bootstrap-theme', bootswatch_get_bootstrap_part_uri( 'theme' ) );
-	}
+	$theme_path = bootswatch_make_theme_file( $theme, $variables_overrides );
+	$theme_url  = site_url( substr( $theme_path, strlen( ABSPATH ) ) );
+	wp_enqueue_style( 'bootswatch-' . $theme, $theme_url );
 
 	/**
 	 * Style.css.
