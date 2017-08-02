@@ -31,4 +31,5 @@ function bootswatch_content_wrapper_end() {
 			<?php get_sidebar(); ?>
 		</div>
 	</div>
+	<?php
 }
