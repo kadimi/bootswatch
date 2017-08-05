@@ -151,12 +151,12 @@ function bootswatch_get_bootswatch_theme_css( $theme, $overrides = [] ) {
 	 * Replace variables in theme file.
 	 */
 	$theme_contents = $filesystem->get_contents( $theme_path );
-		$theme_contents = str_replace( 'variables.less', "_tmp-variables-$salt.less", $theme_contents );
+	$theme_contents = str_replace( 'variables.less', "_tmp-variables-$salt.less", $theme_contents );
 
-		/**
-		 * Combine bare and theme files to produce final file.
-		 */
-		$final_contents = $bare_contents . $theme_contents;
+	/**
+	 * Combine bare and theme files to produce final file.
+	 */
+	$final_contents = $bare_contents . $theme_contents;
 	$filesystem->delete( $tmp_final_path );
 	$filesystem->put_contents( $tmp_final_path, $final_contents );
 
