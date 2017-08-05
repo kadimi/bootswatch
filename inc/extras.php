@@ -79,7 +79,7 @@ add_action( 'bootswatch_shutdown', function() {
 	$end   = end( $bootswatch_log )['arguments']['end'];
 
 	$render = [
-		'full'    => sprintf( '%.2fs', $end - $start ),
+		'full'    => sprintf( '%dms', ( $end - $start ) * 1000 ),
 		'partial' => [],
 	];
 
