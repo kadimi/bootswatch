@@ -31,7 +31,7 @@ function bootswatch_make_theme_file( $theme, $overrides = [], $rebuild = false )
 			break;
 		}
 	}
-	$rebuild = $rebuild || ( defined( 'BOOTSWATCH_DEBUG' ) && BOOTSWATCH_DEBUG );
+	$rebuild = $rebuild || ( defined( 'BOOTSWATCH_FORCE_REBUILD' ) && BOOTSWATCH_FORCE_REBUILD );
 
 	$cache_file_basename = sprintf( '%1$s%2$s-%3$s.min.css'
 		, $theme
