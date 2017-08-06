@@ -30,7 +30,7 @@ add_action( 'wp_head', function() {
  * @param  String $theme The bootswatch theme.
  * @return String        The CSS code.
  */
-function bootswatch_generate_inline_css( $theme ) {
+function bootswatch_generate_inline_css( $theme = 'bootstrap' ) {
 
 	if ( ! class_exists( 'Less_Parser' ) ) {
 		return bootwatch_bootstrap_inline_css();

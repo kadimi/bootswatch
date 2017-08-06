@@ -31,7 +31,7 @@ bootswatch_create_option_select( 'theme', __( 'Theme', 'bootswatch' ), bootswatc
 						$( '<link/>', {
 							rel   : 'stylesheet',
 							id    : 'bootswatch-bootstrap',
-							href  : '<?php bootswatch_bootstrap_part_uri( 'style' ); ?>',
+							href  : '<?php bootswatch_bootstrap_part_uri( 'bootstrap' ); ?>',
 							type  : 'text/css',
 							media : 'all'
 						} ).appendTo( $( 'body' ) );

@@ -94,7 +94,7 @@ function bootswatch_parse_less( $less ) {
  * @param  Array  $overrides Overrides.
  * @return String            Path to file.
  */
-function bootswatch_get_bootswatch_theme_css( $theme, $overrides = [] ) {
+function bootswatch_get_bootswatch_theme_css( $theme = 'bootstrap', $overrides = [] ) {
 
 	/**
 	 * Prevent muliple using the same file.
