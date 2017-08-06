@@ -42,3 +42,9 @@ script:
     - find -L . -not \( -path ./vendor -prune \) -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l
     # Run the theme through PHP_CodeSniffer.
     - if [[ "$SNIFF" == "1" ]]; then $COMPOSER_VENDOR_DIR/bin/phpcs -p -s -v -n . --standard=./codesniffer.ruleset.xml --extensions=php; fi
+    # Run phpunit
+    - |
+        if [[ ! -z "$WP_VERSION" ]] ; then
+          phpunit
+          WP_MULTISITE=1 phpunit
+        fi
