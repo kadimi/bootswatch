@@ -29,6 +29,11 @@ function _register_theme() {
 }
 tests_add_filter( 'muplugins_loaded', '_register_theme' );
 
-
 // Start up the WP testing environment.
 require $_tests_dir . '/includes/bootstrap.php';
+
+// Load MonkeyTestCase class file.
+require 'tests/class-monkey-test-case.php';
+
+// Load dependencies.
+require 'vendor/autoload.php';

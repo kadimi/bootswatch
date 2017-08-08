@@ -9,5 +9,9 @@
     "scripts": {
         "post-install-cmd": "php -f build/build.php",
         "post-update-cmd": "php -f build/build.php"
+    },
+    "require-dev": {
+        "brain/monkey": "^2.0",
+        "oyejorge/less.php": "v1.7.0.14"
     }
 }
