@@ -207,7 +207,7 @@ function bootswatch_create_option_radio( $id, $label, $choices = 'noyes', $secti
  */
 function bootswatch_get_option( $option_id, $default = false ) {
 	$mods = get_theme_mod( 'bootswatch', [] );
-	return array_key_exists( $option_id, $mods )
+	return array_key_exists( $option_id, $mods ) && $mods[ $option_id ]
 		? $mods[ $option_id ]
 		: $default
 	;
