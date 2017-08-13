@@ -30,6 +30,7 @@ before_script:
             else
                 composer global require "phpunit/phpunit=5.7.*"
             fi
+            composer install --dev
         fi
 
 # Run test script commands.
