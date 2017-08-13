@@ -13,12 +13,15 @@
 		<exclude name="PEAR.Functions.FunctionCallSignature.Indent" />
 	</rule>
 
-	<!-- Exclude the vendor directory. -->
+	<!-- Exclude the build directory. -->
 	<exclude-pattern>build/*</exclude-pattern>
 
 	<!-- Exclude the unmanaged vendor directory. -->
 	<exclude-pattern>managed/*</exclude-pattern>
 
-	<!-- Exclude the build directory. -->
+	<!-- Exclude the vendor directory. -->
 	<exclude-pattern>vendor/*</exclude-pattern>
+
+	<!-- Exclude the tests directory. -->
+	<exclude-pattern>tests/*</exclude-pattern>
 </ruleset>
