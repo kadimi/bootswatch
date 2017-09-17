@@ -51,6 +51,11 @@ bootswatch_create_option_select( 'theme', __( 'Theme', 'bootswatch' ), bootswatc
 							media : 'all'
 						} ).appendTo( $( 'body' ) );
 					}
+
+					$( '.custom-header' )
+						.css( 'padding-left', 0 )
+						.css( 'padding-right', 0 )
+					;
 				} );
 			} );
 		} );
