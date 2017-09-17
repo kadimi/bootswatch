@@ -343,8 +343,6 @@ function bootswatch_get_bootstrap_part( $part, $type ) {
 	return false;
 }
 
-
-
 /**
  * Returns a list of available themes.
  *
