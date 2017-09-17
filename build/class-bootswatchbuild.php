@@ -107,6 +107,7 @@ class BootswatchBuild {
 			'css/wordpress-core-missing.css',
 			'css/twentyseventeen-galleries.css',
 			'css/twentyseventeen-galleries-missing-columns.css',
+			'css/misc.css',
 		];
 
 		$css = '';
