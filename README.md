@@ -15,7 +15,7 @@ git clone git@github.com:kadimi/bootswatch.git
 cd bootswatch
 
 # Setup dependencies with Composer
-rm -fr composer.lock vendor && composer install
+rm vendor composer.lock -fr && composer install --no-dev
 
 ```
 
