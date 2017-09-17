@@ -36,6 +36,11 @@ function bootswatch_custom_header_setup() {
 		'flex-width'         => true,
 		'video'              => true,
 		'wp-head-callback'   => function() {
+
+			if ( ! is_customize_preview() ) {
+				return;
+			}
+
 			?><script>
 				var bootswatch_customizer = {
 					"is_front_page" : <?php echo is_front_page() ? 'true' : 'false'; // XSS OK. ?>
