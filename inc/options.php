@@ -25,7 +25,7 @@ bootswatch_create_option_select( 'theme', __( 'Theme', 'bootswatch' ), bootswatc
 			wp.customize( 'bootswatch[theme]', function( value ) {
 				value.bind( function( to ) {
 
-					$('link[id^=bootswatch]').remove();
+					$( 'link[id^=bootswatch]' ).not( '#bootswatch-css' ).remove();
 
 					if ( ! to ) {
 						$( '<link/>', {
