@@ -37,6 +37,20 @@ function bootswatch_generate_inline_css( $theme = 'bootstrap' ) {
 	}
 
 	/**
+	 * Prepare replaceemts.
+	 */
+	$options = get_theme_mod( 'bootswatch' );
+	$replacements = [
+		'{{custom_header_percentage_size}}' => '100vh',
+	];
+	if ( isset( $options[ 'custom_header_percentage_size' ] ) ) {
+		$size = intval( $options[ 'custom_header_percentage_size' ] );
+		if ( $size > 0 ) {
+			$replacements[ '{{custom_header_percentage_size}}'] = $size . 'vh';
+		}
+	}
+
+	/**
 	 * Prepare LESS parser.
 	 */
 	switch ( $theme ) {
@@ -96,7 +110,7 @@ function bootswatch_generate_inline_css( $theme = 'bootstrap' ) {
 			iframe,
 			img,
 			video {
-				height: calc(~"100vh -" @navbar-height);
+				height: calc(~"{{custom_header_percentage_size}} -" @navbar-height);
 			}
 		}
 
@@ -106,18 +120,23 @@ function bootswatch_generate_inline_css( $theme = 'bootstrap' ) {
 			iframe,
 			img,
 			video {
-				height: calc(~"100vh - 32px" - @navbar-height);
+				height: calc(~"{{custom_header_percentage_size}} - 32px" - @navbar-height);
 			}
 			@media screen and (max-width:782px) {
 				&,
 				iframe,
 				img,
 				video {
-						height: calc(~"100vh - 46px" - @navbar-height);
+						height: calc(~"{{custom_header_percentage_size}} - 46px" - @navbar-height);
 				}
 			}
 		}
 	';
+
+	/**
+	 * Apply replacements.
+	 */
+	$less = str_replace( array_keys( $replacements ), array_values( $replacements ), $less );
 
 	/**
 	 * Parse Less and return CSS.

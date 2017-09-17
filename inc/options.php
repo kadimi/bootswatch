@@ -64,6 +64,37 @@ bootswatch_create_option_select( 'theme', __( 'Theme', 'bootswatch' ), bootswatc
 } );
 
 /**
+ * Add header size option.
+ */
+bootswatch_create_option_input( 'range'
+	, 'custom_header_percentage_size'
+	, __( 'Custom Header Size', 'bootswatch' )
+	, [
+		'max' => 100,
+		'min' => 0,
+	]
+	, 'bootswatch'
+	, function() {
+		?>
+		<script>
+			jQuery( document ).ready( function( $ ) {
+				wp.customize( 'bootswatch[custom_header_percentage_size]', function( value ) {
+					value.bind( function( to ) {
+						if ( parseInt( to ) > 0 ) {
+							$custom_header_elements = $( '.custom-header, .custom-header iframe, .custom-header img, .custom-header video ');
+							$custom_header_elements.css( 'height', `calc(${to}vh - 50px)` );
+						} else {
+							$custom_header_elements.css( 'height', '' );
+						}
+					} );
+				} );
+			} );
+		</script>
+		<?php
+	}
+);
+
+/**
  * Add fixed navbar option.
  */
 bootswatch_create_option_radio( 'fixed_navbar', __( 'Fixed Navigation Bar', 'bootswatch' ), 'noyes', 'bootswatch', function () {
@@ -117,6 +148,41 @@ bootswatch_create_option_radio( 'search_form_in_header', __( 'Search Form in Hea
 	</script>
 	<?php
 } );
+
+/**
+ * Registers a new option which is text input.
+ *
+ * @param  String          $type        `text`, `number`, `range`, `email`, `password`.
+ * @param  String          $id          ID.
+ * @param  String          $label       Label.
+ * @param  Attay           $input_attrs HTML attributes as an associative array.
+ * @param  String          $section     Section ID.
+ * @param  String|Function $preview_cb Function.
+ */
+function bootswatch_create_option_input( $type, $id, $label, $input_attrs = [], $section = 'bootswatch', $preview_cb = false ) {
+
+	if ( ! in_array( $type, [ 'text', 'number', 'range', 'email', 'password' ] ) ) {
+		return;
+	}
+
+	add_action( 'customize_register', function( $wp_customize ) use ( $type, $id, $label, $input_attrs, $section, $preview_cb ) {
+
+		$id = sprintf( 'bootswatch[%s]', $id );
+		$wp_customize->add_setting( $id, [ 'transport' => $preview_cb ? 'postMessage' : 'refresh' ] );
+		if ( $preview_cb ) {
+			add_action( 'wp_footer', $preview_cb );
+		}
+		$wp_customize->add_control(
+			new WP_Customize_Control( $wp_customize, $id, [
+				'settings'    => $id,
+				'label'       => $label,
+				'type'        => $type,
+				'input_attrs' => $input_attrs,
+				'section'     => $section,
+			] )
+		);
+	} );
+}
 
 /**
  * Registers a new option which is a dropdown or a radio.
