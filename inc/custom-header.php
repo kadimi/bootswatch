@@ -49,11 +49,14 @@ function bootswatch_custom_header_setup() {
 					/**
 					 * Hide media placeholder if no media choosen in the customizer.
 					 */
-					if ( bootswatch_customizer.is_front_page && $( '.wp-custom-header' ).children().not( 'span' ).length ) {
-						$( '.custom-header' ).slideDown( 200 );
-					} else {
-						$( '.custom-header' ).slideUp( 200 );
-					}
+					setInterval( function() {
+						var $ = jQuery;
+						if ( bootswatch_customizer.is_front_page && $( '.wp-custom-header' ).children().not( 'span' ).length ) {
+							$( '.custom-header' ).slideDown( 200 );
+						} else {
+							$( '.custom-header' ).slideUp( 200 );
+						}
+					}, 2000 );
 				} );
 			</script><?php
 		},
