@@ -44,6 +44,7 @@ Bootswatch includes support for Infinite Scroll in Jetpack.
 
 == Credits ==
 
-* Titan Framework
-* Twitter Bootstrap
-* Underscores
+* Bootswatch (MIT license)
+* Twitter Bootstrap (MIT license)
+* Screenshot and default header image (CC0 license)
+* Underscores (GPLv2 license or later)
