@@ -4,8 +4,8 @@ Contributors: Nabil Kadimi
 Tags: translation-ready, custom-background, theme-options, custom-menu, post-formats, threaded-comments
 
 Requires at least: 4.0
-Tested up to: 4.8
-Stable tag: 1.0.3
+Tested up to: 4.8.1
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,6 +29,11 @@ Bootswatch includes support for Infinite Scroll in Jetpack.
 
 == Changelog ==
 
+= 1.0.4 - Sep 18 2017 =
+* Improve customizer options handling and live preview.
+* Introduce unit tests.
+* Improve files organization. 
+
 = 1.0.3 - Jul 15 2017 =
 * Improve customizer options handling and live preview.
 * Improve caching mechanism
@@ -44,7 +49,7 @@ Bootswatch includes support for Infinite Scroll in Jetpack.
 
 == Credits ==
 
-* Bootswatch (MIT license)
-* Twitter Bootstrap (MIT license)
-* Screenshot and default header image (CC0 license)
-* Underscores (GPLv2 license or later)
+* Bootswatch (MIT license).
+* Twitter Bootstrap (MIT license).
+* Screenshot and default header image (CC0 license).
+* Underscores (GPLv2 license or later).
