@@ -12,7 +12,7 @@ if ( ( is_front_page() && has_custom_header() ) || is_customize_preview() ) {
 			<div class="col-md-12 ">
 				<?php the_custom_header_markup(); ?>
 			</div>
-		</div> 
+		</div>
 	</div>
 	<?php
 }
