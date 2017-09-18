@@ -168,7 +168,12 @@ function bootswatch_create_option_input( $type, $id, $label, $input_attrs = [], 
 	add_action( 'customize_register', function( $wp_customize ) use ( $type, $id, $label, $input_attrs, $section, $preview_cb ) {
 
 		$id = sprintf( 'bootswatch[%s]', $id );
-		$wp_customize->add_setting( $id, [ 'transport' => $preview_cb ? 'postMessage' : 'refresh' ] );
+		$wp_customize->add_setting( $id, [
+			'sanitize_callback' => function( $value ) {
+				return  $value;
+			},
+			'transport' => $preview_cb ? 'postMessage' : 'refresh',
+		] );
 		if ( $preview_cb ) {
 			add_action( 'wp_footer', $preview_cb );
 		}
