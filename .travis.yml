@@ -45,7 +45,7 @@ script:
     - if [[ "$SNIFF" == "1" ]]; then $COMPOSER_VENDOR_DIR/bin/phpcs -p -s -v -n . --standard=./codesniffer.ruleset.xml --extensions=php; fi
     # Run phpunit
     - |
-        if [[ ! -z "$WP_VERSION" ]] ; then
+        if [[ ! -z "$NOT_WP_VERSION" ]] ; then
           phpunit
           WP_MULTISITE=1 phpunit
         fi
