@@ -49,7 +49,9 @@ Bootswatch includes support for Infinite Scroll in Jetpack.
 
 == Credits ==
 
-* Bootswatch (MIT license).
-* Twitter Bootstrap (MIT license).
-* Screenshot and default header image (CC0 license).
-* Underscores (GPLv2 license or later).
+* Bootswatch WordPress Theme https://github.com/kadimi/bootswatch, (C) 2017 Nabil Kadimi, [GPLv2 or later](https://www.gnu.org/licenses/gpl-2.0.html)
+
+* Bootswatch https://bootswatch.com/, (C) 2014-2016 Thomas Park, [MIT](http://opensource.org/licenses/MIT)
+* Twitter Bootstrap http://getbootstrap.com/, (C) 2011-2017 The Bootstrap Authors and Twitter, Inc., [MIT](http://opensource.org/licenses/MIT)
+* Underscores http://underscores.me/, (C) 2012-2017 Automattic, Inc., [GPLv2 or later](https://www.gnu.org/licenses/gpl-2.0.html)
+* Image https://pixabay.com/en/wordpress-badges-buttons-blog-552924, by gounder, [CC0](https://creativecommons.org/publicdomain/zero/1.0/)
