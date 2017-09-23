@@ -139,7 +139,7 @@ function bootswatch_get_bootswatch_theme_css( $theme = 'bootstrap', $overrides =
 		$variables_contents = preg_replace( $regex, $replacement, $variables_contents );
 	}
 	$filesystem->delete( $tmp_variables_path );
-	$filesystem->put_contents( $tmp_variables_path, $variables_contents );
+	$filesystem->put_contents( $tmp_variables_path, $variables_contents, 0644 );
 
 	/**
 	 * Replace variables in bare file.
@@ -158,7 +158,7 @@ function bootswatch_get_bootswatch_theme_css( $theme = 'bootstrap', $overrides =
 	 */
 	$final_contents = $bare_contents . $theme_contents;
 	$filesystem->delete( $tmp_final_path );
-	$filesystem->put_contents( $tmp_final_path, $final_contents );
+	$filesystem->put_contents( $tmp_final_path, $final_contents, 0644 );
 
 	/**
 	 * Parse final file.
@@ -248,13 +248,13 @@ function bootswatch_cache_file( $basename, $contents ) {
 	/**
 	 * Make sure the cache folder exists.
 	 */
-	$filesystem->mkdir( $cache_dir );
+	$filesystem->mkdir( $cache_dir, 0755 );
 
 	/**
 	 * Save file
 	 */
 	$filesystem->delete( $cache_dir . $basename );
-	$filesystem->put_contents( $cache_dir . $basename, $contents );
+	$filesystem->put_contents( $cache_dir . $basename, $contents, 0644 );
 }
 
 /**
