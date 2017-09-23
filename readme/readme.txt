@@ -14,7 +14,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 {{description}}
 
 == Installation ==
-	
+
 {{installation}}
 
 == Frequently Asked Questions ==

@@ -102,17 +102,17 @@ function bootswatch_scripts() {
 	 */
 	$theme_path = bootswatch_make_theme_file( $theme, $variables_overrides );
 	$theme_url  = site_url( substr( $theme_path, strlen( ABSPATH ) ) );
-	wp_enqueue_style( 'bootswatch-' . $theme, $theme_url );
+	wp_enqueue_style( 'bootswatch-' . $theme, $theme_url, [], bootswatch_version() );
 
 	/**
 	 * Style.css.
 	 */
-	wp_enqueue_style( 'bootswatch', get_template_directory_uri() . '/style.css' );
+	wp_enqueue_style( 'bootswatch', get_template_directory_uri() . '/style.css', [], bootswatch_version() );
 
 	/**
 	 * Scripts.
 	 */
-	wp_enqueue_script( 'bootswatch-bootstrap', bootswatch_get_bootstrap_part_uri( 'script' ), [ 'jquery' ] );
+	wp_enqueue_script( 'bootswatch-bootstrap', bootswatch_get_bootstrap_part_uri( 'script' ), [ 'jquery' ], bootswatch_version(), true );
 
 	/**
 	 * Comment reply script.
