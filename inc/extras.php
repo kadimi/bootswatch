@@ -185,3 +185,10 @@ function bootswatch_add_action( $tag, $callback, $priority = 10, $accepted_args 
 		] );
 	}, $priority, $accepted_args );
 }
+
+/**
+ * Returns bootswatch theme version.
+ */
+function bootswatch_version() {
+	return wp_get_theme()->get( 'Version' );
+}

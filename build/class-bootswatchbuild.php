@@ -22,6 +22,11 @@ class BootswatchBuild {
 	private $timer;
 
 	/**
+	 * Bootswatch theme version.
+	 */
+	private $theme_version;
+
+	/**
 	 * Ignored patterns.
 	 *
 	 * @var array
@@ -74,8 +79,11 @@ class BootswatchBuild {
 	 */
 	public function __construct( $data ) {
 		$this->timer = microtime( true );
+		$this->theme_version = file_get_contents( '.version' );
 		$this->ignored_patterns = $data['ignored_patterns'];
 		$this->vendor_ignored_patterns = $data['vendor_ignored_patterns'];
+		$this->check_readme();
+		$this->update_readme();
 		$this->create_style();
 		$this->clean_vendor();
 		$this->clear_cache();
@@ -100,6 +108,10 @@ class BootswatchBuild {
 			unlink( 'style.css' );
 		}
 
+		$variables = [
+			'{{version}}' => $this->theme_version,
+		];
+
 		$parts = [
 			'css/style.css',
 			'css/wordpress-core.css',
@@ -110,11 +122,52 @@ class BootswatchBuild {
 			'css/misc.css',
 		];
 
+		// Join files.
 		$css = '';
 		foreach ( $parts as $part ) {
 			$css .= file_get_contents( $part ) . "\n";
 		}
+
+		// Replace variables.
+		$css = str_replace( array_keys( $variables), array_values( $variables), $css );
+
+		// Write file.
 		file_put_contents( 'style.css', $css );
+	}
+
+	/**
+	 * Check readme.txt.
+	 */
+	private function check_readme() {
+
+		/**
+		 * Check version section in changelog.
+		 */
+		$readme = file_get_contents( 'readme.txt' );
+		$changelog_section_exists = strstr( $readme, sprintf( '= %s -', $this->theme_version ) );
+		if ( ! $changelog_section_exists ) {
+			echo "\033[31m\033[1mError:\033[0m\033[0m ";
+			echo sprintf( 'Changelog section for version %s does not exist in readme.txt', $this->theme_version );
+			die();
+		}
+	}
+
+	/**
+	 * Update readme.txt.
+	 */
+	private function update_readme() {
+
+		$variables = [
+			'{{version}}' => $this->theme_version,
+		];
+
+		$readme = file_get_contents( 'readme.txt' );
+
+		// Replace variables.
+		$readme = str_replace( array_keys( $variables), array_values( $variables), $readme );
+
+		// Write file.
+		file_put_contents( 'readme.txt', $readme );
 	}
 
 	/**
