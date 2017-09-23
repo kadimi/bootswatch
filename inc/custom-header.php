@@ -63,8 +63,8 @@ function bootswatch_custom_header_setup() {
 	) ) );
 	register_default_headers( array(
 		'default-image' => array(
-			'url'           => '%s/img/header.jpg',
-			'thumbnail_url' => '%s/img/header.jpg',
+			'url'           => '%s/header.jpg',
+			'thumbnail_url' => '%s/header.jpg',
 			'description'   => __( 'Default Header Image', 'bootswatch' ),
 		),
 	) );
