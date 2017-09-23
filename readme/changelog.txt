@@ -1,0 +1,20 @@
+= 1.0.5 - Sep 21 2017 =
+* Maintenance release.
+
+= 1.0.4 - Sep 18 2017 =
+* Improve customizer options handling and live preview.
+* Introduce unit tests.
+* Improve files organization.
+
+= 1.0.3 - Jul 15 2017 =
+* Improve customizer options handling and live preview.
+* Improve caching mechanism
+
+= 1.0.2 - Jul 14 2017 =
+* Hot fix.
+
+= 1.0.1 - Jul 14 2017 =
+* Maintenance release.
+
+= 1.0.0 - Jul 10 2017 =
+* Initial release.

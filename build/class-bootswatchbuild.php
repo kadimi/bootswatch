@@ -82,8 +82,8 @@ class BootswatchBuild {
 		$this->theme_version = file_get_contents( '.version' );
 		$this->ignored_patterns = $data['ignored_patterns'];
 		$this->vendor_ignored_patterns = $data['vendor_ignored_patterns'];
-		$this->check_readme();
 		$this->update_readme();
+		$this->check_readme();
 		$this->create_style();
 		$this->clean_vendor();
 		$this->clear_cache();
@@ -153,15 +153,20 @@ class BootswatchBuild {
 	}
 
 	/**
-	 * Update readme.txt.
+	 * Create/Update readme.txt.
 	 */
 	private function update_readme() {
 
 		$variables = [
-			'{{version}}' => $this->theme_version,
+			'{{version}}'      => $this->theme_version,
+			'{{changelog}}'    => file_get_contents( 'readme/changelog.txt'),
+			'{{credits}}'      => file_get_contents( 'readme/credits.txt'),
+			'{{description}}'  => file_get_contents( 'readme/description.txt'),
+			'{{faq}}'          => file_get_contents( 'readme/faq.txt'),
+			'{{installation}}' => file_get_contents( 'readme/installation.txt'),
 		];
 
-		$readme = file_get_contents( 'readme.txt' );
+		$readme = file_get_contents( 'readme/readme.txt' );
 
 		// Replace variables.
 		$readme = str_replace( array_keys( $variables), array_values( $variables), $readme );

@@ -1,0 +1,3 @@
+= Does this theme support any plugins? =
+
+Bootswatch includes support for Infinite Scroll in Jetpack.
