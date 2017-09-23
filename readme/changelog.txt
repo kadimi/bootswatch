@@ -1,3 +1,6 @@
+= 1.0.6 - Sep 23 2017 =
+* Maintenance release.
+
 = 1.0.5 - Sep 21 2017 =
 * Maintenance release.
 
