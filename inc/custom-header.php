@@ -30,7 +30,7 @@ add_action( 'body_class', function( $body_classes ) {
  */
 function bootswatch_custom_header_setup() {
 	add_theme_support( 'custom-header', apply_filters( 'bootswatch_custom_header_args', array(
-		'default-image'      => get_parent_theme_file_uri( '/img/header.jpg' ),
+		'default-image'      => get_parent_theme_file_uri( '/header.jpg' ),
 		'header-text'        => false,
 		'flex-height'        => true,
 		'flex-width'         => true,
