@@ -1,3 +1,6 @@
+= 1.0.8 - Oct 21 2017 =
+* Change screenshot.
+
 = 1.0.7 - Oct 21 2017 =
 * Change header.
 
