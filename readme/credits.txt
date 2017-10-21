@@ -3,4 +3,4 @@
 * Bootswatch https://bootswatch.com/, (C) 2014-2016 Thomas Park, [MIT](http://opensource.org/licenses/MIT)
 * Twitter Bootstrap http://getbootstrap.com/, (C) 2011-2017 The Bootstrap Authors and Twitter, Inc., [MIT](http://opensource.org/licenses/MIT)
 * Underscores http://underscores.me/, (C) 2012-2017 Automattic, Inc., [GPLv2 or later](https://www.gnu.org/licenses/gpl-2.0.html)
-* Image https://pixabay.com/en/wordpress-badges-buttons-blog-552924, by gounder, [CC0](https://creativecommons.org/publicdomain/zero/1.0/)
+* Image https://pixabay.com/en/shoreline-shipwreck-coastline-shore-2857647/, by HypnoArt, [CC0](https://creativecommons.org/publicdomain/zero/1.0/)

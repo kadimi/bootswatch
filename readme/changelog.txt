@@ -1,3 +1,6 @@
+= 1.0.7 - Oct 21 2017 =
+* Change header.
+
 = 1.0.6 - Sep 23 2017 =
 * Maintenance release.
 
