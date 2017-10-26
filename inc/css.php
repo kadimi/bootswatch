@@ -43,10 +43,10 @@ function bootswatch_generate_inline_css( $theme = 'bootstrap' ) {
 	$replacements = [
 		'{{custom_header_percentage_size}}' => '100vh',
 	];
-	if ( isset( $options[ 'custom_header_percentage_size' ] ) ) {
-		$size = intval( $options[ 'custom_header_percentage_size' ] );
+	if ( isset( $options['custom_header_percentage_size'] ) ) {
+		$size = intval( $options['custom_header_percentage_size'] );
 		if ( $size > 0 ) {
-			$replacements[ '{{custom_header_percentage_size}}'] = $size . 'vh';
+			$replacements['{{custom_header_percentage_size}}'] = $size . 'vh';
 		}
 	}
 
