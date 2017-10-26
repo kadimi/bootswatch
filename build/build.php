@@ -25,7 +25,7 @@ require 'build/class-bootswatchbuild.php';
 	],
 	'replacements' => [
 		'vendor/composer/autoload_static.php' => [
-			'ClassLoader::class' => '\'Composer\Autoload\ClassLoader\'',
+			'ClassLoader::class' => "'Composer\Autoload\ClassLoader'",
 		],
 	],
 	'vendor_ignored_patterns' => [
