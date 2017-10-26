@@ -34,6 +34,13 @@ class BootswatchBuild {
 	private $ignored_patterns = [];
 
 	/**
+	 * Replacements.
+	 *
+	 * @var array
+	 */
+	private $replacements = [];
+
+	/**
 	 * Vendor ignored patterns.
 	 *
 	 * @var array
@@ -82,10 +89,12 @@ class BootswatchBuild {
 		$this->theme_version = file_get_contents( '.version' );
 		$this->ignored_patterns = $data['ignored_patterns'];
 		$this->vendor_ignored_patterns = $data['vendor_ignored_patterns'];
+		$this->replacements = $data[ 'replacements' ];
 		$this->update_readme();
 		$this->check_readme();
 		$this->create_style();
 		$this->clean_vendor();
+		$this->do_replacements();
 		$this->clear_cache();
 		$this->package();
 	}
@@ -199,6 +208,34 @@ class BootswatchBuild {
 	 * Clean vendor folder.
 	 */
 	private function clean_vendor() {
+		chdir( 'vendor' );
+		$this->update_vendor_files();
+		foreach ( $this->vendor_ignored_patterns as $id => $pattern ) {
+			$this->process_pattern( $pattern, $id );
+		}
+		$this->log();
+		$this->log( sprintf( '[%s] Deleted %d bytes.'
+			, $this->pretend ? 'Dry' : 'Live'
+			, $this->bytes_deleted
+		) );
+		$this->log( '==================================================' );
+		$this->log();
+		chdir( '..' );
+	}
+
+	/**
+	 * Apply string replacements.
+	 */
+	private function do_replacements() {
+		foreach ( $this->replacements as $file => $replacements 	) {
+			file_put_contents( $file,
+				str_replace(
+					array_keys( $replacements ),
+					array_values( $replacements ),
+					file_get_contents( $file )
+				)
+			);
+		}
 		chdir( 'vendor' );
 		$this->update_vendor_files();
 		foreach ( $this->vendor_ignored_patterns as $id => $pattern ) {

@@ -23,6 +23,11 @@ require 'build/class-bootswatchbuild.php';
 		'tests'    => '^tests/.*$',
 		'wp.dev'   => '^(ip|hostname)$',
 	],
+	'replacements' => [
+		'vendor/composer/autoload_static.php' => [
+			'ClassLoader::class' => '\'Composer\Autoload\ClassLoader\'',
+		],
+	],
 	'vendor_ignored_patterns' => [
 		'extensions'   => '\.md$',
 		'cssjanus-0'   => '^cssjanus/cssjanus/[^/]+$',
