@@ -18,6 +18,16 @@ bootswatch_recommend_plugin( [
 	'file' => 'lessphp/less-plugin.php',
 	'description' => 'Once you {{verb}} {{link}}, you can create even more Bootswatch based themes (advanced feature).',
 ] );
+bootswatch_recommend_plugin( [
+	'name' => 'Less PHP Compiler',
+	'file' => 'lessphp/less-plugin.php',
+	'description' => 'Once you {{verb}} {{link}}, you can create even more Bootswatch based themes (advanced feature).',
+] );
+bootswatch_recommend_plugin( [
+	'name' => 'Less PHP Compiler',
+	'file' => 'lessphp/less-plugin.php',
+	'description' => 'Once you {{verb}} {{link}}, you can create even more Bootswatch based themes (advanced feature).',
+] );
 
 /**
  * Recommends a plugin in an admin notice.
@@ -37,19 +47,25 @@ function bootswatch_recommend_plugin( $plugin ) {
 add_action( 'admin_notices', function() {
 
 	/**
+	 * Make sure current theme is Bootswatch.
+	 */
+	if ( 'Bootswatch' !== wp_get_theme()->get( 'Name' ) ) {
+		return;
+	}
+
+	/**
 	 * No notices on the update screen.
 	 */
 	if ( 'update' === get_current_screen()->id ) {
 		return;
 	}
 
+	/**
+	 * Output admin notices.
+	 */
 	$recommended_plugins = apply_filters( 'bootswatch_recommended_plugins', [] );
-	$notice_id           = 'bootswatch-notice-dependencies';
-	$dismissed           = ! empty( $_COOKIE[ "$notice_id-dismissed" ] );
-
-	$output = '';
-
 	foreach ( $recommended_plugins as $plugin ) {
+		$message = '';
 		if ( is_plugin_active( $plugin['file'] ) ) {
 			// Plugin is installed and active.
 			continue;
@@ -65,26 +81,11 @@ add_action( 'admin_notices', function() {
 			$url  = admin_url( sprintf( 'plugin-install.php?tab=plugin-information&plugin=%s', explode( '/', $plugin['file'] )[0] ) );
 		}
 		$link = sprintf( '<strong><a href="%s">%s</a></strong>', $url, $plugin['name'] );
-		$output .= '<p>' . str_replace( [ '{{link}}', '{{verb}}', '{{ucf_verb}}' ], [ $link, $verb, $ucf_verb ], $plugin['description'] ) . '</p>';
+		$message .= str_replace( [ '{{link}}', '{{verb}}', '{{ucf_verb}}' ], [ $link, $verb, $ucf_verb ], $plugin['description'] );
+		/**
+		 * Display notice.
+		 */
+		bootswatch_admin_notice( $message, 'dependencies' );
 	}
 
-	if ( $output ) {
-		?>
-		<div class="notice notice-success is-dismissible bootswatch-notice" id="<?php echo $notice_id; // XSS OK. ?>">
-			<h4><?php __( 'Howdy, Bootswatch here!', 'bootswatch' ) ?></h4>
-			<?php echo $output; // XSS OK. ?>
-		</div>
-		<script>
-			jQuery( document ).ready( function($) {
-				var noticeID = '<?php echo $notice_id; // XSS OK. ?>';
-				$( document ).on( 'click', `#${noticeID} .notice-dismiss`, function() {
-					boostwatchCreateCookie( `${noticeID}-dismissed`, 1, 7 );
-				} );
-				function boostwatchCreateCookie( name, value = 1, days = 7 ) {
-					document.cookie = `${name}=${value}; expires=${(new Date((new Date).getTime() + days * 86400000)).toUTCString()}; path=/`;
-				}
-			} );
-		</script>
-		<?php
-	}
 } );

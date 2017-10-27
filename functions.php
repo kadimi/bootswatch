@@ -128,6 +128,7 @@ add_action( 'wp_enqueue_scripts', 'bootswatch_scripts' );
  */
 $extras = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( get_template_directory() . '/inc' ), RecursiveIteratorIterator::SELF_FIRST );
 foreach ( $extras as $extra => $unused ) {
+	$extra = str_replace( '\\', '/', $extra );
 	if ( preg_match( '/\/[\w-]+\.php$/', $extra ) ) {
 		require $extra;
 	}
