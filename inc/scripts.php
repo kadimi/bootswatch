@@ -1,4 +1,9 @@
 <?php
+/**
+ * Bootswatch scripts.
+ *
+ * @package Bootswatch
+ */
 
 /**
  * Enqueue scripts and styles.

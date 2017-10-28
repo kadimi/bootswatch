@@ -1,4 +1,9 @@
 <?php
+/**
+ * Bootswatch widgets.
+ *
+ * @package Bootswatch
+ */
 
 /**
  * Register widget area.
