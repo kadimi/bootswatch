@@ -2,12 +2,14 @@
 /**
  * Bootswatch functions and definitions.
  *
- * @link https://developer.wordpress.org/themes/basics/theme-functions/
- *
  * @package Bootswatch
  */
 
-add_action( 'after_setup_theme', function() {
+define( 'BOOTSWATCH_MINIMAL_PHP_VERSION', '5.4.0' );
+define( 'BOOTSWATCH_MINIMAL_PHP_VERSION_ID', 50400 );
+
+add_action( 'after_setup_theme', 'bootswatch_setup_theme' );
+function bootswatch_setup_theme() {
 
 	load_theme_textdomain( 'bootswatch', get_template_directory() . '/languages' );
 
@@ -45,7 +47,7 @@ add_action( 'after_setup_theme', function() {
 		'quote',
 		'link',
 	) );
-} );
+}
 
 /**
  * Set the content width in pixels, based on the theme's design and stylesheet.
@@ -65,8 +67,6 @@ add_action( 'after_setup_theme', 'bootswatch_content_width', 0 );
 
 /**
  * Register widget area.
- *
- * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
 function bootswatch_widgets_init() {
 	register_sidebar( array(
@@ -92,9 +92,9 @@ function bootswatch_scripts() {
 	/**
 	 * Default variable overrides.
 	 */
-	$variables_overrides = [
+	$variables_overrides = array(
 		'@icon-font-path' => '../vendor/kadimi/bootswatch-light/light/fonts/',
-	];
+	);
 	$variables_overrides = apply_filters( 'bootswatch_variables_overrides', $variables_overrides, $theme );
 
 	/**
@@ -102,17 +102,17 @@ function bootswatch_scripts() {
 	 */
 	$theme_path = bootswatch_make_theme_file( $theme, $variables_overrides );
 	$theme_url  = site_url( substr( $theme_path, strlen( ABSPATH ) ) );
-	wp_enqueue_style( 'bootswatch-' . $theme, $theme_url, [], bootswatch_version() );
+	wp_enqueue_style( 'bootswatch-' . $theme, $theme_url, array(), bootswatch_version() );
 
 	/**
 	 * Style.css.
 	 */
-	wp_enqueue_style( 'bootswatch', get_template_directory_uri() . '/style.css', [], bootswatch_version() );
+	wp_enqueue_style( 'bootswatch', get_template_directory_uri() . '/style.css', array(), bootswatch_version() );
 
 	/**
 	 * Scripts.
 	 */
-	wp_enqueue_script( 'bootswatch-bootstrap', bootswatch_get_bootstrap_part_uri( 'script' ), [ 'jquery' ], bootswatch_version(), true );
+	wp_enqueue_script( 'bootswatch-bootstrap', bootswatch_get_bootstrap_part_uri( 'script' ), array( 'jquery' ), bootswatch_version(), true );
 
 	/**
 	 * Comment reply script.
@@ -126,10 +126,13 @@ add_action( 'wp_enqueue_scripts', 'bootswatch_scripts' );
 /**
  * Load all extras from ./inc/
  */
-$extras = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( get_template_directory() . '/inc' ), RecursiveIteratorIterator::SELF_FIRST );
-foreach ( $extras as $extra => $unused ) {
-	$extra = str_replace( '\\', '/', $extra );
-	if ( preg_match( '/\/[\w-]+\.php$/', $extra ) ) {
-		require $extra;
+if ( PHP_VERSION_ID > BOOTSWATCH_MINIMAL_PHP_VERSION_ID ) {
+	$extras = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( get_template_directory() . '/inc' ), RecursiveIteratorIterator::SELF_FIRST );
+	foreach ( $extras as $extra => $unused ) {
+		if ( preg_match( '/\/[\w-]+\.php$/', $extra ) ) {
+			require $extra;
+		}
 	}
+} else {
+	get_template_part( 'inc/compatibility/php-version' );
 }

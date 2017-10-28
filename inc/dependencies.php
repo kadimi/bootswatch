@@ -18,16 +18,6 @@ bootswatch_recommend_plugin( [
 	'file' => 'lessphp/less-plugin.php',
 	'description' => 'Once you {{verb}} {{link}}, you can create even more Bootswatch based themes (advanced feature).',
 ] );
-bootswatch_recommend_plugin( [
-	'name' => 'Less PHP Compiler',
-	'file' => 'lessphp/less-plugin.php',
-	'description' => 'Once you {{verb}} {{link}}, you can create even more Bootswatch based themes (advanced feature).',
-] );
-bootswatch_recommend_plugin( [
-	'name' => 'Less PHP Compiler',
-	'file' => 'lessphp/less-plugin.php',
-	'description' => 'Once you {{verb}} {{link}}, you can create even more Bootswatch based themes (advanced feature).',
-] );
 
 /**
  * Recommends a plugin in an admin notice.
