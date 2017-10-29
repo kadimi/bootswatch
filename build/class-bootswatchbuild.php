@@ -463,9 +463,8 @@ class BootswatchBuild {
 	/**
 	 * Runs a task.
 	 */
-	protected function task( Callable $callback, String $title ) {
+	protected function task( callable $callback, string $title ) {
 		$this->log_title( $title );
 		call_user_func($callback);
 	}
-
 }
