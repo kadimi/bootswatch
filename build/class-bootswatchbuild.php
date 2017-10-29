@@ -104,9 +104,7 @@ class BootswatchBuild {
 	 * Destrictor.
 	 */
 	public function __destruct() {
-		$this->log();
-		$this->log( sprintf( 'Build process completed in %.2fs' , microtime( true ) - $this->timer ) );
-		$this->log();
+		$this->log_title( sprintf( 'Build completed in %.2fs' , microtime( true ) - $this->timer ) );
 	}
 
 	/**
@@ -156,8 +154,7 @@ class BootswatchBuild {
 		$readme = file_get_contents( 'readme.txt' );
 		$changelog_section_exists = strstr( $readme, sprintf( '= %s -', $this->theme_version ) );
 		if ( ! $changelog_section_exists ) {
-			echo "\033[31m\033[1mError:\033[0m\033[0m ";
-			echo sprintf( 'Changelog section for version %s does not exist in readme.txt', $this->theme_version );
+			echo $this->log_error( sprintf( 'Changelog section for version %s does not exist in readme.txt', $this->theme_version ) );
 			die();
 		}
 	}
@@ -450,6 +447,17 @@ class BootswatchBuild {
 	protected function log_title( $title ) {
 		$this->log();
 		$this->log( $title, true, true );
+	}
+
+	/**
+	 * Helper function to show error in log.
+	 *
+	 * @param  String  $title  The log title.
+	 */
+	protected function log_error( $message ) {
+
+		$message = "\033[31m\033[1m$message\033[0m";
+		$this->log( $message, true, true );
 	}
 
 	/**
