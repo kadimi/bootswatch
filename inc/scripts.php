@@ -32,7 +32,7 @@ add_action( 'wp_enqueue_scripts', function() {
 	/**
 	 * Style.css.
 	 */
-	wp_enqueue_style( 'bootswatch', get_template_directory_uri() . '/style.css', [], bootswatch_version() );
+	wp_enqueue_style( 'bootswatch-style', get_template_directory_uri() . '/style.css', [], bootswatch_version() );
 
 	/**
 	 * Scripts.
