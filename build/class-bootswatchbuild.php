@@ -90,13 +90,14 @@ class BootswatchBuild {
 		$this->ignored_patterns = $data['ignored_patterns'];
 		$this->vendor_ignored_patterns = $data['vendor_ignored_patterns'];
 		$this->replacements = $data[ 'replacements' ];
-		$this->update_readme();
-		$this->check_readme();
-		$this->create_style();
-		$this->clean_vendor();
-		$this->do_replacements();
-		$this->clear_cache();
-		$this->package();
+
+		$this->task( [ $this, 'update_readme' ], 'Updating `readme.txt`' );
+		$this->task( [ $this, 'check_readme' ], 'Validating `readme.txt`' );
+		$this->task( [ $this, 'create_style' ], 'Creating `style.css`' );
+		$this->task( [ $this, 'clean_vendor' ], 'Cleaning Vendors Folder');
+		$this->task( [ $this, 'do_replacements' ], 'Applying Replacements' );
+		$this->task( [ $this, 'clear_cache' ], 'Clearing Cache' );
+		$this->task( [ $this, 'package' ], 'Packaging' );
 	}
 
 	/**
@@ -185,13 +186,22 @@ class BootswatchBuild {
 	}
 
 	/**
-	 * Updates the list of files `$vendor_files`.
+	 * Get the updated list of files `$vendor_files`.
 	 *
-	 * @return Array The updated list of files.
+	 * @return Array The list of vendor files.
 	 */
-	private function update_vendor_files() {
+	private function get_vendor_files() {
 		$this->vendor_files = $this->find( '.' );
 		return $this->vendor_files;
+	}
+
+	/**
+	 * An alias of `get_vendor_files`.
+	 *
+	 * @return Array The list of vendor files.
+	 */
+	private function update_vendor_files() {
+		return 	$this->get_vendor_files();
 	}
 
 	/**
@@ -209,17 +219,15 @@ class BootswatchBuild {
 	 */
 	private function clean_vendor() {
 		chdir( 'vendor' );
-		$this->update_vendor_files();
+		$this->get_vendor_files();
 		foreach ( $this->vendor_ignored_patterns as $id => $pattern ) {
-			$this->process_pattern( $pattern, $id );
+			$this->delete_vendor_files_by_pattern( $pattern, $id );
 		}
 		$this->log();
 		$this->log( sprintf( '[%s] Deleted %d bytes.'
 			, $this->pretend ? 'Dry' : 'Live'
 			, $this->bytes_deleted
 		) );
-		$this->log( '==================================================' );
-		$this->log();
 		chdir( '..' );
 	}
 
@@ -227,28 +235,21 @@ class BootswatchBuild {
 	 * Apply string replacements.
 	 */
 	private function do_replacements() {
+		$this->log();
 		foreach ( $this->replacements as $file => $replacements 	) {
 			file_put_contents( $file,
 				str_replace(
 					array_keys( $replacements ),
 					array_values( $replacements ),
-					file_get_contents( $file )
+					file_get_contents( $file ),
+					$count
 				)
 			);
+			$this->log( sprintf( '%d replacements made in %s.'
+				, $count
+				, $file
+			) );
 		}
-		chdir( 'vendor' );
-		$this->update_vendor_files();
-		foreach ( $this->vendor_ignored_patterns as $id => $pattern ) {
-			$this->process_pattern( $pattern, $id );
-		}
-		$this->log();
-		$this->log( sprintf( '[%s] Deleted %d bytes.'
-			, $this->pretend ? 'Dry' : 'Live'
-			, $this->bytes_deleted
-		) );
-		$this->log( '==================================================' );
-		$this->log();
-		chdir( '..' );
 	}
 
 	/**
@@ -289,7 +290,6 @@ class BootswatchBuild {
 
 		$this->log();
 		$this->log( 'Package created.' );
-		$this->log();
 	}
 
 	/**
@@ -299,7 +299,6 @@ class BootswatchBuild {
 		$this->delete_element( 'cache' );
 		$this->log();
 		$this->log( 'Cache cleared.' );
-		$this->log();
 	}
 
 	/**
@@ -325,20 +324,21 @@ class BootswatchBuild {
 	}
 
 	/**
-	 * Deletes files and folders matching pattern.
+	 * Deletes files and folders matching pattern in the vendor folder.
 	 *
 	 * @param  String $pattern The pattern without delimiters or flags.
-	 * @param  string $id      An option ID.
+	 * @param  string $id      An pattern ID.
 	 */
-	private function process_pattern( $pattern, $id = '' ) {
+	private function delete_vendor_files_by_pattern( $pattern, $id = '' ) {
+		$this->update_vendor_files();
+		$this->log();
 		$this->log( 'Pattern     : ' . ( $id ? "$id ($pattern)" : $pattern ) );
-		$this->log( 'Total Files : ' . $this->pattern_total_elements( $pattern, $this->update_vendor_files() ) );
-		$this->log( 'Total Size  : ' . $this->pattern_total_size( $pattern, $this->update_vendor_files() ) );
+		$this->log( 'Total Files : ' . $this->pattern_total_elements( $pattern, $this->vendor_files ) );
+		$this->log( 'Total Size  : ' . $this->pattern_total_size( $pattern, $this->vendor_files ) );
 		foreach ( $this->pattern_elements( $pattern, $this->vendor_files ) as $element ) {
 			$this->log( ' - Deleting ' . $element . '...', false );
-			$this->log( $this->delete_element( $element ) ? 'SUCCESS' : 'FAILURE' );
+			$this->log( sprintf( '   => %s.',  $this->delete_element( $element ) ? 'Done' : 'Failed' ) );
 		}
-		$this->log();
 	}
 
 	/**
@@ -430,11 +430,34 @@ class BootswatchBuild {
 	 *
 	 * @param  String  $message         The message.
 	 * @param  boolean $append_new_line True to append a new line.
+	 * @param  boolean $is_title        True to use special markup.
 	 */
-	protected function log( $message = '', $append_new_line = true ) {
+	protected function log( $message = '', $append_new_line = true, $is_title = false ) {
+		if ( $is_title ) {
+			$message = "\033[32m\033[1m$message\033[0m";
+		}
 		echo $message; // XSS OK.
 		if ( $append_new_line ) {
 			echo "\n";
 		}
 	}
+
+	/**
+	 * Helper function to show title in log.
+	 *
+	 * @param  String  $title  The log title.
+	 */
+	protected function log_title( $title ) {
+		$this->log();
+		$this->log( $title, true, true );
+	}
+
+	/**
+	 * Runs a task.
+	 */
+	protected function task( Callable $callback, String $title ) {
+		$this->log_title( $title );
+		call_user_func($callback);
+	}
+
 }
