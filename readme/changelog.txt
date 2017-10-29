@@ -1,3 +1,8 @@
+= 1.0.10 - Oct 29 2017 =
+* Fail gracefully for PHP version older than 5.4.0.
+* Reorganize files.
+* Move the GPLv3.
+
 = 1.0.9 - Oct 21 2017 =
 * Maintenance release.
 

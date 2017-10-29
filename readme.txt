@@ -4,7 +4,7 @@ Contributors: Nabil Kadimi
 Tags: translation-ready, custom-background, theme-options, custom-menu, post-formats, threaded-comments
 Requires at least: 4.0
 Tested up to: 4.8.2
-Stable tag: 1.0.9
+Stable tag: 1.0.10
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -29,6 +29,11 @@ Bootswatch includes support for Infinite Scroll in Jetpack.
 
 
 == Changelog ==
+
+= 1.0.10 - Oct 29 2017 =
+* Fail gracefully for PHP version older than 5.4.0.
+* Reorganize files.
+* Move the GPLv3.
 
 = 1.0.9 - Oct 21 2017 =
 * Maintenance release.
