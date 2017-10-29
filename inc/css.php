@@ -33,7 +33,7 @@ add_action( 'wp_head', function() {
 function bootswatch_generate_inline_css( $theme = 'bootstrap' ) {
 
 	if ( ! class_exists( 'Less_Parser' ) ) {
-		return bootwatch_bootstrap_inline_css();
+		return bootswatch_bootstrap_inline_css();
 	}
 
 	/**
@@ -151,7 +151,7 @@ function bootswatch_generate_inline_css( $theme = 'bootstrap' ) {
  *
  * @return String CSS code.
  */
-function bootwatch_bootstrap_inline_css() {
+function bootswatch_bootstrap_inline_css() {
 	$css = '
 		body.fixed-navbar #wpadminbar {
 			position: fixed;
