@@ -532,5 +532,4 @@ class BootswatchBuild {
 		$output = shell_exec( sprintf( 'which %s', escapeshellarg( $command ) ) );
 		return  ! empty( $output );
 	}
-
 }
