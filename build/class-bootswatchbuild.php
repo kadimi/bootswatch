@@ -75,6 +75,8 @@ class BootswatchBuild {
 	 */
 	private $bytes_deleted = 0;
 
+	private $last_error = false;
+
 	/**
 	 * Constructor.
 	 *
@@ -91,6 +93,8 @@ class BootswatchBuild {
 		$this->vendor_ignored_patterns = $data['vendor_ignored_patterns'];
 		$this->replacements = $data[ 'replacements' ];
 
+
+		$this->task( [ $this, 'pot' ], 'Creating Languages File' );
 		$this->task( [ $this, 'update_readme' ], 'Updating `readme.txt`' );
 		$this->task( [ $this, 'check_readme' ], 'Validating `readme.txt`' );
 		$this->task( [ $this, 'create_style' ], 'Creating `style.css`' );
@@ -104,7 +108,10 @@ class BootswatchBuild {
 	 * Destrictor.
 	 */
 	public function __destruct() {
-		$this->log_title( sprintf( 'Build completed in %.2fs' , microtime( true ) - $this->timer ) );
+		$duration = microtime( true ) - $this->timer;
+		if ( ! $this->last_error ) {
+			$this->log_title( sprintf( 'Build completed in %.2fs' , $duration ) );
+		}
 	}
 
 	/**
@@ -456,15 +463,74 @@ class BootswatchBuild {
 	 */
 	protected function log_error( $message ) {
 
-		$message = "\033[31m\033[1m$message\033[0m";
-		$this->log( $message, true, true );
+		$this->last_error = $message;
+		$this->log( "\033[31m\033[1mError: $message\033[0m", true, true );
+		exit();
 	}
 
 	/**
 	 * Runs a task.
 	 */
 	protected function task( callable $callback, $title ) {
-		$this->log_title( $title );
-		call_user_func($callback);
+		$this->log_title( $title . ' started.');
+		$timer = microtime( true );
+		call_user_func($callback );
+		$duration = microtime( true ) - $timer;
+		$this->log_title( sprintf( '%s completed in %.2fs' , $title, $duration ) );
+
 	}
+
+	protected function pot() {
+
+		$this->log();
+
+		if ( ! $this->shell_command_exists( 'xgettext' ) ) {
+			$this->log_error('`xgettext` command does not exist.');
+			exit;
+		}
+
+
+		$command = str_replace( "\n", '', '
+			find -name "*.php"
+				-not -path "./build/*"
+				-not -path "./tests/*"
+				-not -path "./vendor/*"
+			|
+			xargs xgettext
+				--language=PHP
+				--package-name=Bootswatch
+				--package-version={{version}}
+				--copyright-holder="Nabil Kadimi"
+				--msgid-bugs-address="https://github.com/kadimi/bootswatch/issues/new"
+				--from-code=UTF-8
+				--keyword="__"
+				--keyword="__ngettext:1,2"
+				--keyword="__ngettext_noop:1,2"
+				--keyword="_c,_nc:4c,1,2"
+				--keyword="_e"
+				--keyword="_ex:1,2c"
+				--keyword="_n:1,2"
+				--keyword="_n_noop:1,2"
+				--keyword="_nx:4c,1,2"
+				--keyword="_nx_noop:4c,1,2"
+				--keyword="_x:1,2c"
+				--keyword="esc_attr__"
+				--keyword="esc_attr_e"
+				--keyword="esc_attr_x:1,2c"
+				--keyword="esc_html__"
+				--keyword="esc_html_e"
+				--keyword="esc_html_x:1,2c"
+				--no-wrap
+				--sort-by-file
+				-o languages/bootswatch.pot
+		');
+		shell_exec( $command );
+		$this->log( 'Language file created successfully.' );
+	}
+
+	protected function shell_command_exists( $command ) {
+		$output = shell_exec( sprintf( 'which %s', escapeshellarg( $command ) ) );
+		return  ! empty( $output );
+	}
+
 }
