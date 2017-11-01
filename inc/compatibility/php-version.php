@@ -78,7 +78,7 @@ function bootswatch_php_version_admin_notice() {
 		$message = sprintf( __( 'Bootswatch requires <code>PHP 5.4</code> or higher but you are using <code>PHP %1$s</code>, as such, Bootswatch cannot be activated, %2$s will be activated instead. We hope you will uprade PHP very soon.', 'bootswatch' ), PHP_VERSION, $theme->get( 'Name' ) );
 	} else {
 		// Translators: %1$s is the current PHP version and %2$s is a WordPress default theme name.
-		$message = sprintf( __( 'Bootswatch requires <code>PHP 5.4</code> or higher but you are using <code>PHP %1$s</code>, as such, Bootswatch will not work until you uprade PHP.', 'bootswatch' ), PHP_VERSION );
+		$message = sprintf( __( 'Bootswatch requires <code>PHP 5.4</code> or higher but you are using <code>PHP %s</code>, as such, Bootswatch will not work until you uprade PHP.', 'bootswatch' ), PHP_VERSION );
 	}
 	bootswatch_admin_notice( $message, 'php-compatibility-error', 'error', false );
 	echo '<style>#message2 { display: none; }</style>';
