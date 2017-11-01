@@ -15,6 +15,54 @@ use \ZipArchive;
 class BootswatchBuild {
 
 	/**
+	 * Bytes deleted.
+	 *
+	 * @var Integer
+	 */
+	private $bytes_deleted = 0;
+
+	/**
+	 * File list.
+	 *
+	 * @var array
+	 */
+	private $files = [];
+
+	/**
+	 * Ignored patterns.
+	 *
+	 * @var array
+	 */
+	private $ignored_patterns = [];
+
+	/**
+	 * Last error seen on the log.
+	 * @var Boolean|String
+	 */
+	private $last_error = false;
+
+	/**
+	 * Regular expression string replacements.
+	 *
+	 * @var array
+	 */
+	private $preg_replacements = [];
+
+	/**
+	 * When true, no deletions are made.
+	 *
+	 * @var boolean
+	 */
+	private $pretend = false;
+
+	/**
+	 * Normal string replacements.
+	 *
+	 * @var array
+	 */
+	private $str_replacements = [];
+
+	/**
 	 * Timer.
 	 *
 	 * @var float
@@ -27,41 +75,6 @@ class BootswatchBuild {
 	private $theme_version;
 
 	/**
-	 * Ignored patterns.
-	 *
-	 * @var array
-	 */
-	private $ignored_patterns = [];
-
-	/**
-	 * Normal string replacements.
-	 *
-	 * @var array
-	 */
-	private $str_replacements = [];
-
-	/**
-	 * Regular expression string replacements.
-	 *
-	 * @var array
-	 */
-	private $preg_replacements = [];
-
-	/**
-	 * Vendor ignored patterns.
-	 *
-	 * @var array
-	 */
-	private $vendor_ignored_patterns = [];
-
-	/**
-	 * When true, no deletions are made.
-	 *
-	 * @var boolean
-	 */
-	private $pretend = false;
-
-	/**
 	 * File list.
 	 *
 	 * @var array
@@ -69,20 +82,11 @@ class BootswatchBuild {
 	private $vendor_files = [];
 
 	/**
-	 * File list.
+	 * Vendor ignored patterns.
 	 *
 	 * @var array
 	 */
-	private $files = [];
-
-	/**
-	 * Bytes deleted.
-	 *
-	 * @var Integer
-	 */
-	private $bytes_deleted = 0;
-
-	private $last_error = false;
+	private $vendor_ignored_patterns = [];
 
 	/**
 	 * Constructor.
