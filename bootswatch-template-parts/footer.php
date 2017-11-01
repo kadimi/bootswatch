@@ -5,6 +5,12 @@
  * @package Bootswatch
  */
 
+$author = [
+	'name'  => __( 'Nabil Kadimi', 'bootswatch' ),
+	'title' => __( 'Independent WordPress Developer', 'bootswatch' ),
+	'url'   => 'https://kadimi.com',
+];
+
 ?>
 
 <footer class="container">
@@ -12,7 +18,20 @@
 		<div class="col-md-12"><hr></div>
 		<div class="col-md-4 col-md-offset-8">
 			<p class="muted pull-right small">
-				&copy; <?php echo date( 'Y' ); // WPCS: XSS OK. ?> <?php echo esc_html( get_bloginfo( 'title' ) ); ?> &ndash; Designed by <a href='https://kadimi.com/' title="Nabil Kadimi - Independent WordPress Developer" rel="nofollow">Nabil</a>
+				&copy; <?php echo esc_html( date( 'Y' ) ); ?>
+				<?php echo esc_html( get_bloginfo( 'title' ) ); ?>
+				&ndash;
+				<?php
+				// Translators: Author details.
+				printf(
+					esc_html( 'Designed by %s.', 'bootswatch' )
+					, sprintf( '<a href="%1$s" title="%2$s">%3$s</a>'
+						, esc_url( $author['url'] )
+						, esc_html( $author['title'] )
+						, esc_html( $author['name'] )
+					)
+				);
+				?>
 			</p>
 		</div>
 	</div>
