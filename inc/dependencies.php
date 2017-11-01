@@ -8,7 +8,7 @@
 /**
  * Require composer autoloader.
  */
-get_template_part( get_template_directory() . '/vendor/autoload.php' );
+get_template_part( 'vendor/autoload' );
 
 /**
  * Recommend Less PHP Compiler,

@@ -46,7 +46,18 @@ function bootswatch_make_theme_file( $theme, $overrides = [], $rebuild = false )
 		return get_template_directory() . '/cache/' . $cache_file_basename;
 	}
 
+	/**
+	 * Prepare CSS
+	 */
 	$css = bootswatch_get_bootswatch_theme_css( $theme, $overrides );
+
+	/**
+	 * RTL-ize when needed.
+	 */
+	if ( is_rtl() ) {
+		$css = CSSJanus::transform( $css );
+	}
+
 	/**
 	 * Keep cache light (only ~50 files).
 	 */
