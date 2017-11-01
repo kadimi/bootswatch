@@ -105,6 +105,7 @@ class BootswatchBuild {
 		$this->str_replacements        = $data[ 'str_replacements' ];
 
 		$this->task( [ $this, 'pot' ], 'Creating Languages File' );
+		$this->task( [ $this, 'dl_translations' ], 'Downloading Translations' );
 		$this->task( [ $this, 'update_readme' ], 'Updating `readme.txt`' );
 		$this->task( [ $this, 'check_readme' ], 'Validating `readme.txt`' );
 		$this->task( [ $this, 'create_style' ], 'Creating `style.css`' );
@@ -578,5 +579,30 @@ class BootswatchBuild {
 	protected function shell_command_exists( $command ) {
 		$output = shell_exec( sprintf( 'which %s', escapeshellarg( $command ) ) );
 		return  ! empty( $output );
+	}
+
+	protected function dl_translations() {
+
+		$this->log();
+
+		/**
+		 * Check that the Transifex API token exists.
+		 */
+		if ( ! file_exists( '.transifex' ) ) {
+			$this->log_error( 'Transifex API token not found, it should be saved in `.transifex`.' );
+		}
+		$transifex_api_token = file_get_contents( '.transifex' );
+
+		$api_url = "https://www.transifex.com/api/2/project/bootswatch/";
+		$auth    = base64_encode("api:$transifex_api_token");
+		$context = stream_context_create(['http' => ['header' => "Authorization: Basic $auth"]]);
+
+		$languages_json = file_get_contents( 'https://www.transifex.com/api/2/project/bootswatch/languages', false, $context  );
+		$languages = json_decode( $languages_json );
+		foreach ( $languages as $language ) {
+			$po = file_get_contents( $api_url . 'resource/bootswatchpot/translation/' . $language->language_code . '/?mode=reviewed&file', false, $context  );
+			file_put_contents( "languages/bootswatch-{$language->language_code}.po", $po );
+			$this->log( sprintf( 'Downloaded `bootswatch-%s.po`.', $language->language_code ) );
+		}
 	}
 }

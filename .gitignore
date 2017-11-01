@@ -5,4 +5,5 @@ hostname
 ip
 node_modules/*
 style.css
+.transifex
 vendor/*
