@@ -1,0 +1,13 @@
+custom-header
+custom-menu
+e-commerce
+flexible-header
+featured-image-header
+featured-images
+grid-layout
+right-sidebar
+sticky-post
+theme-options
+threaded-comments
+translation-ready
+two-columns
