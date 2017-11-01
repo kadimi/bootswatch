@@ -1,18 +1,17 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Nabil Kadimi
+# Copyright (C) (C) 2017 Nabil Kadimi
 # This file is distributed under the same license as the Bootswatch package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# FIRST AUTHOR <EMAIL@ADDRESS>, (C) 2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Bootswatch 1.0.10\n"
 "Report-Msgid-Bugs-To: https://github.com/kadimi/bootswatch/issues/new\n"
-"PO-Creattion-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Creattion-Date: (C) 2017-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: (C) 2017-MO-DA HO:MI+ZONE\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #: bootswatch-template-parts/components/comments-closed.php:11
 msgid "Comments are closed."
