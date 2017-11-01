@@ -1,6 +1,5 @@
 # Copyright (C) 2017 Nabil Kadimi
 # This file is distributed under the GPLv3.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: Bootswatch 1.0.10\n"

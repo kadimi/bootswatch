@@ -34,6 +34,7 @@ require 'build/class-bootswatchbuild.php';
 			"# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.\n" => '',
 			'charset=CHARSET'                         => 'charset=utf-8',
 			"#, fuzzy\n"                              => '',
+			"#\n"                                     => '',
 		],
 	],
 	'preg_replacements' => [
