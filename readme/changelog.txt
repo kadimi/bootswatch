@@ -1,3 +1,7 @@
+= 1.0.11 - Nov 01 2017 =
+* Improve localization.
+* Improve footer.
+
 = 1.0.10 - Oct 29 2017 =
 * Fail gracefully for PHP version older than 5.4.0.
 * Move the GPLv3.

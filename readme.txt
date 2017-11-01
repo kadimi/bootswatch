@@ -4,7 +4,7 @@ Contributors: Nabil Kadimi
 Tags: custom-header,custom-menu,e-commerce,flexible-header,featured-image-header,featured-images,grid-layout,right-sidebar,sticky-post,theme-options,threaded-comments,translation-ready,two-columns
 Requires at least: 4.0
 Tested up to: 4.8.3
-Stable tag: 1.0.10
+Stable tag: 1.0.11
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -29,6 +29,10 @@ Bootswatch includes support for Infinite Scroll in Jetpack.
 
 
 == Changelog ==
+
+= 1.0.11 - Nov 01 2017 =
+* Improve localization.
+* Improve footer.
 
 = 1.0.10 - Oct 29 2017 =
 * Fail gracefully for PHP version older than 5.4.0.
