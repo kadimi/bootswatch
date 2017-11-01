@@ -544,7 +544,6 @@ class BootswatchBuild {
 				--package-name=Bootswatch
 				--package-version={{version}}
 				--copyright-holder="Nabil Kadimi"
-				--copyright-year=' . date( 'Y' ) . '
 				--msgid-bugs-address="https://github.com/kadimi/bootswatch/issues/new"
 				--from-code=UTF-8
 				--keyword="__"

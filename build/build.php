@@ -27,6 +27,14 @@ require 'build/class-bootswatchbuild.php';
 		'vendor/composer/autoload_static.php' => [
 			'ClassLoader::class' => "'Composer\Autoload\ClassLoader'",
 		],
+		'languages/bootswatch.pot' => [
+			"# SOME DESCRIPTIVE TITLE.\n"             => '',
+			'same license as the Bootswatch package'  => 'GPLv3',
+			'(C) YEAR'                                => '(C) ' . date( 'Y' ),
+			"# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.\n" => '',
+			'charset=CHARSET'                         => 'charset=utf-8',
+			"#, fuzzy\n"                              => '',
+		],
 	],
 	'preg_replacements' => [
 		'languages/bootswatch.pot' => [
@@ -35,9 +43,6 @@ require 'build/class-bootswatchbuild.php';
 			sprintf( "/\"%s:[^\n]+\n/", 'Last-Translator' ) => '',
 			sprintf( "/\"%s:[^\n]+\n/", 'Plural-Forms' )    => '',
 			'/"POT-Creation-Date: .*/'                      => '"PO-Creattion-Date: YEAR-MO-DA HO:MI+ZONE\n"',
-			"/#, fuzzy\n/s"                                 => '',
-			'/charset=CHARSET/'                             => 'charset=utf-8',
-			'/\(C\) YEAR/' => '(C) ' . date( 'Y' ),
 		],
 	],
 	'vendor_ignored_patterns' => [
