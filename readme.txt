@@ -1,9 +1,9 @@
 === Bootswatch ===
 
 Contributors: Nabil Kadimi
-Tags: translation-ready, custom-background, theme-options, custom-menu, post-formats, threaded-comments
+Tags: custom-header,custom-menu,e-commerce,flexible-header,featured-image-header,featured-images,grid-layout,right-sidebar,sticky-post,theme-options,threaded-comments,translation-ready,two-columns
 Requires at least: 4.0
-Tested up to: 4.8.2
+Tested up to: 4.8.3
 Stable tag: 1.0.10
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html

@@ -1,9 +1,9 @@
 === Bootswatch ===
 
 Contributors: Nabil Kadimi
-Tags: translation-ready, custom-background, theme-options, custom-menu, post-formats, threaded-comments
+Tags: {{tags}}
 Requires at least: 4.0
-Tested up to: 4.8.2
+Tested up to: 4.8.3
 Stable tag: {{version}}
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html

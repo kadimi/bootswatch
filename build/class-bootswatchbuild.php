@@ -124,6 +124,7 @@ class BootswatchBuild {
 		}
 
 		$variables = [
+			'{{tags}}'    => str_replace( "\n", ',', file_get_contents( 'readme/tags.txt') ),
 			'{{version}}' => $this->theme_version,
 		];
 
@@ -172,20 +173,22 @@ class BootswatchBuild {
 	private function update_readme() {
 
 		$variables = [
-			'{{version}}'      => $this->theme_version,
 			'{{changelog}}'    => file_get_contents( 'readme/changelog.txt'),
 			'{{credits}}'      => file_get_contents( 'readme/credits.txt'),
 			'{{description}}'  => file_get_contents( 'readme/description.txt'),
 			'{{faq}}'          => file_get_contents( 'readme/faq.txt'),
 			'{{installation}}' => file_get_contents( 'readme/installation.txt'),
+			'{{tags}}'         => str_replace( "\n", ',', file_get_contents( 'readme/tags.txt') ),
+			'{{version}}'      => $this->theme_version,
 		];
 
+		// Read.
 		$readme = file_get_contents( 'readme/readme.txt' );
 
 		// Replace variables.
-		$readme = str_replace( array_keys( $variables), array_values( $variables), $readme );
+		$readme = str_replace( array_keys( $variables), array_values( $variables ), $readme );
 
-		// Write file.
+		// Write.
 		file_put_contents( 'readme.txt', $readme );
 	}
 
