@@ -34,11 +34,18 @@ class BootswatchBuild {
 	private $ignored_patterns = [];
 
 	/**
-	 * Replacements.
+	 * Normal string replacements.
 	 *
 	 * @var array
 	 */
-	private $replacements = [];
+	private $str_replacements = [];
+
+	/**
+	 * Regular expression string replacements.
+	 *
+	 * @var array
+	 */
+	private $preg_replacements = [];
 
 	/**
 	 * Vendor ignored patterns.
@@ -80,26 +87,26 @@ class BootswatchBuild {
 	/**
 	 * Constructor.
 	 *
-	 * Fires:
-	 * - Cleaning vendors with `clean_vendor`
-	 * - Clearing cache with `clear_cache`
+	 * Fires all tasks.
 	 *
 	 * @param Array $data Data.
 	 */
 	public function __construct( $data ) {
 		$this->timer = microtime( true );
 		$this->theme_version = file_get_contents( '.version' );
-		$this->ignored_patterns = $data['ignored_patterns'];
-		$this->vendor_ignored_patterns = $data['vendor_ignored_patterns'];
-		$this->replacements = $data[ 'replacements' ];
 
+		$this->ignored_patterns        = $data[ 'ignored_patterns' ];
+		$this->vendor_ignored_patterns = $data[ 'vendor_ignored_patterns' ];
+		$this->preg_replacements       = $data[ 'preg_replacements' ];
+		$this->str_replacements        = $data[ 'str_replacements' ];
 
 		$this->task( [ $this, 'pot' ], 'Creating Languages File' );
 		$this->task( [ $this, 'update_readme' ], 'Updating `readme.txt`' );
 		$this->task( [ $this, 'check_readme' ], 'Validating `readme.txt`' );
 		$this->task( [ $this, 'create_style' ], 'Creating `style.css`' );
 		$this->task( [ $this, 'clean_vendor' ], 'Cleaning Vendors Folder');
-		$this->task( [ $this, 'do_replacements' ], 'Applying Replacements' );
+		$this->task( [ $this, 'do_str_replace' ], 'Applying Normal String Replacements' );
+		$this->task( [ $this, 'do_preg_replace' ], 'Applying Regular Expression String Replacements' );
 		$this->task( [ $this, 'clear_cache' ], 'Clearing Cache' );
 		$this->task( [ $this, 'package' ], 'Packaging' );
 	}
@@ -239,11 +246,19 @@ class BootswatchBuild {
 	}
 
 	/**
-	 * Apply string replacements.
+	 * Apply normal string replacements.
 	 */
-	private function do_replacements() {
+	private function do_str_replace() {
 		$this->log();
-		foreach ( $this->replacements as $file => $replacements 	) {
+		foreach ( $this->str_replacements as $file => $replacements ) {
+			/**
+			 * Provide a version helper.
+			 */
+			$replacements[ '{{version}}' ] = $this->theme_version;
+
+			/**
+			 * Replace.
+			 */
 			file_put_contents( $file,
 				str_replace(
 					array_keys( $replacements ),
@@ -252,6 +267,31 @@ class BootswatchBuild {
 					$count
 				)
 			);
+
+			/**
+			 * Write to log.
+			 */
+			$this->log( sprintf( '%d replacements made in %s.'
+				, $count
+				, $file
+			) );
+		}
+	}
+
+	/**
+	 * Apply regex string replacements.
+	 */
+	private function do_preg_replace() {
+		$this->log();
+		foreach ( $this->preg_replacements as $file => $replacements ) {
+			$replacements[ '/\{\{version\}\}/' ] = $this->theme_version;
+			$count    = 0;
+			$contents = file_get_contents( $file );
+			foreach ( $replacements as $regex => $replacement ) {
+				$contents = preg_replace( $regex, $replacement, $contents, -1, $sub_count);
+				$count += $sub_count;
+			}
+			file_put_contents( $file, $contents );
 			$this->log( sprintf( '%d replacements made in %s.'
 				, $count
 				, $file
@@ -504,6 +544,7 @@ class BootswatchBuild {
 				--package-name=Bootswatch
 				--package-version={{version}}
 				--copyright-holder="Nabil Kadimi"
+				--copyright-year=' . date( 'Y' ) . '
 				--msgid-bugs-address="https://github.com/kadimi/bootswatch/issues/new"
 				--from-code=UTF-8
 				--keyword="__"

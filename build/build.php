@@ -23,9 +23,18 @@ require 'build/class-bootswatchbuild.php';
 		'tests'    => '^tests/.*$',
 		'wp.dev'   => '^(ip|hostname)$',
 	],
-	'replacements' => [
+	'str_replacements' => [
 		'vendor/composer/autoload_static.php' => [
 			'ClassLoader::class' => "'Composer\Autoload\ClassLoader'",
+		],
+	],
+	'preg_replacements' => [
+		'languages/bootswatch.pot' => [
+			sprintf( "/\"%s:[^\n]+\n/", 'Language' )        => '',
+			sprintf( "/\"%s:[^\n]+\n/", 'Language-Team' )   => '',
+			sprintf( "/\"%s:[^\n]+\n/", 'Last-Translator' ) => '',
+			'/"POT-Creation-Date: .*/'                      => '"PO-Creattion-Date: YEAR-MO-DA HO:MI+ZONE\n"',
+			"/#, fuzzy\n/s"                                 => '',
 		],
 	],
 	'vendor_ignored_patterns' => [
