@@ -59,7 +59,7 @@ msgid "Sorry, but nothing matched your search terms. Please try again with some 
 msgstr ""
 
 #: bootswatch-template-parts/content-none.php:36
-msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgid "It seems we can't find what you're looking for. Perhaps searching can help."
 msgstr ""
 
 #: bootswatch-template-parts/footer.php:9
@@ -99,7 +99,7 @@ msgstr ""
 
 #: inc/compatibility/php-version.php:81
 #, php-format
-msgid "Bootswatch requires <code>PHP 5.4</code> or higher but you are using <code>PHP %1$s</code>, as such, Bootswatch will not work until you uprade PHP."
+msgid "Bootswatch requires <code>PHP 5.4</code> or higher but you are using <code>PHP %s</code>, as such, Bootswatch will not work until you uprade PHP."
 msgstr ""
 
 #: inc/compatibility/php-version.php:124

@@ -32,8 +32,8 @@ Bootswatch includes support for Infinite Scroll in Jetpack.
 
 = 1.0.10 - Oct 29 2017 =
 * Fail gracefully for PHP version older than 5.4.0.
-* Reorganize files.
 * Move the GPLv3.
+* Reorganize files.
 
 = 1.0.9 - Oct 21 2017 =
 * Maintenance release.
@@ -52,12 +52,12 @@ Bootswatch includes support for Infinite Scroll in Jetpack.
 
 = 1.0.4 - Sep 18 2017 =
 * Improve customizer options handling and live preview.
-* Introduce unit tests.
 * Improve files organization.
+* Introduce unit tests.
 
 = 1.0.3 - Jul 15 2017 =
-* Improve customizer options handling and live preview.
 * Improve caching mechanism
+* Improve customizer options handling and live preview.
 
 = 1.0.2 - Jul 14 2017 =
 * Hot fix.
