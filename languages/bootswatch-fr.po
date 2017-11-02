@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Bootswatch {{version}}\n"
+"Project-Id-Version: Bootswatch 1.0.11\n"
 "Report-Msgid-Bugs-To: https://github.com/kadimi/bootswatch/issues/new\n"
-"POT-Creation-Date: 2017-11-02 00:46+0000\n"
+"PO-Creattion-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Nabil Kadimi <nabil@kadimi.com>, 2017\n"
 "Language-Team: French (https://www.transifex.com/kadimi/teams/80110/fr/)\n"
