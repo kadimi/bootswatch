@@ -66,7 +66,7 @@ add_action( 'admin_notices', function() {
 			$url = admin_url( 'plugins.php?plugin_status=inactive' );
 		} else {
 			// Plugin is not installed.
-			$verb = _x( 'install', 'once you "install"...' 'bootswatch' );
+			$verb = _x( 'install', 'once you "install"...', 'bootswatch' );
 			$ucf_verb = ucfirst( $verb );
 			$url  = admin_url( sprintf( 'plugin-install.php?tab=plugin-information&plugin=%s', explode( '/', $plugin['file'] )[0] ) );
 		}
