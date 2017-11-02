@@ -20,7 +20,7 @@ msgstr ""
 
 #: bootswatch-template-parts/components/comments-closed.php:11
 msgid "Comments are closed."
-msgstr ""
+msgstr "Les commentaires sont fermés."
 
 #: bootswatch-template-parts/components/comments-navigation.php:10
 msgid "Comment navigation"
@@ -28,11 +28,11 @@ msgstr ""
 
 #: bootswatch-template-parts/components/comments-navigation.php:13
 msgid "Older Comments"
-msgstr ""
+msgstr "Anciens commentaires"
 
 #: bootswatch-template-parts/components/comments-navigation.php:14
 msgid "Newer Comments"
-msgstr ""
+msgstr "Nouveaux commentaires"
 
 #: bootswatch-template-parts/components/comments-title.php:12
 #, php-format
@@ -55,7 +55,7 @@ msgstr "Modifier %s"
 
 #: bootswatch-template-parts/content-none.php:14
 msgid "Nothing Found"
-msgstr ""
+msgstr "Aucun résultat"
 
 #: bootswatch-template-parts/content-none.php:22
 #, php-format
@@ -75,7 +75,7 @@ msgstr ""
 
 #: bootswatch-template-parts/footer.php:9
 msgid "Nabil Kadimi"
-msgstr ""
+msgstr "Nabil Kadimi"
 
 #: bootswatch-template-parts/footer.php:10
 msgid "Independent WordPress Developer"
@@ -120,7 +120,7 @@ msgstr ""
 
 #: inc/compatibility/php-version.php:124
 msgid "Howdy! Bootswatch here..."
-msgstr ""
+msgstr "Salut! Ici Bootswatch..."
 
 #: inc/custom-header.php:68
 msgid "Default Header Image"
@@ -131,20 +131,22 @@ msgid ""
 "Once you {{verb}} {{link}}, you can create even more Bootswatch based themes"
 " (advanced feature)."
 msgstr ""
+"Une fois que vous aurez {{verb}} {{link}}, vous pourrez créer encore plus de"
+" thèmes basé sur Bootswatch (fonction avancée)."
 
 #: inc/dependencies.php:64
 msgctxt "once you \"activate\"..."
 msgid "activate"
-msgstr ""
+msgstr "activé"
 
 #: inc/dependencies.php:69
 msgctxt "once you \"install\"..."
 msgid "install"
-msgstr ""
+msgstr "installé"
 
 #: inc/options.php:21
 msgid "Theme"
-msgstr ""
+msgstr "Thème"
 
 #: inc/options.php:71
 msgid "Custom Header Size"
@@ -214,7 +216,7 @@ msgstr "1 Commentaire"
 
 #: inc/template-tags.php:79
 msgid "Leave a comment"
-msgstr ""
+msgstr "Laisser un commentaire"
 
 #: inc/widgets.php:13
 msgid "Sidebar"
