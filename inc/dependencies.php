@@ -61,7 +61,7 @@ add_action( 'admin_notices', function() {
 			continue;
 		} else if ( file_exists( WP_PLUGIN_DIR . '/' . ( $plugin['file'] ) ) ) {
 			// Plugin is installed but inactive.
-			$verb = _x( 'activate', 'once you "activate"...' 'bootswatch' );
+			$verb = _x( 'activate', 'once you "activate"...', 'bootswatch' );
 			$ucf_verb = ucfirst( $verb );
 			$url = admin_url( 'plugins.php?plugin_status=inactive' );
 		} else {
