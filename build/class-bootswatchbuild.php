@@ -105,7 +105,7 @@ class BootswatchBuild {
 		$this->str_replacements        = $data[ 'str_replacements' ];
 
 		$this->task( [ $this, 'pot' ], 'Creating Languages File' );
-		$this->task( [ $this, 'dl_translations' ], 'Downloading Translations' );
+		$this->task( [ $this, 'update_translations' ], 'Updating .pot and po Files' );
 		$this->task( [ $this, 'update_readme' ], 'Updating `readme.txt`' );
 		$this->task( [ $this, 'check_readme' ], 'Validating `readme.txt`' );
 		$this->task( [ $this, 'create_style' ], 'Creating `style.css`' );
@@ -581,7 +581,7 @@ class BootswatchBuild {
 		return  ! empty( $output );
 	}
 
-	protected function dl_translations() {
+	protected function update_translations() {
 
 		$this->log();
 
@@ -595,8 +595,31 @@ class BootswatchBuild {
 
 		$api_url = "https://www.transifex.com/api/2/project/bootswatch/";
 		$auth    = base64_encode("api:$transifex_api_token");
-		$context = stream_context_create(['http' => ['header' => "Authorization: Basic $auth"]]);
 
+		/**
+		 * Upload source file.
+		 */
+		$data = [
+			'content' => file_get_contents( 'languages/bootswatch.pot' ),
+		];
+		$postdata = json_encode($data);
+		$context = stream_context_create( [
+			'http' => [
+				'header'  => "Content-type: application/json\r\nAuthorization: Basic $auth",
+				'method'  => 'PUT',
+				'content' => $postdata,
+			]
+		] );
+		$languages_json = file_get_contents( 'https://www.transifex.com/api/2/project/bootswatch/resource/bootswatchpot/content/', false, $context );
+
+		/**
+		 * Download translations.
+		 */
+		$context = stream_context_create( [
+			'http' => [
+				'header' => "Authorization: Basic $auth",
+			]
+		] );
 		$languages_json = file_get_contents( 'https://www.transifex.com/api/2/project/bootswatch/languages', false, $context  );
 		$languages = json_decode( $languages_json );
 		foreach ( $languages as $language ) {
