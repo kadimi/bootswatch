@@ -37,6 +37,7 @@ class BootswatchBuild {
 
 	/**
 	 * Last error seen on the log.
+	 *
 	 * @var Boolean|String
 	 */
 	private $last_error = false;
@@ -71,6 +72,8 @@ class BootswatchBuild {
 
 	/**
 	 * Bootswatch theme version.
+	 *
+	 * @var String
 	 */
 	private $theme_version;
 
@@ -99,17 +102,17 @@ class BootswatchBuild {
 		$this->timer = microtime( true );
 		$this->theme_version = file_get_contents( '.version' );
 
-		$this->ignored_patterns        = $data[ 'ignored_patterns' ];
-		$this->vendor_ignored_patterns = $data[ 'vendor_ignored_patterns' ];
-		$this->preg_replacements       = $data[ 'preg_replacements' ];
-		$this->str_replacements        = $data[ 'str_replacements' ];
+		$this->ignored_patterns        = $data['ignored_patterns'];
+		$this->vendor_ignored_patterns = $data['vendor_ignored_patterns'];
+		$this->preg_replacements       = $data['preg_replacements'];
+		$this->str_replacements        = $data['str_replacements'];
 
 		$this->task( [ $this, 'pot' ], 'Creating Languages File' );
 		$this->task( [ $this, 'update_translations' ], 'Updating .pot and po Files' );
 		$this->task( [ $this, 'update_readme' ], 'Updating `readme.txt`' );
 		$this->task( [ $this, 'check_readme' ], 'Validating `readme.txt`' );
 		$this->task( [ $this, 'create_style' ], 'Creating `style.css`' );
-		$this->task( [ $this, 'clean_vendor' ], 'Cleaning Vendors Folder');
+		$this->task( [ $this, 'clean_vendor' ], 'Cleaning Vendors Folder' );
 		$this->task( [ $this, 'do_str_replace' ], 'Applying Normal String Replacements' );
 		$this->task( [ $this, 'do_preg_replace' ], 'Applying Regular Expression String Replacements' );
 		$this->task( [ $this, 'clear_cache' ], 'Clearing Cache' );
@@ -136,7 +139,7 @@ class BootswatchBuild {
 		}
 
 		$variables = [
-			'{{tags}}'    => str_replace( "\n", ',', file_get_contents( 'readme/tags.txt') ),
+			'{{tags}}'    => str_replace( "\n", ',', file_get_contents( 'readme/tags.txt' ) ),
 			'{{version}}' => $this->theme_version,
 		];
 
@@ -157,7 +160,7 @@ class BootswatchBuild {
 		}
 
 		// Replace variables.
-		$css = str_replace( array_keys( $variables), array_values( $variables), $css );
+		$css = str_replace( array_keys( $variables ), array_values( $variables ), $css );
 
 		// Write file.
 		file_put_contents( 'style.css', $css );
@@ -185,12 +188,12 @@ class BootswatchBuild {
 	private function update_readme() {
 
 		$variables = [
-			'{{changelog}}'    => file_get_contents( 'readme/changelog.txt'),
-			'{{credits}}'      => file_get_contents( 'readme/credits.txt'),
-			'{{description}}'  => file_get_contents( 'readme/description.txt'),
-			'{{faq}}'          => file_get_contents( 'readme/faq.txt'),
-			'{{installation}}' => file_get_contents( 'readme/installation.txt'),
-			'{{tags}}'         => str_replace( "\n", ',', file_get_contents( 'readme/tags.txt') ),
+			'{{changelog}}'    => file_get_contents( 'readme/changelog.txt' ),
+			'{{credits}}'      => file_get_contents( 'readme/credits.txt' ),
+			'{{description}}'  => file_get_contents( 'readme/description.txt' ),
+			'{{faq}}'          => file_get_contents( 'readme/faq.txt' ),
+			'{{installation}}' => file_get_contents( 'readme/installation.txt' ),
+			'{{tags}}'         => str_replace( "\n", ',', file_get_contents( 'readme/tags.txt' ) ),
 			'{{version}}'      => $this->theme_version,
 		];
 
@@ -198,7 +201,7 @@ class BootswatchBuild {
 		$readme = file_get_contents( 'readme/readme.txt' );
 
 		// Replace variables.
-		$readme = str_replace( array_keys( $variables), array_values( $variables ), $readme );
+		$readme = str_replace( array_keys( $variables ), array_values( $variables ), $readme );
 
 		// Write.
 		file_put_contents( 'readme.txt', $readme );
@@ -259,7 +262,7 @@ class BootswatchBuild {
 			/**
 			 * Provide a version helper.
 			 */
-			$replacements[ '{{version}}' ] = $this->theme_version;
+			$replacements['{{version}}'] = $this->theme_version;
 
 			/**
 			 * Replace.
@@ -289,11 +292,11 @@ class BootswatchBuild {
 	private function do_preg_replace() {
 		$this->log();
 		foreach ( $this->preg_replacements as $file => $replacements ) {
-			$replacements[ '/\{\{version\}\}/' ] = $this->theme_version;
+			$replacements['/\{\{version\}\}/'] = $this->theme_version;
 			$count    = 0;
 			$contents = file_get_contents( $file );
 			foreach ( $replacements as $regex => $replacement ) {
-				$contents = preg_replace( $regex, $replacement, $contents, -1, $sub_count);
+				$contents = preg_replace( $regex, $replacement, $contents, -1, $sub_count );
 				$count += $sub_count;
 			}
 			file_put_contents( $file, $contents );
@@ -497,7 +500,7 @@ class BootswatchBuild {
 	/**
 	 * Helper function to show title in log.
 	 *
-	 * @param  String  $title  The log title.
+	 * @param  String $title  The log title.
 	 */
 	protected function log_title( $title ) {
 		$this->log();
@@ -507,7 +510,7 @@ class BootswatchBuild {
 	/**
 	 * Helper function to show error in log.
 	 *
-	 * @param  String  $title  The log title.
+	 * @param  String $title  The log title.
 	 */
 	protected function log_error( $message ) {
 
@@ -520,9 +523,9 @@ class BootswatchBuild {
 	 * Runs a task.
 	 */
 	protected function task( callable $callback, $title ) {
-		$this->log_title( $title . ' started.');
+		$this->log_title( $title . ' started.' );
 		$timer = microtime( true );
-		call_user_func($callback );
+		call_user_func( $callback );
 		$duration = microtime( true ) - $timer;
 		$this->log_title( sprintf( '%s completed in %.2fs' , $title, $duration ) );
 
@@ -533,10 +536,9 @@ class BootswatchBuild {
 		$this->log();
 
 		if ( ! $this->shell_command_exists( 'xgettext' ) ) {
-			$this->log_error('`xgettext` command does not exist.');
+			$this->log_error( '`xgettext` command does not exist.' );
 			exit;
 		}
-
 
 		$command = str_replace( "\n", '', '
 			find -name "*.php"
@@ -578,7 +580,7 @@ class BootswatchBuild {
 
 	protected function shell_command_exists( $command ) {
 		$output = shell_exec( sprintf( 'which %s', escapeshellarg( $command ) ) );
-		return  ! empty( $output );
+		return ! empty( $output );
 	}
 
 	protected function update_translations() {
@@ -593,8 +595,8 @@ class BootswatchBuild {
 		}
 		$transifex_api_token = file_get_contents( '.transifex' );
 
-		$api_url = "https://www.transifex.com/api/2/project/bootswatch/";
-		$auth    = base64_encode("api:$transifex_api_token");
+		$api_url = 'https://www.transifex.com/api/2/project/bootswatch/';
+		$auth    = base64_encode( "api:$transifex_api_token" );
 
 		/**
 		 * Upload source file.
@@ -602,13 +604,13 @@ class BootswatchBuild {
 		$data = [
 			'content' => file_get_contents( 'languages/bootswatch.pot' ),
 		];
-		$postdata = json_encode($data);
+		$postdata = json_encode( $data );
 		$context = stream_context_create( [
 			'http' => [
 				'header'  => "Content-type: application/json\r\nAuthorization: Basic $auth",
 				'method'  => 'PUT',
 				'content' => $postdata,
-			]
+			],
 		] );
 		$languages_json = file_get_contents( 'https://www.transifex.com/api/2/project/bootswatch/resource/bootswatchpot/content/', false, $context );
 
@@ -618,12 +620,12 @@ class BootswatchBuild {
 		$context = stream_context_create( [
 			'http' => [
 				'header' => "Authorization: Basic $auth",
-			]
+			],
 		] );
-		$languages_json = file_get_contents( 'https://www.transifex.com/api/2/project/bootswatch/languages', false, $context  );
+		$languages_json = file_get_contents( 'https://www.transifex.com/api/2/project/bootswatch/languages', false, $context );
 		$languages = json_decode( $languages_json );
 		foreach ( $languages as $language ) {
-			$po = file_get_contents( $api_url . 'resource/bootswatchpot/translation/' . $language->language_code . '/?mode=reviewed&file', false, $context  );
+			$po = file_get_contents( $api_url . 'resource/bootswatchpot/translation/' . $language->language_code . '/?mode=reviewed&file', false, $context );
 			file_put_contents( "languages/bootswatch-{$language->language_code}.po", $po );
 			$this->log( sprintf( 'Downloaded `bootswatch-%s.po`.', $language->language_code ) );
 		}
