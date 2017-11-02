@@ -16,7 +16,7 @@ get_template_part( 'vendor/autoload' );
 bootswatch_recommend_plugin( [
 	'name' => 'Less PHP Compiler',
 	'file' => 'lessphp/less-plugin.php',
-	'description' => 'Once you {{verb}} {{link}}, you can create even more Bootswatch based themes (advanced feature).',
+	'description' => __( 'Once you {{verb}} {{link}}, you can create even more Bootswatch based themes (advanced feature).', 'bootswatch' ),
 ] );
 
 /**
@@ -61,12 +61,12 @@ add_action( 'admin_notices', function() {
 			continue;
 		} else if ( file_exists( WP_PLUGIN_DIR . '/' . ( $plugin['file'] ) ) ) {
 			// Plugin is installed but inactive.
-			$verb = __( 'activate', 'bootswatch' );
+			$verb = _x( 'activate', 'once you "activate"...' 'bootswatch' );
 			$ucf_verb = ucfirst( $verb );
 			$url = admin_url( 'plugins.php?plugin_status=inactive' );
 		} else {
 			// Plugin is not installed.
-			$verb = __( 'install', 'bootswatch' );
+			$verb = _x( 'install', 'once you "install"...' 'bootswatch' );
 			$ucf_verb = ucfirst( $verb );
 			$url  = admin_url( sprintf( 'plugin-install.php?tab=plugin-information&plugin=%s', explode( '/', $plugin['file'] )[0] ) );
 		}

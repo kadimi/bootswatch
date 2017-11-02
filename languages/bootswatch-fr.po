@@ -51,7 +51,7 @@ msgstr ""
 #: inc/template-tags.php:85
 #, php-format
 msgid "Edit %s"
-msgstr ""
+msgstr "Modifier %s"
 
 #: bootswatch-template-parts/content-none.php:14
 msgid "Nothing Found"
@@ -79,29 +79,29 @@ msgstr ""
 
 #: bootswatch-template-parts/footer.php:10
 msgid "Independent WordPress Developer"
-msgstr ""
+msgstr "Développeur WordPress Indépendant"
 
 #: bootswatch-template-parts/partial-header.php:13
 #, php-format
 msgid "Search Results for: %s"
-msgstr ""
+msgstr "Résultats de la Recherche pour : %s"
 
 #: inc/comment-form.php:27
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: inc/comment-form.php:36
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 #: inc/comment-form.php:46
 msgid "Website"
-msgstr ""
+msgstr "Site Web"
 
 #: inc/comment-form.php:98
 msgctxt "noun"
 msgid "Comment"
-msgstr ""
+msgstr "Commentaire"
 
 #: inc/compatibility/php-version.php:78
 #, php-format
@@ -126,11 +126,19 @@ msgstr ""
 msgid "Default Header Image"
 msgstr ""
 
+#: inc/dependencies.php:19
+msgid ""
+"Once you {{verb}} {{link}}, you can create even more Bootswatch based themes"
+" (advanced feature)."
+msgstr ""
+
 #: inc/dependencies.php:64
+msgctxt "once you \"activate\"..."
 msgid "activate"
 msgstr ""
 
 #: inc/dependencies.php:69
+msgctxt "once you \"install\"..."
 msgid "install"
 msgstr ""
 
@@ -152,44 +160,44 @@ msgstr ""
 
 #: inc/options.php:212 inc/options.php:219
 msgid "No"
-msgstr ""
+msgstr "Non"
 
 #: inc/options.php:213 inc/options.php:218
 msgid "Yes"
-msgstr ""
+msgstr "Oui"
 
 #: inc/options.php:424
 msgid "Just Bootstrap"
-msgstr ""
+msgstr "Bootstrap seulement"
 
 #: inc/search-form.php:44
 msgid "Search"
-msgstr ""
+msgstr "Recherche"
 
 #: inc/setup.php:18
 msgid "Primary Menu"
-msgstr ""
+msgstr "Menu Principal"
 
 #: inc/template-tags.php:23
 #, php-format
 msgctxt "post date"
 msgid "Posted on %s"
-msgstr ""
+msgstr "Publié le : %s"
 
 #: inc/template-tags.php:26
 #, php-format
 msgctxt "post author"
 msgid "by %s"
-msgstr ""
+msgstr "par %s"
 
 #: inc/template-tags.php:62
 msgid ", "
-msgstr ""
+msgstr ","
 
 #: inc/template-tags.php:65
 #, php-format
 msgid "Posted in %s"
-msgstr ""
+msgstr "Publié dans %s"
 
 #: inc/template-tags.php:73
 #, php-format
@@ -198,11 +206,11 @@ msgstr ""
 
 #: inc/template-tags.php:79
 msgid "% Comments"
-msgstr ""
+msgstr "% Commentaires"
 
 #: inc/template-tags.php:79
 msgid "1 Comment"
-msgstr ""
+msgstr "1 Commentaire"
 
 #: inc/template-tags.php:79
 msgid "Leave a comment"

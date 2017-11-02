@@ -570,7 +570,6 @@ class BootswatchBuild {
 				--keyword="esc_html__"
 				--keyword="esc_html_e"
 				--keyword="esc_html_x:1,2c"
-				--no-wrap
 				--sort-by-file
 				-o languages/bootswatch.pot
 		');

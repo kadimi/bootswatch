@@ -55,11 +55,14 @@ msgid "Ready to publish your first post? <a href=\"%s\">Get started here</a>."
 msgstr ""
 
 #: bootswatch-template-parts/content-none.php:31
-msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgid ""
+"Sorry, but nothing matched your search terms. Please try again with some "
+"different keywords."
 msgstr ""
 
 #: bootswatch-template-parts/content-none.php:36
-msgid "It seems we can't find what you're looking for. Perhaps searching can help."
+msgid ""
+"It seems we can't find what you're looking for. Perhaps searching can help."
 msgstr ""
 
 #: bootswatch-template-parts/footer.php:9
@@ -94,12 +97,17 @@ msgstr ""
 
 #: inc/compatibility/php-version.php:78
 #, php-format
-msgid "Bootswatch requires <code>PHP 5.4</code> or higher but you are using <code>PHP %1$s</code>, as such, Bootswatch cannot be activated, %2$s will be activated instead. We hope you will uprade PHP very soon."
+msgid ""
+"Bootswatch requires <code>PHP 5.4</code> or higher but you are using "
+"<code>PHP %1$s</code>, as such, Bootswatch cannot be activated, %2$s will be "
+"activated instead. We hope you will uprade PHP very soon."
 msgstr ""
 
 #: inc/compatibility/php-version.php:81
 #, php-format
-msgid "Bootswatch requires <code>PHP 5.4</code> or higher but you are using <code>PHP %s</code>, as such, Bootswatch will not work until you uprade PHP."
+msgid ""
+"Bootswatch requires <code>PHP 5.4</code> or higher but you are using "
+"<code>PHP %s</code>, as such, Bootswatch will not work until you uprade PHP."
 msgstr ""
 
 #: inc/compatibility/php-version.php:124
@@ -110,11 +118,19 @@ msgstr ""
 msgid "Default Header Image"
 msgstr ""
 
+#: inc/dependencies.php:19
+msgid ""
+"Once you {{verb}} {{link}}, you can create even more Bootswatch based themes "
+"(advanced feature)."
+msgstr ""
+
 #: inc/dependencies.php:64
+msgctxt "once you \"activate\"..."
 msgid "activate"
 msgstr ""
 
 #: inc/dependencies.php:69
+msgctxt "once you \"install\"..."
 msgid "install"
 msgstr ""
 

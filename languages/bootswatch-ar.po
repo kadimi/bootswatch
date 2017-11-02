@@ -135,13 +135,21 @@ msgstr "كيف حالك؟ معك Bootswatch..."
 msgid "Default Header Image"
 msgstr ""
 
+#: inc/dependencies.php:19
+msgid ""
+"Once you {{verb}} {{link}}, you can create even more Bootswatch based themes"
+" (advanced feature)."
+msgstr ""
+
 #: inc/dependencies.php:64
+msgctxt "once you \"activate\"..."
 msgid "activate"
-msgstr "فعّل"
+msgstr ""
 
 #: inc/dependencies.php:69
+msgctxt "once you \"install\"..."
 msgid "install"
-msgstr "ثبت"
+msgstr ""
 
 #: inc/options.php:21
 msgid "Theme"
