@@ -1,3 +1,6 @@
+= 1.0.12 - Nov 02 2017 =
+* Fix theme tags.
+
 = 1.0.11 - Nov 01 2017 =
 * Improve localization.
 * Improve footer.

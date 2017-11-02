@@ -29,18 +29,6 @@ add_action( 'after_setup_theme', function() {
 		'gallery',
 		'caption',
 	] );
-
-	/*
-	 * Enable support for Post Formats.
-	 * See https://developer.wordpress.org/themes/functionality/post-formats/
-	 */
-	add_theme_support( 'post-formats', [
-		'aside',
-		'image',
-		'video',
-		'quote',
-		'link',
-	] );
 } );
 
 /**
