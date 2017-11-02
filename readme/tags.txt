@@ -1,3 +1,4 @@
+custom-background
 custom-header
 custom-menu
 e-commerce
