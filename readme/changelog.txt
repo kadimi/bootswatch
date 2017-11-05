@@ -1,3 +1,6 @@
+= 1.0.13 - Nov 05 2017 =
+* Fix stylesheet URL in WordPress themes directory.
+
 = 1.0.12 - Nov 02 2017 =
 * Fix theme tags.
 
