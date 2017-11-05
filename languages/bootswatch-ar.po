@@ -6,7 +6,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Bootswatch 1.0.12\n"
+"Project-Id-Version: Bootswatch 1.0.13\n"
 "Report-Msgid-Bugs-To: https://github.com/kadimi/bootswatch/issues/new\n"
 "PO-Creattion-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -133,7 +133,7 @@ msgstr "كيف حالك؟ معك Bootswatch..."
 
 #: inc/custom-header.php:68
 msgid "Default Header Image"
-msgstr ""
+msgstr "الصورة الافتراضية للترويسة"
 
 #: inc/dependencies.php:19
 msgid ""
@@ -153,19 +153,19 @@ msgstr ""
 
 #: inc/options.php:21
 msgid "Theme"
-msgstr ""
+msgstr "القالب"
 
 #: inc/options.php:71
 msgid "Custom Header Size"
-msgstr ""
+msgstr "حجم مخصص للترويسة"
 
 #: inc/options.php:100
 msgid "Fixed Navigation Bar"
-msgstr ""
+msgstr "شريط تصفح ثابت"
 
 #: inc/options.php:126
 msgid "Search Form in Header"
-msgstr ""
+msgstr "استمارة البحث في الترويسة"
 
 #: inc/options.php:212 inc/options.php:219
 msgid "No"
@@ -219,7 +219,7 @@ msgstr ""
 
 #: inc/template-tags.php:79
 msgid "1 Comment"
-msgstr ""
+msgstr "1 تعليق"
 
 #: inc/template-tags.php:79
 msgid "Leave a comment"

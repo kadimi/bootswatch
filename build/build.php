@@ -38,6 +38,9 @@ require 'build/class-bootswatchbuild.php';
 		],
 	],
 	'preg_replacements' => [
+		'vendor/autoload.php' => [
+			'/Composer([a-z]+)[0-9a-f]{32}/i' => 'Composer$1Bootswatch',
+		],
 		'vendor/composer/autoload_real.php' => [
 			'/Composer([a-z]+)[0-9a-f]{32}/i' => 'Composer$1Bootswatch',
 		],
