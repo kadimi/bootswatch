@@ -100,7 +100,7 @@ class BootswatchBuild {
 	 */
 	public function __construct( $data ) {
 		$this->timer = microtime( true );
-		$this->theme_version = file_get_contents( '.version' );
+		$this->theme_version = trim( file_get_contents( '.version' ) );
 
 		$this->ignored_patterns        = $data['ignored_patterns'];
 		$this->vendor_ignored_patterns = $data['vendor_ignored_patterns'];
