@@ -33,11 +33,17 @@ function bootswatch_search_form( $classes = '' ) {
  * @return String       Form HTML.
  */
 function bootswatch_get_search_form_cb() {
+
+
+	$unique_id = esc_attr( uniqid( 'search-form-' ) );
 	ob_start();
 	?>
 	<form role="search" method="get" class="search-form" action="<?php echo esc_url( home_url() ); ?>">
 		<div class="input-group">
-			<input class="form-control" name="s" value="<?php echo get_search_query(); ?>">
+			<label for="<?php echo $unique_id; ?>">
+				<span class="screen-reader-text"><?php echo _x( 'Search for:', 'label', 'bootswatch' ); ?></span>
+			</label>
+			<input type="search" id="<?php echo $unique_id; ?>" class="form-control" value="<?php echo get_search_query(); ?>" name="s">
 			<span class="input-group-btn">
 				<button type="submit" class="btn btn-default">
 					<span class="glyphicon glyphicon-search"></span>
