@@ -107,6 +107,7 @@ class BootswatchBuild {
 		$this->preg_replacements       = $data['preg_replacements'];
 		$this->str_replacements        = $data['str_replacements'];
 
+		$this->task( [ $this, 'mo' ], 'Creating .mo Files' );
 		$this->task( [ $this, 'pot' ], 'Creating Languages File' );
 		$this->task( [ $this, 'update_translations' ], 'Updating .pot and po Files' );
 		$this->task( [ $this, 'update_readme' ], 'Updating `readme.txt`' );
@@ -429,7 +430,7 @@ class BootswatchBuild {
 	 * @param  Sting $pattern The pattern.
 	 * @return Array          A list of files paths.
 	 */
-	protected function find( $pattern ) {
+	protected function find( $pattern, $only_extensions = [], $exclude_extensions = [] ) {
 
 		$elements = [];
 
@@ -439,22 +440,42 @@ class BootswatchBuild {
 		$paths = new \RecursiveIteratorIterator( new \RecursiveDirectoryIterator( $pattern ), \RecursiveIteratorIterator::SELF_FIRST );
 
 		foreach ( $paths as $path => $unused ) {
+
+			$_path_parts = explode( '.', $path );
+			$extension   = end( $_path_parts );
+
 			/**
-			 * Skip non-matching.
+			 * Skip not matching.
 			 */
 			if ( ! preg_match( "/$pattern/", $path ) ) {
 				continue;
 			}
+
 			/**
 			 * Skip `.` and `..`.
 			 */
 			if ( preg_match( '/\/\.{1,2}$/', $path ) ) {
 				continue;
 			}
+
 			/**
-			 * Remove './';
+			 * Remove './'.
 			 */
 			$path = preg_replace( '#^\./#', '', $path );
+
+			/**
+			 * Skip by not included extension.
+			 */
+			if ( $only_extensions && ! in_array( $extension, $only_extensions ) ) {
+				continue;
+			}
+
+			/**
+			 * Skip by excluded extension.
+			 */
+			if ( in_array( $extension, $exclude_extensions ) ) {
+				continue;
+			}
 
 			/**
 			 * Add `/` to directories.
@@ -582,9 +603,25 @@ class BootswatchBuild {
 		return ! empty( $output );
 	}
 
+	protected function mo() {
+		$po_filepaths = $this->find( 'languages', ['po'] );
+		foreach ( $po_filepaths as $po_filepath ) {
+			$command = sprintf( 'msgfmt -o %s %s'
+				, preg_replace( '/po$/', 'mo', $po_filepath )
+				, $po_filepath
+			);
+			shell_exec( $command );
+		}
+	}
+
 	protected function update_translations() {
 
 		$this->log();
+
+		if ( ! $this->shell_command_exists( 'msgfmt' ) ) {
+			$this->log_error( '`msgfmt` command does not exist.' );
+			exit;
+		}
 
 		/**
 		 * Check that the Transifex API token exists.
@@ -625,8 +662,8 @@ class BootswatchBuild {
 		$languages = json_decode( $languages_json );
 		foreach ( $languages as $language ) {
 			$po = file_get_contents( $api_url . 'resource/bootswatchpot/translation/' . $language->language_code . '/?mode=reviewed&file', false, $context );
-			file_put_contents( "languages/bootswatch-{$language->language_code}.po", $po );
-			$this->log( sprintf( 'Downloaded `bootswatch-%s.po`.', $language->language_code ) );
+			file_put_contents( "languages/{$language->language_code}.po", $po );
+			$this->log( sprintf( 'Downloaded `%s.po`.', $language->language_code ) );
 		}
 	}
 }

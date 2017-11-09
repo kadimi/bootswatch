@@ -54,11 +54,13 @@ require 'build/class-bootswatchbuild.php';
 			sprintf( "/\"%s:[^\n]+\n/", 'Plural-Forms' )    => '',
 			'/"POT-Creation-Date: .*/'                      => '"PO-Creattion-Date: YEAR-MO-DA HO:MI+ZONE\n"',
 		],
-		'languages/bootswatch-ar.po' => [
+		'languages/ar.po' => [
 			'/"POT-Creation-Date: .*/' => '"PO-Creattion-Date: YEAR-MO-DA HO:MI+ZONE\n"',
+			'charset=CHARSET'          => 'charset=utf-8',
 		],
-		'languages/bootswatch-fr.po' => [
+		'languages/fr.po' => [
 			'/"POT-Creation-Date: .*/' => '"PO-Creattion-Date: YEAR-MO-DA HO:MI+ZONE\n"',
+			'charset=CHARSET'          => 'charset=utf-8',
 		],
 	],
 	'vendor_ignored_patterns' => [
