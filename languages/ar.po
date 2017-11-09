@@ -184,6 +184,11 @@ msgid "Just Bootstrap"
 msgstr "Bootstrap فقط"
 
 #: inc/search-form.php:44
+msgctxt "label"
+msgid "Search for:"
+msgstr ""
+
+#: inc/search-form.php:50
 msgid "Search"
 msgstr "البحث"
 
