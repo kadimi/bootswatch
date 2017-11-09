@@ -16,11 +16,11 @@
 </head>
 <body <?php body_class(); ?>>
 
-	<header class="header">
+	<header class="header" role="banner">
 
 		<a class="screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'bootswatch' ); ?></a>
 
-		<nav class=" navbar navbar-default <?php echo bootswatch_has( 'fixed_navbar' ) ? 'navbar-fixed-top' : 'navbar-static-top'; ?> ">
+		<nav class=" navbar navbar-default <?php echo bootswatch_has( 'fixed_navbar' ) ? 'navbar-fixed-top' : 'navbar-static-top'; ?> " role="navigation">
 			<div class="container">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".collapse">
