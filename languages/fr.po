@@ -44,11 +44,11 @@ msgstr[1] ""
 
 #: bootswatch-template-parts/components/entry-content.php:37
 #, php-format
-msgid "Continue reading %s <span class=\"meta-nav\">&rarr;</span>"
+msgid "Continue reading %s &rarr;"
 msgstr ""
 
 #: bootswatch-template-parts/components/entry-footer.php:18
-#: inc/template-tags.php:85
+#: inc/template-tags.php:84
 #, php-format
 msgid "Edit %s"
 msgstr "Modifier %s"
@@ -176,12 +176,12 @@ msgstr "Oui"
 msgid "Just Bootstrap"
 msgstr "Bootstrap seulement"
 
-#: inc/search-form.php:44
+#: inc/search-form.php:43
 msgctxt "label"
 msgid "Search for:"
 msgstr ""
 
-#: inc/search-form.php:50
+#: inc/search-form.php:49
 msgid "Search"
 msgstr "Recherche"
 
@@ -201,29 +201,29 @@ msgctxt "post author"
 msgid "by %s"
 msgstr "par %s"
 
-#: inc/template-tags.php:62
+#: inc/template-tags.php:61
 msgid ", "
 msgstr ","
 
-#: inc/template-tags.php:65
+#: inc/template-tags.php:64
 #, php-format
 msgid "Posted in %s"
 msgstr "Publié dans %s"
 
-#: inc/template-tags.php:73
+#: inc/template-tags.php:72
 #, php-format
 msgid "Tagged %1$s"
 msgstr ""
 
-#: inc/template-tags.php:79
+#: inc/template-tags.php:78
 msgid "% Comments"
 msgstr "% Commentaires"
 
-#: inc/template-tags.php:79
+#: inc/template-tags.php:78
 msgid "1 Comment"
 msgstr "1 Commentaire"
 
-#: inc/template-tags.php:79
+#: inc/template-tags.php:78
 msgid "Leave a comment"
 msgstr "Laisser un commentaire"
 
