@@ -73,6 +73,10 @@ msgstr ""
 msgid "Independent WordPress Developer"
 msgstr ""
 
+#: bootswatch-template-parts/header.php:21
+msgid "Skip to content"
+msgstr ""
+
 #: bootswatch-template-parts/partial-header.php:13
 #, php-format
 msgid "Search Results for: %s"

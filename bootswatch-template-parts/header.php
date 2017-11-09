@@ -18,6 +18,8 @@
 
 	<header class="header">
 
+		<a class="screen-reader-text" href="#content"><?php _e( 'Skip to content', 'bootswatch' ); ?></a>
+
 		<nav class=" navbar navbar-default <?php echo bootswatch_has( 'fixed_navbar' ) ? 'navbar-fixed-top' : 'navbar-static-top'; ?> ">
 			<div class="container">
 				<div class="navbar-header">

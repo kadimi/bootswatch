@@ -131,6 +131,11 @@ function bootswatch_generate_inline_css( $theme = 'bootstrap' ) {
 				}
 			}
 		}
+
+		// Fix screen reader text (14px).
+		.screen-reader-text:focus {
+			font-size: 1.4rem;
+		}
 	';
 
 	/**
@@ -200,6 +205,9 @@ function bootswatch_bootstrap_inline_css() {
 			body.admin-bar .custom-header video {
 				height: calc(100vh - 46px - 50px);
 			}
+		}
+		.screen-reader-text:focus {
+			font-size: 1.4rem;
 		}
 	';
 	return $css;
