@@ -1,3 +1,4 @@
+accessibility-ready
 custom-background
 custom-header
 custom-menu
