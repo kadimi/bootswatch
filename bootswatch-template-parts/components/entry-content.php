@@ -34,11 +34,7 @@ if ( $use_short ) {
 			} else {
 				the_content( sprintf(
 					/* translators: %s: Post title. */
-					wp_kses( __( 'Continue reading %s <span class="meta-nav">&rarr;</span>', 'bootswatch' ), array(
-						'span' => array(
-							'class' => array(),
-						),
-					) ),
+					apply_filters( 'bootswatch_read_more_text', esc_html__( 'Continue reading %s &rarr;', 'bootswatch' ) ),
 					the_title( '<span class="screen-reader-text">"', '"</span>', false )
 				) );
 			}
