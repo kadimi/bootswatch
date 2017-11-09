@@ -107,7 +107,6 @@ class BootswatchBuild {
 		$this->preg_replacements       = $data['preg_replacements'];
 		$this->str_replacements        = $data['str_replacements'];
 
-		$this->task( [ $this, 'mo' ], 'Creating .mo Files' );
 		$this->task( [ $this, 'pot' ], 'Creating Languages File' );
 		$this->task( [ $this, 'update_translations' ], 'Updating .pot and po Files' );
 		$this->task( [ $this, 'update_readme' ], 'Updating `readme.txt`' );
@@ -116,6 +115,7 @@ class BootswatchBuild {
 		$this->task( [ $this, 'clean_vendor' ], 'Cleaning Vendors Folder' );
 		$this->task( [ $this, 'do_str_replace' ], 'Applying Normal String Replacements' );
 		$this->task( [ $this, 'do_preg_replace' ], 'Applying Regular Expression String Replacements' );
+		$this->task( [ $this, 'mo' ], 'Creating .mo Files' );
 		$this->task( [ $this, 'clear_cache' ], 'Clearing Cache' );
 		$this->task( [ $this, 'package' ], 'Packaging' );
 	}
@@ -604,6 +604,14 @@ class BootswatchBuild {
 	}
 
 	protected function mo() {
+
+		$this->log();
+
+		if ( ! $this->shell_command_exists( 'msgfmt' ) ) {
+			$this->log_error( '`msgfmt` command does not exist.' );
+			exit;
+		}
+
 		$po_filepaths = $this->find( 'languages', ['po'] );
 		foreach ( $po_filepaths as $po_filepath ) {
 			$command = sprintf( 'msgfmt -o %s %s'
@@ -617,11 +625,6 @@ class BootswatchBuild {
 	protected function update_translations() {
 
 		$this->log();
-
-		if ( ! $this->shell_command_exists( 'msgfmt' ) ) {
-			$this->log_error( '`msgfmt` command does not exist.' );
-			exit;
-		}
 
 		/**
 		 * Check that the Transifex API token exists.

@@ -1,0 +1,235 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Nabil Kadimi
+# This file is distributed under the same license as the Bootswatch package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Bootswatch 1.0.15\n"
+"Report-Msgid-Bugs-To: https://github.com/kadimi/bootswatch/issues/new\n"
+"PO-Creattion-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Nabil Kadimi <nabil@kadimi.com>, 2017\n"
+"Language-Team: Arabic (https://www.transifex.com/kadimi/teams/80110/ar/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: bootswatch-template-parts/components/comments-closed.php:11
+msgid "Comments are closed."
+msgstr "التعليقات مغلقة."
+
+#: bootswatch-template-parts/components/comments-navigation.php:10
+msgid "Comment navigation"
+msgstr "تصفح التعاليق"
+
+#: bootswatch-template-parts/components/comments-navigation.php:13
+msgid "Older Comments"
+msgstr "التعاليق الأقدم"
+
+#: bootswatch-template-parts/components/comments-navigation.php:14
+msgid "Newer Comments"
+msgstr "التعاليق الأحدث"
+
+#: bootswatch-template-parts/components/comments-title.php:12
+#, php-format
+msgctxt "comments title"
+msgid "%1$s thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: bootswatch-template-parts/components/entry-content.php:37
+#, php-format
+msgid "Continue reading %s <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+#: bootswatch-template-parts/components/entry-footer.php:18
+#: inc/template-tags.php:85
+#, php-format
+msgid "Edit %s"
+msgstr "تحرير %s"
+
+#: bootswatch-template-parts/content-none.php:14
+msgid "Nothing Found"
+msgstr "لا يتم العثور على أي شيء"
+
+#: bootswatch-template-parts/content-none.php:22
+#, php-format
+msgid "Ready to publish your first post? <a href=\"%s\">Get started here</a>."
+msgstr ""
+
+#: bootswatch-template-parts/content-none.php:31
+msgid ""
+"Sorry, but nothing matched your search terms. Please try again with some "
+"different keywords."
+msgstr ""
+
+#: bootswatch-template-parts/content-none.php:36
+msgid ""
+"It seems we can't find what you're looking for. Perhaps searching can help."
+msgstr ""
+
+#: bootswatch-template-parts/footer.php:9
+msgid "Nabil Kadimi"
+msgstr "نبيل قديمي"
+
+#: bootswatch-template-parts/footer.php:10
+msgid "Independent WordPress Developer"
+msgstr "مطور ووردبريس حر"
+
+#: bootswatch-template-parts/partial-header.php:13
+#, php-format
+msgid "Search Results for: %s"
+msgstr "نتائج البحث عن: %s"
+
+#: inc/comment-form.php:27
+msgid "Name"
+msgstr "الاسم"
+
+#: inc/comment-form.php:36
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+#: inc/comment-form.php:46
+msgid "Website"
+msgstr "الموقع"
+
+#: inc/comment-form.php:98
+msgctxt "noun"
+msgid "Comment"
+msgstr "التعليق"
+
+#: inc/compatibility/php-version.php:78
+#, php-format
+msgid ""
+"Bootswatch requires <code>PHP 5.4</code> or higher but you are using "
+"<code>PHP %1$s</code>, as such, Bootswatch cannot be activated, %2$s will be"
+" activated instead. We hope you will uprade PHP very soon."
+msgstr ""
+"يتطلب ووردبريس <code>PHP 5.4</code> أو أحدث، لكنك تستعمل <code>PHP "
+"%1$s</code>، لهذا لا يمكن تفعيل Bootswatch، سيتم تفعيل %2$s بدل ذلك. نأمل "
+"أنك سترقّي PHP عاجلا."
+
+#: inc/compatibility/php-version.php:81
+#, php-format
+msgid ""
+"Bootswatch requires <code>PHP 5.4</code> or higher but you are using "
+"<code>PHP %s</code>, as such, Bootswatch will not work until you uprade PHP."
+msgstr ""
+"يتطلب ووردبريس <code>PHP 5.4</code> أو أحدث، لكنك تستعمل <code>PHP %s</code>"
+" ، لهذا لن يعمل Bootswatch  حتى ترقيّ PHP."
+
+#: inc/compatibility/php-version.php:124
+msgid "Howdy! Bootswatch here..."
+msgstr "كيف حالك؟ معك Bootswatch..."
+
+#: inc/custom-header.php:68
+msgid "Default Header Image"
+msgstr "الصورة الافتراضية للترويسة"
+
+#: inc/dependencies.php:19
+msgid ""
+"Once you {{verb}} {{link}}, you can create even more Bootswatch based themes"
+" (advanced feature)."
+msgstr ""
+
+#: inc/dependencies.php:64
+msgctxt "once you \"activate\"..."
+msgid "activate"
+msgstr ""
+
+#: inc/dependencies.php:69
+msgctxt "once you \"install\"..."
+msgid "install"
+msgstr ""
+
+#: inc/options.php:21
+msgid "Theme"
+msgstr "القالب"
+
+#: inc/options.php:71
+msgid "Custom Header Size"
+msgstr "حجم مخصص للترويسة"
+
+#: inc/options.php:100
+msgid "Fixed Navigation Bar"
+msgstr "شريط تصفح ثابت"
+
+#: inc/options.php:126
+msgid "Search Form in Header"
+msgstr "استمارة البحث في الترويسة"
+
+#: inc/options.php:212 inc/options.php:219
+msgid "No"
+msgstr "لا"
+
+#: inc/options.php:213 inc/options.php:218
+msgid "Yes"
+msgstr "نعم"
+
+#: inc/options.php:424
+msgid "Just Bootstrap"
+msgstr "Bootstrap فقط"
+
+#: inc/search-form.php:44
+msgid "Search"
+msgstr "البحث"
+
+#: inc/setup.php:18
+msgid "Primary Menu"
+msgstr "القائمة الرئيسية"
+
+#: inc/template-tags.php:23
+#, php-format
+msgctxt "post date"
+msgid "Posted on %s"
+msgstr "حرّر في %s"
+
+#: inc/template-tags.php:26
+#, php-format
+msgctxt "post author"
+msgid "by %s"
+msgstr "من طرف %s"
+
+#: inc/template-tags.php:62
+msgid ", "
+msgstr "،"
+
+#: inc/template-tags.php:65
+#, php-format
+msgid "Posted in %s"
+msgstr ""
+
+#: inc/template-tags.php:73
+#, php-format
+msgid "Tagged %1$s"
+msgstr ""
+
+#: inc/template-tags.php:79
+msgid "% Comments"
+msgstr ""
+
+#: inc/template-tags.php:79
+msgid "1 Comment"
+msgstr "1 تعليق"
+
+#: inc/template-tags.php:79
+msgid "Leave a comment"
+msgstr "اترك تعليقا"
+
+#: inc/widgets.php:13
+msgid "Sidebar"
+msgstr "القائمة الجانبية"
+
+#: index.php:13
+#, php-format
+msgid "Bootswatch requires PHP %1$s or newer, you are using PHP %2$s."
+msgstr ""

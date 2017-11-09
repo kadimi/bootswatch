@@ -56,11 +56,11 @@ require 'build/class-bootswatchbuild.php';
 		],
 		'languages/ar.po' => [
 			'/"POT-Creation-Date: .*/' => '"PO-Creattion-Date: YEAR-MO-DA HO:MI+ZONE\n"',
-			'charset=CHARSET'          => 'charset=utf-8',
+			'/charset=CHARSET/'        => 'charset=utf-8',
 		],
 		'languages/fr.po' => [
 			'/"POT-Creation-Date: .*/' => '"PO-Creattion-Date: YEAR-MO-DA HO:MI+ZONE\n"',
-			'charset=CHARSET'          => 'charset=utf-8',
+			'/charset=CHARSET/'        => 'charset=utf-8',
 		],
 	],
 	'vendor_ignored_patterns' => [
