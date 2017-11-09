@@ -4,7 +4,7 @@ Contributors: Nabil Kadimi
 Tags: custom-background,custom-header,custom-menu,e-commerce,flexible-header,featured-image-header,featured-images,grid-layout,right-sidebar,rtl-language-support,sticky-post,theme-options,threaded-comments,translation-ready,two-columns
 Requires at least: 4.0
 Tested up to: 4.8.3
-Stable tag: 1.0.14
+Stable tag: 1.0.15
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -29,6 +29,9 @@ Bootswatch includes support for Infinite Scroll in Jetpack.
 
 
 == Changelog ==
+
+= 1.0.15 - Nov 09 2017 =
+* Fix translations not showing in GlotPress.
 
 = 1.0.14 - Nov 05 2017 =
 * Add RTL support.

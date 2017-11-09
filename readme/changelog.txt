@@ -1,3 +1,6 @@
+= 1.0.15 - Nov 09 2017 =
+* Fix translations not showing in GlotPress.
+
 = 1.0.14 - Nov 05 2017 =
 * Add RTL support.
 * Add translation files.
