@@ -3,3 +3,7 @@
 body {
 	word-wrap: break-word;
 }
+
+.inline {
+	display: inline;
+}

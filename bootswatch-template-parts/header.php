@@ -18,7 +18,7 @@
 
 	<header class="header">
 
-		<a class="screen-reader-text" href="#content"><?php _e( 'Skip to content', 'bootswatch' ); ?></a>
+		<a class="screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'bootswatch' ); ?></a>
 
 		<nav class=" navbar navbar-default <?php echo bootswatch_has( 'fixed_navbar' ) ? 'navbar-fixed-top' : 'navbar-static-top'; ?> ">
 			<div class="container">
@@ -28,7 +28,9 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand site-title" href="<?php echo esc_url( home_url() ); ?>"><?php bloginfo( 'name' ); ?></a>
+					<?php if ( is_home() ) { ?><h1 class="inline"><?php } ?>
+						<a class="navbar-brand site-title" href="<?php echo esc_url( home_url() ); ?>"><?php bloginfo( 'name' ); ?></a>
+					<?php if ( is_home() ) { ?></h1><?php } ?>
 				</div>
 				<div class="collapse navbar-collapse">
 					<?php bootswatch_get_template_part( 'template-parts/components/header', 'menu' ); ?>
