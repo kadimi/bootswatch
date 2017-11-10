@@ -21,10 +21,7 @@ function bootswatch_make_theme_file( $theme, $overrides = [], $rebuild = false )
 	if ( ! class_exists( 'Less_Parser' ) ) {
 		switch ( $theme ) {
 		case 'bootstrap':
-			return get_template_directory() . '/vendor/kadimi/bootswatch-light/light/css/bootstrap.min.css';
-			break;
-		case 'bootstrap-theme':
-			return get_template_directory() . '/vendor/kadimi/bootswatch-light/light/css/bootstrap-theme.min.css';
+			return get_template_directory() . '/vendor/kadimi/bootswatch-light/4/_css/bootstrap.min.css';
 			break;
 		default:
 			return get_template_directory() . '/vendor/kadimi/bootswatch-light/light/' . $theme . '/bootstrap.min.css';

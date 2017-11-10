@@ -387,9 +387,9 @@ function bootswatch_get_bootstrap_part_path( $part ) {
 function bootswatch_get_bootstrap_part( $part, $type ) {
 
 	if ( 'uri' === $type ) {
-		$bootswatch_light = get_template_directory_uri() . '/vendor/kadimi/bootswatch-light/light/';
+		$bootswatch_light = get_template_directory_uri() . '/vendor/kadimi/bootswatch-light/4/';
 	} else if ( 'path' === $type ) {
-		$bootswatch_light = get_template_directory() . '/vendor/kadimi/bootswatch-light/light/';
+		$bootswatch_light = get_template_directory() . '/vendor/kadimi/bootswatch-light/4/';
 	} else {
 		return false;
 	}
@@ -400,7 +400,7 @@ function bootswatch_get_bootstrap_part( $part, $type ) {
 	case 'variables':
 		return $bootswatch_light . 'less/variables.less';
 	case 'script':
-		return $bootswatch_light . 'js/bootstrap.min.js';
+		return $bootswatch_light . '_js/bootstrap.min.js';
 	case 'bootstrap':
 		return $bootswatch_light . 'css/bootstrap.min.css';
 	case 'bootstrap.less':

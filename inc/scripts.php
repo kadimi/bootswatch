@@ -17,9 +17,7 @@ add_action( 'wp_enqueue_scripts', function() {
 	/**
 	 * Default variable overrides.
 	 */
-	$variables_overrides = [
-		'@icon-font-path' => '../vendor/kadimi/bootswatch-light/light/fonts/',
-	];
+	$variables_overrides = [];
 	$variables_overrides = apply_filters( 'bootswatch_variables_overrides', $variables_overrides, $theme );
 
 	/**

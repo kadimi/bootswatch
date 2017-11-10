@@ -4,14 +4,13 @@
     "require": {
         "php": ">=5.6",
         "cssjanus/cssjanus": "^1.2",
-        "kadimi/bootswatch-light": "^1.0"
+        "kadimi/bootswatch-light": "^2.0"
     },
     "scripts": {
         "post-install-cmd": "php -f build/build.php",
         "post-update-cmd": "php -f build/build.php"
     },
     "require-dev": {
-        "brain/monkey": "^2.0",
-        "oyejorge/less.php": "v1.7.0.14"
+        "brain/monkey": "^2.0"
     }
 }
