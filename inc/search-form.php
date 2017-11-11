@@ -15,7 +15,7 @@ function bootswatch_get_search_form( $classes = '' ) {
 	if ( is_array( $classes ) ) {
 		$classes = implode( ' ', $classes );
 	}
-	return str_replace( 'class="search-form', 'class="' . $classes . ' search-form', get_search_form( false ) );
+	return str_replace( 'class="search-form', 'class="search-form ' . $classes, get_search_form( false ) );
 }
 
 /**
@@ -36,15 +36,15 @@ function bootswatch_get_search_form_cb() {
 
 	$unique_id = esc_attr( uniqid( 'search-form-' ) );
 	$classes   = [
-		'form'   => join( ' ', apply_filters( 'bootswatch_search_form_classes', explode( ' ', 'search-form form-inline my-2 my-lg-0' ) ) ),
-		'input'  => join( ' ', apply_filters( 'bootswatch_search_form_classes', explode( ' ', 'form-control my-2 my-sm-0 mr-sm-2' ) ) ),
-		'submit' => join( ' ', apply_filters( 'bootswatch_search_form_classes', explode( ' ', 'btn btn-outline-primary' ) ) ),
+		'form'   => join( ' ', apply_filters( 'bootswatch_search_form_classes',        explode( ' ', 'form-inline my-2 my-lg-0' ) ) ),
+		'input'  => join( ' ', apply_filters( 'bootswatch_search_form_input_classes',  explode( ' ', 'form-control my-2 mr-sm-2' ) ) ),
+		'submit' => join( ' ', apply_filters( 'bootswatch_search_form_submit_classes', explode( ' ', 'btn btn-outline-primary' ) ) ),
 	];
 
 	ob_start();
 	?>
 
-	<form role="search" class="<?php echo $classes['form']; ?>" action="<?php echo esc_url( home_url() ); ?>">
+	<form role="search" class="search-form <?php echo $classes['form']; ?>" action="<?php echo esc_url( home_url() ); ?>">
 		<label for="<?php echo $unique_id; // XSS OK. ?>">
 			<span class="screen-reader-text"><?php echo esc_html_x( 'Search for:', 'label', 'bootswatch' ); ?></span>
 		</label>
