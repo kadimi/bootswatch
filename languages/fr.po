@@ -176,12 +176,12 @@ msgstr "Oui"
 msgid "Just Bootstrap"
 msgstr "Bootstrap seulement"
 
-#: inc/search-form.php:43
+#: inc/search-form.php:49
 msgctxt "label"
 msgid "Search for:"
 msgstr ""
 
-#: inc/search-form.php:49
+#: inc/search-form.php:52
 msgid "Search"
 msgstr "Recherche"
 
