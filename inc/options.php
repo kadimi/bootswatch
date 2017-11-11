@@ -400,7 +400,7 @@ function bootswatch_get_bootstrap_part( $part, $type ) {
 	case 'variables':
 		return $bootswatch_light . 'less/variables.less';
 	case 'script':
-		return $bootswatch_light . '_js/bootstrap.min.js';
+		return $bootswatch_light . '_js/bootstrap.bundle.min.js';
 	case 'bootstrap':
 		return $bootswatch_light . 'css/bootstrap.min.css';
 	case 'bootstrap.less':

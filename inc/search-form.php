@@ -15,7 +15,7 @@ function bootswatch_get_search_form( $classes = '' ) {
 	if ( is_array( $classes ) ) {
 		$classes = implode( ' ', $classes );
 	}
-	return str_replace( 'class="search', 'class="' . $classes . ' search', get_search_form( false ) );
+	return str_replace( 'class="search-form', 'class="' . $classes . ' search-form', get_search_form( false ) );
 }
 
 /**
@@ -35,22 +35,23 @@ function bootswatch_search_form( $classes = '' ) {
 function bootswatch_get_search_form_cb() {
 
 	$unique_id = esc_attr( uniqid( 'search-form-' ) );
+	$classes   = [
+		'form'   => join( ' ', apply_filters( 'bootswatch_search_form_classes', explode( ' ', 'search-form form-inline my-2 my-lg-0' ) ) ),
+		'input'  => join( ' ', apply_filters( 'bootswatch_search_form_classes', explode( ' ', 'form-control my-2 my-sm-0 mr-sm-2' ) ) ),
+		'submit' => join( ' ', apply_filters( 'bootswatch_search_form_classes', explode( ' ', 'btn btn-outline-primary' ) ) ),
+	];
+
 	ob_start();
 	?>
-	<form role="search" method="get" class="search-form" action="<?php echo esc_url( home_url() ); ?>">
-		<div class="input-group">
-			<label for="<?php echo $unique_id; // XSS OK. ?>">
-				<span class="screen-reader-text"><?php echo esc_html_x( 'Search for:', 'label', 'bootswatch' ); ?></span>
-			</label>
-			<input type="search" id="<?php echo $unique_id; // XSS OK. ?>" class="form-control" value="<?php echo get_search_query(); ?>" name="s">
-			<span class="input-group-btn">
-				<button type="submit" class="btn btn-default">
-					<span class="glyphicon glyphicon-search"></span>
-					<span class="screen-reader-text"><?php esc_html_e( 'Search', 'bootswatch' ); ?></span>
-				</button>
-			</span>
-		</div>
+
+	<form role="search" class="<?php echo $classes['form']; ?>" action="<?php echo esc_url( home_url() ); ?>">
+		<label for="<?php echo $unique_id; // XSS OK. ?>">
+			<span class="screen-reader-text"><?php echo esc_html_x( 'Search for:', 'label', 'bootswatch' ); ?></span>
+		</label>
+		<input type="search" id="<?php echo $unique_id; // XSS OK. ?>" class="<?php echo $classes['input']; ?>" value="<?php echo get_search_query(); ?>" name="s">
+		<button class="<?php echo $classes['submit']; ?>" type="submit"><?php esc_html_e( 'Search', 'bootswatch' ); ?></button>
 	</form>
+
 	<?php
 	$form = ob_get_clean();
 	return $form;

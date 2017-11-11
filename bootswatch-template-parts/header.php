@@ -20,19 +20,18 @@
 
 		<a class="screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'bootswatch' ); ?></a>
 
-		<nav class=" navbar navbar-default <?php echo bootswatch_has( 'fixed_navbar' ) ? 'navbar-fixed-top' : 'navbar-static-top'; ?> " role="navigation">
+		<?php $navbar_unique_id = esc_attr( uniqid( 'navbar-' ) ); ?>
+
+		<nav class="navbar navbar-expand-lg navbar-light bg-light <?php echo bootswatch_has( 'fixed_navbar' ) ? 'fixed-top' : ''; ?>">
 			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".collapse">
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<?php if ( is_home() ) { ?><h1 class="inline"><?php } ?>
-						<a class="navbar-brand site-title" href="<?php echo esc_url( home_url() ); ?>"><?php bloginfo( 'name' ); ?></a>
-					<?php if ( is_home() ) { ?></h1><?php } ?>
-				</div>
-				<div class="collapse navbar-collapse">
+				<?php if ( is_home() ) { ?><h1 class="inline"><?php } ?>
+					<a class="navbar-brand site-title" href="<?php echo esc_url( home_url() ); ?>"><?php bloginfo( 'name' ); ?></a>
+				<?php if ( is_home() ) { ?></h1><?php } ?>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#<?php echo $navbar_unique_id; ?>" aria-controls="<?php echo $navbar_unique_id; ?>" aria-expanded="false" aria-label="<?php echo 'Toggle navigation'; ?>">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="<?php echo $navbar_unique_id; ?>">
 					<?php bootswatch_get_template_part( 'template-parts/components/header', 'menu' ); ?>
 					<?php bootswatch_get_template_part( 'template-parts/components/header', 'search-form' ); ?>
 				</div>
