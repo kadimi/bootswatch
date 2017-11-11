@@ -162,13 +162,13 @@ function bootswatch_bootstrap_inline_css() {
 			position: fixed;
 		}
 		body.fixed-navbar {
-			padding-top: 70px;
+			padding-top: 5rem;
 		}
-		body.admin-bar .navbar-fixed-top {
+		body.admin-bar .fixed-top {
 			top: 32px;
 		}
 		@media screen and (max-width: 782px) {
-			body.admin-bar .navbar-fixed-top {
+			body.admin-bar .fixed-top {
 				top: 46px;
 			}
 		}

@@ -36,20 +36,30 @@ function bootswatch_get_search_form_cb() {
 
 	$unique_id = esc_attr( uniqid( 'search-form-' ) );
 	$classes   = [
-		'form'   => join( ' ', apply_filters( 'bootswatch_search_form_classes',        explode( ' ', 'form-inline my-2 my-lg-0' ) ) ),
-		'input'  => join( ' ', apply_filters( 'bootswatch_search_form_input_classes',  explode( ' ', 'form-control my-2 mr-sm-2' ) ) ),
-		'submit' => join( ' ', apply_filters( 'bootswatch_search_form_submit_classes', explode( ' ', 'btn btn-outline-primary' ) ) ),
+		'form'   => join( ' ', apply_filters( 'bootswatch_search_form_classes', [
+			'my-2',
+			'my-lg-0',
+		] ) ),
+		'input'  => join( ' ', apply_filters( 'bootswatch_search_form_input_classes', [
+			'form-control',
+			'my-2',
+			'mr-sm-2',
+		] ) ),
+		'submit' => join( ' ', apply_filters( 'bootswatch_search_form_submit_classes', [
+			'btn',
+			'btn-outline-primary',
+		] ) ),
 	];
 
 	ob_start();
 	?>
 
 	<form role="search" class="search-form <?php echo $classes['form']; ?>" action="<?php echo esc_url( home_url() ); ?>">
-		<label for="<?php echo $unique_id; // XSS OK. ?>">
-			<span class="screen-reader-text"><?php echo esc_html_x( 'Search for:', 'label', 'bootswatch' ); ?></span>
+		<label class="sr-only" for="<?php echo $unique_id; // XSS OK. ?>">
+			<?php echo esc_html_x( 'Search for:', 'label', 'bootswatch' ); ?>
 		</label>
 		<input type="search" id="<?php echo $unique_id; // XSS OK. ?>" class="<?php echo $classes['input']; ?>" value="<?php echo get_search_query(); ?>" name="s">
-		<button class="<?php echo $classes['submit']; ?>" type="submit"><?php esc_html_e( 'Search', 'bootswatch' ); ?></button>
+		<button class="<?php echo $classes['submit']; ?>" type="submit" role="button"><?php esc_html_e( 'Search', 'bootswatch' ); ?></button>
 	</form>
 
 	<?php
