@@ -35,9 +35,9 @@ class Walker_Comment_Bootswatch extends Walker_Comment {
 			],
 			[
 				'class="comment-body card p-3 my-2"',
-				'comment-reply-link btn btn-default btn-xs',
+				'comment-reply-link btn btn-secondary btn-sm',
 				'class="comment-metadata small text-right"',
-				'class="comment-edit-link btn btn-danger btn-xs"',
+				'class="comment-edit-link btn btn-danger btn-sm"',
 				'class="reply text-right"',
 				sprintf( '<div class="row"><div class="col-md-%1$d offset-md-%2$d"><article id="div-comment-'
 					, ( 13 - $depth )
