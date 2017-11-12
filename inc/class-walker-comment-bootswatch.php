@@ -34,12 +34,12 @@ class Walker_Comment_Bootswatch extends Walker_Comment {
 				'</article>',
 			],
 			[
-				'class="comment-body well"',
+				'class="comment-body card p-3 my-2"',
 				'comment-reply-link btn btn-default btn-xs',
 				'class="comment-metadata small text-right"',
 				'class="comment-edit-link btn btn-danger btn-xs"',
 				'class="reply text-right"',
-				sprintf( '<div class="row"><div class="col-md-%1$d col-md-offset-%2$d"><article id="div-comment-'
+				sprintf( '<div class="row"><div class="col-md-%1$d offset-md-%2$d"><article id="div-comment-'
 					, ( 13 - $depth )
 					, ( $depth -1 )
 				),
@@ -71,7 +71,7 @@ class Walker_Comment_Bootswatch extends Walker_Comment {
 				'class="comment-body"',
 			],
 			[
-				'class="comment-body well well-sm"',
+				'class="comment-body category_description( $category = 0 )"',
 			],
 			ob_get_clean()
 		);

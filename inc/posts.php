@@ -25,13 +25,13 @@ add_filter( 'post_class', 'bootstwatch_post_classes' );
 /**
  * Adds relevant post link classes.
  *
- * - Adds `post-edit-link`,  `btn` and `btn-default` to post links.
+ * - Adds `post-edit-link`,  `btn` and `btn-secondary` to post links.
  *
  * @param  String $output Post link.
  * @return String         Post link modified.
  */
 function bootstwatch_edit_post_link( $output ) {
-	$output = str_replace( 'class="post-edit-link"', 'class="post-edit-link btn btn-default"', $output );
+	$output = str_replace( 'class="post-edit-link"', 'class="post-edit-link btn btn-secondary"', $output );
 	return $output;
 }
 add_filter( 'edit_post_link', 'bootstwatch_edit_post_link' );

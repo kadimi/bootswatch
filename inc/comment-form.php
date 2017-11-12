@@ -18,9 +18,9 @@ function bootswatch_comment_form_fields( $fields ) {
 	$required      = $req ? 'required' : '';
 	$aria_required = $req ? 'true' : '';
 
-	$div_tpl   = '<div class="form-group comment-form-{{field}}">{{label}} {{input}}</div>';
-	$label_tpl = '<label for="{{field}}" class="col-sm-2 control-label">{{label}}{{required}}</label>';
-	$input_tpl = '<div class="col-sm-10"><input{{param}}></div>';
+	$div_tpl   = '<div class="form-group row comment-form-{{field}}">{{label}} {{input}}</div>';
+	$label_tpl = '<label for="{{field}}" class="col-sm-2 col-form-label text-sm-right">{{label}}{{required}}</label>';
+	$input_tpl = '<div class="col"><input{{param}}></div>';
 
 	$fields_parameters = array(
 		'author' => array(
@@ -92,16 +92,16 @@ add_filter( 'comment_form_default_fields', 'bootswatch_comment_form_fields' );
  * @return Array           Defaults modified
  */
 function bootswatch_comment_form( $defaults ) {
-	$defaults['class_form']    = 'form-horizontal well';
+	$defaults['class_form']    = 'form-horizontal card my-2 p-3';
 	$defaults['comment_field'] = '
-		<div class="form-group comment-form-comment">
-			<label for="comment" class="col-sm-2 control-label">' . _x( 'Comment', 'noun', 'bootswatch' ) . ' <span class="required">*</span></label>
-			<div class="col-sm-10">
+		<div class="form-group row comment-form-comment">
+			<label for="comment" class="col-sm-2 col-form-label text-sm-right">' . _x( 'Comment', 'noun', 'bootswatch' ) . '&nbsp;<span class="required">*</span></label>
+			<div class="col">
 				<textarea class="form-control" id="comment" name="comment" cols="45" rows="8" required="required" aria-required="true"></textarea>
 			</div>
 		</div>'
 	;
-	$defaults['submit_field']  = '<div class="form-group"><div class="col-sm-offset-2 col-sm-10">%1$s %2$s</div></div>';
+	$defaults['submit_field']  = '<div class="form-group row"><div class="col offset-sm-2">%1$s %2$s</div></div>';
 	$defaults['class_submit']  = 'btn btn-primary btn-lg';
 	return $defaults;
 };

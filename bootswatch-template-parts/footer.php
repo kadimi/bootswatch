@@ -16,7 +16,7 @@ $author = [
 <footer class="container" role="contentinfo">
 	<div class="row">
 		<div class="col-md-12"><hr></div>
-		<div class="col-md-4 col-md-offset-8">
+		<div class="col-md-4 offset-md-8">
 			<p class="muted pull-right small">
 				&copy; <?php echo esc_html( date( 'Y' ) ); ?>
 				<?php echo esc_html( get_bloginfo( 'title' ) ); ?>
