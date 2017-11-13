@@ -1,6 +1,7 @@
 accessibility-ready
 custom-background
 custom-header
+custom-logo
 custom-menu
 e-commerce
 flexible-header

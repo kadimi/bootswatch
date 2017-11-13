@@ -1,7 +1,7 @@
 === Bootswatch ===
 
 Contributors: Nabil Kadimi
-Tags: accessibility-ready,custom-background,custom-header,custom-menu,e-commerce,flexible-header,featured-image-header,featured-images,grid-layout,right-sidebar,rtl-language-support,sticky-post,theme-options,threaded-comments,translation-ready,two-columns
+Tags: accessibility-ready,custom-background,custom-header,custom-logo,custom-menu,e-commerce,flexible-header,featured-image-header,featured-images,grid-layout,right-sidebar,rtl-language-support,sticky-post,theme-options,threaded-comments,translation-ready,two-columns
 Requires at least: 4.0
 Tested up to: 4.8.3
 Stable tag: 1.0.18
