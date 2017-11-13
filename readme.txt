@@ -4,7 +4,7 @@ Contributors: Nabil Kadimi
 Tags: accessibility-ready,custom-background,custom-header,custom-logo,custom-menu,e-commerce,flexible-header,featured-image-header,featured-images,grid-layout,right-sidebar,rtl-language-support,sticky-post,theme-options,threaded-comments,translation-ready,two-columns
 Requires at least: 4.0
 Tested up to: 4.8.3
-Stable tag: 1.0.18
+Stable tag: 1.0.19
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -29,6 +29,9 @@ Bootswatch includes support for Infinite Scroll in Jetpack.
 
 
 == Changelog ==
+
+= 1.0.19 - Nov 13 2017 =
+* Maintenance release.
 
 = 1.0.18 - Nov 13 2017 =
 * Add custom logo.
