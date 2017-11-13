@@ -29,7 +29,12 @@
 						<span class="icon-bar"></span>
 					</button>
 					<?php if ( is_home() ) { ?><h1 class="inline"><?php } ?>
+					<?php
+					if ( has_custom_logo() ) {
+						the_custom_logo();
+					} else { ?>
 						<a class="navbar-brand site-title" href="<?php echo esc_url( home_url() ); ?>"><?php bloginfo( 'name' ); ?></a>
+					<?php } ?>
 					<?php if ( is_home() ) { ?></h1><?php } ?>
 				</div>
 				<div class="collapse navbar-collapse">
