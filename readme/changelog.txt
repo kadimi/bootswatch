@@ -1,6 +1,3 @@
-= 1.0.19 - Nov 13 2017 =
-* Maintenance release.
-
 = 1.0.18 - Nov 13 2017 =
 * Add custom logo.
 
