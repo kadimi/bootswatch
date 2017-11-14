@@ -1,11 +1,13 @@
 accessibility-ready
 custom-background
 custom-header
+custom-logo
 custom-menu
 e-commerce
 flexible-header
 featured-image-header
 featured-images
+footer-widgets
 grid-layout
 right-sidebar
 rtl-language-support

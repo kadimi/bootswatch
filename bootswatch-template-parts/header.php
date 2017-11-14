@@ -25,7 +25,12 @@
 		<nav class="navbar navbar-expand-lg navbar-light bg-light <?php echo bootswatch_has( 'fixed_navbar' ) ? 'fixed-top' : ''; ?>">
 			<div class="container">
 				<?php if ( is_home() ) { ?><h1 class="inline"><?php } ?>
+				<?php
+				if ( has_custom_logo() ) {
+					the_custom_logo();
+				} else { ?>
 					<a class="navbar-brand site-title" href="<?php echo esc_url( home_url() ); ?>"><?php bloginfo( 'name' ); ?></a>
+				<?php } ?>
 				<?php if ( is_home() ) { ?></h1><?php } ?>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#<?php echo $navbar_unique_id; ?>" aria-controls="<?php echo $navbar_unique_id; ?>" aria-expanded="false" aria-label="<?php echo 'Toggle navigation'; ?>">
 					<span class="navbar-toggler-icon"></span>

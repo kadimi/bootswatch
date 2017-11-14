@@ -14,8 +14,14 @@ $author = [
 ?>
 
 <footer class="container" role="contentinfo">
+	<?php if ( is_active_sidebar( 'footer' ) ) { ?>
+		<div class="row"><hr></div>
+		<div class="row">
+			<?php dynamic_sidebar( 'footer' ); ?>
+		</div>
+	<?php } ?>
+	<div class="row"><hr></div>
 	<div class="row">
-		<div class="col-md-12"><hr></div>
 		<div class="col-md-4 offset-md-8">
 			<p class="muted pull-right small">
 				&copy; <?php echo esc_html( date( 'Y' ) ); ?>

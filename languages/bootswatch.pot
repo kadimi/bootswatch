@@ -2,7 +2,7 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: Bootswatch 1.0.17\n"
+"Project-Id-Version: Bootswatch 1.0.20\n"
 "Report-Msgid-Bugs-To: https://github.com/kadimi/bootswatch/issues/new\n"
 "PO-Creattion-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -166,16 +166,16 @@ msgstr ""
 msgid "Just Bootstrap"
 msgstr ""
 
-#: inc/search-form.php:49
+#: inc/search-form.php:59
 msgctxt "label"
 msgid "Search for:"
 msgstr ""
 
-#: inc/search-form.php:52
+#: inc/search-form.php:62
 msgid "Search"
 msgstr ""
 
-#: inc/setup.php:18
+#: inc/setup.php:22
 msgid "Primary Menu"
 msgstr ""
 
@@ -219,6 +219,10 @@ msgstr ""
 
 #: inc/widgets.php:13
 msgid "Sidebar"
+msgstr ""
+
+#: inc/widgets.php:21
+msgid "Footer"
 msgstr ""
 
 #: index.php:13

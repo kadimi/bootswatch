@@ -20,8 +20,8 @@ require 'build/class-bootswatchbuild.php';
 		'file-1'   => '^README\.md$',
 		'file-2'   => '^composer.(json|lock)$',
 		'readme'   => '^readme/.*$',
-		'tests'    => '^tests/.*$',
-		'wp.dev'   => '^(ip|hostname)$',
+		'tests'    => '^((tests/.*)|phpunit\.xml\.dist)$',
+		'wp.dev'   => '^(ip|hostname|wp)$',
 	],
 	'str_replacements' => [
 		'vendor/composer/autoload_static.php' => [
