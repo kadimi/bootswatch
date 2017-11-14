@@ -1,3 +1,6 @@
+= 1.0.20 - Nov 14 2017 =
+* Add footer widgets.
+
 = 1.0.19 - Nov 13 2017 =
 * Maintenance release.
 
