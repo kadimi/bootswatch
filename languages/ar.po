@@ -85,9 +85,14 @@ msgstr "نبيل قديمي"
 msgid "Independent WordPress Developer"
 msgstr "مطور ووردبريس حر"
 
+#: bootswatch-template-parts/footer.php:33
+#, php-format
+msgid "Designed by %s."
+msgstr "من تصميم %s."
+
 #: bootswatch-template-parts/header.php:21
 msgid "Skip to content"
-msgstr ""
+msgstr "التجاوز إلى المحتوى"
 
 #: bootswatch-template-parts/partial-header.php:13
 #, php-format
@@ -240,7 +245,7 @@ msgstr "القائمة الجانبية"
 
 #: inc/widgets.php:21
 msgid "Footer"
-msgstr ""
+msgstr "التذييل"
 
 #: index.php:13
 #, php-format

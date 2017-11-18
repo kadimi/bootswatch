@@ -81,6 +81,11 @@ msgstr "Nabil Kadimi"
 msgid "Independent WordPress Developer"
 msgstr "Développeur WordPress Indépendant"
 
+#: bootswatch-template-parts/footer.php:33
+#, php-format
+msgid "Designed by %s."
+msgstr ""
+
 #: bootswatch-template-parts/header.php:21
 msgid "Skip to content"
 msgstr ""
