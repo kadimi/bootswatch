@@ -20,8 +20,8 @@ $author = [
 			<?php dynamic_sidebar( 'footer' ); ?>
 		</div>
 	<?php } ?>
-	<div class="row"><hr></div>
 	<div class="row">
+		<div class="col-md-12"><hr></div>
 		<div class="col-md-4 col-md-offset-8">
 			<p class="muted pull-right small">
 				&copy; <?php echo esc_html( date( 'Y' ) ); ?>
@@ -30,7 +30,7 @@ $author = [
 				<?php
 				// Translators: Author details.
 				printf(
-					esc_html__( 'Designed by %s.', 'bootswatch' )
+					esc_html( 'Designed by %s.', 'bootswatch' )
 					, sprintf( '<a href="%1$s" title="%2$s">%3$s</a>'
 						, esc_url( $author['url'] )
 						, esc_html( $author['title'] )
