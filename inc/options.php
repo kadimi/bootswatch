@@ -66,12 +66,12 @@ bootswatch_create_option_select( 'theme', __( 'Theme', 'bootswatch' ), bootswatc
 /**
  * Add header size option.
  */
-bootswatch_create_option_input( 'range'
+bootswatch_create_option_input( 'number'
 	, 'custom_header_percentage_size'
 	, __( 'Custom Header Size', 'bootswatch' )
 	, [
 		'max' => 100,
-		'min' => 0,
+		'min' => 20,
 	]
 	, 'bootswatch'
 	, function() {
