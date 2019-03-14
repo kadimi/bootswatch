@@ -30,7 +30,7 @@ $author = [
 				<?php
 				// Translators: Author details.
 				printf(
-					esc_html( 'Designed by %s.', 'bootswatch' )
+					esc_html__( 'Designed by %s.', 'bootswatch' )
 					, sprintf( '<a href="%1$s" title="%2$s">%3$s</a>'
 						, esc_url( $author['url'] )
 						, esc_html( $author['title'] )
