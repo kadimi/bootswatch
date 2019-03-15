@@ -154,13 +154,22 @@ function bootswatch_create_option_input( $type, $id, $label, $input_attrs = [], 
  * @param  String          $section Section ID.
  * @param  String|Function $preview_cb Function.
  */
-function bootswatch_create_option_choice( $type, $id, $label, $choices = 'noyes', $section = 'bootswatch', $preview_cb = false ) {
+function bootswatch_create_option_choice( $type, $id, $label, $choices = 'noyes', $section = 'bootswatch', $preview_cb = false, $selective_refresh = [] ) {
 
 	if ( ! in_array( $type, [ 'select', 'radio' ] ) ) {
 		return;
 	}
 
-	add_action( 'customize_register', function( $wp_customize ) use ( $type, $id, $label, $choices, $section, $preview_cb ) {
+	add_action( 'customize_register', function( $wp_customize ) use ( $type, $id, $label, $choices, $section, $preview_cb, $selective_refresh ) {
+
+		/**
+		 * Prepare ID.
+		 */
+		$id = sprintf( 'bootswatch[%s]', $id );
+
+		/**
+		 * Handle yes/no choices.
+		 */
 		switch ( $choices ) {
 		case 'noyes':
 				$choices = [
@@ -178,7 +187,9 @@ function bootswatch_create_option_choice( $type, $id, $label, $choices = 'noyes'
 			break;
 		}
 
-		$id = sprintf( 'bootswatch[%s]', $id );
+		/**
+		 * Add setting.
+		 */
 		$wp_customize->add_setting( $id, [
 			'sanitize_callback' => function( $value ) {
 				return  ( preg_match( '/^[a-z]+$/', $value ) )
@@ -186,11 +197,15 @@ function bootswatch_create_option_choice( $type, $id, $label, $choices = 'noyes'
 					: ''
 				;
 			},
-			'transport' => $preview_cb ? 'postMessage' : 'refresh',
+			'transport' => ( $preview_cb || $selective_refresh ) ? 'postMessage' : 'refresh',
 		] );
 		if ( $preview_cb ) {
 			add_action( 'wp_footer', $preview_cb );
 		}
+
+		/**
+		 * Add control.
+		 */
 		$wp_customize->add_control( $id, [
 			'settings' => $id,
 			'label'    => $label,
@@ -198,6 +213,13 @@ function bootswatch_create_option_choice( $type, $id, $label, $choices = 'noyes'
 			'choices'  => $choices,
 			'section'  => $section,
 		] );
+
+		/**
+		 * Maybe add partial.
+		 */
+		if ( $selective_refresh ) {
+			$wp_customize->selective_refresh->add_partial( $id, $selective_refresh );
+		}
 	} );
 }
 
