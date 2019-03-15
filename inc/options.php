@@ -261,28 +261,6 @@ function bootswatch_has( $option_id ) {
 }
 
 /**
- * Return bootswatch theme CSS file URI.
- *
- * @param  String $theme The theme.
- * @return String|Bolean The theme URI or false.
- */
-function bootswatch_get_theme_uri( $theme ) {
-
-	$bootswatch_light = get_template_directory_uri() . '/vendor/kadimi/bootswatch-light/light/';
-
-	if ( ! $theme ) {
-		return bootswatch_get_bootstrap_part_uri( 'style' );
-	}
-
-	return array_key_exists( $theme, array_merge( bootswatch_themes_list(), [
-		'{{theme}}' => '',
-	] ) )
-		? $bootswatch_light . $theme . '/bootstrap.min.css'
-		: false
-	;
-}
-
-/**
  * Returns bootswatch theme variable.less file path.
  *
  * @param  String $theme The theme.
