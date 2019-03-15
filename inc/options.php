@@ -18,50 +18,7 @@ add_action( 'customize_register', function( $wp_customize ) {
 /**
  * Add theme option.
  */
-bootswatch_create_option_select( 'theme', __( 'Theme', 'bootswatch' ), bootswatch_themes_list(), 'bootswatch', function () {
-	?>
-	<script>
-		jQuery( document ).ready( function( $ ) {
-			wp.customize( 'bootswatch[theme]', function( value ) {
-				value.bind( function( to ) {
-
-					$( 'link[id^=bootswatch]' ).not( '#bootswatch-css' ).remove();
-
-					if ( ! to ) {
-						$( '<link/>', {
-							rel   : 'stylesheet',
-							id    : 'bootswatch-bootstrap',
-							href  : '<?php bootswatch_bootstrap_part_uri( 'bootstrap' ); ?>',
-							type  : 'text/css',
-							media : 'all'
-						} ).appendTo( $( 'body' ) );
-						$( '<link/>', {
-							rel   : 'stylesheet',
-							id    : 'bootswatch-bootstrap-theme',
-							href  : '<?php bootswatch_bootstrap_part_uri( 'theme' ); ?>',
-							type  : 'text/css',
-							media : 'all'
-						} ).appendTo( $( 'body' ) );
-					} else {
-						$( '<link/>', {
-							rel   : 'stylesheet',
-							id    : `bootswatch-${to}-css`,
-							href  : '<?php echo bootswatch_get_theme_uri( '{{theme}}' ); // XSS OK. ?>'.replace('{{theme}}', to),
-							type  : 'text/css',
-							media : 'all'
-						} ).appendTo( $( 'body' ) );
-					}
-
-					$( '.custom-header' )
-						.css( 'padding-left', 0 )
-						.css( 'padding-right', 0 )
-					;
-				} );
-			} );
-		} );
-	</script>
-	<?php
-} );
+bootswatch_create_option_select( 'theme', __( 'Theme', 'bootswatch' ), bootswatch_themes_list(), 'bootswatch' );
 
 /**
  * Add header size option.
