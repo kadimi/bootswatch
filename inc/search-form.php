@@ -39,14 +39,10 @@ function bootswatch_get_search_form_cb() {
 	?>
 	<form role="search" method="get" class="search-form" action="<?php echo esc_url( home_url() ); ?>">
 		<div class="input-group">
-			<label for="<?php echo $unique_id; // XSS OK. ?>">
-				<span class="screen-reader-text"><?php echo esc_html_x( 'Search for:', 'label', 'bootswatch' ); ?></span>
-			</label>
-			<input type="search" id="<?php echo $unique_id; // XSS OK. ?>" class="form-control" value="<?php echo get_search_query(); ?>" name="s">
+			<input type="search" id="<?php echo $unique_id; // XSS OK. ?>" class="form-control" value="<?php echo get_search_query(); ?>" name="s" aria-label="<?php echo esc_html_x( 'Search Phrase', 'label', 'bootswatch' ); ?>">
 			<span class="input-group-btn">
 				<button type="submit" class="btn btn-default">
-					<span class="glyphicon glyphicon-search"></span>
-					<span class="screen-reader-text"><?php esc_html_e( 'Search', 'bootswatch' ); ?></span>
+					<span class="glyphicon glyphicon-search" aria-label="<?php esc_html_e( 'Search', 'bootswatch' ); ?>"></span>
 				</button>
 			</span>
 		</div>
