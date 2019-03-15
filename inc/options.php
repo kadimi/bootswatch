@@ -134,15 +134,13 @@ function bootswatch_create_option_input( $type, $id, $label, $input_attrs = [], 
 		if ( $preview_cb ) {
 			add_action( 'wp_footer', $preview_cb );
 		}
-		$wp_customize->add_control(
-			new WP_Customize_Control( $wp_customize, $id, [
-				'settings'    => $id,
-				'label'       => $label,
-				'type'        => $type,
-				'input_attrs' => $input_attrs,
-				'section'     => $section,
-			] )
-		);
+		$wp_customize->add_control( $id, [
+			'settings'    => $id,
+			'label'       => $label,
+			'type'        => $type,
+			'input_attrs' => $input_attrs,
+			'section'     => $section,
+		] );
 	} );
 }
 
@@ -193,15 +191,13 @@ function bootswatch_create_option_choice( $type, $id, $label, $choices = 'noyes'
 		if ( $preview_cb ) {
 			add_action( 'wp_footer', $preview_cb );
 		}
-		$wp_customize->add_control(
-			new WP_Customize_Control( $wp_customize, $id, [
-				'settings' => $id,
-				'label'    => $label,
-				'type'     => $type,
-				'choices'  => $choices,
-				'section'  => $section,
-			] )
-		);
+		$wp_customize->add_control( $id, [
+			'settings' => $id,
+			'label'    => $label,
+			'type'     => $type,
+			'choices'  => $choices,
+			'section'  => $section,
+		] );
 	} );
 }
 
