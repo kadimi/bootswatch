@@ -232,8 +232,8 @@ function bootswatch_create_option_choice( $type, $id, $label, $choices = 'noyes'
  * @param  String          $section Section ID.
  * @param  String|Function $preview_cb Function.
  */
-function bootswatch_create_option_select( $id, $label, $choices = 'noyes', $section = 'bootswatch', $preview_cb = false ) {
-	bootswatch_create_option_choice( 'select', $id, $label, $choices, $section, $preview_cb );
+function bootswatch_create_option_select( $id, $label, $choices = 'noyes', $section = 'bootswatch', $preview_cb = false, $selective_refresh = [] ) {
+	bootswatch_create_option_choice( 'select', $id, $label, $choices, $section, $preview_cb, $selective_refresh );
 }
 
 /**
