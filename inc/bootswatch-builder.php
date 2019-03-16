@@ -61,7 +61,7 @@ function bootswatch_make_theme_file( $theme, $overrides = [], $rebuild = false )
 	/**
 	 * Keep cache light (only ~50 files).
 	 */
-	bootswatch_reduce_cache( 50 );
+	bootswatch_reduce_cache( 128 );
 
 	/**
 	 * Save file
