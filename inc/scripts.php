@@ -27,7 +27,7 @@ add_action( 'wp_enqueue_scripts', function() {
 	 */
 	$theme_path = bootswatch_make_theme_file( $theme, $variables_overrides );
 	$theme_url  = content_url( substr( $theme_path, strlen( WP_CONTENT_DIR ) ) );
-	wp_enqueue_style( 'bootswatch-' . $theme, $theme_url, [], bootswatch_version() );
+	wp_enqueue_style( 'bootswatch', $theme_url, [], bootswatch_version() );
 
 	/**
 	 * Style.css.
