@@ -52,15 +52,15 @@ require 'build/class-bootswatchbuild.php';
 			sprintf( "/\"%s:[^\n]+\n/", 'Language-Team' )   => '',
 			sprintf( "/\"%s:[^\n]+\n/", 'Last-Translator' ) => '',
 			sprintf( "/\"%s:[^\n]+\n/", 'Plural-Forms' )    => '',
-			'/"PO-([a-z])+-Date: .*/i'         => '"PO-$1-Date: YEAR-MO-DA HO:MI+ZONE\n"',
+			'/"PO-([a-z]+)-Date: .*/i'                      => '"PO-$1-Date: YEAR-MO-DA HO:MI+ZONE\n"',
 		],
 		'languages/ar.po' => [
-			'/"PO-([a-z])+-Date: .*/i' => '"PO-$1-Date: YEAR-MO-DA HO:MI+ZONE\n"',
-			'/charset=CHARSET/'                     => 'charset=utf-8',
+			'/"PO-([a-z]+)-Date: .*/i' => '"PO-$1-Date: YEAR-MO-DA HO:MI+ZONE\n"',
+			'/charset=CHARSET/'        => 'charset=utf-8',
 		],
 		'languages/fr.po' => [
-			'/"PO-([a-z])+-Date: .*/i' => '"PO-$1-Date: YEAR-MO-DA HO:MI+ZONE\n"',
-			'/charset=CHARSET/'                     => 'charset=utf-8',
+			'/"PO-([a-z]+)-Date: .*/i' => '"PO-$1-Date: YEAR-MO-DA HO:MI+ZONE\n"',
+			'/charset=CHARSET/'        => 'charset=utf-8',
 		],
 	],
 	'vendor_ignored_patterns' => [
