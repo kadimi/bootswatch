@@ -9,6 +9,7 @@
  * Add main section.
  */
 add_action( 'customize_register', function( $wp_customize ) {
+	show_admin_bar( false );
 	$wp_customize->add_section( 'bootswatch', [
 			'title'     => 'Bootswatch',
 			'priority'  => 0,
@@ -18,7 +19,15 @@ add_action( 'customize_register', function( $wp_customize ) {
 /**
  * Add theme option.
  */
-bootswatch_create_option_select( 'theme', __( 'Theme', 'bootswatch' ), bootswatch_themes_list(), 'bootswatch' );
+bootswatch_create_option_select( 'theme', __( 'Theme', 'bootswatch' ), bootswatch_themes_list(), 'bootswatch', null, [
+	'selector' => 'head',
+	'settings' => [
+		'bootswatch[theme]',
+	],
+	'render_callback' => function () {
+		bootswatch_get_template_part( 'template-parts/components/header', 'head' );
+	},
+] );
 
 /**
  * Add header size option.
