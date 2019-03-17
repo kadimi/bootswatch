@@ -11,6 +11,5 @@
         "post-update-cmd": "php -f build/build.php"
     },
     "require-dev": {
-        "oyejorge/less.php": "v1.7.0.14"
     }
 }

@@ -160,27 +160,27 @@ msgstr "installé"
 msgid "Theme"
 msgstr "Thème"
 
-#: inc/options.php:37
+#: inc/options.php:29
 msgid "Custom Header Size"
 msgstr ""
 
-#: inc/options.php:66
+#: inc/options.php:58
 msgid "Fixed Navigation Bar"
 msgstr ""
 
-#: inc/options.php:92
+#: inc/options.php:84
 msgid "Search Form in Header"
 msgstr ""
 
-#: inc/options.php:185 inc/options.php:192
+#: inc/options.php:177 inc/options.php:184
 msgid "No"
 msgstr "Non"
 
-#: inc/options.php:186 inc/options.php:191
+#: inc/options.php:178 inc/options.php:183
 msgid "Yes"
 msgstr "Oui"
 
-#: inc/options.php:386
+#: inc/options.php:378
 msgid "Just Bootstrap"
 msgstr "Bootstrap seulement"
 
