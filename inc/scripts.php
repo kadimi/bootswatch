@@ -14,18 +14,11 @@ add_action( 'wp_enqueue_scripts', function() {
 	 * Current Bootswatch theme with fallback to Bootstrap
 	 */
 	$theme = bootswatch_get_option( 'theme', 'bootstrap' );
-	/**
-	 * Default variable overrides.
-	 */
-	$variables_overrides = [
-		'@icon-font-path' => '../vendor/kadimi/bootswatch-light/light/fonts/',
-	];
-	$variables_overrides = apply_filters( 'bootswatch_variables_overrides', $variables_overrides, $theme );
 
 	/**
 	 * Bootswatch or bootstrap theme.
 	 */
-	$theme_path = bootswatch_make_theme_file( $theme, $variables_overrides );
+	$theme_path = bootswatch_make_theme_file( $theme, bootswatch_get_default_overrides() );
 	$theme_url  = content_url( substr( $theme_path, strlen( WP_CONTENT_DIR ) ) );
 	wp_enqueue_style( 'bootswatch', $theme_url, [], bootswatch_version() );
 

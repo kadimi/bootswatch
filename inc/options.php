@@ -403,3 +403,11 @@ function bootswatch_themes_list() {
 		'yeti'      => 'Yeti',
 	];
 }
+
+function bootswatch_get_default_overrides( $theme = null ) {
+	$overrides = [
+		'@icon-font-path' => '../vendor/kadimi/bootswatch-light/light/fonts/',
+	];
+	$overrides = apply_filters( 'bootswatch_default_overrides', $overrides, $theme );
+	return $overrides;
+}
