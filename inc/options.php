@@ -19,15 +19,7 @@ add_action( 'customize_register', function( $wp_customize ) {
 /**
  * Add theme option.
  */
-bootswatch_create_option_select( 'theme', __( 'Theme', 'bootswatch' ), bootswatch_themes_list(), 'bootswatch', null, [
-	'selector' => 'head',
-	'settings' => [
-		'bootswatch[theme]',
-	],
-	'render_callback' => function () {
-		bootswatch_get_template_part( 'template-parts/components/header', 'head' );
-	},
-] );
+bootswatch_create_option_select( 'theme', __( 'Theme', 'bootswatch' ), bootswatch_themes_list(), 'bootswatch' );
 
 /**
  * Add header size option.
