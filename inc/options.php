@@ -9,7 +9,6 @@
  * Add main section.
  */
 add_action( 'customize_register', function( $wp_customize ) {
-	show_admin_bar( false );
 	$wp_customize->add_section( 'bootswatch', [
 			'title'     => 'Bootswatch',
 			'priority'  => 0,
