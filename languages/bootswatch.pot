@@ -143,31 +143,31 @@ msgctxt "once you \"install\"..."
 msgid "install"
 msgstr ""
 
-#: inc/options.php:22
+#: inc/options.php:21
 msgid "Theme"
 msgstr ""
 
-#: inc/options.php:29
+#: inc/options.php:28
 msgid "Custom Header Size"
 msgstr ""
 
-#: inc/options.php:58
+#: inc/options.php:57
 msgid "Fixed Navigation Bar"
 msgstr ""
 
-#: inc/options.php:84
+#: inc/options.php:83
 msgid "Search Form in Header"
 msgstr ""
 
-#: inc/options.php:177 inc/options.php:184
+#: inc/options.php:176 inc/options.php:183
 msgid "No"
 msgstr ""
 
-#: inc/options.php:178 inc/options.php:183
+#: inc/options.php:177 inc/options.php:182
 msgid "Yes"
 msgstr ""
 
-#: inc/options.php:378
+#: inc/options.php:377
 msgid "Just Bootstrap"
 msgstr ""
 
