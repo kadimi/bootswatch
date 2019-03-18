@@ -6,7 +6,7 @@
  */
 
 /**
- * Add main section.
+ * Add customization general stuff.
  */
 add_action( 'customize_register', function( $wp_customize ) {
 	$wp_customize->add_section( 'bootswatch', [
@@ -14,17 +14,12 @@ add_action( 'customize_register', function( $wp_customize ) {
 			'priority'  => 0,
 	] );
 
-	$wp_customize->selective_refresh->add_partial( 'bootswatch_custom_header', [
-		'selector' => 'header',
-		'settings' => [
-			'external_header_video',
-			'header_image',
-			'header_video',
-		],
-		'render_callback' => function() {
-			return bootswatch_get_template_part( 'template-parts/components/header', 'header' );
-		},
-	] );
+	/**
+	 * Necessary since custom header CSS is in the HTML head.
+	 */
+	$wp_customize->get_setting( 'external_header_video' )->transport = 'refresh';
+	$wp_customize->get_setting( 'header_image' )->transport = 'refresh';
+	$wp_customize->get_setting( 'header_video' )->transport = 'refresh';
 } );
 
 /**
