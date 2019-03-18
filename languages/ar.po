@@ -60,6 +60,10 @@ msgstr ""
 msgid "Edit %s"
 msgstr "تحرير %s"
 
+#: bootswatch-template-parts/components/header-header.php:12
+msgid "Skip to content"
+msgstr "التجاوز إلى المحتوى"
+
 #: bootswatch-template-parts/content-none.php:14
 msgid "Nothing Found"
 msgstr "لا يتم العثور على أي شيء"
@@ -92,10 +96,6 @@ msgstr "مطور ووردبريس حر"
 #, php-format
 msgid "Designed by %s."
 msgstr "من تصميم %s."
-
-#: bootswatch-template-parts/header.php:15
-msgid "Skip to content"
-msgstr "التجاوز إلى المحتوى"
 
 #: bootswatch-template-parts/partial-header.php:13
 #, php-format
@@ -143,7 +143,7 @@ msgstr ""
 msgid "Howdy! Bootswatch here..."
 msgstr "كيف حالك؟ معك Bootswatch..."
 
-#: inc/custom-header.php:68
+#: inc/custom-header.php:43
 msgid "Default Header Image"
 msgstr "الصورة الافتراضية للترويسة"
 
@@ -163,31 +163,31 @@ msgctxt "once you \"install\"..."
 msgid "install"
 msgstr ""
 
-#: inc/options.php:21
+#: inc/options.php:28
 msgid "Theme"
 msgstr "القالب"
 
-#: inc/options.php:28
+#: inc/options.php:35
 msgid "Custom Header Size"
 msgstr "حجم مخصص للترويسة"
 
-#: inc/options.php:57
+#: inc/options.php:64
 msgid "Fixed Navigation Bar"
 msgstr "شريط تصفح ثابت"
 
-#: inc/options.php:83
+#: inc/options.php:90
 msgid "Search Form in Header"
 msgstr "استمارة البحث في الترويسة"
 
-#: inc/options.php:176 inc/options.php:183
+#: inc/options.php:183 inc/options.php:190
 msgid "No"
 msgstr "لا"
 
-#: inc/options.php:177 inc/options.php:182
+#: inc/options.php:184 inc/options.php:189
 msgid "Yes"
 msgstr "نعم"
 
-#: inc/options.php:377
+#: inc/options.php:384
 msgid "Just Bootstrap"
 msgstr "Bootstrap فقط"
 

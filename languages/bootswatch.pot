@@ -45,6 +45,10 @@ msgstr ""
 msgid "Edit %s"
 msgstr ""
 
+#: bootswatch-template-parts/components/header-header.php:12
+msgid "Skip to content"
+msgstr ""
+
 #: bootswatch-template-parts/content-none.php:14
 msgid "Nothing Found"
 msgstr ""
@@ -76,10 +80,6 @@ msgstr ""
 #: bootswatch-template-parts/footer.php:33
 #, php-format
 msgid "Designed by %s."
-msgstr ""
-
-#: bootswatch-template-parts/header.php:15
-msgid "Skip to content"
 msgstr ""
 
 #: bootswatch-template-parts/partial-header.php:13
@@ -123,7 +123,7 @@ msgstr ""
 msgid "Howdy! Bootswatch here..."
 msgstr ""
 
-#: inc/custom-header.php:68
+#: inc/custom-header.php:43
 msgid "Default Header Image"
 msgstr ""
 
@@ -143,31 +143,31 @@ msgctxt "once you \"install\"..."
 msgid "install"
 msgstr ""
 
-#: inc/options.php:21
+#: inc/options.php:28
 msgid "Theme"
 msgstr ""
 
-#: inc/options.php:28
+#: inc/options.php:35
 msgid "Custom Header Size"
 msgstr ""
 
-#: inc/options.php:57
+#: inc/options.php:64
 msgid "Fixed Navigation Bar"
 msgstr ""
 
-#: inc/options.php:83
+#: inc/options.php:90
 msgid "Search Form in Header"
 msgstr ""
 
-#: inc/options.php:176 inc/options.php:183
+#: inc/options.php:183 inc/options.php:190
 msgid "No"
 msgstr ""
 
-#: inc/options.php:177 inc/options.php:182
+#: inc/options.php:184 inc/options.php:189
 msgid "Yes"
 msgstr ""
 
-#: inc/options.php:377
+#: inc/options.php:384
 msgid "Just Bootstrap"
 msgstr ""
 
