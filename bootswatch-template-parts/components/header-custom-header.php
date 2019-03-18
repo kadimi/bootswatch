@@ -5,7 +5,7 @@
  * @package Bootswatch
  */
 
-if ( ( is_front_page() && has_custom_header() ) || is_customize_preview() ) {
+if ( ( is_front_page() && has_custom_header() ) ) {
 	?>
 	<div class="container-fluid custom-header">
 		<div class="row">

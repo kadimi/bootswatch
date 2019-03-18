@@ -35,31 +35,6 @@ function bootswatch_custom_header_setup() {
 		'flex-height'        => true,
 		'flex-width'         => true,
 		'video'              => true,
-		'wp-head-callback'   => function() {
-
-			if ( ! is_customize_preview() ) {
-				return;
-			}
-
-			?><script>
-				var bootswatch_customizer = {
-					"is_front_page" : <?php echo is_front_page() ? 'true' : 'false'; // XSS OK. ?>
-				};
-				jQuery( document ).ready( function( $ ) {
-					/**
-					 * Hide media placeholder if no media choosen in the customizer.
-					 */
-					setInterval( function() {
-						var $ = jQuery;
-						if ( bootswatch_customizer.is_front_page && $( '.wp-custom-header' ).children().not( 'span' ).length ) {
-							$( '.custom-header' ).slideDown( 200 );
-						} else {
-							$( '.custom-header' ).slideUp( 200 );
-						}
-					}, 2000 );
-				} );
-			</script><?php
-		},
 	) ) );
 	register_default_headers( array(
 		'default-image' => array(

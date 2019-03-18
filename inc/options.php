@@ -13,6 +13,18 @@ add_action( 'customize_register', function( $wp_customize ) {
 			'title'     => 'Bootswatch',
 			'priority'  => 0,
 	] );
+
+	$wp_customize->selective_refresh->add_partial( 'bootswatch_custom_header', [
+		'selector' => 'header',
+		'settings' => [
+			'external_header_video',
+			'header_image',
+			'header_video',
+		],
+		'render_callback' => function() {
+			return bootswatch_get_template_part( 'template-parts/components/header', 'header' );
+		},
+	] );
 } );
 
 /**
