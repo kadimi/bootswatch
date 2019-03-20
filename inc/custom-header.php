@@ -32,9 +32,11 @@ function bootswatch_custom_header_setup() {
 	add_theme_support( 'custom-header', apply_filters( 'bootswatch_custom_header_args', array(
 		'default-image'      => get_parent_theme_file_uri( '/header.jpg' ),
 		'header-text'        => false,
+		'height'             => 900,
 		'flex-height'        => true,
 		'flex-width'         => true,
 		'video'              => true,
+		'width'              => 1440,
 	) ) );
 	register_default_headers( array(
 		'default-image' => array(
