@@ -26,17 +26,19 @@ $author = [
 			<p class="muted pull-right small">
 				&copy; <?php echo esc_html( date( 'Y' ) ); ?>
 				<span class="site-title"><?php echo esc_html( get_bloginfo( 'title' ) ); ?></span>
-				&ndash;
 				<?php
-				// Translators: Author details.
-				printf(
-					esc_html( 'Designed by %s.', 'bootswatch' )
-					, sprintf( '<a href="%1$s" title="%2$s">%3$s</a>'
-						, esc_url( $author['url'] )
-						, esc_html( $author['title'] )
-						, esc_html( $author['name'] )
-					)
-				);
+				if ( apply_filters( 'bootswatch_show_theme_author', true ) ) {
+					echo '&ndash; ';
+					// Translators: Author details.
+					printf(
+						esc_html( 'Designed by %s.', 'bootswatch' )
+						, sprintf( '<a href="%1$s" title="%2$s">%3$s</a>'
+							, esc_url( $author['url'] )
+							, esc_html( $author['title'] )
+							, esc_html( $author['name'] )
+						)
+					);
+				}
 				?>
 			</p>
 		</div>
