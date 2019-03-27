@@ -3,15 +3,15 @@
 Contributors: Nabil Kadimi
 Tags: accessibility-ready,custom-background,custom-header,custom-logo,custom-menu,e-commerce,flexible-header,featured-image-header,featured-images,footer-widgets,grid-layout,right-sidebar,rtl-language-support,sticky-post,theme-options,threaded-comments,translation-ready,two-columns
 Requires at least: 4.0
-Tested up to: 4.8.3
-Stable tag: 1.0.20
+Tested up to: 5.1.1
+Stable tag: 1.0.21
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 
 == Description ==
 
-Do you like Bootswatch? Now you'll like it even more.
+We are happy to bring Bootswatch to WordPress, this framework comes with Bootstrap itself and the 16 Bootswatch 3 themes but you can easily create new themes by overriding Bootstrap variables, the possibilities are endless. This theme framework is very versatile and easy to use. If you need help, get in touch by posting on the theme forum at https://wordpress.org/support/theme/bootswatch/.
 
 
 == Installation ==
@@ -23,12 +23,19 @@ Do you like Bootswatch? Now you'll like it even more.
 
 == Frequently Asked Questions ==
 
-= Does this theme support any plugins? =
+= Does this theme support plugins? =
 
-Bootswatch includes support for Infinite Scroll in Jetpack.
+Bootswatch should work perfectly with any plugin (WooCommerce, Sensei, etc).
+
+= What version of Bootstrap (and Bootswatch) does the framework use? =
+
+3, but we will add version 4 in the near future.
 
 
 == Changelog ==
+
+= 1.0.21 - Mar 27 2019 =
+* Improve customizer integration.
 
 = 1.0.20 - Nov 14 2017 =
 * Add footer widgets.

@@ -3,7 +3,7 @@
 Contributors: Nabil Kadimi
 Tags: {{tags}}
 Requires at least: 4.0
-Tested up to: 4.8.3
+Tested up to: 5.1.1
 Stable tag: {{version}}
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html

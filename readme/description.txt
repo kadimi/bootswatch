@@ -1,1 +1,1 @@
-Do you like Bootswatch? Now you'll like it even more.
+We are happy to bring Bootswatch to WordPress, this framework comes with Bootstrap itself and the 16 Bootswatch 3 themes but you can easily create new themes by overriding Bootstrap variables, the possibilities are endless. This theme framework is very versatile and easy to use. If you need help, get in touch by posting on the theme forum at https://wordpress.org/support/theme/bootswatch/.

@@ -1,3 +1,6 @@
+= 1.0.21 - Mar 27 2019 =
+* Improve customizer integration.
+
 = 1.0.20 - Nov 14 2017 =
 * Add footer widgets.
 

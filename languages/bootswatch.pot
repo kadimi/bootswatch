@@ -2,7 +2,7 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: Bootswatch 1.0.20\n"
+"Project-Id-Version: Bootswatch 1.0.21\n"
 "Report-Msgid-Bugs-To: https://github.com/kadimi/bootswatch/issues/new\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"

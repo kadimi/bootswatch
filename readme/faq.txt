@@ -1,3 +1,7 @@
-= Does this theme support any plugins? =
+= Does this theme support plugins? =
 
-Bootswatch includes support for Infinite Scroll in Jetpack.
+Bootswatch should work perfectly with any plugin (WooCommerce, Sensei, etc).
+
+= What version of Bootstrap (and Bootswatch) does the framework use? =
+
+3, but we will add version 4 in the near future.
