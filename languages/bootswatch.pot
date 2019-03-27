@@ -45,6 +45,14 @@ msgstr ""
 msgid "Edit %s"
 msgstr ""
 
+#: bootswatch-template-parts/components/footer-footer.php:9
+msgid "Nabil Kadimi"
+msgstr ""
+
+#: bootswatch-template-parts/components/footer-footer.php:10
+msgid "Independent WordPress Developer"
+msgstr ""
+
 #: bootswatch-template-parts/components/header-header.php:12
 msgid "Skip to content"
 msgstr ""
@@ -67,19 +75,6 @@ msgstr ""
 #: bootswatch-template-parts/content-none.php:36
 msgid ""
 "It seems we can't find what you're looking for. Perhaps searching can help."
-msgstr ""
-
-#: bootswatch-template-parts/footer.php:9
-msgid "Nabil Kadimi"
-msgstr ""
-
-#: bootswatch-template-parts/footer.php:10
-msgid "Independent WordPress Developer"
-msgstr ""
-
-#: bootswatch-template-parts/footer.php:33
-#, php-format
-msgid "Designed by %s."
 msgstr ""
 
 #: bootswatch-template-parts/partial-header.php:13
@@ -123,7 +118,7 @@ msgstr ""
 msgid "Howdy! Bootswatch here..."
 msgstr ""
 
-#: inc/custom-header.php:43
+#: inc/custom-header.php:45
 msgid "Default Header Image"
 msgstr ""
 

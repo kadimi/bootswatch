@@ -60,6 +60,14 @@ msgstr ""
 msgid "Edit %s"
 msgstr "تحرير %s"
 
+#: bootswatch-template-parts/components/footer-footer.php:9
+msgid "Nabil Kadimi"
+msgstr "نبيل قديمي"
+
+#: bootswatch-template-parts/components/footer-footer.php:10
+msgid "Independent WordPress Developer"
+msgstr "مطور ووردبريس حر"
+
 #: bootswatch-template-parts/components/header-header.php:12
 msgid "Skip to content"
 msgstr "التجاوز إلى المحتوى"
@@ -83,19 +91,6 @@ msgstr ""
 msgid ""
 "It seems we can't find what you're looking for. Perhaps searching can help."
 msgstr ""
-
-#: bootswatch-template-parts/footer.php:9
-msgid "Nabil Kadimi"
-msgstr "نبيل قديمي"
-
-#: bootswatch-template-parts/footer.php:10
-msgid "Independent WordPress Developer"
-msgstr "مطور ووردبريس حر"
-
-#: bootswatch-template-parts/footer.php:33
-#, php-format
-msgid "Designed by %s."
-msgstr "من تصميم %s."
 
 #: bootswatch-template-parts/partial-header.php:13
 #, php-format
@@ -143,7 +138,7 @@ msgstr ""
 msgid "Howdy! Bootswatch here..."
 msgstr "كيف حالك؟ معك Bootswatch..."
 
-#: inc/custom-header.php:43
+#: inc/custom-header.php:45
 msgid "Default Header Image"
 msgstr "الصورة الافتراضية للترويسة"
 
