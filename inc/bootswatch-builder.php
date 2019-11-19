@@ -81,7 +81,7 @@ function bootswatch_make_theme_file( $theme, $overrides = [], $rebuild = false )
  * @return String       CSS code.
  */
 function bootswatch_parse_less_file( $path ) {
-	return ( new Less_Parser( [
+	return @( new Less_Parser( [
 		'compress' => true,
 	] ) )->parseFile( $path )->getCss();
 }
@@ -93,7 +93,7 @@ function bootswatch_parse_less_file( $path ) {
  * @return String       CSS code.
  */
 function bootswatch_parse_less( $less ) {
-	return ( new Less_Parser( [
+	return @( new Less_Parser( [
 		'compress' => true,
 	] ) )->parse( $less )->getCss();
 }
