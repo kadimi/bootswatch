@@ -40,7 +40,7 @@ if ( ! function_exists( 'bootswatch_posts_navigation' ) ) {
 		if ( $links ) {
 			foreach ( $links as $index => $link ) {
 				$link = '<li>' . $link . '</li>';
-				$link = str_replace( "<li><span class='page-numbers current'>", '<li class="active"><a>', $link );
+				$link = str_replace( '<li><span aria-current="page" class="page-numbers current">', '<li class="active"><a>', $link );
 				$link = str_replace( '</span></li>', '</a></li>', $link );
 				$links[ $index ] = $link;
 			}
