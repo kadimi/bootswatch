@@ -34,6 +34,9 @@ endif;
  */
 if ( ! function_exists( 'bootswatch_category_list' ) ) {	
 	function bootswatch_category_list() {
+		if ( ! bootswatch_categorized_blog() ) {
+			return;
+		}
 		$categories = get_categories();
 		if( ! $categories ) {
 			return;
