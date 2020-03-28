@@ -529,7 +529,7 @@ class BootswatchBuild {
 	}
 
 	/**
-	 * Helper function to show error in log.
+	 * Helper function to show an error in the log.
 	 *
 	 * @param  String $title  The log title.
 	 */
@@ -538,6 +538,18 @@ class BootswatchBuild {
 		$this->last_error = $message;
 		$this->log( "\033[31m\033[1mError: $message\033[0m", true, true );
 		exit();
+	}
+
+	/**
+	 * Helper function to show a warning in the log.
+	 *
+	 * @param  String $title  The log title.
+	 */
+	protected function log_warning( $message ) {
+
+		$this->last_error = $message;
+		$this->log( "\033[33m\033[1mWarning: $message\033[0m", true, true );
+		sleep( 2 );
 	}
 
 	/**
@@ -630,7 +642,8 @@ class BootswatchBuild {
 		 * Check that the Transifex API token exists.
 		 */
 		if ( ! file_exists( '.transifex' ) ) {
-			$this->log_error( 'Transifex API token not found, it should be saved in `.transifex`.' );
+			$this->log_warning( 'Transifex API token not found, it should be saved in `.transifex`.' );
+			return;
 		}
 		$transifex_api_token = file_get_contents( '.transifex' );
 
