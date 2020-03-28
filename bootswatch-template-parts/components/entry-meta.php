@@ -7,6 +7,7 @@
 
 if ( 'post' === get_post_type() ) {
 	?>
-	<div class="entry-meta"><?php bootswatch_posted_on(); ?></div>
+	<p class="entry-meta pull-right"><?php bootswatch_posted_on(); ?></p>
+	<p class="pull-right"><?php bootswatch_category_list(); ?></p>
 	<?php
 }

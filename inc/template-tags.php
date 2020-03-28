@@ -29,6 +29,26 @@ function bootswatch_posted_on() {
 }
 endif;
 
+/**
+ * Displays post categories
+ */
+if ( ! function_exists( 'bootswatch_category_list' ) ) {	
+	function bootswatch_category_list() {
+		$categories = get_categories();
+		if( ! $categories ) {
+			return;
+		}
+		$links = [];
+		foreach ( $categories as $category ) {
+			$links[]= sprintf( '<a href="%1$s"><span class="badge">%2$s</a>'
+				, get_category_link( $category )
+				, $category->cat_name
+			);
+		}
+		echo '<p>' . implode( ' ' , $links ) . '</p>';
+	}
+}
+
 if ( ! function_exists( 'bootswatch_posts_navigation' ) ) {
 	/**
 	 * Displays pagination.

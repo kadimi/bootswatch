@@ -5,10 +5,17 @@
  * @package Bootswatch
  */
 
-the_title(
-	sprintf( '<%1$s class="entry-title"><a href="%2$s" rel="bookmark">'
-		, is_singular() ? 'h1' : 'h2'
+/**
+ * Prepare classes.
+ */
+$classes = [ 'entry-title' ];
+
+if ( is_singular() ) {
+	the_title( sprintf( '<h1 class="%s">', implode( ' ', $classes )
+	), '</h1>' );
+} else {
+	the_title( sprintf( '<h2 class="%1$s"><a href="%2$s" rel="bookmark">'
+		, implode( ' ', $classes )
 		, esc_url( get_permalink() )
-	),
-	sprintf( '</a></%s>', is_singular() ? 'h1' : 'h2' )
-);
+	), '</a></h2>' );
+}

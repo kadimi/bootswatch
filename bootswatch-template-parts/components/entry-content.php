@@ -23,9 +23,22 @@ if ( $use_short ) {
 	$featured_image_size = apply_filters( 'bootswatch_thumbnail_size', 'full' );
 }
 
+/**
+ * Determine if we should use the `panel` class.
+ */
+$use_panel_class = is_archive() || is_home();
+
+/**
+ * Prepare classes.
+ */
+$classes = [ 'entry-content' ];
+if ( $use_panel_class ) {
+	$classes[] = 'panel-body';
+}
+
 ?>
 
-<div class="entry-content">
+<div class="<?php echo implode( ' ', $classes ); ?>">
 	<p><?php the_post_thumbnail( $featured_image_size ); ?></p>
 	<?php
 		if ( $use_short ) {
