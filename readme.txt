@@ -4,7 +4,7 @@ Contributors: Nabil Kadimi
 Tags: accessibility-ready,custom-background,custom-header,custom-logo,custom-menu,e-commerce,flexible-header,featured-image-header,featured-images,footer-widgets,grid-layout,right-sidebar,rtl-language-support,sticky-post,theme-options,threaded-comments,translation-ready,two-columns
 Requires at least: 4.0
 Tested up to: 5.1.1
-Stable tag: 1.0.21
+Stable tag: 1.0.22
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -33,6 +33,12 @@ Bootswatch should work perfectly with any plugin (WooCommerce, Sensei, etc).
 
 
 == Changelog ==
+
+= 1.0.22 - Mar 28 2019 =
+* Fix page numbers style
+* Enhance posts and post archives
+* Show post categories
+* Remove dependencies
 
 = 1.0.21 - Mar 27 2019 =
 * Improve customizer integration.
