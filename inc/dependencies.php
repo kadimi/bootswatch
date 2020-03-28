@@ -11,15 +11,6 @@
 get_template_part( 'vendor/autoload' );
 
 /**
- * Recommend Less PHP Compiler,
- */
-bootswatch_recommend_plugin( [
-	'name' => 'Less PHP Compiler',
-	'file' => 'lessphp/less-plugin.php',
-	'description' => __( 'Once you {{verb}} {{link}}, you can create even more Bootswatch based themes (advanced feature).', 'bootswatch' ),
-] );
-
-/**
  * Recommends a plugin in an admin notice.
  *
  * @param Array $plugin Plugin data.
