@@ -6,18 +6,20 @@
  */
 
 /**
- * Determine if we should use the `page_header` class.
+ * Determine if we should use the `panel` class.
  */
-if ( is_singular() ) {
-	$use_page_header_class = true;
-} else if ( ! is_sticky() || ! is_home() ) {
-	$use_page_header_class = true;
-} else {
-	$use_page_header_class = false;
+$use_panel_class = is_archive() || is_home();
+
+/**
+ * Prepare classes.
+ */
+$classes = [ 'entry-header' ];
+if ( $use_panel_class ) {
+	$classes[] = 'panel-heading';
 }
 ?>
 
-<header class="entry-header<?php echo $use_page_header_class ? ' page-header' : ''; ?>">
+<header class="<?php echo implode( ' ', $classes ); ?>">
 	<?php bootswatch_get_template_part( 'template-parts/components/entry', 'title' ); ?>
 	<?php bootswatch_get_template_part( 'template-parts/components/entry', 'meta' ); ?>
 </header>
