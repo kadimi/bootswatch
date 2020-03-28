@@ -2,7 +2,7 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: Bootswatch 1.0.21\n"
+"Project-Id-Version: Bootswatch 1.0.22\n"
 "Report-Msgid-Bugs-To: https://github.com/kadimi/bootswatch/issues/new\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -40,7 +40,7 @@ msgid "Continue reading %s &rarr;"
 msgstr ""
 
 #: bootswatch-template-parts/components/entry-footer.php:18
-#: inc/template-tags.php:104
+#: inc/template-tags.php:107
 #, php-format
 msgid "Edit %s"
 msgstr ""
@@ -185,29 +185,29 @@ msgctxt "post author"
 msgid "by %s"
 msgstr ""
 
-#: inc/template-tags.php:81
+#: inc/template-tags.php:84
 msgid ", "
 msgstr ""
 
-#: inc/template-tags.php:84
+#: inc/template-tags.php:87
 #, php-format
 msgid "Posted in %s"
 msgstr ""
 
-#: inc/template-tags.php:92
+#: inc/template-tags.php:95
 #, php-format
 msgid "Tagged %1$s"
 msgstr ""
 
-#: inc/template-tags.php:98
+#: inc/template-tags.php:101
 msgid "% Comments"
 msgstr ""
 
-#: inc/template-tags.php:98
+#: inc/template-tags.php:101
 msgid "1 Comment"
 msgstr ""
 
-#: inc/template-tags.php:98
+#: inc/template-tags.php:101
 msgid "Leave a comment"
 msgstr ""
 

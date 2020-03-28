@@ -9,7 +9,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Bootswatch 1.0.21\n"
+"Project-Id-Version: Bootswatch 1.0.22\n"
 "Report-Msgid-Bugs-To: https://github.com/kadimi/bootswatch/issues/new\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -45,13 +45,13 @@ msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
 msgstr[0] ""
 msgstr[1] ""
 
-#: bootswatch-template-parts/components/entry-content.php:37
+#: bootswatch-template-parts/components/entry-content.php:50
 #, php-format
 msgid "Continue reading %s &rarr;"
 msgstr ""
 
 #: bootswatch-template-parts/components/entry-footer.php:18
-#: inc/template-tags.php:84
+#: inc/template-tags.php:107
 #, php-format
 msgid "Edit %s"
 msgstr "Modifier %s"
@@ -133,20 +133,12 @@ msgstr "Salut! Ici Bootswatch..."
 msgid "Default Header Image"
 msgstr ""
 
-#: inc/dependencies.php:19
-msgid ""
-"Once you {{verb}} {{link}}, you can create even more Bootswatch based themes"
-" (advanced feature)."
-msgstr ""
-"Une fois que vous aurez {{verb}} {{link}}, vous pourrez créer encore plus de"
-" thèmes basé sur Bootswatch (fonction avancée)."
-
-#: inc/dependencies.php:64
+#: inc/dependencies.php:55
 msgctxt "once you \"activate\"..."
 msgid "activate"
 msgstr "activé"
 
-#: inc/dependencies.php:69
+#: inc/dependencies.php:60
 msgctxt "once you \"install\"..."
 msgid "install"
 msgstr "installé"
@@ -204,29 +196,29 @@ msgctxt "post author"
 msgid "by %s"
 msgstr "par %s"
 
-#: inc/template-tags.php:61
+#: inc/template-tags.php:84
 msgid ", "
 msgstr ","
 
-#: inc/template-tags.php:64
+#: inc/template-tags.php:87
 #, php-format
 msgid "Posted in %s"
 msgstr "Publié dans %s"
 
-#: inc/template-tags.php:72
+#: inc/template-tags.php:95
 #, php-format
 msgid "Tagged %1$s"
 msgstr ""
 
-#: inc/template-tags.php:78
+#: inc/template-tags.php:101
 msgid "% Comments"
 msgstr "% Commentaires"
 
-#: inc/template-tags.php:78
+#: inc/template-tags.php:101
 msgid "1 Comment"
 msgstr "1 Commentaire"
 
-#: inc/template-tags.php:78
+#: inc/template-tags.php:101
 msgid "Leave a comment"
 msgstr "Laisser un commentaire"
 
