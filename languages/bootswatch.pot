@@ -45,15 +45,15 @@ msgstr ""
 msgid "Edit %s"
 msgstr ""
 
-#: bootswatch-template-parts/components/footer-footer.php:9
+#: bootswatch-template-parts/components/footer-info.php:9
 msgid "Nabil Kadimi"
 msgstr ""
 
-#: bootswatch-template-parts/components/footer-footer.php:10
+#: bootswatch-template-parts/components/footer-info.php:10
 msgid "Independent WordPress Developer"
 msgstr ""
 
-#: bootswatch-template-parts/components/header-header.php:12
+#: bootswatch-template-parts/components/header-header.php:11
 msgid "Skip to content"
 msgstr ""
 
