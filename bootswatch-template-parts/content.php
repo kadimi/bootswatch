@@ -10,7 +10,9 @@
 /**
  * Determine if we should use the `page_header` class.
  */
-if ( is_singular() ) {
+if ( is_archive() ) {
+	$use_page_header_class = false;
+} else if ( is_singular() ) {
 	$use_page_header_class = true;
 } else if ( ! is_sticky() || ! is_home() ) {
 	$use_page_header_class = true;

@@ -11,11 +11,19 @@
 $use_panel_class = is_archive() || is_home();
 
 /**
+ * Determine if we should use the `page-header` class.
+ */
+$use_page_header_class = is_singular();
+
+/**
  * Prepare classes.
  */
 $classes = [ 'entry-header' ];
 if ( $use_panel_class ) {
 	$classes[] = 'panel-heading';
+}
+if ( $use_page_header_class ) {
+	$classes[] = 'page-header';
 }
 ?>
 

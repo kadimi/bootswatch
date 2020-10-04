@@ -33,19 +33,21 @@ endif;
  * Displays post categories
  */
 if ( ! function_exists( 'bootswatch_category_list' ) ) {	
-	function bootswatch_category_list() {
+	function bootswatch_category_list( $post_id ) {
 		if ( ! bootswatch_categorized_blog() ) {
 			return;
 		}
-		$categories = get_categories();
+		$categories = wp_get_post_categories( $post_id, array(
+			'fields' => 'all'
+		) );
 		if( ! $categories ) {
 			return;
 		}
 		$links = [];
 		foreach ( $categories as $category ) {
 			$links[]= sprintf( '<a href="%1$s"><span class="badge">%2$s</a>'
-				, get_category_link( $category )
-				, $category->cat_name
+				, get_category_link( $category->term_id )
+				, $category->name
 			);
 		}
 		echo '<p>' . implode( ' ' , $links ) . '</p>';
