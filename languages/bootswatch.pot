@@ -39,8 +39,8 @@ msgstr[1] ""
 msgid "Continue reading %s &rarr;"
 msgstr ""
 
-#: bootswatch-template-parts/components/entry-footer.php:18
-#: inc/template-tags.php:107
+#: bootswatch-template-parts/components/entry-footer.php:34
+#: inc/template-tags.php:109
 #, php-format
 msgid "Edit %s"
 msgstr ""
@@ -185,29 +185,29 @@ msgctxt "post author"
 msgid "by %s"
 msgstr ""
 
-#: inc/template-tags.php:84
+#: inc/template-tags.php:86
 msgid ", "
 msgstr ""
 
-#: inc/template-tags.php:87
+#: inc/template-tags.php:89
 #, php-format
 msgid "Posted in %s"
 msgstr ""
 
-#: inc/template-tags.php:95
+#: inc/template-tags.php:97
 #, php-format
 msgid "Tagged %1$s"
 msgstr ""
 
-#: inc/template-tags.php:101
+#: inc/template-tags.php:103
 msgid "% Comments"
 msgstr ""
 
-#: inc/template-tags.php:101
+#: inc/template-tags.php:103
 msgid "1 Comment"
 msgstr ""
 
-#: inc/template-tags.php:101
+#: inc/template-tags.php:103
 msgid "Leave a comment"
 msgstr ""
 
