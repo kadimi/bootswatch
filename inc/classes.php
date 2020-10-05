@@ -16,7 +16,12 @@ function bootswatch_primary_classes() {
 		: 'col-md-12'
 	;
 
+	if ( is_home() ) {
+		$classes = 'page-header';
+	}
+
 	$classes = apply_filters( 'bootswatch_primary_classes', $classes );
+
 	return $classes;
 }
 
