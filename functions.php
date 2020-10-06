@@ -5,8 +5,8 @@
  * @package Bootswatch
  */
 
-define( 'BOOTSWATCH_DIR'                   , get_template_directory() );
-define( 'BOOTSWATCH_MINIMAL_PHP_VERSION'   , '5.4.0' );
+define( 'BOOTSWATCH_DIR', get_template_directory() );
+define( 'BOOTSWATCH_MINIMAL_PHP_VERSION', '5.4.0' );
 define( 'BOOTSWATCH_MINIMAL_PHP_VERSION_ID', 50400 );
 
 /**
