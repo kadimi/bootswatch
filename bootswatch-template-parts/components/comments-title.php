@@ -8,13 +8,15 @@
 $count = get_comments_number();
 
 // Translators: %1$s is a number and %2$s is a post title.
-$format = esc_html( _nx(
-	'%1$s thought on &ldquo;%2$s&rdquo;',
-	'%1$s thoughts on &ldquo;%2$s&rdquo;',
-	$count,
-	'comments title',
-	'bootswatch'
-) );
+$format = esc_html(
+	_nx(
+		'%1$s thought on &ldquo;%2$s&rdquo;',
+		'%1$s thoughts on &ldquo;%2$s&rdquo;',
+		$count,
+		'comments title',
+		'bootswatch'
+	) 
+);
 
 ?>
 
