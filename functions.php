@@ -6,8 +6,8 @@
  */
 
 define( 'BOOTSWATCH_DIR', get_template_directory() );
-define( 'BOOTSWATCH_MINIMAL_PHP_VERSION', '5.4.0' );
-define( 'BOOTSWATCH_MINIMAL_PHP_VERSION_ID', 50400 );
+define( 'BOOTSWATCH_MINIMAL_PHP_VERSION', '7.3.0' );
+define( 'BOOTSWATCH_MINIMAL_PHP_VERSION_ID', 70300 );
 
 /**
  * Loads Bootswatch translated strings.
