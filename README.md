@@ -13,7 +13,7 @@ git clone git@github.com:kadimi/bootswatch.git
 cd bootswatch
 
 # Setup dependencies with Composer
-rm vendor composer.lock -fr && composer install --no-dev
+rm vendor composer.lock -fr && composer install
 
 ```
 
@@ -40,26 +40,4 @@ function my_variables_overrides( $overrides, $theme ) {
 	return $overrides;
 }
 add_filter( 'bootswatch_variables_overrides', 'my_variables_overrides', 10, 2 );
-```
-
-## Code Sniffing
-
-The command you need is:
-
-```bash
-phpcs -p -s -v -n . --standard=./codesniffer.ruleset.xml --extensions=php
-```
-
-This command requires PHP_CodeSniffer and WordPress-Coding-Standards, you can install them as follows:
-
-```bash
-# Install PHP_CodeSniffer.
-composer global require squizlabs/php_codesniffer:^2.8.1
-
-# Install WordPress-Coding-Standards.
-composer global require wp-coding-standards/wpcs
-
-# Configure PHP_CodeSniffer to use WordPress-Coding-Standards.
-phpcs --config-set installed_paths ~/.config/composer/vendor/wp-coding-standards/wpcs/
-
 ```
