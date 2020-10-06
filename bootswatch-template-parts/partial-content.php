@@ -10,7 +10,7 @@ while ( have_posts() ) {
 
 	bootswatch_get_template_part( 'template-parts/content' );
 
-	if ( is_singular( [ 'post' ] ) ) {
+	if ( is_singular( array( 'post' ) ) ) {
 		bootswatch_post_navigation();
 	}
 
