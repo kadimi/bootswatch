@@ -4,6 +4,7 @@ cache/*
 hostname
 ip
 node_modules/*
+package-lock.json
 style.css
 .transifex
 vendor/*

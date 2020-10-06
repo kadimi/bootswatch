@@ -1,0 +1,15 @@
+{
+  "name": "bootswatch",
+  "version": "1.0.22",
+  "dependencies": {},
+  "devDependencies": {
+    "@wordpress/eslint-plugin": "^7.2.1",
+    "eslint": "^7.10.0",
+    "stylelint": "^13.7.2",
+    "stylelint-config-wordpress": "^17.0.0"
+  },
+  "scripts": {
+    "lint:css": "./node_modules/.bin/stylelint css/**/*.css",
+    "lint:js": "./node_modules/.bin/eslint js/**/*.js"
+  }
+}
