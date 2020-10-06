@@ -2,13 +2,16 @@
 /**
  * Class SampleTest
  *
- * @package Kadimi\Bootswatch
+ * @package Bootswatch
  */
 
-namespace Kadimi\Bootswatch\Test;
+namespace Bootswatch\Test;
 
 use Brain\Monkey;
 
+/**
+ * Test case.
+ */
 class MonkeyTestCase extends \PHPUnit_Framework_TestCase {
 
 	/**

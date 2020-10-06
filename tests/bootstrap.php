@@ -5,15 +5,18 @@
  * @package Bootswatch
  */
 
-$_tests_dir = getenv( 'WP_TESTS_DIR' );
-if ( ! $_tests_dir ) {
-	$_tests_dir = '/tmp/wordpress-tests-lib';
+$bootswatch_tests_dir = getenv( 'WP_TESTS_DIR' );
+if ( ! $bootswatch_tests_dir ) {
+	$bootswatch_tests_dir = '/tmp/wordpress-tests-lib';
 }
 
 // Give access to tests_add_filter() function.
-require_once $_tests_dir . '/includes/functions.php';
+require_once $bootswatch_tests_dir . '/includes/functions.php'; // phpcs:ignore WPThemeReview.CoreFunctionality.FileInclude.FileIncludeFound
 
-function _register_theme() {
+/**
+ * Undocumented.
+ */
+function bootswatch_register_theme() {
 
 	$theme_dir     = dirname( dirname( __FILE__ ) );
 	$current_theme = basename( $theme_dir );
@@ -33,13 +36,13 @@ function _register_theme() {
 		}
 	);
 }
-tests_add_filter( 'muplugins_loaded', '_register_theme' );
+tests_add_filter( 'muplugins_loaded', 'bootswatch_register_theme' );
 
 // Start up the WP testing environment.
-require $_tests_dir . '/includes/bootstrap.php';
+require $bootswatch_tests_dir . '/includes/bootstrap.php'; // phpcs:ignore WPThemeReview.CoreFunctionality.FileInclude.FileIncludeFound
 
 // Load MonkeyTestCase class file.
-require 'tests/class-monkey-test-case.php';
+require 'tests/class-monkey-test-case.php'; // phpcs:ignore WPThemeReview.CoreFunctionality.FileInclude.FileIncludeFound
 
 // Load dependencies.
-require 'vendor/autoload.php';
+require 'vendor/autoload.php'; // phpcs:ignore WPThemeReview.CoreFunctionality.FileInclude.FileIncludeFound
