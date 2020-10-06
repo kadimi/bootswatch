@@ -8,20 +8,7 @@
 /**
  * Determine if we should use short version of the post.
  */
-if ( ! is_singular() && ! post_password_required() ) {
-	$use_short = true;
-} else {
-	$use_short = false;
-}
-
-/**
- * Determine featured image size.
- */
-if ( $use_short ) {
-	$featured_image_size = apply_filters( 'bootswatch_thumbnail_size_short', 'thumbnail' );
-} else {
-	$featured_image_size = apply_filters( 'bootswatch_thumbnail_size', 'full' );
-}
+$use_short =  ! is_singular() && ! post_password_required();
 
 /**
  * Determine if we should use the `panel` class.
@@ -29,17 +16,59 @@ if ( $use_short ) {
 $use_panel_class = is_archive() || is_home();
 
 /**
- * Prepare classes.
+ * Classes.
  */
 $classes = [ 'entry-content' ];
 if ( $use_panel_class ) {
 	$classes[] = 'panel-body';
 }
 
-?>
+/**
+ * Featured image.
+ */
+$has_thumbnail  = ( $tmp = get_post_thumbnail_id( get_the_ID() ) ) && get_post( $tmp );
+$thumbnail_size = apply_filters( 'bootswatch_thumbnail_size', 'full' );
 
-<div class="<?php echo implode( ' ', $classes ); ?>">
-	<p><?php the_post_thumbnail( $featured_image_size ); ?></p>
+/**
+ * Columns.
+*/
+$thumbnail_columns = apply_filters( 'bootswatch_thumbnail_columns', 6 );
+$content_columns   = 12 - $thumbnail_columns;
+$thumbnail_first   = is_singular() || apply_filters( 'bootswatch_thumbnail_first', false );
+/**
+ * Prepare the featured image.
+ */
+ob_start();
+?>
+	<?php if ( $use_short && $has_thumbnail ) : ?>
+		<div class="col-md-<?php echo $thumbnail_columns; ?>">
+	<?php endif; ?>
+
+	<?php if ( $has_thumbnail ) : ?>
+		<p>
+			<?php if ( $use_short ) : ?>
+				<?php echo wp_get_attachment_link( get_post_thumbnail_id( get_the_ID() ), $thumbnail_size ); ?>
+			<?php else : ?>
+				<?php the_post_thumbnail( $thumbnail_size ); ?>
+			<?php endif; ?>
+		</p>
+	<?php endif; ?>
+
+	<?php if ( $use_short && $has_thumbnail ) : ?>
+		</div>
+	<?php endif; ?>
+<?php
+$thumbnail_output = ob_get_clean();
+
+/**
+ * Prepare the content.
+ */
+ob_start();
+?>
+	<?php if ( $use_short && $has_thumbnail ) : ?>
+		<div class="col-md-<?php echo $content_columns; ?>">
+	<?php endif; ?>
+
 	<?php
 		if ( $use_short ) {
 			if ( is_search() ) {
@@ -55,5 +84,34 @@ if ( $use_panel_class ) {
 			the_content();
 		}
 	?>
+
+	<?php if ( $has_thumbnail ) : ?>
+		</div>
+	<?php endif; ?>
+<?php
+$content_output = ob_get_clean();
+
+/**
+ * Output.
+ */
+?>
+<div class="<?php echo implode( ' ', $classes ); ?>">
+
+	<?php if ( $use_short && $has_thumbnail ) : ?>
+		<div class="row">
+	<?php endif; ?>
+
+	<?php if ( $thumbnail_first ) : ?>
+		<?php echo $thumbnail_output ?>
+		<?php echo $content_output ?>
+	<?php else: ?>
+		<?php echo $content_output ?>
+		<?php echo $thumbnail_output ?>
+	<?php endif; ?>
+
+	<?php if ( $use_short && $has_thumbnail ) : ?>
+		</div>
+	<?php endif; ?>
+
 	<?php bootswatch_link_pages(); ?>
 </div><!-- .entry-content -->
