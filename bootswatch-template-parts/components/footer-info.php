@@ -5,11 +5,11 @@
  * @package Bootswatch
  */
 
-$author = [
+$author = array(
 	'name'  => __( 'Nabil Kadimi', 'bootswatch' ),
 	'title' => __( 'Independent WordPress Developer', 'bootswatch' ),
 	'url'   => 'https://kadimi.com',
-];
+);
 
 ?>
 
@@ -24,11 +24,12 @@ $author = [
 				echo '&ndash; ';
 				// Translators: Author details.
 				printf(
-					esc_html( 'Designed by %s.', 'bootswatch' )
-					, sprintf( '<a href="%1$s" title="%2$s">%3$s</a>'
-						, esc_url( $author['url'] )
-						, esc_html( $author['title'] )
-						, esc_html( $author['name'] )
+					esc_html( 'Designed by %s.', 'bootswatch' ),
+					sprintf(
+						'<a href="%1$s" title="%2$s">%3$s</a>',
+						esc_url( $author['url'] ),
+						esc_html( $author['title'] ),
+						esc_html( $author['name'] )
 					)
 				);
 			}
