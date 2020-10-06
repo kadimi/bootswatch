@@ -18,7 +18,7 @@ $use_page_header_class = is_singular();
 /**
  * Prepare classes.
  */
-$classes = [ 'entry-header' ];
+$classes = array( 'entry-header' );
 if ( $use_panel_class ) {
 	$classes[] = 'panel-heading';
 }

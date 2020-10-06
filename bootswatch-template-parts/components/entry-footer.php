@@ -28,14 +28,14 @@ if ( $use_panel_class ) {
 
 <footer class="<?php echo implode( ' ', $classes ); ?>">
 	<?php
-		edit_post_link(
-			sprintf(
-				/* translators: %s: Post title */
-				esc_html__( 'Edit %s', 'bootswatch' ),
-				the_title( '<span class="screen-reader-text">"', '"</span>', false )
-			),
-			'<span class="edit-link">',
-			'</span>'
-		);
+	edit_post_link(
+		sprintf(
+			/* translators: %s: Post title */
+			esc_html__( 'Edit %s', 'bootswatch' ),
+			the_title( '<span class="screen-reader-text">"', '"</span>', false )
+		),
+		'<span class="edit-link">',
+		'</span>'
+	);
 	?>
 </footer><!-- .entry-footer -->
