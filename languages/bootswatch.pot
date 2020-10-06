@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: bootswatch-template-parts/components/comments-closed.php:11
+#: bootswatch-template-parts/components/comments-closed.php:13
 msgid "Comments are closed."
 msgstr ""
 
@@ -26,7 +26,7 @@ msgstr ""
 msgid "Newer Comments"
 msgstr ""
 
-#: bootswatch-template-parts/components/comments-title.php:12
+#: bootswatch-template-parts/components/comments-title.php:15
 #, php-format
 msgctxt "comments title"
 msgid "%1$s thought on &ldquo;%2$s&rdquo;"
@@ -34,23 +34,28 @@ msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
 msgstr[0] ""
 msgstr[1] ""
 
-#: bootswatch-template-parts/components/entry-content.php:79
+#: bootswatch-template-parts/components/entry-content.php:84
 #, php-format
 msgid "Continue reading %s &rarr;"
 msgstr ""
 
-#: bootswatch-template-parts/components/entry-footer.php:34
-#: inc/template-tags.php:109
+#: bootswatch-template-parts/components/entry-footer.php:36
+#: inc/template-tags.php:118
 #, php-format
 msgid "Edit %s"
 msgstr ""
 
-#: bootswatch-template-parts/components/footer-info.php:9
+#: bootswatch-template-parts/components/footer-info.php:11
 msgid "Nabil Kadimi"
 msgstr ""
 
-#: bootswatch-template-parts/components/footer-info.php:10
+#: bootswatch-template-parts/components/footer-info.php:12
 msgid "Independent WordPress Developer"
+msgstr ""
+
+#: bootswatch-template-parts/components/footer-info.php:29
+#, php-format
+msgid "Designed by %s."
 msgstr ""
 
 #: bootswatch-template-parts/components/header-header.php:11
@@ -61,23 +66,23 @@ msgstr ""
 msgid "Nothing Found"
 msgstr ""
 
-#: bootswatch-template-parts/content-none.php:22
+#: bootswatch-template-parts/content-none.php:25
 #, php-format
 msgid "Ready to publish your first post? <a href=\"%s\">Get started here</a>."
 msgstr ""
 
-#: bootswatch-template-parts/content-none.php:31
+#: bootswatch-template-parts/content-none.php:39
 msgid ""
 "Sorry, but nothing matched your search terms. Please try again with some "
 "different keywords."
 msgstr ""
 
-#: bootswatch-template-parts/content-none.php:36
+#: bootswatch-template-parts/content-none.php:44
 msgid ""
 "It seems we can't find what you're looking for. Perhaps searching can help."
 msgstr ""
 
-#: bootswatch-template-parts/partial-header.php:13
+#: bootswatch-template-parts/partial-header.php:14
 #, php-format
 msgid "Search Results for: %s"
 msgstr ""
@@ -114,49 +119,49 @@ msgid ""
 "<code>PHP %s</code>, as such, Bootswatch will not work until you uprade PHP."
 msgstr ""
 
-#: inc/compatibility/php-version.php:124
+#: inc/compatibility/php-version.php:125
 msgid "Howdy! Bootswatch here..."
 msgstr ""
 
-#: inc/custom-header.php:45
+#: inc/custom-header.php:55
 msgid "Default Header Image"
 msgstr ""
 
-#: inc/dependencies.php:55
+#: inc/dependencies.php:60
 msgctxt "once you \"activate\"..."
 msgid "activate"
 msgstr ""
 
-#: inc/dependencies.php:60
+#: inc/dependencies.php:65
 msgctxt "once you \"install\"..."
 msgid "install"
 msgstr ""
 
-#: inc/options.php:28
+#: inc/options.php:34
 msgid "Theme"
 msgstr ""
 
-#: inc/options.php:35
+#: inc/options.php:42
 msgid "Custom Header Size"
 msgstr ""
 
-#: inc/options.php:64
+#: inc/options.php:73
 msgid "Fixed Navigation Bar"
 msgstr ""
 
-#: inc/options.php:90
+#: inc/options.php:105
 msgid "Search Form in Header"
 msgstr ""
 
-#: inc/options.php:183 inc/options.php:190
+#: inc/options.php:214 inc/options.php:221
 msgid "No"
 msgstr ""
 
-#: inc/options.php:184 inc/options.php:189
+#: inc/options.php:215 inc/options.php:220
 msgid "Yes"
 msgstr ""
 
-#: inc/options.php:384
+#: inc/options.php:417
 msgid "Just Bootstrap"
 msgstr ""
 
@@ -169,7 +174,7 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: inc/setup.php:22
+#: inc/setup.php:28
 msgid "Primary Menu"
 msgstr ""
 
@@ -185,41 +190,41 @@ msgctxt "post author"
 msgid "by %s"
 msgstr ""
 
-#: inc/template-tags.php:86
+#: inc/template-tags.php:94
 msgid ", "
-msgstr ""
-
-#: inc/template-tags.php:89
-#, php-format
-msgid "Posted in %s"
 msgstr ""
 
 #: inc/template-tags.php:97
 #, php-format
+msgid "Posted in %s"
+msgstr ""
+
+#: inc/template-tags.php:105
+#, php-format
 msgid "Tagged %1$s"
 msgstr ""
 
-#: inc/template-tags.php:103
+#: inc/template-tags.php:111
 msgid "% Comments"
 msgstr ""
 
-#: inc/template-tags.php:103
+#: inc/template-tags.php:111
 msgid "1 Comment"
 msgstr ""
 
-#: inc/template-tags.php:103
+#: inc/template-tags.php:111
 msgid "Leave a comment"
 msgstr ""
 
-#: inc/widgets.php:13
+#: inc/widgets.php:14
 msgid "Sidebar"
 msgstr ""
 
-#: inc/widgets.php:21
+#: inc/widgets.php:24
 msgid "Footer"
 msgstr ""
 
-#: index.php:13
+#: index.php:14
 #, php-format
 msgid "Bootswatch requires PHP %1$s or newer, you are using PHP %2$s."
 msgstr ""
