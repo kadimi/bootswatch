@@ -16,7 +16,7 @@ if ( ! function_exists( 'bootswatch_header_menu_title_cb' ) ) {
 	 * @return String   The filtered menu item title.
 	 */
 	function bootswatch_header_menu_title_cb( $title, $item, $args, $depth ) {
-		return 0 === $depth && in_array( 'menu-item-has-children', $item->classes )
+		return 0 === $depth && in_array( 'menu-item-has-children', $item->classes, true )
 			? $title . ' <span class="caret"></span>'
 			: $title;
 	}

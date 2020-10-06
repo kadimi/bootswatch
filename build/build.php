@@ -5,9 +5,9 @@
  * @package Bootswatch
  */
 
-namespace Kadimi;
+namespace Bootswatch;
 
-require 'build/class-bootswatchbuild.php';
+require 'build/class-bootswatchbuild.php'; // phpcs:ignore WPThemeReview.CoreFunctionality.FileInclude.FileIncludeFound
 
 ( new BootswatchBuild(
 	array(

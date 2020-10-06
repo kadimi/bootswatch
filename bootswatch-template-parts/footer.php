@@ -4,11 +4,12 @@
  *
  * @package Bootswatch
  */
+
+bootswatch_get_template_part( 'template-parts/components/footer', 'footer' );
+
+wp_footer();
+
 ?>
-
-<?php bootswatch_get_template_part( 'template-parts/components/footer', 'footer' ); ?>
-
-<?php wp_footer(); ?>
 
 </body>
 </html>

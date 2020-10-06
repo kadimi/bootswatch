@@ -4,6 +4,7 @@
  *
  * @package Bootswatch
  */
+
 ?>
 
 <footer class="container" role="contentinfo">

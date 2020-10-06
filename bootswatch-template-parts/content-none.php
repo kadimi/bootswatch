@@ -19,9 +19,9 @@
 
 			<p>
 			<?php
-				// Translators: %s is a URL.
 				printf(
 					wp_kses(
+						// Translators: %s is a URL.
 						__( 'Ready to publish your first post? <a href="%s">Get started here</a>.', 'bootswatch' ),
 						array(
 							'a' => array(

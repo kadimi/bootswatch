@@ -5,7 +5,7 @@
  * @package Bootswatch
  */
 
-namespace Kadimi;
+namespace Bootswatch;
 
 use \ZipArchive;
 
@@ -99,9 +99,8 @@ class BootswatchBuild {
 	 * @param Array $data Data.
 	 */
 	public function __construct( $data ) {
-		$this->timer         = microtime( true );
-		$this->theme_version = trim( file_get_contents( '.version' ) );
-
+		$this->timer                   = microtime( true );
+		$this->theme_version           = trim( file_get_contents( '.version' ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 		$this->ignored_patterns        = $data['ignored_patterns'];
 		$this->vendor_ignored_patterns = $data['vendor_ignored_patterns'];
 		$this->preg_replacements       = $data['preg_replacements'];
@@ -140,7 +139,7 @@ class BootswatchBuild {
 		}
 
 		$variables = array(
-			'{{tags}}'    => str_replace( "\n", ',', file_get_contents( 'readme/tags.txt' ) ),
+			'{{tags}}'    => str_replace( "\n", ',', file_get_contents( 'readme/tags.txt' ) ), // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 			'{{version}}' => $this->theme_version,
 		);
 
@@ -157,14 +156,14 @@ class BootswatchBuild {
 		// Join files.
 		$css = '';
 		foreach ( $parts as $part ) {
-			$css .= file_get_contents( $part ) . "\n";
+			$css .= file_get_contents( $part ) . "\n"; // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 		}
 
 		// Replace variables.
 		$css = str_replace( array_keys( $variables ), array_values( $variables ), $css );
 
 		// Write file.
-		file_put_contents( 'style.css', $css );
+		file_put_contents( 'style.css', $css ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_file_put_contents
 	}
 
 	/**
@@ -175,10 +174,10 @@ class BootswatchBuild {
 		/**
 		 * Check version section in changelog.
 		 */
-		$readme                   = file_get_contents( 'readme.txt' );
+		$readme                   = file_get_contents( 'readme.txt' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 		$changelog_section_exists = strstr( $readme, sprintf( '= %s -', $this->theme_version ) );
 		if ( ! $changelog_section_exists ) {
-			echo $this->log_error( sprintf( 'Changelog section for version %s does not exist in readme.txt', $this->theme_version ) );
+			echo $this->log_error( sprintf( 'Changelog section for version %s does not exist in readme.txt', $this->theme_version ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			die();
 		}
 	}
@@ -189,23 +188,23 @@ class BootswatchBuild {
 	private function update_readme() {
 
 		$variables = array(
-			'{{changelog}}'    => file_get_contents( 'readme/changelog.txt' ),
-			'{{credits}}'      => file_get_contents( 'readme/credits.txt' ),
-			'{{description}}'  => file_get_contents( 'readme/description.txt' ),
-			'{{faq}}'          => file_get_contents( 'readme/faq.txt' ),
-			'{{installation}}' => file_get_contents( 'readme/installation.txt' ),
-			'{{tags}}'         => str_replace( "\n", ',', file_get_contents( 'readme/tags.txt' ) ),
+			'{{changelog}}'    => file_get_contents( 'readme/changelog.txt' ), // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+			'{{credits}}'      => file_get_contents( 'readme/credits.txt' ), // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+			'{{description}}'  => file_get_contents( 'readme/description.txt' ), // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+			'{{faq}}'          => file_get_contents( 'readme/faq.txt' ), // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+			'{{installation}}' => file_get_contents( 'readme/installation.txt' ), // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+			'{{tags}}'         => str_replace( "\n", ',', file_get_contents( 'readme/tags.txt' ) ), // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 			'{{version}}'      => $this->theme_version,
 		);
 
 		// Read.
-		$readme = file_get_contents( 'readme/readme.txt' );
+		$readme = file_get_contents( 'readme/readme.txt' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 
 		// Replace variables.
 		$readme = str_replace( array_keys( $variables ), array_values( $variables ), $readme );
 
 		// Write.
-		file_put_contents( 'readme.txt', $readme );
+		file_put_contents( 'readme.txt', $readme ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_file_put_contents
 	}
 
 	/**
@@ -271,12 +270,12 @@ class BootswatchBuild {
 			/**
 			 * Replace.
 			 */
-			file_put_contents(
+			file_put_contents( // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_file_put_contents
 				$file,
 				str_replace(
 					array_keys( $replacements ),
 					array_values( $replacements ),
-					file_get_contents( $file ),
+					file_get_contents( $file ), // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 					$count
 				)
 			);
@@ -302,12 +301,12 @@ class BootswatchBuild {
 		foreach ( $this->preg_replacements as $file => $replacements ) {
 			$replacements['/\{\{version\}\}/'] = $this->theme_version;
 			$count                             = 0;
-			$contents                          = file_get_contents( $file );
+			$contents                          = file_get_contents( $file ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 			foreach ( $replacements as $regex => $replacement ) {
 				$contents = preg_replace( $regex, $replacement, $contents, -1, $sub_count );
 				$count   += $sub_count;
 			}
-			file_put_contents( $file, $contents );
+			file_put_contents( $file, $contents ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_file_put_contents
 			$this->log(
 				sprintf(
 					'%d replacements made in %s.',
@@ -437,8 +436,10 @@ class BootswatchBuild {
 	/**
 	 * Works like shell find command.
 	 *
-	 * @param  Sting $pattern The pattern.
-	 * @return Array          A list of files paths.
+	 * @param  Sting $pattern            The pattern.
+	 * @param  array $only_extensions    Extensions to match.
+	 * @param  array $exclude_extensions Extensions to exclude.
+	 * @return Array                     A list of files paths.
 	 */
 	protected function find( $pattern, $only_extensions = array(), $exclude_extensions = array() ) {
 
@@ -476,14 +477,14 @@ class BootswatchBuild {
 			/**
 			 * Skip by not included extension.
 			 */
-			if ( $only_extensions && ! in_array( $extension, $only_extensions ) ) {
+			if ( $only_extensions && ! in_array( $extension, $only_extensions, true ) ) {
 				continue;
 			}
 
 			/**
 			 * Skip by excluded extension.
 			 */
-			if ( in_array( $extension, $exclude_extensions ) ) {
+			if ( in_array( $extension, $exclude_extensions, true ) ) {
 				continue;
 			}
 
@@ -522,7 +523,7 @@ class BootswatchBuild {
 		if ( $is_title ) {
 			$message = "\033[32m\033[1m$message\033[0m";
 		}
-		echo $message; // XSS OK.
+		echo $message; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		if ( $append_new_line ) {
 			echo "\n";
 		}
@@ -541,7 +542,7 @@ class BootswatchBuild {
 	/**
 	 * Helper function to show an error in the log.
 	 *
-	 * @param  String $title  The log title.
+	 * @param  String $message The message.
 	 */
 	protected function log_error( $message ) {
 
@@ -553,7 +554,7 @@ class BootswatchBuild {
 	/**
 	 * Helper function to show a warning in the log.
 	 *
-	 * @param  String $title  The log title.
+	 * @param  String $message The message.
 	 */
 	protected function log_warning( $message ) {
 
@@ -564,6 +565,9 @@ class BootswatchBuild {
 
 	/**
 	 * Runs a task.
+	 *
+	 * @param  callable $callback The task callback.
+	 * @param  string   $title    The log title.
 	 */
 	protected function task( callable $callback, $title ) {
 		$this->log_title( $title . ' started.' );
@@ -571,9 +575,11 @@ class BootswatchBuild {
 		call_user_func( $callback );
 		$duration = microtime( true ) - $timer;
 		$this->log_title( sprintf( '%s completed in %.2fs', $title, $duration ) );
-
 	}
 
+	/**
+	 * Creates the pot file.
+	 */
 	protected function pot() {
 
 		$this->log();
@@ -620,15 +626,24 @@ class BootswatchBuild {
 				-o languages/bootswatch.pot
 		'
 		);
-		shell_exec( $command );
+		shell_exec( $command ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.system_calls_shell_exec
 		$this->log( 'Language file created successfully.' );
 	}
 
+	/**
+	 * Checks of a shell command exists.
+	 *
+	 * @param  string $command The command.
+	 * @return boolean         True if the command exists, false otherwise.
+	 */
 	protected function shell_command_exists( $command ) {
-		$output = shell_exec( sprintf( 'which %s', escapeshellarg( $command ) ) );
+		$output = shell_exec( sprintf( 'which %s', escapeshellarg( $command ) ) ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.system_calls_shell_exec
 		return ! empty( $output );
 	}
 
+	/**
+	 * Creates mo files from po files.
+	 */
 	protected function mo() {
 
 		$this->log();
@@ -645,10 +660,13 @@ class BootswatchBuild {
 				preg_replace( '/po$/', 'mo', $po_filepath ),
 				$po_filepath
 			);
-			shell_exec( $command );
+			shell_exec( $command ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.system_calls_shell_exec
 		}
 	}
 
+	/**
+	 * Updates translations from transifex.
+	 */
 	protected function update_translations() {
 
 		$this->log();
@@ -660,18 +678,18 @@ class BootswatchBuild {
 			$this->log_warning( 'Transifex API token not found, it should be saved in `.transifex`.' );
 			return;
 		}
-		$transifex_api_token = file_get_contents( '.transifex' );
+		$transifex_api_token = file_get_contents( '.transifex' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 
 		$api_url = 'https://www.transifex.com/api/2/project/bootswatch/';
-		$auth    = base64_encode( "api:$transifex_api_token" );
+		$auth    = base64_encode( "api:$transifex_api_token" ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode
 
 		/**
 		 * Upload source file.
 		 */
 		$data           = array(
-			'content' => file_get_contents( 'languages/bootswatch.pot' ),
+			'content' => file_get_contents( 'languages/bootswatch.pot' ), // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 		);
-		$postdata       = json_encode( $data );
+		$postdata       = json_encode( $data ); // phpcs:ignore WordPress.WP.AlternativeFunctions.json_encode_json_encode
 		$context        = stream_context_create(
 			array(
 				'http' => array(
@@ -681,7 +699,7 @@ class BootswatchBuild {
 				),
 			) 
 		);
-		$languages_json = file_get_contents( 'https://www.transifex.com/api/2/project/bootswatch/resource/bootswatchpot/content/', false, $context );
+		$languages_json = file_get_contents( 'https://www.transifex.com/api/2/project/bootswatch/resource/bootswatchpot/content/', false, $context ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 
 		/**
 		 * Download translations.
@@ -693,11 +711,11 @@ class BootswatchBuild {
 				),
 			) 
 		);
-		$languages_json = file_get_contents( 'https://www.transifex.com/api/2/project/bootswatch/languages', false, $context );
+		$languages_json = file_get_contents( 'https://www.transifex.com/api/2/project/bootswatch/languages', false, $context ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 		$languages      = json_decode( $languages_json );
 		foreach ( $languages as $language ) {
-			$po = file_get_contents( $api_url . 'resource/bootswatchpot/translation/' . $language->language_code . '/?mode=reviewed&file', false, $context );
-			file_put_contents( "languages/{$language->language_code}.po", $po );
+			$po = file_get_contents( $api_url . 'resource/bootswatchpot/translation/' . $language->language_code . '/?mode=reviewed&file', false, $context ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+			file_put_contents( "languages/{$language->language_code}.po", $po ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_file_put_contents
 			$this->log( sprintf( 'Downloaded `%s.po`.', $language->language_code ) );
 		}
 	}

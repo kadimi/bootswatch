@@ -1,3 +1,12 @@
+<?php
+/**
+ * The header navigation.
+ *
+ * @package Bootswatch
+ */
+
+?>
+
 <nav class=" navbar navbar-default <?php echo bootswatch_has( 'fixed_navbar' ) ? 'navbar-fixed-top' : 'navbar-static-top'; ?> " role="navigation">
 	<div class="container">
 		<div class="navbar-header">
