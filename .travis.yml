@@ -1,51 +1,71 @@
-dist: trusty
-sudo: false
-language: php
-matrix:
-    fast_finish: true
-    include:
-        - php: '5.6'
-          env: SNIFF=1
-        - php: 5.6
-          env: WP_VERSION=4.0
-        - php: 5.6
-          env: WP_VERSION=latest
-        - php: 5.6
-          env: WP_VERSION=trunk
-        - php: '7.0'
-        - php: 'hhvm'
-before_script:
-    - export COMPOSER_VENDOR_DIR=/home/travis/build/kadimi/bootswatch/vendor
-    - if [[ "$SNIFF" == "1" ]]; then composer global require squizlabs/php_codesniffer:^2.8.1; fi
-    - if [[ "$SNIFF" == "1" ]]; then composer global require wp-coding-standards/wpcs; fi
-    - if [[ "$SNIFF" == "1" ]]; then $COMPOSER_VENDOR_DIR/bin/phpcs --config-set installed_paths $COMPOSER_VENDOR_DIR/wp-coding-standards/wpcs/; fi
-    - if [[ "$SNIFF" == "1" ]]; then npm install -g jscs; fi
-    - if [[ "$SNIFF" == "1" ]]; then npm install -g jshint; fi
-    - if [[ "$SNIFF" == "1" ]]; then wget https://develop.svn.wordpress.org/trunk/.jshintrc; fi
-    - |
-        if [[ ! -z "$WP_VERSION" ]] ; then
-            bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
-            if [[ ${TRAVIS_PHP_VERSION:0:2} == "5." ]]; then
-                composer global require "phpunit/phpunit=4.8.*"
-            else
-                composer global require "phpunit/phpunit=5.7.*"
-            fi
-            composer install --dev
-        fi
+# Travis CI (MIT License) configuration file for the Underscores WordPress theme.
+# @link https://travis-ci.org/
 
-# Run test script commands.
+# For use with the Underscores WordPress theme.
+# @link https://github.com/Automattic/_s
+
+# Tell Travis CI which OS and which distro to use.
+os: linux
+dist: xenial
+
+# Cache directories between builds.
+# @link https://docs.travis-ci.com/user/caching/#arbitrary-directories
+cache:
+  directories:
+    # Cache directory for npm.
+    - $HOME/.npm
+    # Cache directory for older Composer versions.
+    - $HOME/.composer/cache/files
+    # Cache directory for more recent Composer versions.
+    - $HOME/.cache/composer/files
+
+# Declare project language.
+# @link https://docs.travis-ci.com/user/languages/php/
+language:
+  - php
+
+php:
+  - 5.6
+  - 7.0
+  - 7.1
+  - 7.2
+  - 7.3
+
+jobs:
+  fast_finish: true
+  include:
+    - php: 7.4
+      env: SNIFF=1
+
+before_install:
+  # Speed up build time by disabling Xdebug.
+  - phpenv config-rm xdebug.ini || echo 'No xdebug config.'
+  # Download and install the latest long-term support release of node.
+  - if [[ "$SNIFF" == 1 ]]; then nvm install --lts; fi
+  # Install Composer dependencies.
+  - composer install
+  # Install NPM dependencies.
+  - if [[ "$SNIFF" == 1 ]]; then npm install; fi
+
 script:
-    # Run the theme through JavaScript Code Style checker.
-    - if [[ "$SNIFF" == "1" ]]; then jscs .; fi
-    # Run the theme through JSHint.
-    - if [[ "$SNIFF" == "1" ]]; then jshint . --exclude vendor/; fi
-    # Search for PHP syntax errors.
-    - find -L . -not \( -path ./vendor -prune \) -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l
-    # Run the theme through PHP_CodeSniffer.
-    - if [[ "$SNIFF" == "1" ]]; then $COMPOSER_VENDOR_DIR/bin/phpcs -p -s -v -n . --standard=./codesniffer.ruleset.xml --extensions=php; fi
-    # Run phpunit
-    - |
-        if [[ ! -z "$NOT_WP_VERSION" ]] ; then
-          phpunit
-          WP_MULTISITE=1 phpunit
-        fi
+  # Validate the composer.json file.
+  # @link https://getcomposer.org/doc/03-cli.md#validate
+  - composer validate --no-check-all --strict
+
+  # Search for PHP syntax errors using PHP Parallel Lint.
+  # @link https://github.com/php-parallel-lint/PHP-Parallel-Lint
+  - composer lint:php
+
+  # Check the PHP files with the coding standards documented in the phpcs.xml.dist file.
+  - if [[ "$SNIFF" == 1 ]]; then composer lint:wpcs; fi
+
+  # Check the JS files with the lint-js script defined in the @wordpress/scripts package.
+  - if [[ "$SNIFF" == 1 ]]; then npm run lint:js; fi
+
+  # Check the SCSS files with the lint-style script defined in the @wordpress/scripts package.
+  - if [[ "$SNIFF" == 1 ]]; then npm run lint:scss; fi
+
+# Receive notifications for build results.
+# @link https://docs.travis-ci.com/user/notifications/#configuring-email-notifications
+notifications:
+    email: false
