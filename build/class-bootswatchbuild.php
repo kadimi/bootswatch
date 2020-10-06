@@ -26,14 +26,14 @@ class BootswatchBuild {
 	 *
 	 * @var array
 	 */
-	private $files = [];
+	private $files = array();
 
 	/**
 	 * Ignored patterns.
 	 *
 	 * @var array
 	 */
-	private $ignored_patterns = [];
+	private $ignored_patterns = array();
 
 	/**
 	 * Last error seen on the log.
@@ -47,7 +47,7 @@ class BootswatchBuild {
 	 *
 	 * @var array
 	 */
-	private $preg_replacements = [];
+	private $preg_replacements = array();
 
 	/**
 	 * When true, no deletions are made.
@@ -61,7 +61,7 @@ class BootswatchBuild {
 	 *
 	 * @var array
 	 */
-	private $str_replacements = [];
+	private $str_replacements = array();
 
 	/**
 	 * Timer.
@@ -82,14 +82,14 @@ class BootswatchBuild {
 	 *
 	 * @var array
 	 */
-	private $vendor_files = [];
+	private $vendor_files = array();
 
 	/**
 	 * Vendor ignored patterns.
 	 *
 	 * @var array
 	 */
-	private $vendor_ignored_patterns = [];
+	private $vendor_ignored_patterns = array();
 
 	/**
 	 * Constructor.
@@ -99,7 +99,7 @@ class BootswatchBuild {
 	 * @param Array $data Data.
 	 */
 	public function __construct( $data ) {
-		$this->timer = microtime( true );
+		$this->timer         = microtime( true );
 		$this->theme_version = trim( file_get_contents( '.version' ) );
 
 		$this->ignored_patterns        = $data['ignored_patterns'];
@@ -107,17 +107,17 @@ class BootswatchBuild {
 		$this->preg_replacements       = $data['preg_replacements'];
 		$this->str_replacements        = $data['str_replacements'];
 
-		$this->task( [ $this, 'pot' ], 'Creating Languages File' );
-		$this->task( [ $this, 'update_translations' ], 'Updating .pot and po Files' );
-		$this->task( [ $this, 'update_readme' ], 'Updating `readme.txt`' );
-		$this->task( [ $this, 'check_readme' ], 'Validating `readme.txt`' );
-		$this->task( [ $this, 'create_style' ], 'Creating `style.css`' );
-		$this->task( [ $this, 'clean_vendor' ], 'Cleaning Vendors Folder' );
-		$this->task( [ $this, 'do_str_replace' ], 'Applying Normal String Replacements' );
-		$this->task( [ $this, 'do_preg_replace' ], 'Applying Regular Expression String Replacements' );
-		$this->task( [ $this, 'mo' ], 'Creating .mo Files' );
-		$this->task( [ $this, 'clear_cache' ], 'Clearing Cache' );
-		$this->task( [ $this, 'package' ], 'Packaging' );
+		$this->task( array( $this, 'pot' ), 'Creating Languages File' );
+		$this->task( array( $this, 'update_translations' ), 'Updating .pot and po Files' );
+		$this->task( array( $this, 'update_readme' ), 'Updating `readme.txt`' );
+		$this->task( array( $this, 'check_readme' ), 'Validating `readme.txt`' );
+		$this->task( array( $this, 'create_style' ), 'Creating `style.css`' );
+		$this->task( array( $this, 'clean_vendor' ), 'Cleaning Vendors Folder' );
+		$this->task( array( $this, 'do_str_replace' ), 'Applying Normal String Replacements' );
+		$this->task( array( $this, 'do_preg_replace' ), 'Applying Regular Expression String Replacements' );
+		$this->task( array( $this, 'mo' ), 'Creating .mo Files' );
+		$this->task( array( $this, 'clear_cache' ), 'Clearing Cache' );
+		$this->task( array( $this, 'package' ), 'Packaging' );
 	}
 
 	/**
@@ -126,7 +126,7 @@ class BootswatchBuild {
 	public function __destruct() {
 		$duration = microtime( true ) - $this->timer;
 		if ( ! $this->last_error ) {
-			$this->log_title( sprintf( 'Build completed in %.2fs' , $duration ) );
+			$this->log_title( sprintf( 'Build completed in %.2fs', $duration ) );
 		}
 	}
 
@@ -139,12 +139,12 @@ class BootswatchBuild {
 			unlink( 'style.css' );
 		}
 
-		$variables = [
+		$variables = array(
 			'{{tags}}'    => str_replace( "\n", ',', file_get_contents( 'readme/tags.txt' ) ),
 			'{{version}}' => $this->theme_version,
-		];
+		);
 
-		$parts = [
+		$parts = array(
 			'css/style.css',
 			'css/wordpress-core.css',
 			'css/wordpress-core-overrides.css',
@@ -152,7 +152,7 @@ class BootswatchBuild {
 			'css/twentyseventeen-galleries.css',
 			'css/twentyseventeen-galleries-missing-columns.css',
 			'css/misc.css',
-		];
+		);
 
 		// Join files.
 		$css = '';
@@ -175,7 +175,7 @@ class BootswatchBuild {
 		/**
 		 * Check version section in changelog.
 		 */
-		$readme = file_get_contents( 'readme.txt' );
+		$readme                   = file_get_contents( 'readme.txt' );
 		$changelog_section_exists = strstr( $readme, sprintf( '= %s -', $this->theme_version ) );
 		if ( ! $changelog_section_exists ) {
 			echo $this->log_error( sprintf( 'Changelog section for version %s does not exist in readme.txt', $this->theme_version ) );
@@ -188,7 +188,7 @@ class BootswatchBuild {
 	 */
 	private function update_readme() {
 
-		$variables = [
+		$variables = array(
 			'{{changelog}}'    => file_get_contents( 'readme/changelog.txt' ),
 			'{{credits}}'      => file_get_contents( 'readme/credits.txt' ),
 			'{{description}}'  => file_get_contents( 'readme/description.txt' ),
@@ -196,7 +196,7 @@ class BootswatchBuild {
 			'{{installation}}' => file_get_contents( 'readme/installation.txt' ),
 			'{{tags}}'         => str_replace( "\n", ',', file_get_contents( 'readme/tags.txt' ) ),
 			'{{version}}'      => $this->theme_version,
-		];
+		);
 
 		// Read.
 		$readme = file_get_contents( 'readme/readme.txt' );
@@ -224,7 +224,7 @@ class BootswatchBuild {
 	 * @return Array The list of vendor files.
 	 */
 	private function update_vendor_files() {
-		return 	$this->get_vendor_files();
+		return $this->get_vendor_files();
 	}
 
 	/**
@@ -247,10 +247,13 @@ class BootswatchBuild {
 			$this->delete_vendor_files_by_pattern( $pattern, $id );
 		}
 		$this->log();
-		$this->log( sprintf( '[%s] Deleted %d bytes.'
-			, $this->pretend ? 'Dry' : 'Live'
-			, $this->bytes_deleted
-		) );
+		$this->log(
+			sprintf(
+				'[%s] Deleted %d bytes.',
+				$this->pretend ? 'Dry' : 'Live',
+				$this->bytes_deleted
+			) 
+		);
 		chdir( '..' );
 	}
 
@@ -268,7 +271,8 @@ class BootswatchBuild {
 			/**
 			 * Replace.
 			 */
-			file_put_contents( $file,
+			file_put_contents(
+				$file,
 				str_replace(
 					array_keys( $replacements ),
 					array_values( $replacements ),
@@ -280,10 +284,13 @@ class BootswatchBuild {
 			/**
 			 * Write to log.
 			 */
-			$this->log( sprintf( '%d replacements made in %s.'
-				, $count
-				, $file
-			) );
+			$this->log(
+				sprintf(
+					'%d replacements made in %s.',
+					$count,
+					$file
+				) 
+			);
 		}
 	}
 
@@ -294,17 +301,20 @@ class BootswatchBuild {
 		$this->log();
 		foreach ( $this->preg_replacements as $file => $replacements ) {
 			$replacements['/\{\{version\}\}/'] = $this->theme_version;
-			$count    = 0;
-			$contents = file_get_contents( $file );
+			$count                             = 0;
+			$contents                          = file_get_contents( $file );
 			foreach ( $replacements as $regex => $replacement ) {
 				$contents = preg_replace( $regex, $replacement, $contents, -1, $sub_count );
-				$count += $sub_count;
+				$count   += $sub_count;
 			}
 			file_put_contents( $file, $contents );
-			$this->log( sprintf( '%d replacements made in %s.'
-				, $count
-				, $file
-			) );
+			$this->log(
+				sprintf(
+					'%d replacements made in %s.',
+					$count,
+					$file
+				) 
+			);
 		}
 	}
 
@@ -393,7 +403,7 @@ class BootswatchBuild {
 		$this->log( 'Total Size  : ' . $this->pattern_total_size( $pattern, $this->vendor_files ) );
 		foreach ( $this->pattern_elements( $pattern, $this->vendor_files ) as $element ) {
 			$this->log( ' - Deleting ' . $element . '...', false );
-			$this->log( sprintf( '   => %s.',  $this->delete_element( $element ) ? 'Done' : 'Failed' ) );
+			$this->log( sprintf( '   => %s.', $this->delete_element( $element ) ? 'Done' : 'Failed' ) );
 		}
 	}
 
@@ -417,7 +427,7 @@ class BootswatchBuild {
 	 */
 	protected function pattern_total_size( $pattern, $files ) {
 		$total_size = 0;
-		$files = preg_grep( "#$pattern#", $files );
+		$files      = preg_grep( "#$pattern#", $files );
 		foreach ( $files as $file ) {
 			$total_size += filesize( $file );
 		}
@@ -430,9 +440,9 @@ class BootswatchBuild {
 	 * @param  Sting $pattern The pattern.
 	 * @return Array          A list of files paths.
 	 */
-	protected function find( $pattern, $only_extensions = [], $exclude_extensions = [] ) {
+	protected function find( $pattern, $only_extensions = array(), $exclude_extensions = array() ) {
 
-		$elements = [];
+		$elements = array();
 
 		/**
 		 * All paths
@@ -560,7 +570,7 @@ class BootswatchBuild {
 		$timer = microtime( true );
 		call_user_func( $callback );
 		$duration = microtime( true ) - $timer;
-		$this->log_title( sprintf( '%s completed in %.2fs' , $title, $duration ) );
+		$this->log_title( sprintf( '%s completed in %.2fs', $title, $duration ) );
 
 	}
 
@@ -573,7 +583,10 @@ class BootswatchBuild {
 			exit;
 		}
 
-		$command = str_replace( "\n", '', '
+		$command = str_replace(
+			"\n",
+			'',
+			'
 			find -name "*.php"
 				-not -path "./build/*"
 				-not -path "./tests/*"
@@ -605,7 +618,8 @@ class BootswatchBuild {
 				--keyword="esc_html_x:1,2c"
 				--sort-by-file
 				-o languages/bootswatch.pot
-		');
+		'
+		);
 		shell_exec( $command );
 		$this->log( 'Language file created successfully.' );
 	}
@@ -624,11 +638,12 @@ class BootswatchBuild {
 			exit;
 		}
 
-		$po_filepaths = $this->find( 'languages', ['po'] );
+		$po_filepaths = $this->find( 'languages', array( 'po' ) );
 		foreach ( $po_filepaths as $po_filepath ) {
-			$command = sprintf( 'msgfmt -o %s %s'
-				, preg_replace( '/po$/', 'mo', $po_filepath )
-				, $po_filepath
+			$command = sprintf(
+				'msgfmt -o %s %s',
+				preg_replace( '/po$/', 'mo', $po_filepath ),
+				$po_filepath
 			);
 			shell_exec( $command );
 		}
@@ -653,29 +668,33 @@ class BootswatchBuild {
 		/**
 		 * Upload source file.
 		 */
-		$data = [
+		$data           = array(
 			'content' => file_get_contents( 'languages/bootswatch.pot' ),
-		];
-		$postdata = json_encode( $data );
-		$context = stream_context_create( [
-			'http' => [
-				'header'  => "Content-type: application/json\r\nAuthorization: Basic $auth",
-				'method'  => 'PUT',
-				'content' => $postdata,
-			],
-		] );
+		);
+		$postdata       = json_encode( $data );
+		$context        = stream_context_create(
+			array(
+				'http' => array(
+					'header'  => "Content-type: application/json\r\nAuthorization: Basic $auth",
+					'method'  => 'PUT',
+					'content' => $postdata,
+				),
+			) 
+		);
 		$languages_json = file_get_contents( 'https://www.transifex.com/api/2/project/bootswatch/resource/bootswatchpot/content/', false, $context );
 
 		/**
 		 * Download translations.
 		 */
-		$context = stream_context_create( [
-			'http' => [
-				'header' => "Authorization: Basic $auth",
-			],
-		] );
+		$context        = stream_context_create(
+			array(
+				'http' => array(
+					'header' => "Authorization: Basic $auth",
+				),
+			) 
+		);
 		$languages_json = file_get_contents( 'https://www.transifex.com/api/2/project/bootswatch/languages', false, $context );
-		$languages = json_decode( $languages_json );
+		$languages      = json_decode( $languages_json );
 		foreach ( $languages as $language ) {
 			$po = file_get_contents( $api_url . 'resource/bootswatchpot/translation/' . $language->language_code . '/?mode=reviewed&file', false, $context );
 			file_put_contents( "languages/{$language->language_code}.po", $po );
