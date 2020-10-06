@@ -13,15 +13,18 @@ class TestOptions extends MonkeyTestCase {
 
 		require_once 'inc/options.php';
 
-		set_theme_mod( 'bootswatch', [
-			'optionTrue' => true,
-			'optionFalse' => false,
-			'optionString' => 'string',
-			'optionEmptyString' => '',
-			'optionNumber' => 123,
-			'optionZero' => 0,
-			'optionOne' => 1,
-		] );
+		set_theme_mod(
+			'bootswatch',
+			array(
+				'optionTrue'        => true,
+				'optionFalse'       => false,
+				'optionString'      => 'string',
+				'optionEmptyString' => '',
+				'optionNumber'      => 123,
+				'optionZero'        => 0,
+				'optionOne'         => 1,
+			) 
+		);
 	}
 
 	function test_bootswatch_get_option_returns_correct_value() {
