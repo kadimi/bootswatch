@@ -73,7 +73,7 @@ function bootswatch_php_version_admin_notice() {
 
 	$stylesheet = bootswatch_get_wp_stylesheet();
 	if ( $stylesheet ) {
-		$theme   = wp_get_theme( $stylesheet );
+		$theme = wp_get_theme( $stylesheet );
 		// Translators: %1$s is the current PHP version and %2$s is a WordPress default theme name.
 		$message = sprintf( __( 'Bootswatch requires <code>PHP 5.4</code> or higher but you are using <code>PHP %1$s</code>, as such, Bootswatch cannot be activated, %2$s will be activated instead. We hope you will uprade PHP very soon.', 'bootswatch' ), PHP_VERSION, $theme->get( 'Name' ) );
 	} else {
@@ -109,9 +109,10 @@ function bootswatch_admin_notice( $message, $id, $type = 'success', $is_dismissi
 	/**
 	 * Classes.
 	 */
-	$classes = sprintf( 'notice notice-%s %s bootswatch-notice'
-		, $type
-		, $is_dismissible ? 'is-dismissible' : ''
+	$classes = sprintf(
+		'notice notice-%s %s bootswatch-notice',
+		$type,
+		$is_dismissible ? 'is-dismissible' : ''
 	);
 
 	/**
@@ -120,16 +121,16 @@ function bootswatch_admin_notice( $message, $id, $type = 'success', $is_dismissi
 	 * Add the title if this is the first notice.
 	 */
 	static $once_html = false;
-	$__message = '';
-	$__message .= ! $once_html ? ( '<h3>' . __( 'Howdy! Bootswatch here...', 'bootswatch' ) . '</h3>' ) : '';
-	$__message .= '<p>' . $message . '</p>';
+	$__message        = '';
+	$__message       .= ! $once_html ? ( '<h3>' . __( 'Howdy! Bootswatch here...', 'bootswatch' ) . '</h3>' ) : '';
+	$__message       .= '<p>' . $message . '</p>';
 	printf( '<div id="%s" class="%s">%s</div>', $id, $classes, $__message ); // XSS OK.
 	$once_html = true;
 
 	/**
 	 * Output JavaScript common with all dismissible notices.
 	 */
-	static $once_js   = false;
+	static $once_js = false;
 	if ( $is_dismissible && ! $once_js ) {
 		?>
 		<script>

@@ -50,20 +50,25 @@ function bootswatch_link_pages() {
 	 * Put current link in empty `a` tag.
 	 */
 	if ( ! $once ) {
-		add_filter( 'wp_link_pages_link', function( $link ) {
-			return is_numeric( $link ) ? '<a class="active">' . $link . '</a>' : $link;
-		} );
+		add_filter(
+			'wp_link_pages_link',
+			function( $link ) {
+				return is_numeric( $link ) ? '<a class="active">' . $link . '</a>' : $link;
+			} 
+		);
 	}
 
 	/**
 	 * Generate links.
 	 */
-	$links = wp_link_pages( [
-		'after' => '</li></ul>',
-		'before' => '<ul class="pagination"><li>',
-		'echo' => false,
-		'separator' => '</li><li>',
-	] );
+	$links = wp_link_pages(
+		array(
+			'after'     => '</li></ul>',
+			'before'    => '<ul class="pagination"><li>',
+			'echo'      => false,
+			'separator' => '</li><li>',
+		) 
+	);
 
 	/**
 	 * Move active class from `a` to `li`.

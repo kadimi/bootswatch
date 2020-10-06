@@ -34,7 +34,7 @@ function bootswatch_nav_menu_css_class( $classes, $item, $args, $depth ) {
 	}
 	return $classes;
 }
-add_filter( 'nav_menu_css_class' , 'bootswatch_nav_menu_css_class' , 10 , 4 );
+add_filter( 'nav_menu_css_class', 'bootswatch_nav_menu_css_class', 10, 4 );
 
 /**
  * Adds relevant classes to menu items.
@@ -59,7 +59,7 @@ function bootswatch_nav_menu_link_attributes( $atts, $item, $args, $depth ) {
 			$atts['data-toggle'] = 'dropdown';
 
 			// Add "dropdown-toggle" class to first level primary menu elements with children.
-			$classes         = isset( $atts['classes'] ) ? explode( ' ', $atts['classes'] ) : [];
+			$classes         = isset( $atts['classes'] ) ? explode( ' ', $atts['classes'] ) : array();
 			$classes[]       = 'dropdown-toggle';
 			$atts['classes'] = implode( ' ', $classes );
 		}

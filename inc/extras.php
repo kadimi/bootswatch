@@ -31,7 +31,7 @@ add_filter( 'body_class', 'bootswatch_body_classes' );
  */
 function bootswatch_get_template_part( $slug, $name = null ) {
 
-	$call = rand( 100000 , 999999 );
+	$call = rand( 100000, 999999 );
 	$part = $name ? "$slug::$name" : $slug;
 	$cb   = '__return_null';
 
@@ -49,7 +49,7 @@ function bootswatch_get_template_part( $slug, $name = null ) {
 }
 
 global $bootswatch_log;
-$bootswatch_log = [];
+$bootswatch_log = array();
 
 /**
  * Does nothing yet.
@@ -61,92 +61,98 @@ function bootswatch_log( $message, $args ) {
 
 	global $bootswatch_log;
 
-	$bootswatch_log[] = [
-		'message' => $message,
+	$bootswatch_log[] = array(
+		'message'   => $message,
 		'arguments' => $args,
-	];
+	);
 }
 
-add_action( 'bootswatch_shutdown', function() {
+add_action(
+	'bootswatch_shutdown',
+	function() {
 
-	if ( ! defined( 'BOOTSWATCH_DEBUG' ) || ! BOOTSWATCH_DEBUG ) {
-		return;
-	}
-
-	global $bootswatch_log;
-
-	$start = $bootswatch_log[0]['arguments']['start'];
-	$end   = end( $bootswatch_log )['arguments']['end'];
-
-	$render = [
-		'full'    => sprintf( '%dms', ( $end - $start ) * 1000 ),
-		'partial' => [],
-	];
-
-	/**
-	 * Build tags stats table.
-	 */
-	$tags_stats = [];
-	array_walk( $bootswatch_log, function( $log_entry ) use ( &$tags_stats ) {
-
-		/**
-		 * Only and action log entriy.
-		 */
-		if ( ! array_key_exists( 'arguments', $log_entry ) || ! array_key_exists( 'tag', $log_entry['arguments'] ) ) {
-			return;
-		}
-		$tag  = $log_entry['arguments']['tag'];
-		$args = $log_entry['arguments'];
-
-		/**
-		 * Only template parts tags.
-		 */
-		if ( ! preg_match( '/^bootswatch_(after|before)_template-parts/', $tag ) ) {
+		if ( ! defined( 'BOOTSWATCH_DEBUG' ) || ! BOOTSWATCH_DEBUG ) {
 			return;
 		}
 
+		global $bootswatch_log;
+
+		$start = $bootswatch_log[0]['arguments']['start'];
+		$end   = end( $bootswatch_log )['arguments']['end'];
+
+		$render = array(
+			'full'    => sprintf( '%dms', ( $end - $start ) * 1000 ),
+			'partial' => array(),
+		);
+
 		/**
-		 * Only numbered tags.
+		 * Build tags stats table.
 		 */
-		if ( ! preg_match( '/::\d+$/', $tag ) ) {
-			return;
-		}
+		$tags_stats = array();
+		array_walk(
+			$bootswatch_log,
+			function( $log_entry ) use ( &$tags_stats ) {
 
-		$tags_stats[ $tag ] = [
-			'start' => $args['start'],
-			'end' => $args['end'],
-		];
-		return;
-	} );
+				/**
+				 * Only and action log entriy.
+				 */
+				if ( ! array_key_exists( 'arguments', $log_entry ) || ! array_key_exists( 'tag', $log_entry['arguments'] ) ) {
+					return;
+				}
+				$tag  = $log_entry['arguments']['tag'];
+				$args = $log_entry['arguments'];
 
-	foreach ( $tags_stats as $tag => $stats ) {
+				/**
+				 * Only template parts tags.
+				 */
+				if ( ! preg_match( '/^bootswatch_(after|before)_template-parts/', $tag ) ) {
+					return;
+				}
 
-		preg_match( '/^bootswatch_(after|before)_(.+)::(\d+)$/', $tag, $tag_parts );
-		list( $unused, $when, $part, $call ) = $tag_parts;
-		$start = $tags_stats[ "bootswatch_before_$part::$call" ]['end'];
-		$end = $tags_stats[ "bootswatch_after_$part::$call" ]['start'];
+				/**
+				 * Only numbered tags.
+				 */
+				if ( ! preg_match( '/::\d+$/', $tag ) ) {
+					return;
+				}
 
-		if ( ! array_key_exists( $part, $render['partial'] ) ) {
-			// First call.
-			$render['partial'][ $part ] = [
-				'total_calls'    => 0,
-				'total_duration_ms' => 0,
-			];
-		} else {
-			if ( 'after' === $when ) {
-				// Another call.
-				$render['partial'][ $part ]['total_calls']       += 1;
-				$render['partial'][ $part ]['total_duration_ms'] += 1000 * ($end -$start);
+				$tags_stats[ $tag ] = array(
+					'start' => $args['start'],
+					'end'   => $args['end'],
+				);
+				return;
+			} 
+		);
+
+		foreach ( $tags_stats as $tag => $stats ) {
+
+			preg_match( '/^bootswatch_(after|before)_(.+)::(\d+)$/', $tag, $tag_parts );
+			list( $unused, $when, $part, $call ) = $tag_parts;
+			$start                               = $tags_stats[ "bootswatch_before_$part::$call" ]['end'];
+			$end                                 = $tags_stats[ "bootswatch_after_$part::$call" ]['start'];
+
+			if ( ! array_key_exists( $part, $render['partial'] ) ) {
+				// First call.
+				$render['partial'][ $part ] = array(
+					'total_calls'       => 0,
+					'total_duration_ms' => 0,
+				);
+			} else {
+				if ( 'after' === $when ) {
+					// Another call.
+					$render['partial'][ $part ]['total_calls']       += 1;
+					$render['partial'][ $part ]['total_duration_ms'] += 1000 * ( $end - $start );
+				}
 			}
 		}
-	}
 
-	foreach ( $render['partial'] as &$partial ) {
-		$partial['total_duration_ms'] = sprintf( '%d', $partial['total_duration_ms'] );
-	}
-	! d( get_theme_mods() );
-	! d( $render );
-} );
+		foreach ( $render['partial'] as &$partial ) {
+			$partial['total_duration_ms'] = sprintf( '%d', $partial['total_duration_ms'] );
+		}
+		! d( get_theme_mods() );
+		! d( $render );
+	} 
+);
 
 /**
  * Wrapper around `add_action()` with some debuggin tools.
@@ -162,28 +168,36 @@ add_action( 'bootswatch_shutdown', function() {
  * @return true Will always return true.
  */
 function bootswatch_add_action( $tag, $callback, $priority = 10, $accepted_args = 1 ) {
-	return add_action( $tag, function() use ( $tag, $callback ) {
+	return add_action(
+		$tag,
+		function() use ( $tag, $callback ) {
 
-		/**
-		 * Fire callback while counting duratoin.
-		 */
-		$args    = func_get_args();
-		$timer_0 = microtime( true );
-		call_user_func( $callback, $args );
-		$timer_1 = microtime( true );
+			/**
+			 * Fire callback while counting duratoin.
+			 */
+			$args    = func_get_args();
+			$timer_0 = microtime( true );
+			call_user_func( $callback, $args );
+			$timer_1 = microtime( true );
 
-		/**
-		 * Write to log.
-		 */
-		bootswatch_log( 'Bootswatch action', [
-			'tag'       => $tag,
-			'callback'  => $callback,
-			'arguments' => $args,
-			'start'     => $timer_0,
-			'end'       => $timer_1,
-			'duration'  => $timer_1 - $timer_0,
-		] );
-	}, $priority, $accepted_args );
+			/**
+			 * Write to log.
+			 */
+			bootswatch_log(
+				'Bootswatch action',
+				array(
+					'tag'       => $tag,
+					'callback'  => $callback,
+					'arguments' => $args,
+					'start'     => $timer_0,
+					'end'       => $timer_1,
+					'duration'  => $timer_1 - $timer_0,
+				) 
+			);
+		},
+		$priority,
+		$accepted_args 
+	);
 }
 
 /**

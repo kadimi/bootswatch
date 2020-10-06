@@ -24,7 +24,7 @@ class Walker_Comment_Bootswatch extends Walker_Comment {
 		parent::html5_comment( $comment, $depth, $args );
 		$output = ob_get_clean();
 		$output = str_replace( // WPCS XSS OK.
-			[
+			array(
 				'class="comment-body"',
 				'comment-reply-link',
 				'class="comment-metadata"',
@@ -32,19 +32,20 @@ class Walker_Comment_Bootswatch extends Walker_Comment {
 				'class="reply"',
 				'<article id="div-comment-',
 				'</article>',
-			],
-			[
+			),
+			array(
 				'class="comment-body well"',
 				'comment-reply-link btn btn-default btn-xs',
 				'class="comment-metadata small text-right"',
 				'class="comment-edit-link btn btn-danger btn-xs"',
 				'class="reply text-right"',
-				sprintf( '<div class="row"><div class="col-md-%1$d col-md-offset-%2$d"><article id="div-comment-'
-					, ( 13 - $depth )
-					, ( $depth -1 )
+				sprintf(
+					'<div class="row"><div class="col-md-%1$d col-md-offset-%2$d"><article id="div-comment-',
+					( 13 - $depth ),
+					( $depth - 1 )
 				),
 				'</article></div></div>',
-			],
+			),
 			$output
 		);
 
@@ -63,16 +64,23 @@ class Walker_Comment_Bootswatch extends Walker_Comment {
 	 */
 	protected function ping( $comment, $depth, $args ) {
 		ob_start();
-		parent::ping( $comment, $depth, array_merge( $args, [
-			'style' => 'div',
-		] ) );
+		parent::ping(
+			$comment,
+			$depth,
+			array_merge(
+				$args,
+				array(
+					'style' => 'div',
+				) 
+			) 
+		);
 		echo str_replace( // WPCS XSS OK.
-			[
+			array(
 				'class="comment-body"',
-			],
-			[
+			),
+			array(
 				'class="comment-body well well-sm"',
-			],
+			),
 			ob_get_clean()
 		);
 	}

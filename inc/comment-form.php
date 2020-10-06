@@ -54,11 +54,11 @@ function bootswatch_comment_form_fields( $fields ) {
 	foreach ( $fields_parameters as $field => $parameter ) {
 
 		// Add some defaults to field.
-		$parameter += [
-			'id' => $field,
-			'name' => $field,
+		$parameter += array(
+			'id'    => $field,
+			'name'  => $field,
 			'class' => 'form-control',
-		];
+		);
 
 		// Build <input>.
 		$input = $input_tpl;
@@ -99,8 +99,7 @@ function bootswatch_comment_form( $defaults ) {
 			<div class="col-sm-10">
 				<textarea class="form-control" id="comment" name="comment" cols="45" rows="8" required="required" aria-required="true"></textarea>
 			</div>
-		</div>'
-	;
+		</div>';
 	$defaults['submit_field']  = '<div class="form-group"><div class="col-sm-offset-2 col-sm-10">%1$s %2$s</div></div>';
 	$defaults['class_submit']  = 'btn btn-primary btn-lg';
 	return $defaults;

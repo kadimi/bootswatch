@@ -8,19 +8,25 @@
 /**
  * Add body class `fixed-navbar` if navbar is fixed.
  */
-add_action( 'body_class', function( $body_classes ) {
-	if ( bootswatch_has( 'fixed_navbar' ) ) {
-		return array_merge( $body_classes, [ 'fixed-navbar' ] );
-	}
-	return $body_classes;
-} );
+add_action(
+	'body_class',
+	function( $body_classes ) {
+		if ( bootswatch_has( 'fixed_navbar' ) ) {
+			return array_merge( $body_classes, array( 'fixed-navbar' ) );
+		}
+		return $body_classes;
+	} 
+);
 
 /**
  * Add inline CSS in header.
  */
-add_action( 'wp_head', function() {
-	echo '<style>' . bootswatch_generate_inline_css( bootswatch_get_option( 'theme', 'bootstrap' ) ) . '</style>'; // WPCS: xss ok.
-} );
+add_action(
+	'wp_head',
+	function() {
+		echo '<style>' . bootswatch_generate_inline_css( bootswatch_get_option( 'theme', 'bootstrap' ) ) . '</style>'; // WPCS: xss ok.
+	} 
+);
 
 /**
  * Generates inline CSS that corrects display, see comments with LESS code.
@@ -39,10 +45,10 @@ function bootswatch_generate_inline_css( $theme = 'bootstrap' ) {
 	/**
 	 * Prepare replaceemts.
 	 */
-	$options = get_theme_mod( 'bootswatch' );
-	$replacements = [
+	$options      = get_theme_mod( 'bootswatch' );
+	$replacements = array(
 		'{{custom_header_percentage_size}}' => '100vh',
-	];
+	);
 	if ( isset( $options['custom_header_percentage_size'] ) ) {
 		$size = intval( $options['custom_header_percentage_size'] );
 		if ( $size > 0 ) {
@@ -54,17 +60,19 @@ function bootswatch_generate_inline_css( $theme = 'bootstrap' ) {
 	 * Prepare LESS parser.
 	 */
 	switch ( $theme ) {
-	case 'bootstrap':
+		case 'bootstrap':
 			$variables_path = bootswatch_get_bootstrap_part_path( 'variables' );
-		break;
-	default:
+			break;
+		default:
 			$variables_path = bootswatch_get_theme_part_path( $theme, 'variables' );
-		break;
+			break;
 	}
 
-	$less_parser = new Less_Parser( [
-		'compress' => true,
-	] );
+	$less_parser = new Less_Parser(
+		array(
+			'compress' => true,
+		) 
+	);
 	$less_parser->parseFile( $variables_path );
 	/**
 	 * The styles.

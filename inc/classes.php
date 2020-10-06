@@ -13,8 +13,7 @@
 function bootswatch_primary_classes() {
 	$classes = is_active_sidebar( 'sidebar' )
 		? 'col-md-8'
-		: 'col-md-12'
-	;
+		: 'col-md-12';
 
 	if ( is_home() ) {
 		$classes = 'page-header';
@@ -25,10 +24,13 @@ function bootswatch_primary_classes() {
 	return $classes;
 }
 
-add_filter( 'body_class', function( $classes ) {
-	if ( is_active_sidebar( 'sidebar' ) ) {
-		$classes[] = 'has-sidebar';
-		$classes[] = 'has-sidebar-sidebar';
-	}
-	return array_unique( $classes );
-} );
+add_filter(
+	'body_class',
+	function( $classes ) {
+		if ( is_active_sidebar( 'sidebar' ) ) {
+			$classes[] = 'has-sidebar';
+			$classes[] = 'has-sidebar-sidebar';
+		}
+		return array_unique( $classes );
+	} 
+);

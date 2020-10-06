@@ -13,30 +13,31 @@
  * @param  Boolean $rebuild    Should the function rebuild the cache.
  * @return String              Generated CSS file path.
  */
-function bootswatch_make_theme_file( $theme, $overrides = [], $rebuild = false ) {
+function bootswatch_make_theme_file( $theme, $overrides = array(), $rebuild = false ) {
 
 	/**
 	 * Fall back when missing the Less compiler.
 	 */
 	if ( ! class_exists( 'Less_Parser' ) ) {
 		switch ( $theme ) {
-		case 'bootstrap':
-			return get_template_directory() . '/vendor/kadimi/bootswatch-light/light/css/bootstrap.min.css';
+			case 'bootstrap':
+				return get_template_directory() . '/vendor/kadimi/bootswatch-light/light/css/bootstrap.min.css';
 			break;
-		case 'bootstrap-theme':
-			return get_template_directory() . '/vendor/kadimi/bootswatch-light/light/css/bootstrap-theme.min.css';
+			case 'bootstrap-theme':
+				return get_template_directory() . '/vendor/kadimi/bootswatch-light/light/css/bootstrap-theme.min.css';
 			break;
-		default:
-			return get_template_directory() . '/vendor/kadimi/bootswatch-light/light/' . $theme . '/bootstrap.min.css';
+			default:
+				return get_template_directory() . '/vendor/kadimi/bootswatch-light/light/' . $theme . '/bootstrap.min.css';
 			break;
 		}
 	}
 	$rebuild = $rebuild || ( defined( 'BOOTSWATCH_FORCE_REBUILD' ) && BOOTSWATCH_FORCE_REBUILD );
 
-	$cache_file_basename = sprintf( '%1$s%2$s-%3$s.min.css'
-		, $theme
-		, $overrides ? '-' . md5( serialize( $overrides ) ) : ''
-		, is_rtl() ? 'rtl' : 'ltr'
+	$cache_file_basename = sprintf(
+		'%1$s%2$s-%3$s.min.css',
+		$theme,
+		$overrides ? '-' . md5( serialize( $overrides ) ) : '',
+		is_rtl() ? 'rtl' : 'ltr'
 	);
 
 	/**
@@ -81,9 +82,11 @@ function bootswatch_make_theme_file( $theme, $overrides = [], $rebuild = false )
  * @return String       CSS code.
  */
 function bootswatch_parse_less_file( $path ) {
-	return ( new Less_Parser( [
-		'compress' => true,
-	] ) )->parseFile( $path )->getCss();
+	return ( new Less_Parser(
+		array(
+			'compress' => true,
+		) 
+	) )->parseFile( $path )->getCss();
 }
 
 /**
@@ -93,9 +96,11 @@ function bootswatch_parse_less_file( $path ) {
  * @return String       CSS code.
  */
 function bootswatch_parse_less( $less ) {
-	return ( new Less_Parser( [
-		'compress' => true,
-	] ) )->parse( $less )->getCss();
+	return ( new Less_Parser(
+		array(
+			'compress' => true,
+		) 
+	) )->parse( $less )->getCss();
 }
 
 /**
@@ -105,7 +110,7 @@ function bootswatch_parse_less( $less ) {
  * @param  Array  $overrides Overrides.
  * @return String            Path to file.
  */
-function bootswatch_get_bootswatch_theme_css( $theme = 'bootstrap', $overrides = [] ) {
+function bootswatch_get_bootswatch_theme_css( $theme = 'bootstrap', $overrides = array() ) {
 
 	/**
 	 * Prevent muliple using the same file.
@@ -143,8 +148,8 @@ function bootswatch_get_bootswatch_theme_css( $theme = 'bootstrap', $overrides =
 	 */
 	$variables_contents = $filesystem->get_contents( $variables_path );
 	foreach ( $overrides as $variable => $value ) {
-		$regex       = sprintf( '/(%1$s)\s*:\s*(.+?);/s', $variable );
-		$replacement = strstr( $value, '/' )
+		$regex              = sprintf( '/(%1$s)\s*:\s*(.+?);/s', $variable );
+		$replacement        = strstr( $value, '/' )
 			? sprintf( '$1:"%s";', $value )
 			: sprintf( '$1:%s;', $value );
 		$variables_contents = preg_replace( $regex, $replacement, $variables_contents );
@@ -155,7 +160,7 @@ function bootswatch_get_bootswatch_theme_css( $theme = 'bootstrap', $overrides =
 	/**
 	 * Replace variables in bare file.
 	 */
-	$bare_contents = $filesystem->get_contents( $bare_path );
+	$bare_contents     = $filesystem->get_contents( $bare_path );
 		$bare_contents = str_replace( 'variables.less', "_tmp-variables-$salt.less", $bare_contents );
 
 	/**
@@ -191,7 +196,7 @@ function bootswatch_get_bootswatch_theme_css( $theme = 'bootstrap', $overrides =
 /**
  * Get the WP_Filesystem_Direct instance.
  *
- * @return WP_Filesystem_Direct	The instance.
+ * @return WP_Filesystem_Direct The instance.
  */
 function bootswatch_get_filesystem() {
 
@@ -275,7 +280,7 @@ function bootswatch_cache_file( $basename, $contents ) {
  * @return Boolean          True if the file exists, false otherwise.
  */
 function bootswatch_cache_file_exists( $basename ) {
-	$cache_dir  = get_template_directory() . '/cache/';
+	$cache_dir = get_template_directory() . '/cache/';
 	return file_exists( $cache_dir . $basename );
 }
 

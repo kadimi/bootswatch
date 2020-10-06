@@ -8,19 +8,25 @@
 /**
  * Add customization general stuff.
  */
-add_action( 'customize_register', function( $wp_customize ) {
-	$wp_customize->add_section( 'bootswatch', [
-			'title'     => 'Bootswatch',
-			'priority'  => 0,
-	] );
+add_action(
+	'customize_register',
+	function( $wp_customize ) {
+		$wp_customize->add_section(
+			'bootswatch',
+			array(
+				'title'     => 'Bootswatch',
+				'priority'  => 0,
+			) 
+		);
 
-	/**
-	 * Necessary since custom header CSS is in the HTML head.
-	 */
-	$wp_customize->get_setting( 'external_header_video' )->transport = 'refresh';
-	$wp_customize->get_setting( 'header_image' )->transport = 'refresh';
-	$wp_customize->get_setting( 'header_video' )->transport = 'refresh';
-} );
+		/**
+		 * Necessary since custom header CSS is in the HTML head.
+		 */
+		$wp_customize->get_setting( 'external_header_video' )->transport = 'refresh';
+		$wp_customize->get_setting( 'header_image' )->transport          = 'refresh';
+		$wp_customize->get_setting( 'header_video' )->transport          = 'refresh';
+	} 
+);
 
 /**
  * Add theme option.
@@ -30,15 +36,16 @@ bootswatch_create_option_select( 'theme', __( 'Theme', 'bootswatch' ), bootswatc
 /**
  * Add header size option.
  */
-bootswatch_create_option_input( 'number'
-	, 'custom_header_percentage_size'
-	, __( 'Custom Header Size', 'bootswatch' )
-	, [
+bootswatch_create_option_input(
+	'number',
+	'custom_header_percentage_size',
+	__( 'Custom Header Size', 'bootswatch' ),
+	array(
 		'max' => 100,
 		'min' => 20,
-	]
-	, 'bootswatch'
-	, function() {
+	),
+	'bootswatch',
+	function() {
 		?>
 		<script>
 			jQuery( document ).ready( function( $ ) {
@@ -54,15 +61,20 @@ bootswatch_create_option_input( 'number'
 				} );
 			} );
 		</script>
-		<?php
+			<?php
 	}
 );
 
 /**
  * Add fixed navbar option.
  */
-bootswatch_create_option_radio( 'fixed_navbar', __( 'Fixed Navigation Bar', 'bootswatch' ), 'noyes', 'bootswatch', function () {
-	?>
+bootswatch_create_option_radio(
+	'fixed_navbar',
+	__( 'Fixed Navigation Bar', 'bootswatch' ),
+	'noyes',
+	'bootswatch',
+	function () {
+		?>
 	<script>
 		jQuery( document ).ready( function( $ ) {
 			wp.customize( 'bootswatch[fixed_navbar]', function( value ) {
@@ -81,14 +93,20 @@ bootswatch_create_option_radio( 'fixed_navbar', __( 'Fixed Navigation Bar', 'boo
 			} );
 		} );
 	</script>
-	<?php
-} );
+		<?php
+	} 
+);
 
 /**
 	* Add header search form option.
 	*/
-bootswatch_create_option_radio( 'search_form_in_header', __( 'Search Form in Header', 'bootswatch' ), 'noyes', 'bootswatch', function () {
-	?>
+bootswatch_create_option_radio(
+	'search_form_in_header',
+	__( 'Search Form in Header', 'bootswatch' ),
+	'noyes',
+	'bootswatch',
+	function () {
+		?>
 	<script>
 		jQuery( document ).ready( function( $ ) {
 			wp.customize( 'bootswatch[search_form_in_header]', function( value ) {
@@ -96,7 +114,7 @@ bootswatch_create_option_radio( 'search_form_in_header', __( 'Search Form in Hea
 
 					$container = $( '.navbar .navbar-collapse' );
 					$menu      = $( '.nav', $container );
-					$form_new  = $( '<?php echo str_replace( [ "'", "\n" ], [ "\'", ' ' ], bootswatch_get_search_form( 'navbar-form pull-right' ) ); // XSS OK. ?>' );
+					$form_new  = $( '<?php echo str_replace( array( "'", "\n" ), array( "\'", ' ' ), bootswatch_get_search_form( 'navbar-form pull-right' ) ); // XSS OK. ?>' );
 					$form_old  = $( '.navbar-form', $container );
 
 					if ( 'yes' === to ) {
@@ -110,8 +128,9 @@ bootswatch_create_option_radio( 'search_form_in_header', __( 'Search Form in Hea
 			} );
 		} );
 	</script>
-	<?php
-} );
+		<?php
+	} 
+);
 
 /**
  * Registers a new option which is text input.
@@ -123,32 +142,41 @@ bootswatch_create_option_radio( 'search_form_in_header', __( 'Search Form in Hea
  * @param  String          $section     Section ID.
  * @param  String|Function $preview_cb Function.
  */
-function bootswatch_create_option_input( $type, $id, $label, $input_attrs = [], $section = 'bootswatch', $preview_cb = false ) {
+function bootswatch_create_option_input( $type, $id, $label, $input_attrs = array(), $section = 'bootswatch', $preview_cb = false ) {
 
-	if ( ! in_array( $type, [ 'text', 'number', 'range', 'email', 'password' ] ) ) {
+	if ( ! in_array( $type, array( 'text', 'number', 'range', 'email', 'password' ) ) ) {
 		return;
 	}
 
-	add_action( 'customize_register', function( $wp_customize ) use ( $type, $id, $label, $input_attrs, $section, $preview_cb ) {
+	add_action(
+		'customize_register',
+		function( $wp_customize ) use ( $type, $id, $label, $input_attrs, $section, $preview_cb ) {
 
-		$id = sprintf( 'bootswatch[%s]', $id );
-		$wp_customize->add_setting( $id, [
-			'sanitize_callback' => function( $value ) {
-				return  $value;
-			},
-			'transport' => $preview_cb ? 'postMessage' : 'refresh',
-		] );
-		if ( $preview_cb ) {
-			add_action( 'wp_footer', $preview_cb );
-		}
-		$wp_customize->add_control( $id, [
-			'settings'    => $id,
-			'label'       => $label,
-			'type'        => $type,
-			'input_attrs' => $input_attrs,
-			'section'     => $section,
-		] );
-	} );
+			$id = sprintf( 'bootswatch[%s]', $id );
+			$wp_customize->add_setting(
+				$id,
+				array(
+					'sanitize_callback' => function( $value ) {
+						return $value;
+					},
+					'transport'         => $preview_cb ? 'postMessage' : 'refresh',
+				) 
+			);
+			if ( $preview_cb ) {
+				add_action( 'wp_footer', $preview_cb );
+			}
+			$wp_customize->add_control(
+				$id,
+				array(
+					'settings'    => $id,
+					'label'       => $label,
+					'type'        => $type,
+					'input_attrs' => $input_attrs,
+					'section'     => $section,
+				) 
+			);
+		} 
+	);
 }
 
 /**
@@ -161,73 +189,81 @@ function bootswatch_create_option_input( $type, $id, $label, $input_attrs = [], 
  * @param  String          $section Section ID.
  * @param  String|Function $preview_cb Function.
  */
-function bootswatch_create_option_choice( $type, $id, $label, $choices = 'noyes', $section = 'bootswatch', $preview_cb = false, $selective_refresh = [] ) {
+function bootswatch_create_option_choice( $type, $id, $label, $choices = 'noyes', $section = 'bootswatch', $preview_cb = false, $selective_refresh = array() ) {
 
-	if ( ! in_array( $type, [ 'select', 'radio' ] ) ) {
+	if ( ! in_array( $type, array( 'select', 'radio' ) ) ) {
 		return;
 	}
 
-	add_action( 'customize_register', function( $wp_customize ) use ( $type, $id, $label, $choices, $section, $preview_cb, $selective_refresh ) {
+	add_action(
+		'customize_register',
+		function( $wp_customize ) use ( $type, $id, $label, $choices, $section, $preview_cb, $selective_refresh ) {
 
-		/**
-		 * Prepare ID.
-		 */
-		$id = sprintf( 'bootswatch[%s]', $id );
+			/**
+			 * Prepare ID.
+			 */
+			$id = sprintf( 'bootswatch[%s]', $id );
 
-		/**
-		 * Handle yes/no choices.
-		 */
-		switch ( $choices ) {
-		case 'noyes':
-				$choices = [
-					'no' => __( 'No', 'bootswatch' ),
-					'yes' => __( 'Yes', 'bootswatch' ),
-				];
-			break;
-		case 'yesno':
-				$choices = [
-					'yes' => __( 'Yes', 'bootswatch' ),
-					'no' => __( 'No', 'bootswatch' ),
-				];
-			break;
-		default:
-			break;
-		}
+			/**
+			 * Handle yes/no choices.
+			 */
+			switch ( $choices ) {
+				case 'noyes':
+					$choices = array(
+						'no'  => __( 'No', 'bootswatch' ),
+						'yes' => __( 'Yes', 'bootswatch' ),
+					);
+					break;
+				case 'yesno':
+					$choices = array(
+						'yes' => __( 'Yes', 'bootswatch' ),
+						'no'  => __( 'No', 'bootswatch' ),
+					);
+					break;
+				default:
+					break;
+			}
 
-		/**
-		 * Add setting.
-		 */
-		$wp_customize->add_setting( $id, [
-			'sanitize_callback' => function( $value ) {
-				return  ( preg_match( '/^[a-z]+$/', $value ) )
-					? $value
-					: ''
-				;
-			},
-			'transport' => ( $preview_cb || $selective_refresh ) ? 'postMessage' : 'refresh',
-		] );
-		if ( $preview_cb ) {
-			add_action( 'wp_footer', $preview_cb );
-		}
+			/**
+			 * Add setting.
+			 */
+			$wp_customize->add_setting(
+				$id,
+				array(
+					'sanitize_callback' => function( $value ) {
+						return ( preg_match( '/^[a-z]+$/', $value ) )
+							? $value
+							: '';
+					},
+					'transport'         => ( $preview_cb || $selective_refresh ) ? 'postMessage' : 'refresh',
+				) 
+			);
+			if ( $preview_cb ) {
+				add_action( 'wp_footer', $preview_cb );
+			}
 
-		/**
-		 * Add control.
-		 */
-		$wp_customize->add_control( $id, [
-			'settings' => $id,
-			'label'    => $label,
-			'type'     => $type,
-			'choices'  => $choices,
-			'section'  => $section,
-		] );
+			/**
+			 * Add control.
+			 */
+			$wp_customize->add_control(
+				$id,
+				array(
+					'settings' => $id,
+					'label'    => $label,
+					'type'     => $type,
+					'choices'  => $choices,
+					'section'  => $section,
+				) 
+			);
 
-		/**
-		 * Maybe add partial.
-		 */
-		if ( $selective_refresh ) {
-			$wp_customize->selective_refresh->add_partial( $id, $selective_refresh );
-		}
-	} );
+			/**
+			 * Maybe add partial.
+			 */
+			if ( $selective_refresh ) {
+				$wp_customize->selective_refresh->add_partial( $id, $selective_refresh );
+			}
+		} 
+	);
 }
 
 /**
@@ -239,7 +275,7 @@ function bootswatch_create_option_choice( $type, $id, $label, $choices = 'noyes'
  * @param  String          $section Section ID.
  * @param  String|Function $preview_cb Function.
  */
-function bootswatch_create_option_select( $id, $label, $choices = 'noyes', $section = 'bootswatch', $preview_cb = false, $selective_refresh = [] ) {
+function bootswatch_create_option_select( $id, $label, $choices = 'noyes', $section = 'bootswatch', $preview_cb = false, $selective_refresh = array() ) {
 	bootswatch_create_option_choice( 'select', $id, $label, $choices, $section, $preview_cb, $selective_refresh );
 }
 
@@ -264,11 +300,10 @@ function bootswatch_create_option_radio( $id, $label, $choices = 'noyes', $secti
  * @param  mixed  $default   Default value.
  */
 function bootswatch_get_option( $option_id, $default = false ) {
-	$mods = get_theme_mod( 'bootswatch', [] );
+	$mods = get_theme_mod( 'bootswatch', array() );
 	return array_key_exists( $option_id, $mods ) && $mods[ $option_id ]
 		? $mods[ $option_id ]
-		: $default
-	;
+		: $default;
 }
 
 /**
@@ -279,8 +314,8 @@ function bootswatch_get_option( $option_id, $default = false ) {
  */
 function bootswatch_has( $option_id ) {
 	switch ( $option_id ) {
-	default:
-		return 'yes' === bootswatch_get_option( $option_id );
+		default:
+			return 'yes' === bootswatch_get_option( $option_id );
 		break;
 	}
 }
@@ -301,10 +336,10 @@ function bootswatch_get_theme_part_path( $theme, $part ) {
 	$bootswatch_light = get_template_directory() . '/vendor/kadimi/bootswatch-light/light/';
 
 	switch ( $part ) {
-	case 'bootswatch':
-		return $bootswatch_light . "$theme/" . 'bootswatch.less';
-	case 'variables':
-		return $bootswatch_light . "$theme/" . 'variables.less';
+		case 'bootswatch':
+			return $bootswatch_light . "$theme/" . 'bootswatch.less';
+		case 'variables':
+			return $bootswatch_light . "$theme/" . 'variables.less';
 	}
 }
 
@@ -348,27 +383,27 @@ function bootswatch_get_bootstrap_part( $part, $type ) {
 
 	if ( 'uri' === $type ) {
 		$bootswatch_light = get_template_directory_uri() . '/vendor/kadimi/bootswatch-light/light/';
-	} else if ( 'path' === $type ) {
+	} elseif ( 'path' === $type ) {
 		$bootswatch_light = get_template_directory() . '/vendor/kadimi/bootswatch-light/light/';
 	} else {
 		return false;
 	}
 
 	switch ( $part ) {
-	case 'less':
-		return $bootswatch_light . 'less/bootstrap.less';
-	case 'variables':
-		return $bootswatch_light . 'less/variables.less';
-	case 'script':
-		return $bootswatch_light . 'js/bootstrap.min.js';
-	case 'bootstrap':
-		return $bootswatch_light . 'css/bootstrap.min.css';
-	case 'bootstrap.less':
-		return $bootswatch_light . 'less/bootstrap.less';
-	case 'theme':
-		return $bootswatch_light . 'css/bootstrap-theme.min.css';
-	case 'theme.less':
-		return $bootswatch_light . 'less/theme.less';
+		case 'less':
+			return $bootswatch_light . 'less/bootstrap.less';
+		case 'variables':
+			return $bootswatch_light . 'less/variables.less';
+		case 'script':
+			return $bootswatch_light . 'js/bootstrap.min.js';
+		case 'bootstrap':
+			return $bootswatch_light . 'css/bootstrap.min.css';
+		case 'bootstrap.less':
+			return $bootswatch_light . 'less/bootstrap.less';
+		case 'theme':
+			return $bootswatch_light . 'css/bootstrap-theme.min.css';
+		case 'theme.less':
+			return $bootswatch_light . 'less/theme.less';
 	}
 
 	return false;
@@ -380,7 +415,7 @@ function bootswatch_get_bootstrap_part( $part, $type ) {
  * @return Array The list.
  */
 function bootswatch_themes_list() {
-	return [
+	return array(
 		''          => __( 'Just Bootstrap', 'bootswatch' ),
 		'cerulean'  => 'Cerulean',
 		'cosmo'     => 'Cosmo',
@@ -399,13 +434,13 @@ function bootswatch_themes_list() {
 		'superhero' => 'Superhero',
 		'united'    => 'United',
 		'yeti'      => 'Yeti',
-	];
+	);
 }
 
 function bootswatch_get_default_overrides( $theme = null ) {
-	$overrides = [
+	$overrides = array(
 		'@icon-font-path' => '../vendor/kadimi/bootswatch-light/light/fonts/',
-	];
+	);
 	$overrides = apply_filters( 'bootswatch_default_overrides', $overrides, $theme );
 	return $overrides;
 }

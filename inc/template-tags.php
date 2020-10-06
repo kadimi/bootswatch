@@ -8,14 +8,14 @@
  */
 
 if ( ! function_exists( 'bootswatch_posted_on' ) ) :
-/**
- * Prints HTML with meta information for the current post-date/time and author.
- */
-function bootswatch_posted_on() {
+	/**
+	 * Prints HTML with meta information for the current post-date/time and author.
+	 */
+	function bootswatch_posted_on() {
 		$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
 		if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
-			$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time>' /* . '<time class="updated" datetime="%3$s">%4$s</time>' */;
-			}
+			$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time>'; /* . '<time class="updated" datetime="%3$s">%4$s</time>' */
+		}
 
 		$time_string = sprintf( $time_string, esc_attr( get_the_date( 'c' ) ), esc_html( get_the_date() ), esc_attr( get_the_modified_date( 'c' ) ), esc_html( get_the_modified_date() ) );
 
@@ -26,31 +26,35 @@ function bootswatch_posted_on() {
 		$byline = sprintf( esc_html_x( 'by %s', 'post author', 'bootswatch' ), '<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>' );
 
 		echo '<span class="posted-on">' . $posted_on . '</span><span class="byline"> ' . $byline . '</span>'; // WPCS: XSS OK.
-}
+	}
 endif;
 
 /**
  * Displays post categories
  */
-if ( ! function_exists( 'bootswatch_category_list' ) ) {	
+if ( ! function_exists( 'bootswatch_category_list' ) ) {    
 	function bootswatch_category_list( $post_id ) {
 		if ( ! bootswatch_categorized_blog() ) {
 			return;
 		}
-		$categories = wp_get_post_categories( $post_id, array(
-			'fields' => 'all'
-		) );
-		if( ! $categories ) {
+		$categories = wp_get_post_categories(
+			$post_id,
+			array(
+				'fields' => 'all',
+			) 
+		);
+		if ( ! $categories ) {
 			return;
 		}
-		$links = [];
+		$links = array();
 		foreach ( $categories as $category ) {
-			$links[]= sprintf( '<a href="%1$s"><span class="badge">%2$s</a>'
-				, get_category_link( $category->term_id )
-				, $category->name
+			$links[] = sprintf(
+				'<a href="%1$s"><span class="badge">%2$s</a>',
+				get_category_link( $category->term_id ),
+				$category->name
 			);
 		}
-		echo '<p>' . implode( ' ' , $links ) . '</p>';
+		echo '<p>' . implode( ' ', $links ) . '</p>';
 	}
 }
 
@@ -59,14 +63,16 @@ if ( ! function_exists( 'bootswatch_posts_navigation' ) ) {
 	 * Displays pagination.
 	 */
 	function bootswatch_posts_navigation() {
-		$links = paginate_links( [
-			'type' => 'array',
-		] );
+		$links = paginate_links(
+			array(
+				'type' => 'array',
+			) 
+		);
 		if ( $links ) {
 			foreach ( $links as $index => $link ) {
-				$link = '<li>' . $link . '</li>';
-				$link = str_replace( '<li><span aria-current="page" class="page-numbers current">', '<li class="active"><a>', $link );
-				$link = str_replace( '</span></li>', '</a></li>', $link );
+				$link            = '<li>' . $link . '</li>';
+				$link            = str_replace( '<li><span aria-current="page" class="page-numbers current">', '<li class="active"><a>', $link );
+				$link            = str_replace( '</span></li>', '</a></li>', $link );
 				$links[ $index ] = $link;
 			}
 			echo '<nav><ul class="pagination">' . implode( $links, "\n" ) . '</ul></nav>'; // XSS OK.
@@ -104,13 +110,14 @@ if ( ! function_exists( 'bootswatch_entry_footer' ) ) :
 			echo '</p>';
 		}
 
-		edit_post_link( sprintf(
+		edit_post_link(
+			sprintf(
 				/* translators: %s: Name of current post */
 				esc_html__( 'Edit %s', 'bootswatch' ),
 				the_title( '<span class="screen-reader-text">"', '"</span>', false )
-			)
-			, '<p>'
-			, '</p>'
+			),
+			'<p>',
+			'</p>'
 		);
 	}
 endif;
@@ -120,19 +127,19 @@ endif;
  */
 function bootswatch_post_navigation() {
 
-	$replacements = [
+	$replacements = array(
 		'/<div class="nav-links">/'    => '<ul class="nav-links pager">',
 		'/<div class="nav-previous">/' => '<li class="nav-previous previous">',
 		'/<div class="nav-next">/'     => '<li class="nav-next next">',
-		'/<\/a><\/div>/'                 => '</a></li>',
+		'/<\/a><\/div>/'               => '</a></li>',
 		'/rel="prev">(.*?)</'          => 'rel="prev">&laquo; $1<',
 		'/rel="next">(.*?)</'          => 'rel="prev">$1 &raquo;<',
-		'/<\/li><\/div>/'                => '</li></ul>',
-	];
+		'/<\/li><\/div>/'              => '</li></ul>',
+	);
 
 	$nav = get_the_post_navigation();
 	foreach ( $replacements as $pattern => $replacement ) {
-		$nav = preg_replace( $pattern , $replacement, $nav );
+		$nav = preg_replace( $pattern, $replacement, $nav );
 	}
 	echo $nav; // WPCS: XSS OK.
 }
@@ -146,12 +153,14 @@ function bootswatch_categorized_blog() {
 	$all_the_cool_cats = get_transient( 'bootswatch_categories' );
 	if ( ! $all_the_cool_cats ) {
 		// Create an array of all the categories that are attached to posts.
-		$all_the_cool_cats = get_categories( array(
-			'fields'     => 'ids',
-			'hide_empty' => 1,
-			// We only need to know if there is more than one category.
-			'number'     => 2,
-		) );
+		$all_the_cool_cats = get_categories(
+			array(
+				'fields'     => 'ids',
+				'hide_empty' => 1,
+				// We only need to know if there is more than one category.
+				'number'     => 2,
+			) 
+		);
 
 		// Count the number of categories that are attached to the posts.
 		$all_the_cool_cats = count( $all_the_cool_cats );
@@ -173,7 +182,7 @@ function bootswatch_category_transient_flusher() {
 	delete_transient( 'bootswatch_categories' );
 }
 add_action( 'edit_category', 'bootswatch_category_transient_flusher' );
-add_action( 'save_post',     'bootswatch_category_transient_flusher' );
+add_action( 'save_post', 'bootswatch_category_transient_flusher' );
 
 /**
  * Helps us know if we can use the tag `comments_popup_link()`.
