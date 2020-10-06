@@ -6,7 +6,7 @@
         "cssjanus/cssjanus": "^1.3",
         "kadimi/bootswatch-light": "^2.0",
         "ext-zip": "^1.15",
-        "wikimedia/less.php": "^3.0"
+        "wikimedia/less.php": "^1.8"
     },
     "require-dev": {
         "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
