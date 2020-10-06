@@ -8,7 +8,7 @@
 /**
  * Determine if we should use short version of the post.
  */
-$use_short =  ! is_singular() && ! post_password_required();
+$use_short = ! is_singular() && ! post_password_required();
 
 /**
  * Determine if we should use the `panel` class.
@@ -18,7 +18,7 @@ $use_panel_class = is_archive() || is_home();
 /**
  * Classes.
  */
-$classes = [ 'entry-content' ];
+$classes = array( 'entry-content' );
 if ( $use_panel_class ) {
 	$classes[] = 'panel-body';
 }
@@ -70,19 +70,21 @@ ob_start();
 	<?php endif; ?>
 
 	<?php
-		if ( $use_short ) {
-			if ( is_search() ) {
-				the_excerpt();
-			} else {
-				the_content( sprintf(
-					/* translators: %s: Post title. */
+	if ( $use_short ) {
+		if ( is_search() ) {
+			the_excerpt();
+		} else {
+			the_content(
+				/* translators: %s: Post title. */
+				sprintf(
 					apply_filters( 'bootswatch_read_more_text', esc_html__( 'Continue reading %s &rarr;', 'bootswatch' ) ),
 					the_title( '<span class="screen-reader-text">"', '"</span>', false )
-				) );
-			}
-		} else {
-			the_content();
+				) 
+			);
 		}
+	} else {
+		the_content();
+	}
 	?>
 
 	<?php if ( $has_thumbnail ) : ?>
@@ -102,11 +104,11 @@ $content_output = ob_get_clean();
 	<?php endif; ?>
 
 	<?php if ( $thumbnail_first ) : ?>
-		<?php echo $thumbnail_output ?>
-		<?php echo $content_output ?>
-	<?php else: ?>
-		<?php echo $content_output ?>
-		<?php echo $thumbnail_output ?>
+		<?php echo $thumbnail_output; ?>
+		<?php echo $content_output; ?>
+	<?php else : ?>
+		<?php echo $content_output; ?>
+		<?php echo $thumbnail_output; ?>
 	<?php endif; ?>
 
 	<?php if ( $use_short && $has_thumbnail ) : ?>
