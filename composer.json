@@ -1,4 +1,5 @@
 {
+    "name": "Bootswatch",
     "description": "Bootswatch for WordPress",
     "license": "MIT",
     "require": {
