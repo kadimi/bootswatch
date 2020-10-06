@@ -7,11 +7,10 @@
  */
 
 ( function( $ ) {
-
 	// Site title and description.
-	wp.customize( 'blogname', function( value ) {
+	window.wp.customize( 'blogname', function( value ) {
 		value.bind( function( to ) {
 			$( '.site-title' ).text( to );
 		} );
 	} );
-} )( jQuery );
+}( window.jQuery ) );
