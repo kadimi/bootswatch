@@ -34,7 +34,7 @@ msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
 msgstr[0] ""
 msgstr[1] ""
 
-#: bootswatch-template-parts/components/entry-content.php:50
+#: bootswatch-template-parts/components/entry-content.php:79
 #, php-format
 msgid "Continue reading %s &rarr;"
 msgstr ""
