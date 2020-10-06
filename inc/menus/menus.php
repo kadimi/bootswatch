@@ -22,13 +22,13 @@
 function bootswatch_nav_menu_css_class( $classes, $item, $args, $depth ) {
 
 	// Add active class to active menu item.
-	if ( in_array( 'current-menu-item', $classes ) ) {
+	if ( in_array( 'current-menu-item', $classes, true ) ) {
 		$classes[] = 'active';
 	}
 
 	// Add dropdown class to first level primary menu elements with children.
-	if ( 'primary' === $args->theme_location && 0 == $depth ) {
-		if ( in_array( 'menu-item-has-children', $item->classes ) ) {
+	if ( 'primary' === $args->theme_location && 0 === $depth ) {
+		if ( in_array( 'menu-item-has-children', $item->classes, true ) ) {
 			$classes[] = 'dropdown';
 		}
 	}
@@ -52,8 +52,8 @@ add_filter( 'nav_menu_css_class', 'bootswatch_nav_menu_css_class', 10, 4 );
  */
 function bootswatch_nav_menu_link_attributes( $atts, $item, $args, $depth ) {
 
-	if ( 'primary' === $args->theme_location && 0 == $depth ) {
-		if ( in_array( 'menu-item-has-children', $item->classes ) ) {
+	if ( 'primary' === $args->theme_location && 0 === $depth ) {
+		if ( in_array( 'menu-item-has-children', $item->classes, true ) ) {
 
 			// Add data-toggle="dropdown" to first level primary menu elements with children.
 			$atts['data-toggle'] = 'dropdown';

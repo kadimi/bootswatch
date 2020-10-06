@@ -124,7 +124,7 @@ function bootswatch_admin_notice( $message, $id, $type = 'success', $is_dismissi
 	$__message        = '';
 	$__message       .= ! $once_html ? ( '<h3>' . __( 'Howdy! Bootswatch here...', 'bootswatch' ) . '</h3>' ) : '';
 	$__message       .= '<p>' . $message . '</p>';
-	printf( '<div id="%s" class="%s">%s</div>', $id, $classes, $__message ); // XSS OK.
+	printf( '<div id="%s" class="%s">%s</div>', $id, $classes, $__message ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	$once_html = true;
 
 	/**

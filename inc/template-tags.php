@@ -25,14 +25,16 @@ if ( ! function_exists( 'bootswatch_posted_on' ) ) :
 		// Translators: %s ia a name.
 		$byline = sprintf( esc_html_x( 'by %s', 'post author', 'bootswatch' ), '<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>' );
 
-		echo '<span class="posted-on">' . $posted_on . '</span><span class="byline"> ' . $byline . '</span>'; // WPCS: XSS OK.
+		echo '<span class="posted-on">' . $posted_on . '</span><span class="byline"> ' . $byline . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 endif;
 
-/**
- * Displays post categories
- */
 if ( ! function_exists( 'bootswatch_category_list' ) ) {    
+	/**
+	 * Displays post categories
+	 *
+	 * @param  int $post_id The post ID.
+	 */
 	function bootswatch_category_list( $post_id ) {
 		if ( ! bootswatch_categorized_blog() ) {
 			return;
@@ -54,7 +56,7 @@ if ( ! function_exists( 'bootswatch_category_list' ) ) {
 				$category->name
 			);
 		}
-		echo '<p>' . implode( ' ', $links ) . '</p>';
+		echo '<p>' . implode( ' ', $links ) . '</p>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 }
 
@@ -75,7 +77,7 @@ if ( ! function_exists( 'bootswatch_posts_navigation' ) ) {
 				$link            = str_replace( '</span></li>', '</a></li>', $link );
 				$links[ $index ] = $link;
 			}
-			echo '<nav><ul class="pagination">' . implode( $links, "\n" ) . '</ul></nav>'; // XSS OK.
+			echo '<nav><ul class="pagination">' . implode( "\n", $links ) . '</ul></nav>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 	}
 }
@@ -92,7 +94,7 @@ if ( ! function_exists( 'bootswatch_entry_footer' ) ) :
 			$categories_list = get_the_category_list( esc_html__( ', ', 'bootswatch' ) );
 			if ( $categories_list && bootswatch_categorized_blog() ) {
 				// Translators: %s ia a category name.
-				printf( '<p class="cat-links small">' . esc_html__( 'Posted in %s', 'bootswatch' ) . '</p>', $categories_list ); // WPCS: XSS OK.
+				printf( '<p class="cat-links small">' . esc_html__( 'Posted in %s', 'bootswatch' ) . '</p>', $categories_list ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			}
 
 			/* translators: used between list items, there is a space after the comma */
@@ -100,7 +102,7 @@ if ( ! function_exists( 'bootswatch_entry_footer' ) ) :
 
 			if ( $tags_list ) {
 				// Translators: %s ia a tag name.
-				printf( '<p class="tags-links small">' . esc_html__( 'Tagged %1$s', 'bootswatch' ) . '</p>', $tags_list ); // WPCS: XSS OK.
+				printf( '<p class="tags-links small">' . esc_html__( 'Tagged %1$s', 'bootswatch' ) . '</p>', $tags_list ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			}
 		}
 
@@ -141,7 +143,7 @@ function bootswatch_post_navigation() {
 	foreach ( $replacements as $pattern => $replacement ) {
 		$nav = preg_replace( $pattern, $replacement, $nav );
 	}
-	echo $nav; // WPCS: XSS OK.
+	echo $nav; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 }
 
 /**

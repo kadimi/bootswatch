@@ -114,7 +114,7 @@ bootswatch_create_option_radio(
 
 					$container = $( '.navbar .navbar-collapse' );
 					$menu      = $( '.nav', $container );
-					$form_new  = $( '<?php echo str_replace( array( "'", "\n" ), array( "\'", ' ' ), bootswatch_get_search_form( 'navbar-form pull-right' ) ); // XSS OK. ?>' );
+					$form_new  = $( '<?php echo str_replace( array( "'", "\n" ), array( "\'", ' ' ), bootswatch_get_search_form( 'navbar-form pull-right' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>' );
 					$form_old  = $( '.navbar-form', $container );
 
 					if ( 'yes' === to ) {
@@ -144,7 +144,7 @@ bootswatch_create_option_radio(
  */
 function bootswatch_create_option_input( $type, $id, $label, $input_attrs = array(), $section = 'bootswatch', $preview_cb = false ) {
 
-	if ( ! in_array( $type, array( 'text', 'number', 'range', 'email', 'password' ) ) ) {
+	if ( ! in_array( $type, array( 'text', 'number', 'range', 'email', 'password' ), true ) ) {
 		return;
 	}
 
@@ -182,16 +182,17 @@ function bootswatch_create_option_input( $type, $id, $label, $input_attrs = arra
 /**
  * Registers a new option which is a dropdown or a radio.
  *
- * @param  String          $type   `select` or `radio`.
- * @param  String          $id      ID.
- * @param  String          $label   Label.
- * @param  String|Array    $choices Choices array, accepts also `noyes` and 'yesno'.
- * @param  String          $section Section ID.
- * @param  String|Function $preview_cb Function.
+ * @param  String          $type              `select` or `radio`.
+ * @param  String          $id                ID.
+ * @param  String          $label             Label.
+ * @param  String|Array    $choices           Choices array, accepts also `noyes` and 'yesno'.
+ * @param  String          $section            Section ID.
+ * @param  String|Function $preview_cb        Function.
+ * @param  String|Function $selective_refresh Undocumented.
  */
 function bootswatch_create_option_choice( $type, $id, $label, $choices = 'noyes', $section = 'bootswatch', $preview_cb = false, $selective_refresh = array() ) {
 
-	if ( ! in_array( $type, array( 'select', 'radio' ) ) ) {
+	if ( ! in_array( $type, array( 'select', 'radio' ), true ) ) {
 		return;
 	}
 
@@ -269,11 +270,12 @@ function bootswatch_create_option_choice( $type, $id, $label, $choices = 'noyes'
 /**
  * Registers a new option which is a dropdown.
  *
- * @param  String          $id      ID.
- * @param  String          $label   Label.
- * @param  String|Array    $choices Choices array, accepts also `noyes` and 'yesno'.
- * @param  String          $section Section ID.
- * @param  String|Function $preview_cb Function.
+ * @param  String          $id                ID.
+ * @param  String          $label             Label.
+ * @param  String|Array    $choices           Choices array, accepts also `noyes` and 'yesno'.
+ * @param  String          $section           Section ID.
+ * @param  String|Function $preview_cb        Function.
+ * @param  String|Function $selective_refresh Undocumented.
  */
 function bootswatch_create_option_select( $id, $label, $choices = 'noyes', $section = 'bootswatch', $preview_cb = false, $selective_refresh = array() ) {
 	bootswatch_create_option_choice( 'select', $id, $label, $choices, $section, $preview_cb, $selective_refresh );
@@ -313,11 +315,7 @@ function bootswatch_get_option( $option_id, $default = false ) {
  * @return boolean           Weither or not that option is being used
  */
 function bootswatch_has( $option_id ) {
-	switch ( $option_id ) {
-		default:
-			return 'yes' === bootswatch_get_option( $option_id );
-		break;
-	}
+	return 'yes' === bootswatch_get_option( $option_id );
 }
 
 /**
@@ -349,7 +347,7 @@ function bootswatch_get_theme_part_path( $theme, $part ) {
  * @param  String $part `style`, `theme` or `script`.
  */
 function bootswatch_bootstrap_part_uri( $part ) {
-	echo (string) bootswatch_get_bootstrap_part_uri( $part ); // XSS OK.
+	echo (string) bootswatch_get_bootstrap_part_uri( $part ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 }
 
 /**
@@ -437,6 +435,12 @@ function bootswatch_themes_list() {
 	);
 }
 
+/**
+ * Returns the default overrides.
+ *
+ * @param  string $theme `bootstrap` or a bootswatch theme in lowercase.
+ * @return array         The overrides.
+ */
 function bootswatch_get_default_overrides( $theme = null ) {
 	$overrides = array(
 		'@icon-font-path' => '../vendor/kadimi/bootswatch-light/light/fonts/',

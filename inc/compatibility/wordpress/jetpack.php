@@ -38,7 +38,7 @@ if ( class_exists( 'Jetpack' ) ) {
 	add_filter(
 		'bootswatch_show_posts_navigation',
 		function( $show ) {
-			$using_infinite_scroll = in_array( 'infinite-scroll', get_option( 'jetpack_active_modules', array() ) );
+			$using_infinite_scroll = in_array( 'infinite-scroll', get_option( 'jetpack_active_modules', array() ), true );
 			return $using_infinite_scroll ? false : $show;
 		} 
 	);

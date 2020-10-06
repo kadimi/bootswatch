@@ -24,7 +24,7 @@ function bootswatch_get_search_form( $classes = '' ) {
  * @param  Array|String $classes Additional form classes.
  */
 function bootswatch_search_form( $classes = '' ) {
-	echo bootswatch_get_search_form( $classes ); // XSS OK.
+	echo bootswatch_get_search_form( $classes ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 }
 
 /**
@@ -39,7 +39,7 @@ function bootswatch_get_search_form_cb() {
 	?>
 	<form role="search" method="get" class="search-form" action="<?php echo esc_url( home_url() ); ?>">
 		<div class="input-group">
-			<input type="search" id="<?php echo $unique_id; // XSS OK. ?>" class="form-control" value="<?php echo get_search_query(); ?>" name="s" aria-label="<?php echo esc_html_x( 'Search Phrase', 'label', 'bootswatch' ); ?>">
+			<input type="search" id="<?php echo $unique_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" class="form-control" value="<?php echo get_search_query(); ?>" name="s" aria-label="<?php echo esc_html_x( 'Search Phrase', 'label', 'bootswatch' ); ?>">
 			<span class="input-group-btn">
 				<button type="submit" class="btn btn-default">
 					<span class="glyphicon glyphicon-search" aria-label="<?php esc_html_e( 'Search', 'bootswatch' ); ?>"></span>

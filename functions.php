@@ -21,13 +21,15 @@ add_action( 'after_setup_theme', 'bootswatch_load_textdomain' );
  * Load all extras from ./inc/ using `get_template_part()` to allow overriding.
  */
 if ( PHP_VERSION_ID > BOOTSWATCH_MINIMAL_PHP_VERSION_ID ) {
-	$extras = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( BOOTSWATCH_DIR . '/inc' ), RecursiveIteratorIterator::SELF_FIRST );
-	foreach ( $extras as $extra => $unused ) {
-		$extra = str_replace( '\\', '/', $extra );
-		if ( preg_match( '/\/[\w-]+\.php$/', $extra ) ) {
-			get_template_part( substr( $extra, strlen( BOOTSWATCH_DIR ), -4 ) );
+	$bootswatch_extras = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( BOOTSWATCH_DIR . '/inc' ), RecursiveIteratorIterator::SELF_FIRST );
+	( function() use ( $bootswatch_extras ) {
+		foreach ( $bootswatch_extras as $extra => $unused ) {
+			$extra = str_replace( '\\', '/', $extra );
+			if ( preg_match( '/\/[\w-]+\.php$/', $extra ) ) {
+				get_template_part( substr( $extra, strlen( BOOTSWATCH_DIR ), -4 ) );
+			}
 		}
-	}
+	} )();
 } else {
 	get_template_part( 'inc/compatibility/php-version' );
 }

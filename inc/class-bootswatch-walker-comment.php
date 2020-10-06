@@ -6,11 +6,11 @@
  */
 
 /**
- * Walker_Comment_Bootswatch
+ * Bootswatch_Walker_Comment
  *
  * Custom comments walker.
  */
-class Walker_Comment_Bootswatch extends Walker_Comment {
+class Bootswatch_Walker_Comment extends Walker_Comment {
 
 	/**
 	 * Same as Walker_Comment::html5_comment() plus some Bootstrap classes and style locked on `div`.
@@ -23,7 +23,7 @@ class Walker_Comment_Bootswatch extends Walker_Comment {
 		ob_start();
 		parent::html5_comment( $comment, $depth, $args );
 		$output = ob_get_clean();
-		$output = str_replace( // WPCS XSS OK.
+		$output = str_replace(
 			array(
 				'class="comment-body"',
 				'comment-reply-link',
@@ -52,7 +52,7 @@ class Walker_Comment_Bootswatch extends Walker_Comment {
 		// Fix line exceeding link.
 		$output = preg_replace( "/\s*<\/time>\n\s+<\/a>/s", '</time></a>', $output );
 
-		echo $output; // WPCS XSS OK.
+		echo $output; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 	/**
@@ -74,7 +74,7 @@ class Walker_Comment_Bootswatch extends Walker_Comment {
 				) 
 			) 
 		);
-		echo str_replace( // WPCS XSS OK.
+		$output = str_replace(
 			array(
 				'class="comment-body"',
 			),
@@ -83,5 +83,6 @@ class Walker_Comment_Bootswatch extends Walker_Comment {
 			),
 			ob_get_clean()
 		);
+		echo $output; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 }

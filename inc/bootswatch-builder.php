@@ -22,13 +22,10 @@ function bootswatch_make_theme_file( $theme, $overrides = array(), $rebuild = fa
 		switch ( $theme ) {
 			case 'bootstrap':
 				return get_template_directory() . '/vendor/kadimi/bootswatch-light/light/css/bootstrap.min.css';
-			break;
 			case 'bootstrap-theme':
 				return get_template_directory() . '/vendor/kadimi/bootswatch-light/light/css/bootstrap-theme.min.css';
-			break;
 			default:
 				return get_template_directory() . '/vendor/kadimi/bootswatch-light/light/' . $theme . '/bootstrap.min.css';
-			break;
 		}
 	}
 	$rebuild = $rebuild || ( defined( 'BOOTSWATCH_FORCE_REBUILD' ) && BOOTSWATCH_FORCE_REBUILD );
@@ -36,7 +33,7 @@ function bootswatch_make_theme_file( $theme, $overrides = array(), $rebuild = fa
 	$cache_file_basename = sprintf(
 		'%1$s%2$s-%3$s.min.css',
 		$theme,
-		$overrides ? '-' . md5( serialize( $overrides ) ) : '',
+		$overrides ? '-' . md5( wp_json_encode( $overrides ) ) : '',
 		is_rtl() ? 'rtl' : 'ltr'
 	);
 
@@ -115,7 +112,7 @@ function bootswatch_get_bootswatch_theme_css( $theme = 'bootstrap', $overrides =
 	/**
 	 * Prevent muliple using the same file.
 	 */
-	$salt = rand( 10, 99 );
+	$salt = wp_rand( 10, 99 );
 
 	/**
 	 * Path of original files, bare, theme and variables.
@@ -206,13 +203,13 @@ function bootswatch_get_filesystem() {
 		return $filesystem;
 	}
 
-	require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
-	require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php';
+	require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php'; // phpcs:ignore WPThemeReview.CoreFunctionality.FileInclude.FileIncludeFound
+	require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php'; // phpcs:ignore WPThemeReview.CoreFunctionality.FileInclude.FileIncludeFound
 	if ( ! defined( 'FS_CHMOD_DIR' ) ) {
-		define( 'FS_CHMOD_DIR', false );
+		define( 'FS_CHMOD_DIR', false ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound
 	}
 	if ( ! defined( 'FS_CHMOD_FILE' ) ) {
-		define( 'FS_CHMOD_FILE', false );
+		define( 'FS_CHMOD_FILE', false ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound
 	}
 	$filesystem = new WP_Filesystem_Direct( 'bootswatch' );
 

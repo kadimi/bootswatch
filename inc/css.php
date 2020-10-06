@@ -24,7 +24,7 @@ add_action(
 add_action(
 	'wp_head',
 	function() {
-		echo '<style>' . bootswatch_generate_inline_css( bootswatch_get_option( 'theme', 'bootstrap' ) ) . '</style>'; // WPCS: xss ok.
+		echo '<style>' . bootswatch_generate_inline_css( bootswatch_get_option( 'theme', 'bootstrap' ) ) . '</style>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	} 
 );
 

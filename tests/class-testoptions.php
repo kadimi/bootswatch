@@ -2,16 +2,22 @@
 /**
  * Class SampleTest
  *
- * @package Kadimi\Bootswatch
+ * @package Bootswatch
  */
 
-namespace Kadimi\Bootswatch\Test;
+namespace Bootswatch\Test;
 
+/**
+ * Test Case.
+ */
 class TestOptions extends MonkeyTestCase {
 
+	/**
+	 * Setup.
+	 */
 	protected function setUp() {
 
-		require_once 'inc/options.php';
+		require_once 'inc/options.php'; // phpcs:ignore WPThemeReview.CoreFunctionality.FileInclude.FileIncludeFound
 
 		set_theme_mod(
 			'bootswatch',
@@ -27,7 +33,10 @@ class TestOptions extends MonkeyTestCase {
 		);
 	}
 
-	function test_bootswatch_get_option_returns_correct_value() {
+	/**
+	 * Missing documentation.
+	 */
+	protected function test_bootswatch_get_option_returns_correct_value() {
 
 		/**
 		 * Truthy.

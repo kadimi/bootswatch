@@ -31,7 +31,7 @@ add_filter( 'body_class', 'bootswatch_body_classes' );
  */
 function bootswatch_get_template_part( $slug, $name = null ) {
 
-	$call = rand( 100000, 999999 );
+	$call = wp_rand( 100000, 999999 );
 	$part = $name ? "$slug::$name" : $slug;
 	$cb   = '__return_null';
 
