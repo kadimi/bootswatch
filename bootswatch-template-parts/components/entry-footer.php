@@ -7,6 +7,8 @@
 
 ( function() {
 
+	global $post;
+
 	if ( ! current_user_can( 'edit_post', $post->ID ) ) {
 		return;
 	}
