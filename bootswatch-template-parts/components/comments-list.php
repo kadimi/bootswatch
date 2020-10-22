@@ -11,7 +11,7 @@
 	wp_list_comments(
 		array(
 			'style'      => 'div',
-			'walker'     => new Walker_Comment_Bootswatch(),
+			'walker'     => new Bootswatch_Walker_Comment(),
 			'short_ping' => true,
 		) 
 	);
